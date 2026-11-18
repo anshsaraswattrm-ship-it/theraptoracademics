@@ -130,12 +130,12 @@ const Footer = () => {
         </div>
 
         <div className="flex flex-wrap justify-center lg:justify-end gap-x-6 gap-y-3 font-semibold text-[#0f2547]">
-          <Link to="#" className="hover:text-red-600 transition-colors">Student Care Process</Link>
-          <Link to="#" className="hover:text-red-600 transition-colors">Disclaimer</Link>
-          <Link to="#" className="hover:text-red-600 transition-colors">Privacy Policy</Link>
-          <Link to="#" className="hover:text-red-600 transition-colors">Terms & Conditions</Link>
-          <Link to="#" className="hover:text-red-600 transition-colors">Sitemap</Link>
-        </div>
+  <Link to="/student-care-process" className="hover:text-red-600 transition-colors">Student Care Process</Link>
+  <Link to="/disclaimer" className="hover:text-red-600 transition-colors">Disclaimer</Link>
+  <Link to="/privacy-policy" className="hover:text-red-600 transition-colors">Privacy Policy</Link>
+  <Link to="/terms-and-conditions" className="hover:text-red-600 transition-colors">Terms & Conditions</Link>
+  <Link to="/sitemap" className="hover:text-red-600 transition-colors">Sitemap</Link>
+</div>
       </div>
 
       {/* Developer Credit */}

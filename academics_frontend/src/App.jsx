@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Lenis from 'lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -10,9 +10,24 @@ import AboutUs from './pages/AboutUs';
 import Institutions from './pages/Institutions';
 import ContactUs from './pages/ContactUs';
 import FreeCounselling from './pages/FreeCounselling';
+import StudentCareProcess from './pages/StudentCareProcess';
+import Disclaimer from './pages/Disclaimer';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsAndConditions from './pages/TermsAndConditions';
 import CursorTrail from './components/CursorTrail';
 
 gsap.registerPlugin(ScrollTrigger);
+
+// Automatically scroll to top when switching pages
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+};
 
 const App = () => {
   useEffect(() => {
@@ -41,6 +56,7 @@ const App = () => {
 
   return (
     <Router>
+      <ScrollToTop />
       <div className="w-full min-h-screen bg-gray-50 text-gray-900 font-sans cursor-default">
         {/* Custom Magnetic Cursor + Mix-Blend-Difference + Particle Trail */}
         <CursorTrail />
@@ -51,6 +67,12 @@ const App = () => {
           <Route path="/institutions" element={<Institutions />} />
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/free-counselling" element={<FreeCounselling />} />
+          
+          {/* Student Care & Legal Pages */}
+          <Route path="/student-care-process" element={<StudentCareProcess />} />
+          <Route path="/disclaimer" element={<Disclaimer />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
 
           <Route
             path="*"

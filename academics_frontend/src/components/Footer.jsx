@@ -3,7 +3,7 @@ import {
   FaFacebookF, 
   FaInstagram, 
   FaLinkedinIn, 
-  FaYoutube, 
+  FaWhatsapp, 
   FaPhoneAlt, 
   FaEnvelope, 
   FaMapMarkerAlt, 
@@ -16,34 +16,36 @@ import logo from '../assets/logo.png';
 
 const Footer = () => {
   return (
-    <footer className="bg-[#050505] text-gray-300 pt-20 pb-8 px-4 md:px-12 border-t border-gray-900 font-sans">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+    <footer className="w-full bg-[#f8fafc] text-[#334155] pt-20 pb-8 px-4 md:px-12 lg:px-20 border-t border-gray-200 font-sans">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16 mb-16">
         
         {/* 1. Brand Information */}
-        <div className="space-y-6 lg:pr-8">
-          <Link to="/" className="flex items-center gap-2 cursor-pointer mb-2">
+        <div className="space-y-6 lg:pr-6">
+          <Link to="/" className="inline-block mb-2">
             <img 
               src={logo} 
               alt="The Raptor Academics Logo" 
-              className="w-48 md:w-60 object-contain" 
+              className="w-52 md:w-64 object-contain" 
             />
           </Link>
-          <p className="text-sm leading-relaxed text-gray-400">
+          <p className="text-sm leading-relaxed font-medium">
             Expert guidance and trusted support for your study abroad journey. We turn your international education goals into reality with seamless visa and university assistance.
           </p>
           
-          {/* Luxury Style Social Icons */}
+          {/* Social Icons (YouTube replaced with WhatsApp) */}
           <div className="flex gap-3 pt-2">
             {[
-              { icon: FaFacebookF, link: "#" },
-              { icon: FaInstagram, link: "#" },
-              { icon: FaLinkedinIn, link: "#" },
-              { icon: FaYoutube, link: "#" }
+              { icon: FaFacebookF, link: "https://www.facebook.com/raptoracademics" },
+              { icon: FaInstagram, link: "https://www.instagram.com/theraptoracademics?utm_source=ig_web_button_share_sheet&xtok=ZDNlZDc0MzIxNw==" },
+              { icon: FaLinkedinIn, link: "https://www.linkedin.com/company/the-raptor-academics" },
+              { icon: FaWhatsapp, link: "https://wa.me/917232010105" }
             ].map((social, i) => (
               <a 
                 key={i} 
                 href={social.link} 
-                className="w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center text-gray-400 hover:bg-red-600 hover:text-white transition-all duration-300 shadow-lg"
+                target="_blank"
+                rel="noreferrer"
+                className="w-10 h-10 rounded-full bg-white border border-gray-200 shadow-sm flex items-center justify-center text-[#0f2547] hover:bg-red-600 hover:border-red-600 hover:text-white transition-all duration-300 hover:-translate-y-1"
               >
                 <social.icon size={16} />
               </a>
@@ -53,10 +55,10 @@ const Footer = () => {
 
         {/* 2. Quick Links */}
         <div>
-          <h4 className="text-white font-bold text-lg mb-6 flex items-center gap-2">
+          <h4 className="text-[#0f2547] font-extrabold text-lg mb-6 flex items-center gap-2.5">
             <span className="w-2 h-2 bg-red-600 rounded-full"></span> Quick Links
           </h4>
-          <ul className="space-y-4 text-sm text-gray-400">
+          <ul className="space-y-4 text-sm font-semibold">
             {[
               { name: 'Home', path: '/' },
               { name: 'About Us', path: '/about-us' },
@@ -65,8 +67,8 @@ const Footer = () => {
               { name: 'Overseas Education Consultants In Jaipur', path: '#' }
             ].map((link, i) => (
               <li key={i}>
-                <Link to={link.path} className="group flex items-center gap-2 hover:text-red-500 transition-all duration-300">
-                  <FaChevronRight className="text-[10px] text-gray-700 group-hover:text-red-500 transition-colors" />
+                <Link to={link.path} className="group flex items-center gap-2.5 hover:text-red-600 transition-all duration-300">
+                  <FaChevronRight className="text-[10px] text-gray-400 group-hover:text-red-600 group-hover:translate-x-1 transition-all" />
                   {link.name}
                 </Link>
               </li>
@@ -76,14 +78,14 @@ const Footer = () => {
 
         {/* 3. Our Services */}
         <div>
-          <h4 className="text-white font-bold text-lg mb-6 flex items-center gap-2">
+          <h4 className="text-[#0f2547] font-extrabold text-lg mb-6 flex items-center gap-2.5">
             <span className="w-2 h-2 bg-red-600 rounded-full"></span> Our Services
           </h4>
-          <ul className="space-y-4 text-sm text-gray-400">
-            {['Study Visa', 'Tourist Visa', 'Business Visa', 'Free Counselling'].map((service, i) => (
+          <ul className="space-y-4 text-sm font-semibold">
+            {['Study Visa', 'Tourist Visa', 'Free Counselling'].map((service, i) => (
               <li key={i}>
-                <a href="#" className="group flex items-center gap-2 hover:text-red-500 transition-all duration-300">
-                  <FaChevronRight className="text-[10px] text-gray-700 group-hover:text-red-500 transition-colors" />
+                <a href="#" className="group flex items-center gap-2.5 hover:text-red-600 transition-all duration-300">
+                  <FaChevronRight className="text-[10px] text-gray-400 group-hover:text-red-600 group-hover:translate-x-1 transition-all" />
                   {service}
                 </a>
               </li>
@@ -93,24 +95,24 @@ const Footer = () => {
 
         {/* 4. Contact Us */}
         <div>
-          <h4 className="text-white font-bold text-lg mb-6 flex items-center gap-2">
+          <h4 className="text-[#0f2547] font-extrabold text-lg mb-6 flex items-center gap-2.5">
             <span className="w-2 h-2 bg-red-600 rounded-full"></span> Contact Us
           </h4>
-          <div className="space-y-5 text-sm text-gray-400">
+          <div className="space-y-5 text-sm font-semibold">
             
-            <div className="flex items-start gap-4 hover:text-white transition-colors cursor-default">
-              <div className="bg-gray-900 p-3 rounded-lg text-red-600 shrink-0"><FaMapMarkerAlt size={16} /></div>
+            <div className="flex items-start gap-4 hover:text-[#0f2547] transition-colors cursor-default group">
+              <div className="bg-red-50 p-2.5 rounded-lg text-red-600 shrink-0 group-hover:scale-110 transition-transform"><FaMapMarkerAlt size={16} /></div>
               <p className="leading-relaxed mt-1">120/64, New Sanganer Rd, Sector 12, Mansarovar, Jaipur 302020</p>
             </div>
             
-            <div className="flex items-center gap-4 hover:text-white transition-colors cursor-default">
-              <div className="bg-gray-900 p-3 rounded-lg text-red-600 shrink-0"><FaPhoneAlt size={16} /></div>
-              <p className="font-semibold tracking-wider">(+91) 72320 10105</p>
+            <div className="flex items-center gap-4 hover:text-[#0f2547] transition-colors cursor-default group">
+              <div className="bg-red-50 p-2.5 rounded-lg text-red-600 shrink-0 group-hover:scale-110 transition-transform"><FaPhoneAlt size={15} /></div>
+              <p className="tracking-wider">(+91) 72320 10105</p>
             </div>
             
-            <div className="flex items-center gap-4 hover:text-white transition-colors cursor-default">
-              <div className="bg-gray-900 p-3 rounded-lg text-red-600 shrink-0"><FaEnvelope size={16} /></div>
-              <a href="mailto:theraptoracademics@gmail.com" className="hover:text-red-500 transition-colors">theraptoracademics@gmail.com</a>
+            <div className="flex items-center gap-4 group">
+              <div className="bg-red-50 p-2.5 rounded-lg text-red-600 shrink-0 group-hover:scale-110 transition-transform"><FaEnvelope size={15} /></div>
+              <a href="mailto:theraptoracademics@gmail.com" className="hover:text-red-600 transition-colors">theraptoracademics@gmail.com</a>
             </div>
 
           </div>
@@ -118,17 +120,30 @@ const Footer = () => {
         
       </div>
 
-      {/* Bottom Bar: Copyright & Developer Credit */}
-      <div className="max-w-7xl mx-auto pt-8 border-t border-gray-900 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500 gap-4">
-        <p>
-          &copy; {new Date().getFullYear()} <span className="text-gray-300 font-bold hover:text-white transition cursor-pointer tracking-wide">The Raptor Academics</span>. All rights reserved.
-        </p>
-        <p className="flex items-center gap-1">
-          Developed By 
-          <a href="https://theraptormarketing.com" target="_blank" rel="noreferrer" className="text-gray-300 font-bold hover:text-red-600 transition-colors ml-1">
-            The Raptor Marketing
+      {/* Bottom Bar: Copyright & Legal Links */}
+      <div className="max-w-7xl mx-auto pt-8 border-t border-gray-200 flex flex-col lg:flex-row justify-between items-center text-[13px] gap-6">
+        <div className="text-center lg:text-left font-medium text-gray-500">
+          Copyright &copy; 2024–{new Date().getFullYear()}. <span className="font-extrabold text-[#0f2547]">The Raptor Academics</span>{' '}
+          <a href="mailto:theraptoracademics@gmail.com" className="text-red-600 hover:text-red-700 font-bold ml-1 transition-colors">
+            theraptoracademics@gmail.com
           </a>
-        </p>
+        </div>
+
+        <div className="flex flex-wrap justify-center lg:justify-end gap-x-6 gap-y-3 font-semibold text-[#0f2547]">
+          <Link to="#" className="hover:text-red-600 transition-colors">Student Care Process</Link>
+          <Link to="#" className="hover:text-red-600 transition-colors">Disclaimer</Link>
+          <Link to="#" className="hover:text-red-600 transition-colors">Privacy Policy</Link>
+          <Link to="#" className="hover:text-red-600 transition-colors">Terms & Conditions</Link>
+          <Link to="#" className="hover:text-red-600 transition-colors">Sitemap</Link>
+        </div>
+      </div>
+
+      {/* Developer Credit */}
+      <div className="max-w-7xl mx-auto mt-6 text-center lg:text-right text-xs font-medium text-gray-400">
+        Developed By{' '}
+        <a href="https://theraptormarketing.com" target="_blank" rel="noreferrer" className="font-bold text-gray-500 hover:text-red-600 transition-colors border-b border-transparent hover:border-red-600 pb-0.5">
+          The Raptor Marketing
+        </a>
       </div>
     </footer>
   );

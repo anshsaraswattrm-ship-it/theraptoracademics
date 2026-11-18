@@ -79,13 +79,13 @@ const ContactForm = () => {
           </div>
 
           <h2 className="text-3xl md:text-4xl font-extrabold text-[#0f2547] leading-tight tracking-tight">
-            Have Questions? <br className="hidden sm:block" />
+          Book Your Free Study Abroad <br className="hidden sm:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-red-800">
-              Let's Talk.
+            Counselling Session.
             </span>
           </h2>
           <p className="text-gray-500 text-sm md:text-base mt-3 max-w-md leading-relaxed">
-            Fill in your details and our Malta expert will call you back with a free profile assessment.
+          Take the first step towards your international education goals with personalised guidance from The Raptor Academics.
           </p>
 
           <form onSubmit={handleSubmit} className="mt-9 space-y-4">
@@ -191,7 +191,7 @@ const ContactForm = () => {
                 whileTap={{ scale: loading ? 1 : 0.97 }}
                 className="w-full sm:w-auto bg-red-600 hover:bg-red-700 disabled:opacity-70 disabled:cursor-not-allowed text-white font-bold px-9 py-4 rounded-2xl shadow-lg shadow-red-600/30 flex items-center justify-center gap-3 transition-colors"
               >
-                {loading ? 'Submitting...' : 'Submit Now'}
+                {loading ? 'Submitting...' : 'Get Free Counselling'}
                 {!loading && <FaArrowRight size={13} />}
               </motion.button>
               <p className="text-xs text-gray-400 font-medium">100% free • No spam, ever.</p>
@@ -220,7 +220,7 @@ const ContactForm = () => {
         {/* ============ RIGHT: IMAGE PANEL ============ */}
         <div className="hidden lg:block lg:col-span-5 relative min-h-[560px]">
           <img
-            src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=1000"
+            src="https://res.cloudinary.com/ppkvzeli/image/upload/v1794911042/contact.png"
             alt="Students"
             className="absolute inset-0 w-full h-full object-cover"
           />

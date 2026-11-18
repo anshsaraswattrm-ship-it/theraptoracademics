@@ -12,7 +12,7 @@ const PHONE_LINK = 'tel:+917232010105';
 const socialLinks = [
   { name: 'Instagram', icon: FaInstagram, href: 'https://www.instagram.com/theraptoracademics?utm_source=ig_web_button_share_sheet&xtok=ZDNlZDc0MzIxNw==', hover: 'hover:bg-gradient-to-tr hover:from-yellow-500 hover:via-red-500 hover:to-purple-600' },
   { name: 'Facebook', icon: FaFacebookF, href: 'https://www.facebook.com/raptoracademics', hover: 'hover:bg-[#1877f2]' },
-  { name: 'LinkedIn', icon: FaLinkedinIn, href: ' https://www.linkedin.com/company/the-raptor-academics', hover: 'hover:bg-[#0a66c2]' },
+  { name: 'LinkedIn', icon: FaLinkedinIn, href: 'https://www.linkedin.com/company/the-raptor-academics', hover: 'hover:bg-[#0a66c2]' },
   { name: 'WhatsApp', icon: FaWhatsapp, href: 'https://wa.me/917232010105', hover: 'hover:bg-[#25d366]' }
 ];
 

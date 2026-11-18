@@ -7,30 +7,30 @@ import { RedUnderline } from './Shared';
 const stepsData = [
   {
     num: "01",
-    title: "Education Counseling",
-    desc: "One-on-One counseling with our Malta specialist. Shortlist your ideal MFHEA-accredited institution and MQF Level 4, 5, 6, or 7 program based on your budget and career goals.",
-    badge: "100% Free Profile Assessment",
+    title: "Profile Assessment & Counselling",
+    desc: "Share your academic background, career interests, preferred destination and budget. Our counsellors help you explore suitable courses and institutions in Malta and other selected European countries based on your profile.",
+    badge: "Get Your Profile Assessed",
     image: "https://res.cloudinary.com/ppkvzeli/image/upload/v1794899393/Education_Counseling.png"
   },
   {
     num: "02",
-    title: "University Applications",
-    desc: "Apply to your dream Malta college without IELTS or PTE. Even with 10th/12th pass qualifications or unlimited study gaps, we secure your conditional offer letter within 24 to 48 hours.",
-    badge: "Offer Letter in 24–48 Hours",
+    title: "Course Selection & University Applications",
+    desc: "Explore relevant undergraduate, postgraduate and professional programmes. Get guidance on comparing institutions, understanding entry requirements and preparing your admission application.",
+    badge: "Explore Study Options",
     image: "https://res.cloudinary.com/ppkvzeli/image/upload/v1794899392/University_Applications.png"
   },
   {
     num: "03",
-    title: "Hostel & VFS Documentation",
-    desc: "We arrange your official college hostel accommodation letter, health insurance, financial checklist, and book your priority VFS appointment slot without delays.",
-    badge: "Guaranteed Hostel Letter & VFS Slot",
+    title: "Documentation & Student Visa Guidance",
+    desc: "Understand the supporting documents required for your chosen destination. Get guidance on academic records, financial evidence, health insurance, accommodation requirements and the relevant student visa application process.",
+    badge: " Get Visa Guidance",
     image: "https://res.cloudinary.com/ppkvzeli/image/upload/v1794899393/Hostel_VFS_Documentation.png"
   },
   {
     num: "04",
-    title: "Visa Processing & Pay After Visa",
-    desc: "Apply for your Malta Schengen student visa with our 99% visa success team. Best of all—at top partner colleges, you pay your main tuition fees ONLY after your visa is approved!",
-    badge: "Pay Tuition Fee AFTER Visa Approval",
+    title: "Pre-Departure Preparation",
+    desc: "Once your admission and visa formalities are complete, prepare for your international education journey. Get guidance on travel planning, accommodation considerations, essential documents and pre-departure preparation.",
+    badge: "Plan Your Journey",
     image: "https://res.cloudinary.com/ppkvzeli/image/upload/v1794899397/Visa_Processing_Pay_After_Visa.png"
   }
 ];
@@ -73,10 +73,10 @@ const StepsSection = () => {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-extrabold text-[#0f2547]">
-            <RedUnderline>4 Steps</RedUnderline> To Your Dream Destination
+            <RedUnderline>4 Steps</RedUnderline> to Start Your Abroad Study Journey
           </h2>
           <p className="text-gray-500 mt-4 max-w-2xl mx-auto text-sm md:text-base">
-            From your first free counseling call to landing in Malta—here is how we make your study abroad journey effortless.
+          The Raptor Academics helps you understand the process of applying to selected institutions across Malta and Europe.
           </p>
         </div>
 

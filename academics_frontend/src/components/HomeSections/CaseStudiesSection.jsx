@@ -1,251 +1,3 @@
-// import React, { useState, useEffect } from 'react';
-// import { motion, AnimatePresence } from 'framer-motion';
-// import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
-// import gsap from 'gsap';
-// import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-// gsap.registerPlugin(ScrollTrigger);
-
-// // REAL CLIENT FEEDBACK DATA
-// const caseStudiesData = [
-//   {
-//     id: "01",
-//     student: "Harendra Kurdiya",
-//     location: "Malta",
-//     program: "Smooth Process, Excellent Guidance!",
-//     desc: "Raptor Academics made my Malta student visa journey effortless. Their support and expertise ensured a hassle-free process. Highly recommended!",
-//     image: "https://res.cloudinary.com/ppkvzeli/image/upload/v1794833210/review1.jpg"
-//   },
-//   {
-//     id: "02",
-//     student: "Rashid Khan",
-//     location: "Malta",
-//     program: "Fast & Reliable Service!",
-//     desc: "I was worried about my Norway visitor visa, but Raptor Academics made it so simple. Thank you for your dedication and expert advice!",
-//     image: "https://res.cloudinary.com/ppkvzeli/image/upload/v1794833210/review2.jpg"
-//   },
-//   {
-//     id: "03",
-//     student: "Noman Ali Qureshi",
-//     location: "Malta",
-//     program: "Dreams Turned Into Reality!",
-//     desc: "I can't thank Raptor Academics enough for their expert guidance and support. They truly made my Malta student visa journey stress-free!",
-//     image: "https://res.cloudinary.com/ppkvzeli/image/upload/v1794833210/review3.jpg"
-//   },
-//   {
-//     id: "04",
-//     student: "Ravindra Singh Shekhawat",
-//     location: "Malta",
-//     program: "Effortless Process, Outstanding Support!",
-//     desc: "The team at Raptor Academics is incredibly knowledgeable and helpful. They handled my Malta student visa process with great professionalism!",
-//     image: "https://res.cloudinary.com/ppkvzeli/image/upload/v1794833210/review4.jpg"
-//   },
-//   {
-//     id: "05",
-//     student: "Pawan Rathore",
-//     location: "Norway",
-//     program: "Highly Recommended For Visa Services!",
-//     desc: "From consultation to approval, Raptor Academics provided top-notch service. A big thanks for making my Norway trip possible! A Big Thanks",
-//     image: "https://res.cloudinary.com/ppkvzeli/image/upload/v1794833210/review5.jpg"
-//   },
-//   {
-//     id: "06",
-//     student: "Kamlesh Pipioda",
-//     location: "Malta",
-//     program: "A Seamless Visa Experience!",
-//     desc: "The entire process was smooth, and the team guided me at every step. I truly appreciate their commitment and support! My Dream to study abroad is now completed.",
-//     image: "https://res.cloudinary.com/ppkvzeli/image/upload/v1794833210/review6.jpg"
-//   },
-//   {
-//     id: "07",
-//     student: "Manjeet Singh Tanwar",
-//     location: "Malta",
-//     program: "Professional And Trustworthy!",
-//     desc: "From document preparation to final approval, the Raptor Academics team handled everything professionally. Thank you for making my dream a reality!",
-//     image: "https://res.cloudinary.com/ppkvzeli/image/upload/v1794833210/review7.jpg"
-//   },
-//   {
-//     id: "08",
-//     student: "Yuvraj",
-//     location: "Malta",
-//     program: "Quick & Transparent Process!",
-//     desc: "I was amazed by how quickly my student visa was processed. The counselors at Raptor Academics were always available to clear my doubts and kept everything transparent from day one. Highly recommended!",
-//     image: "https://res.cloudinary.com/ppkvzeli/image/upload/v1794833210/review8.jpg"
-//   },
-//   {
-//     id: "09",
-//     student: "Sumit Saxena",
-//     location: "Malta",
-//     program: "Exceptional Guidance & Support!",
-//     desc: "The team made my study abroad journey completely stress-free. From university selection to the final visa interview prep, they helped me at every single step. Thank you for the amazing support!",
-//     image: "https://res.cloudinary.com/ppkvzeli/image/upload/v1794833210/review9.jpg"
-//   },
-//   {
-//     id: "10",
-//     student: "Himanshu Soni",
-//     location: "Malta",
-//     program: "100% Recommended!",
-//     desc: "What I loved most was their honest approach. They didn't just suggest random colleges but found the exact course that matched my career goals. The entire visa process was just a breeze.",
-//     image: "https://res.cloudinary.com/ppkvzeli/image/upload/v1794833210/review10.jpg"
-//   },
-//   {
-//     id: "11",
-//     student: "Kuldeep Singh Shekhawat",
-//     location: "Malta",
-//     program: "A Lifesaver For My Career!",
-//     desc: "After getting a visa refusal earlier through another consultant, I was completely heartbroken. Raptor Academics took up my case, fixed the flaws, and got my visa approved in record time!",
-//     image: "https://res.cloudinary.com/ppkvzeli/image/upload/v1794833210/review11.jpg"
-//   }
-// ];
-
-// const caseVariants = {
-//   enter: (dir) => ({ opacity: 0, x: dir * 60 }),
-//   center: { opacity: 1, x: 0 },
-//   exit: (dir) => ({ opacity: 0, x: dir * -60 })
-// };
-
-// const CaseStudiesSection = () => {
-//   const [csIndex, setCsIndex] = useState(0);
-//   const [csDir, setCsDir] = useState(1);
-
-//   const goCase = (dir) => {
-//     setCsDir(dir);
-//     setCsIndex((i) => (i + dir + caseStudiesData.length) % caseStudiesData.length);
-//   };
-
-//   useEffect(() => {
-//     const ctx = gsap.context(() => {
-//       const cards = gsap.utils.toArray('.gsap-case-card');
-//       cards.forEach((card) => {
-//         gsap.fromTo(
-//           card,
-//           { opacity: 0, y: 60, scale: 0.96 },
-//           {
-//             opacity: 1, y: 0, scale: 1, duration: 0.8, ease: 'power3.out',
-//             scrollTrigger: {
-//               trigger: card, start: 'top 82%', end: 'top 40%', toggleActions: 'play none none reverse',
-//             },
-//           }
-//         );
-//       });
-//     });
-//     return () => ctx.revert();
-//   }, []);
-
-//   return (
-//     <section className="relative py-24 px-4 md:px-12 bg-[#050505] text-white overflow-hidden border-y border-gray-900">
-      
-//       {/* Background Airplane Silhouette & Overlay */}
-//       <div className="absolute inset-0 z-0 pointer-events-none opacity-20">
-//          <img 
-//            src="https://images.unsplash.com/photo-1542296332-2e4473faf563?auto=format&fit=crop&q=80&w=1600" 
-//            alt="Airplane Background" 
-//            className="w-full h-full object-cover grayscale mix-blend-overlay"
-//          />
-//       </div>
-
-//       <div className="max-w-7xl mx-auto relative z-10">
-        
-//         {/* Header Section Matches Original UI */}
-//         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-//           <div>
-//             <p className="text-red-600 font-bold uppercase tracking-[0.2em] text-xs mb-4">
-//               ★ POPULAR ★
-//             </p>
-//             <h2 className="text-4xl md:text-5xl lg:text-[54px] font-extrabold leading-[1.1] text-white">
-//               Happy Feedback From Our <br /> Students And Clients
-//             </h2>
-//           </div>
-          
-//           <div className="flex flex-col items-end shrink-0">
-//              <div className="flex items-center gap-3">
-//                 <span className="text-5xl md:text-6xl font-extrabold text-red-600">4.8</span>
-//                 <div className="flex flex-col">
-//                    <span className="text-[10px] font-bold text-gray-300 uppercase tracking-widest leading-tight">Rating From</span>
-//                    <span className="text-[10px] font-bold text-white uppercase tracking-widest leading-tight">Our Clients</span>
-//                 </div>
-//              </div>
-//           </div>
-//         </div>
-
-//         {/* Carousel Section */}
-//         <div className="relative mt-8">
-//           <button
-//             onClick={() => goCase(-1)}
-//             className="absolute top-1/2 -translate-y-1/2 -left-3 md:-left-7 z-20 w-12 h-12 md:w-14 md:h-14 rounded-full bg-red-600 hover:bg-red-700 text-white flex items-center justify-center shadow-lg shadow-red-600/30 border-4 border-[#0b0d13] transition hover:scale-105 active:scale-95"
-//           >
-//             <ChevronLeft size={26} />
-//           </button>
-//           <button
-//             onClick={() => goCase(1)}
-//             className="absolute top-1/2 -translate-y-1/2 -right-3 md:-right-7 z-20 w-12 h-12 md:w-14 md:h-14 rounded-full bg-red-600 hover:bg-red-700 text-white flex items-center justify-center shadow-lg shadow-red-600/30 border-4 border-[#0b0d13] transition hover:scale-105 active:scale-95"
-//           >
-//             <ChevronRight size={26} />
-//           </button>
-
-//           <AnimatePresence mode="wait" custom={csDir} initial={false}>
-//             <motion.div
-//               key={csIndex}
-//               custom={csDir}
-//               variants={caseVariants}
-//               initial="enter"
-//               animate="center"
-//               exit="exit"
-//               transition={{ duration: 0.35, ease: 'easeOut' }}
-//               className="gsap-case-card grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 items-stretch"
-//             >
-//                {/* We show 3 reviews at a time based on the current index */}
-//                {[0, 1, 2].map((offset) => {
-//                   const reviewIndex = (csIndex + offset) % caseStudiesData.length;
-//                   const review = caseStudiesData[reviewIndex];
-//                   return (
-//                      <div key={review.id} className="bg-[#0b0c10] border border-gray-800 rounded-3xl overflow-hidden shadow-2xl flex flex-col group">
-//                         <div className="h-[260px] overflow-hidden relative">
-//                            <img
-//                              src={review.image}
-//                              alt={review.student}
-//                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-//                            />
-//                            <div className="absolute top-3 right-3 bg-white/95 p-1.5 rounded-lg shadow-md">
-//                               <img src="https://theraptoracademics.com/wp-content/uploads/2024/09/cropped-Raptor-Logo-e1728284698525-4-97x33.png" alt="Logo" className="h-4" />
-//                            </div>
-//                         </div>
-
-//                         <div className="p-6 md:p-8 flex flex-col grow">
-//                            <h3 className="text-[17px] font-extrabold text-red-600 leading-snug mb-4">
-//                              {review.program}
-//                            </h3>
-//                            <p className="text-gray-300 text-[13.5px] leading-relaxed mb-6 font-medium">
-//                              {review.desc}
-//                            </p>
-                           
-//                            <div className="mt-auto pt-4 border-t border-gray-800/80">
-//                               <div className="flex text-red-600 gap-1 mb-2">
-//                                  <Star fill="currentColor" size={14} />
-//                                  <Star fill="currentColor" size={14} />
-//                                  <Star fill="currentColor" size={14} />
-//                                  <Star fill="currentColor" size={14} />
-//                                  <Star fill="currentColor" size={14} />
-//                               </div>
-//                               <p className="text-gray-400 text-xs font-bold uppercase tracking-wider">
-//                                 {review.student}, <span className="text-red-700">{review.location}</span>
-//                               </p>
-//                            </div>
-//                         </div>
-//                      </div>
-//                   );
-//                })}
-//             </motion.div>
-//           </AnimatePresence>
-//         </div>
-//       </div>
-//     </section>
-//   );
-// };
-
-// export default CaseStudiesSection;
-
-
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -256,7 +8,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// ALL 17 REAL CLIENT REVIEWS FROM SCREENSHOTS
+// ALL 17 REAL CLIENT REVIEWS
 const caseStudiesData = [
   {
     id: "REV-01",
@@ -428,7 +180,6 @@ const CaseStudiesSection = () => {
     setCsIndex((i) => (i + dir + caseStudiesData.length) % caseStudiesData.length);
   };
 
-  // NEW: Auto-Slide every 4 seconds. Resets automatically if user clicks left/right.
   useEffect(() => {
     const timer = setTimeout(() => {
       goCase(1);
@@ -456,7 +207,7 @@ const CaseStudiesSection = () => {
   }, []);
 
   return (
-    <section className="relative py-24 px-4 md:px-12 bg-[#050505] text-white overflow-hidden border-y border-gray-900">
+    <section className="relative py-16 md:py-20 px-4 md:px-12 bg-[#050505] text-white overflow-hidden border-y border-gray-900">
       
       {/* Background Airplane Silhouette & Overlay */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-20">
@@ -467,20 +218,20 @@ const CaseStudiesSection = () => {
          />
       </div>
 
-      {/* Main Content (z-10 ensures it stays above the background image) */}
+      {/* Main Content */}
       <div className="max-w-7xl mx-auto relative z-10">
         
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
           <div>
-            <p className="text-red-500 font-bold uppercase tracking-[0.2em] text-xs mb-3">
+            <p className="text-red-500 font-bold uppercase tracking-[0.2em] text-xs mb-2.5">
               ★ REAL STUDENT JOURNEYS ★
             </p>
             <h2 className="text-3xl md:text-5xl font-extrabold">
-            Real Profiles. Real International Education <RedUnderline>Journeys</RedUnderline>.
+              Real Profiles. Real International Education <RedUnderline>Journeys</RedUnderline>.
             </h2>
           </div>
           <Link to="/free-counselling">
-            <button className="bg-red-600 hover:bg-red-700 text-white font-bold px-7 py-3.5 rounded-xl transition text-sm">
+            <button className="bg-red-600 hover:bg-red-700 text-white font-bold px-7 py-3.5 rounded-xl transition text-sm cursor-pointer">
               Evaluate Your Profile Free
             </button>
           </Link>
@@ -489,13 +240,13 @@ const CaseStudiesSection = () => {
         <div className="relative">
           <button
             onClick={() => goCase(-1)}
-            className="absolute top-1/2 -translate-y-1/2 -left-3 md:-left-7 z-20 w-12 h-12 md:w-14 md:h-14 rounded-full bg-red-600 hover:bg-red-700 text-white flex items-center justify-center shadow-lg shadow-red-600/30 border-4 border-[#0b0d13] transition hover:scale-105 active:scale-95"
+            className="absolute top-1/2 -translate-y-1/2 -left-3 md:-left-7 z-20 w-12 h-12 md:w-14 md:h-14 rounded-full bg-red-600 hover:bg-red-700 text-white flex items-center justify-center shadow-lg shadow-red-600/30 border-4 border-[#0b0d13] transition hover:scale-105 active:scale-95 cursor-pointer"
           >
             <ChevronLeft size={26} />
           </button>
           <button
             onClick={() => goCase(1)}
-            className="absolute top-1/2 -translate-y-1/2 -right-3 md:-right-7 z-20 w-12 h-12 md:w-14 md:h-14 rounded-full bg-red-600 hover:bg-red-700 text-white flex items-center justify-center shadow-lg shadow-red-600/30 border-4 border-[#0b0d13] transition hover:scale-105 active:scale-95"
+            className="absolute top-1/2 -translate-y-1/2 -right-3 md:-right-7 z-20 w-12 h-12 md:w-14 md:h-14 rounded-full bg-red-600 hover:bg-red-700 text-white flex items-center justify-center shadow-lg shadow-red-600/30 border-4 border-[#0b0d13] transition hover:scale-105 active:scale-95 cursor-pointer"
           >
             <ChevronRight size={26} />
           </button>
@@ -509,15 +260,16 @@ const CaseStudiesSection = () => {
               animate="center"
               exit="exit"
               transition={{ duration: 0.35, ease: 'easeOut' }}
-              className="gsap-case-card bg-[#131722]/90 backdrop-blur-md border border-gray-800 rounded-3xl p-6 md:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center shadow-2xl"
+              className="gsap-case-card bg-[#131722]/90 backdrop-blur-md border border-gray-800 rounded-3xl p-5 md:p-7 grid grid-cols-1 lg:grid-cols-12 gap-7 items-center shadow-2xl"
             >
-              <div className="lg:col-span-5 h-64 md:h-80 rounded-2xl overflow-hidden relative">
+              {/* Taller Image Container without increasing overall section height */}
+              <div className="lg:col-span-5 h-80 sm:h-96 lg:h-[440px] rounded-2xl overflow-hidden relative bg-[#0b0d13]">
                 <img
                   src={caseStudiesData[csIndex].image}
                   alt={caseStudiesData[csIndex].student}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-top"
                 />
-                <span className="absolute top-4 left-4 bg-red-600 text-white text-xs font-black px-3.5 py-1.5 rounded-full">
+                <span className="absolute top-4 left-4 bg-red-600 text-white text-xs font-black px-3.5 py-1.5 rounded-full shadow-md">
                   {caseStudiesData[csIndex].id}
                 </span>
               </div>
@@ -542,7 +294,7 @@ const CaseStudiesSection = () => {
           </AnimatePresence>
         </div>
 
-        <div className="flex items-center justify-center gap-5 mt-10">
+        <div className="flex items-center justify-center gap-5 mt-7">
           <span className="text-sm font-bold text-gray-400 tabular-nums">
             {String(csIndex + 1).padStart(2, '0')} / {caseStudiesData.length}
           </span>
@@ -554,7 +306,7 @@ const CaseStudiesSection = () => {
                   setCsDir(i > csIndex ? 1 : -1);
                   setCsIndex(i);
                 }}
-                className={`h-2 rounded-full transition-all duration-300 ${
+                className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
                   i === csIndex ? 'w-8 bg-red-600' : 'w-2 bg-gray-600 hover:bg-gray-500'
                 }`}
               />

@@ -41,7 +41,7 @@ const Navbar = () => {
           <div className="group relative flex items-center gap-1 cursor-pointer hover:text-red-600 transition">
             Visa <ChevronDown size={16} />
           </div>
-          <a href="#" className="hover:text-red-600 transition">Blogs</a>
+          <a href="/blogs" className="hover:text-red-600 transition">Blogs</a>
           <Link to="/contact-us" className="hover:text-red-600 transition">Contact Us</Link>
         </div>
 
@@ -94,7 +94,7 @@ const Navbar = () => {
           <Link to="/about-us" onClick={() => setIsOpen(false)} className="hover:text-red-600 transition">About Us</Link>
           <Link to="/institutions" onClick={() => setIsOpen(false)} className="hover:text-red-600 transition">Institutions</Link>
           <a href="#" className="hover:text-red-600 transition">Visa</a>
-          <a href="#" className="hover:text-red-600 transition">Blogs</a>
+          <a href="/blogs" className="hover:text-red-600 transition">Blogs</a>
           <Link to="/contact-us" onClick={() => setIsOpen(false)} className="hover:text-red-600 transition">Contact Us</Link>
 
           {/* Mobile: tap to call */}

@@ -8,6 +8,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Home from './pages/Home';
 import AboutUs from './pages/AboutUs';
 import Institutions from './pages/Institutions';
+import Blogs from './pages/Blogs';
+import BlogPost from './pages/BlogPost';
 import ContactUs from './pages/ContactUs';
 import FreeCounselling from './pages/FreeCounselling';
 import StudentCareProcess from './pages/StudentCareProcess';
@@ -15,16 +17,29 @@ import Disclaimer from './pages/Disclaimer';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsAndConditions from './pages/TermsAndConditions';
 import CursorTrail from './components/CursorTrail';
+import RaptorChatWidget from './components/RaptorChatWidget';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Automatically scroll to top when switching pages
+// Automatically scroll to top or deep-linked section/institution panel
 const ScrollToTop = () => {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+    if (hash) {
+      setTimeout(() => {
+        const targetId = hash.replace('#', '');
+        const directEl = document.getElementById(targetId);
+        const panel = directEl || document.getElementById('institution-detail-panel');
+        if (panel) {
+          const y = panel.getBoundingClientRect().top + window.scrollY - 110;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      }, 150);
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname, hash]);
 
   return null;
 };
@@ -61,10 +76,15 @@ const App = () => {
         {/* Custom Magnetic Cursor + Mix-Blend-Difference + Particle Trail */}
         <CursorTrail />
 
+        {/* Option-Driven 2027 Assistant & Call Back Widget */}
+        <RaptorChatWidget />
+
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/institutions" element={<Institutions />} />
+          <Route path="/blogs" element={<Blogs />} />
+          <Route path="/blogs/:slug" element={<BlogPost />} />
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/free-counselling" element={<FreeCounselling />} />
           

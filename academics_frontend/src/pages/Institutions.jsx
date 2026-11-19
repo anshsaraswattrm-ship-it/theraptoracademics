@@ -17,7 +17,6 @@ import {
   FaCopy,
   FaPrint,
   FaTimes,
-  FaFileUpload,
   FaArrowRight,
   FaClock,
   FaShieldAlt,
@@ -60,7 +59,7 @@ const getCollegeImage = (college, index = 0) => {
 };
 
 // ==========================================
-// 2. SLUG HELPER FOR SHAREABLE DEEP LINKS (#avanza-training-academy)
+// 2. SLUG HELPER FOR SHAREABLE DEEP LINKS
 // ==========================================
 const getCollegeSlug = (college) => {
   const short = (college?.name || '').split('–')[0].trim().toLowerCase();
@@ -68,11 +67,38 @@ const getCollegeSlug = (college) => {
 };
 
 // ==========================================
-// 3. SMART FORMATTERS FOR 2027 & ULTRA-MINIMAL TABLE
+// 3. SMART FORMATTERS FOR 2027, LA VALLETTE MBA & CLEAN CARDS
 // ==========================================
 const to2027 = (val) => {
   if (typeof val !== 'string') return val;
   return val.replace(/\b2026\b/g, '2027');
+};
+
+const isLaValletteCollege = (collegeName = '') => {
+  return /la\s*vallette/i.test(collegeName);
+};
+
+const formatCourseTitleForCollege = (title = '', collegeName = '') => {
+  let clean = to2027(title);
+  if (isLaValletteCollege(collegeName) && /\bmba\b/i.test(clean)) {
+    clean = clean
+      .replace(/^Level\s*7\s+/i, '')
+      .replace(/\(\s*2\s*Years?\s*\)/gi, '')
+      .replace(/\s+/g, ' ')
+      .trim();
+    if (!/\(MQF\/EQF Level 7\)/i.test(clean)) {
+      clean = `${clean} (MQF/EQF Level 7)`;
+    }
+  }
+  return clean;
+};
+
+const formatLaValletteMbaText = (val = '', collegeName = '', isMbaCourse = false) => {
+  let clean = to2027(String(val));
+  if (isLaValletteCollege(collegeName) && isMbaCourse) {
+    clean = clean.replace(/\b2\s*Years?\b/gi, '18 Months');
+  }
+  return clean;
 };
 
 const extractLicense = (text = '') => {
@@ -89,7 +115,6 @@ const splitIntoCleanLines = (val = '') => {
     .filter(Boolean);
 };
 
-// Shortens "January / April / July / October - 2027 (Every 2 Months...)" -> "Jan / Apr / Jul / Oct 2027"
 const formatShortIntake = (raw = '') => {
   const text = to2027(raw);
   if (/flexible\s*monthly/i.test(text) && !/january|april/i.test(text)) {
@@ -120,7 +145,6 @@ const formatShortIntake = (raw = '') => {
   return cleaned;
 };
 
-// ULTRA-MINIMAL Tuition Formatter for Quick Comparison Table (Max 2 tiny lines, no Yr 1/Yr 2 clutter!)
 const formatMinimalTableTuition = (raw = '') => {
   const parts = splitIntoCleanLines(raw);
   if (parts.length === 0) return { primary: '€6,500', secondary: '' };
@@ -133,7 +157,7 @@ const formatMinimalTableTuition = (raw = '') => {
   parts.forEach((p) => {
     const euroMatch = p.match(/€\s?[\d,]+(?:\s*[-–]\s*€\s?[\d,]+)?/);
     if (!euroMatch) return;
-    const amt = euroMatch[0].replace(/\s+/g, '');
+    const amt = euroMatch[0].replace(/\s+/g, '').replace(/,+$/, '');
 
     if (/nbc|nursing\s*bridging/i.test(p)) {
       nbcFee = `NBC ${amt}`;
@@ -158,19 +182,16 @@ const formatMinimalTableTuition = (raw = '') => {
     return { primary: diplomaFee, secondary: '' };
   }
 
-  // Fallback: extract first two clean Euro figures from your data
   const allEuros = raw.match(/€\s?[\d,]+/g) || [];
   return {
-    primary: allEuros[0] ? allEuros[0].replace(/\s+/g, '') : to2027(parts[0]),
+    primary: allEuros[0] ? allEuros[0].replace(/\s+/g, '').replace(/,+$/, '') : to2027(parts[0]),
     secondary: ''
   };
 };
 
-// Strictly uses YOUR institutionsData.js applicationFee without adding external text
 const formatOwnAppFee = (raw = '') => {
   const clean = to2027(raw).trim();
   if (!clean) return { primary: '—', secondary: '' };
-  // Split if your own data has "|" or "("
   const lines = splitIntoCleanLines(clean);
   const firstLine = lines[0];
   const parenMatch = firstLine.match(/^([^()]+)\(([^)]+)\)(.*)$/);
@@ -245,7 +266,11 @@ const formatPayAfterVisaColumn = (inst) => {
   return 'Selected Courses';
 };
 
-const extractDurationBadge = (course) => {
+const extractDurationBadge = (course, collegeName = '') => {
+  const isMba = /\bmba\b/i.test(course?.title || '');
+  if (isLaValletteCollege(collegeName) && isMba) {
+    return '18 Months';
+  }
   if (!course?.keyDetails) return '2027 Intake';
   const dur = course.keyDetails.find((d) =>
     /duration|length|year|month|week/i.test(d.label)
@@ -274,28 +299,59 @@ const parseTuitionSummaryBlocks = (summaryText = '') => {
 
   const cards = [];
   parts.forEach((part) => {
-    const euroMatch = part.match(/(€\s?[\d,]+(?:\s*[-–to]+\s*€?\s?[\d,]+)?)/i);
+    let payAfterVisaNote = '';
+    const parenMatch = part.match(/\(([^)]*pay[^)]*visa[^)]*)\)/i);
+    if (parenMatch) {
+      payAfterVisaNote = parenMatch[1].trim();
+    }
+    const textWithoutVisaParen = part.replace(/\([^)]*pay[^)]*visa[^)]*\)/gi, '').trim();
+
+    const colonIdx = textWithoutVisaParen.indexOf(':');
+    const title =
+      colonIdx > -1
+        ? textWithoutVisaParen.slice(0, colonIdx).trim()
+        : 'Program Tuition Fee';
+    const breakdown =
+      colonIdx > -1
+        ? textWithoutVisaParen.slice(colonIdx + 1).trim()
+        : textWithoutVisaParen;
+
+    const euroMatch = breakdown.match(/€\s?\d+(?:,\d{3})*(?:\s*[-–to]+\s*€?\s?\d+(?:,\d{3})*)?/i);
     if (euroMatch) {
-      const amount = euroMatch[1].trim();
-      const label = part
-        .replace(euroMatch[0], '')
-        .replace(/^[:\-–\s]+|[:\-–\s]+$/g, '')
-        .trim();
+      const amount = euroMatch[0].replace(/,+$/, '').trim();
+      const hasMultiYear = /yr\s*2|6\s*months|year\s*2/i.test(breakdown);
+
       cards.push({
-        label: label || 'Program Tuition Fee',
-        amount
+        label: title,
+        amount,
+        subBreakdown: hasMultiYear ? breakdown : '',
+        payAfterVisaNote
       });
     }
   });
-  return { fullText: clean, cards };
+
+  const formattedLines = parts.map((part) => {
+    const parenMatch = part.match(/\(([^)]*pay[^)]*visa[^)]*)\)/i);
+    if (parenMatch) {
+      const mainPart = part.replace(parenMatch[0], '').trim();
+      return { main: mainPart, subNote: `(${parenMatch[1].trim()})` };
+    }
+    return { main: part, subNote: '' };
+  });
+
+  return { fullText: clean, cards, formattedLines };
 };
 
 // ==========================================
 // 4. COURSE ACCORDION
 // ==========================================
-const CourseAccordion = ({ course, isOpen, onToggle, onApplyCourse }) => {
-  const durationBadge = extractDurationBadge(course);
+const CourseAccordion = ({ course, collegeName, isOpen, onToggle, onApplyCourse }) => {
+  const isMbaCourse = /\bmba\b/i.test(course?.title || '');
+  const displayTitle = formatCourseTitleForCollege(course.title, collegeName);
+  const durationBadge = extractDurationBadge(course, collegeName);
   const headlineFee = extractCourseHeadlineFee(course);
+
+  const fmt = (val) => formatLaValletteMbaText(val, collegeName, isMbaCourse);
 
   return (
     <div
@@ -305,7 +361,6 @@ const CourseAccordion = ({ course, isOpen, onToggle, onApplyCourse }) => {
           : 'border-slate-200 hover:border-slate-300 shadow-xs'
       }`}
     >
-      {/* Course Header Bar */}
       <div
         onClick={onToggle}
         className="w-full px-5 py-4 md:px-7 md:py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 cursor-pointer hover:bg-slate-50 transition-colors"
@@ -323,7 +378,7 @@ const CourseAccordion = ({ course, isOpen, onToggle, onApplyCourse }) => {
           </button>
           <div>
             <h4 className="font-extrabold text-[#0f2547] text-base md:text-xl leading-snug">
-              {to2027(course.title)}
+              {displayTitle}
             </h4>
             <div className="flex flex-wrap items-center gap-2 mt-2">
               <span className="inline-flex items-center gap-1.5 text-xs font-bold bg-amber-50 text-amber-800 border border-amber-200 px-3 py-0.5 rounded-full">
@@ -331,7 +386,7 @@ const CourseAccordion = ({ course, isOpen, onToggle, onApplyCourse }) => {
               </span>
               {headlineFee && (
                 <span className="inline-flex items-center gap-1 text-xs font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-200 px-3 py-0.5 rounded-full">
-                  Fee: {to2027(headlineFee.amount)}
+                  Fee: {fmt(headlineFee.amount)}
                 </span>
               )}
               <span className="text-[11px] font-semibold text-slate-400">
@@ -346,11 +401,11 @@ const CourseAccordion = ({ course, isOpen, onToggle, onApplyCourse }) => {
           onClick={(e) => e.stopPropagation()}
         >
           <span className="bg-slate-100 text-[#0f2547] font-extrabold text-xs md:text-sm px-3.5 py-2 rounded-xl border border-slate-200">
-            {to2027(durationBadge)}
+            {durationBadge}
           </span>
           <button
             type="button"
-            onClick={() => onApplyCourse(course.title)}
+            onClick={() => onApplyCourse(displayTitle)}
             className="bg-red-600 hover:bg-red-700 text-white font-extrabold text-xs md:text-sm px-5 py-2.5 rounded-xl shadow-sm transition-all flex items-center gap-1.5 cursor-pointer"
           >
             Apply <FaArrowRight size={11} />
@@ -358,7 +413,6 @@ const CourseAccordion = ({ course, isOpen, onToggle, onApplyCourse }) => {
         </div>
       </div>
 
-      {/* Course Body */}
       <div className={`${isOpen ? 'block' : 'hidden print:block'}`}>
         <div className="p-6 md:p-8 space-y-8 border-t border-slate-200 bg-[#f8fafc]/70 print:bg-white">
           
@@ -370,7 +424,7 @@ const CourseAccordion = ({ course, isOpen, onToggle, onApplyCourse }) => {
                   <FaGraduationCap className="text-red-600" size={18} /> Course Overview
                 </h5>
                 <p className="text-slate-700 text-sm md:text-base leading-relaxed">
-                  {to2027(course.overview)}
+                  {fmt(course.overview)}
                 </p>
               </div>
             )}
@@ -382,13 +436,13 @@ const CourseAccordion = ({ course, isOpen, onToggle, onApplyCourse }) => {
                 </span>
                 {headlineFee ? (
                   <div className="mt-2 space-y-1.5">
-                    {splitIntoCleanLines(headlineFee.amount).map((line, i) => (
+                    {splitIntoCleanLines(fmt(headlineFee.amount)).map((line, i) => (
                       <div key={i} className="text-2xl md:text-3xl font-black text-white tracking-tight leading-tight">
                         {line}
                       </div>
                     ))}
                     <p className="text-xs text-blue-100/85 pt-1 leading-relaxed">
-                      {to2027(headlineFee.category)} — {to2027(headlineFee.notes)}
+                      {fmt(headlineFee.category)} — {fmt(headlineFee.notes)}
                     </p>
                   </div>
                 ) : (
@@ -400,7 +454,7 @@ const CourseAccordion = ({ course, isOpen, onToggle, onApplyCourse }) => {
 
               <button
                 type="button"
-                onClick={() => onApplyCourse(course.title)}
+                onClick={() => onApplyCourse(displayTitle)}
                 className="w-full bg-red-600 hover:bg-red-700 text-white font-extrabold text-xs md:text-sm uppercase tracking-wider py-3.5 px-5 rounded-xl transition-colors flex items-center justify-center gap-2 cursor-pointer print:hidden"
               >
                 Apply For This Program <FaArrowRight size={12} />
@@ -423,7 +477,7 @@ const CourseAccordion = ({ course, isOpen, onToggle, onApplyCourse }) => {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
                 {course.keyDetails.map((detail, idx) => {
                   const isFeeField = /fee|tuition|cost|price|scholarship/i.test(detail.label);
-                  const lines = splitIntoCleanLines(detail.value);
+                  const lines = splitIntoCleanLines(fmt(detail.value));
 
                   return (
                     <div
@@ -439,7 +493,7 @@ const CourseAccordion = ({ course, isOpen, onToggle, onApplyCourse }) => {
                           isFeeField ? 'text-red-100' : 'text-blue-700'
                         }`}
                       >
-                        {to2027(detail.label)}
+                        {fmt(detail.label)}
                       </span>
 
                       <div className="space-y-1.5">
@@ -472,7 +526,7 @@ const CourseAccordion = ({ course, isOpen, onToggle, onApplyCourse }) => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
                 {course.feeStructure.map((fee, idx) => {
-                  const amountLines = splitIntoCleanLines(fee.amount);
+                  const amountLines = splitIntoCleanLines(fmt(fee.amount));
                   return (
                     <div
                       key={idx}
@@ -480,7 +534,7 @@ const CourseAccordion = ({ course, isOpen, onToggle, onApplyCourse }) => {
                     >
                       <div>
                         <span className="text-xs font-extrabold uppercase tracking-wider text-slate-500 block">
-                          {to2027(fee.category)}
+                          {fmt(fee.category)}
                         </span>
                         <div className="mt-2 space-y-1">
                           {amountLines.map((amt, aIdx) => (
@@ -495,7 +549,7 @@ const CourseAccordion = ({ course, isOpen, onToggle, onApplyCourse }) => {
                       </div>
                       {fee.notes && (
                         <p className="text-xs md:text-sm font-medium text-slate-600 mt-3 pt-3 border-t border-slate-200 leading-relaxed">
-                          {to2027(fee.notes)}
+                          {fmt(fee.notes)}
                         </p>
                       )}
                     </div>
@@ -518,14 +572,14 @@ const CourseAccordion = ({ course, isOpen, onToggle, onApplyCourse }) => {
                         key={idx}
                         className="border-b border-slate-200 last:border-0 hover:bg-slate-50"
                       >
-                        <td className="p-4 font-extrabold text-[#0f2547]">{to2027(fee.category)}</td>
+                        <td className="p-4 font-extrabold text-[#0f2547]">{fmt(fee.category)}</td>
                         <td className="p-4 font-black text-red-600 text-base">
-                          {splitIntoCleanLines(fee.amount).map((line, lIdx) => (
+                          {splitIntoCleanLines(fmt(fee.amount)).map((line, lIdx) => (
                             <div key={lIdx}>{line}</div>
                           ))}
                         </td>
                         <td className="p-4 text-slate-700 font-medium leading-relaxed">
-                          {to2027(fee.notes)}
+                          {fmt(fee.notes)}
                         </td>
                       </tr>
                     ))}
@@ -548,7 +602,7 @@ const CourseAccordion = ({ course, isOpen, onToggle, onApplyCourse }) => {
                     className="flex items-start gap-3 text-sm md:text-base text-slate-800 bg-emerald-50/60 p-4 rounded-xl border border-emerald-200"
                   >
                     <FaCheckCircle className="text-emerald-600 mt-1 shrink-0" size={16} />
-                    <span className="leading-relaxed font-semibold">{to2027(req)}</span>
+                    <span className="leading-relaxed font-semibold">{fmt(req)}</span>
                   </div>
                 ))}
               </div>
@@ -570,7 +624,7 @@ const CourseAccordion = ({ course, isOpen, onToggle, onApplyCourse }) => {
                     <span className="w-7 h-7 rounded-full bg-[#0f2547] text-white text-xs font-extrabold flex items-center justify-center shrink-0 mt-0.5">
                       {idx + 1}
                     </span>
-                    <span className="leading-relaxed font-semibold">{to2027(mod)}</span>
+                    <span className="leading-relaxed font-semibold">{fmt(mod)}</span>
                   </div>
                 ))}
               </div>
@@ -590,7 +644,7 @@ const CourseAccordion = ({ course, isOpen, onToggle, onApplyCourse }) => {
                     className="bg-slate-50 p-4 rounded-xl border border-slate-200/80 text-sm md:text-base text-slate-700 leading-relaxed flex items-start gap-2.5 font-medium"
                   >
                     <span className="text-red-600 font-extrabold">✦</span>
-                    <span>{to2027(outcome)}</span>
+                    <span>{fmt(outcome)}</span>
                   </li>
                 ))}
               </ul>
@@ -605,7 +659,7 @@ const CourseAccordion = ({ course, isOpen, onToggle, onApplyCourse }) => {
               </h5>
               {course.assessmentSummary && (
                 <p className="text-slate-700 text-sm md:text-base leading-relaxed mb-4">
-                  {to2027(course.assessmentSummary)}
+                  {fmt(course.assessmentSummary)}
                 </p>
               )}
               {course.grading && course.grading.length > 0 && (
@@ -621,9 +675,9 @@ const CourseAccordion = ({ course, isOpen, onToggle, onApplyCourse }) => {
                     <tbody>
                       {course.grading.map((g, idx) => (
                         <tr key={idx} className="border-b border-slate-100 last:border-0 hover:bg-slate-50">
-                          <td className="p-4 font-bold text-[#0f2547]">{to2027(g.grade)}</td>
-                          <td className="p-4 text-slate-800 font-semibold">{to2027(g.range)}</td>
-                          <td className="p-4 text-slate-600">{to2027(g.description)}</td>
+                          <td className="p-4 font-bold text-[#0f2547]">{fmt(g.grade)}</td>
+                          <td className="p-4 text-slate-800 font-semibold">{fmt(g.range)}</td>
+                          <td className="p-4 text-slate-600">{fmt(g.description)}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -645,7 +699,7 @@ const CourseAccordion = ({ course, isOpen, onToggle, onApplyCourse }) => {
                     key={idx}
                     className="bg-[#0f2547]/5 text-[#0f2547] border border-[#0f2547]/15 text-xs md:text-sm font-bold px-4 py-1.5 rounded-full"
                   >
-                    {to2027(ind)}
+                    {fmt(ind)}
                   </span>
                 ))}
               </div>
@@ -671,13 +725,13 @@ const CourseAccordion = ({ course, isOpen, onToggle, onApplyCourse }) => {
                   <tbody>
                     {course.careers.map((career, idx) => (
                       <tr key={idx} className="border-b border-slate-100 last:border-0 hover:bg-slate-50">
-                        <td className="p-4 font-extrabold text-[#0f2547]">{to2027(career.role)}</td>
-                        <td className="p-4 text-slate-600">{to2027(career.sector || '-')}</td>
+                        <td className="p-4 font-extrabold text-[#0f2547]">{fmt(career.role)}</td>
+                        <td className="p-4 text-slate-600">{fmt(career.sector || '-')}</td>
                         <td className="p-4 font-black text-emerald-700">
-                          {to2027(career.startSalary || career.salary)}
+                          {fmt(career.startSalary || career.salary)}
                         </td>
                         <td className="p-4 font-bold text-[#0f2547]">
-                          {to2027(career.midSalary || '-')}
+                          {fmt(career.midSalary || '-')}
                         </td>
                       </tr>
                     ))}
@@ -686,7 +740,7 @@ const CourseAccordion = ({ course, isOpen, onToggle, onApplyCourse }) => {
               </div>
               {course.note && (
                 <p className="text-xs md:text-sm text-slate-500 italic mt-3">
-                  Note: {to2027(course.note)}
+                  Note: {fmt(course.note)}
                 </p>
               )}
             </div>
@@ -702,7 +756,7 @@ const CourseAccordion = ({ course, isOpen, onToggle, onApplyCourse }) => {
                 {course.benefits.map((b, idx) => (
                   <li key={idx} className="text-sm md:text-base text-blue-100 flex items-start gap-2.5">
                     <FaCheckCircle className="text-red-400 mt-1 shrink-0" size={14} />
-                    <span className="leading-relaxed">{to2027(b)}</span>
+                    <span className="leading-relaxed">{fmt(b)}</span>
                   </li>
                 ))}
               </ul>
@@ -727,7 +781,9 @@ const CourseAccordion = ({ course, isOpen, onToggle, onApplyCourse }) => {
 };
 
 // ==========================================
-// 5. APPLY MODAL
+// 5. ORIGINAL RAPTOR ACADEMICS APPLY MODAL
+//    - Split Two-Panel Branded Design
+//    - Step 3 Optional with Simple Yes / No Buttons (No File Upload)
 // ==========================================
 const ApplyNowModal = ({ isOpen, onClose, initialCollegeName, initialProgramName }) => {
   const [formData, setFormData] = useState({
@@ -741,15 +797,12 @@ const ApplyNowModal = ({ isOpen, onClose, initialCollegeName, initialProgramName
     institute: initialCollegeName || institutionsData[0]?.name || '',
     program: initialProgramName || '',
     branch: 'Jaipur Head Office (Mansarovar)',
-    otherDocsDesc: '',
-    consent: false
-  });
-
-  const [files, setFiles] = useState({
-    academic: null,
-    passport: null,
-    cv: null,
-    other: null
+    has10th: 'Yes',
+    has12th: 'Yes',
+    hasGraduation: 'No',
+    hasPassport: 'Yes',
+    notes: '',
+    consent: true
   });
 
   const [submitted, setSubmitted] = useState(false);
@@ -759,8 +812,10 @@ const ApplyNowModal = ({ isOpen, onClose, initialCollegeName, initialProgramName
       document.body.style.overflow = 'hidden';
       const matchedCollege =
         institutionsData.find((c) => c.name === initialCollegeName) || institutionsData[0];
-      const defaultProg =
-        initialProgramName || matchedCollege?.courses?.[0]?.title || 'General 2027 Intake';
+      const firstProgFormatted = matchedCollege?.courses?.[0]
+        ? formatCourseTitleForCollege(matchedCollege.courses[0].title, matchedCollege.name)
+        : 'General 2027 Intake';
+      const defaultProg = initialProgramName || firstProgFormatted;
       setFormData((prev) => ({
         ...prev,
         institute: matchedCollege?.name || '',
@@ -781,6 +836,13 @@ const ApplyNowModal = ({ isOpen, onClose, initialCollegeName, initialProgramName
     );
   }, [formData.institute]);
 
+  const selectedCollegeIndex = useMemo(() => {
+    return Math.max(
+      0,
+      institutionsData.findIndex((c) => c.id === selectedCollegeObj?.id)
+    );
+  }, [selectedCollegeObj]);
+
   if (!isOpen) return null;
 
   const handleSubmit = (e) => {
@@ -788,74 +850,151 @@ const ApplyNowModal = ({ isOpen, onClose, initialCollegeName, initialProgramName
     setSubmitted(true);
   };
 
+  const docChecklistQuestions = [
+    { key: 'has10th', label: 'Do you have 10th Pass Marksheet?' },
+    { key: 'has12th', label: 'Do you have 12th Pass Marksheet?' },
+    { key: 'hasGraduation', label: 'Do you have Graduation / Diploma?' },
+    { key: 'hasPassport', label: 'Do you have a valid Passport?' }
+  ];
+
   return (
     <div
       data-lenis-prevent="true"
-      className="fixed inset-0 z-50 bg-black/75 backdrop-blur-xs flex items-center justify-center p-3 md:p-6 overflow-y-auto print:hidden"
+      className="fixed inset-0 z-50 bg-[#071122]/80 backdrop-blur-md flex items-center justify-center p-3 md:p-6 overflow-y-auto print:hidden"
     >
       <motion.div
-        initial={{ opacity: 0, scale: 0.96, y: 15 }}
+        initial={{ opacity: 0, scale: 0.96, y: 18 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 0.96, y: 15 }}
-        className="bg-white w-full max-w-2xl rounded-3xl shadow-2xl overflow-hidden border border-slate-200 my-auto max-h-[90vh] flex flex-col"
+        exit={{ opacity: 0, scale: 0.96, y: 18 }}
+        transition={{ duration: 0.25 }}
+        className="bg-white w-full max-w-4xl rounded-[2rem] shadow-2xl overflow-hidden border border-slate-200/80 my-auto max-h-[92vh] grid grid-cols-1 lg:grid-cols-12"
       >
-        <div className="bg-[#0f2547] text-white px-6 py-5 md:px-8 md:py-6 flex items-start justify-between gap-4 shrink-0">
-          <div>
-            <span className="inline-block bg-red-600 text-white text-[10px] font-extrabold uppercase tracking-widest px-2.5 py-1 rounded-full mb-1.5">
-              2027 Intake Application Portal
-            </span>
-            <h3 className="text-xl md:text-2xl font-extrabold">Apply Now</h3>
-            <p className="text-blue-100/80 text-xs md:text-sm mt-1">
-              Fill in your details and upload your documents. The Raptor Academics team will take your 2027 application forward.
+        {/* LEFT BRANDED SUMMARY SIDEBAR (Raptor Academics Original Look) */}
+        <div className="lg:col-span-4 bg-gradient-to-b from-[#0b1930] via-[#0f2547] to-[#16315c] text-white p-6 md:p-8 flex flex-col justify-between relative overflow-hidden">
+          <div className="absolute -bottom-16 -left-16 w-52 h-52 bg-red-600/20 rounded-full blur-3xl pointer-events-none" />
+
+          <div className="space-y-5 relative z-10">
+            <div className="flex items-center justify-between lg:justify-start gap-2">
+              <span className="bg-red-600 text-white text-[10px] font-extrabold uppercase tracking-widest px-3 py-1 rounded-full">
+                2027 Malta Admissions
+              </span>
+              <button
+                type="button"
+                onClick={onClose}
+                className="lg:hidden w-8 h-8 rounded-full bg-white/10 hover:bg-red-600 text-white flex items-center justify-center cursor-pointer"
+              >
+                <FaTimes size={14} />
+              </button>
+            </div>
+
+            <div>
+              <h3 className="text-2xl md:text-3xl font-black leading-tight">
+                Quick Profile <span className="text-red-400">Assessment</span>
+              </h3>
+              <p className="text-blue-100/80 text-xs leading-relaxed mt-2">
+                No document upload needed right now. Just share your basic details and document readiness—our Jaipur counselors will contact you within 24 hours.
+              </p>
+            </div>
+
+            {/* Selected Institute Mini Card */}
+            <div className="bg-white/10 border border-white/15 rounded-2xl p-3.5 space-y-2.5 backdrop-blur-xs">
+              <div className="h-24 rounded-xl overflow-hidden">
+                <img
+                  src={getCollegeImage(selectedCollegeObj, selectedCollegeIndex)}
+                  alt={selectedCollegeObj?.name}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div>
+                <span className="text-[10px] font-extrabold uppercase tracking-wider text-red-300 block">
+                  Selected Institution
+                </span>
+                <p className="text-sm font-extrabold text-white leading-snug line-clamp-2">
+                  {selectedCollegeObj?.name.split('–')[0]}
+                </p>
+                <p className="text-[11px] text-blue-200/80 mt-0.5">
+                  📍 {selectedCollegeObj?.location}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="hidden lg:block pt-6 border-t border-white/15 space-y-2 text-xs text-blue-100/85 relative z-10">
+            <div className="flex items-center gap-2">
+              <FaCheckCircle className="text-emerald-400 shrink-0" />
+              <span>24–48 Hr Conditional Offer Letter</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <FaCheckCircle className="text-emerald-400 shrink-0" />
+              <span>Pay Main Tuition After Visa Approval</span>
+            </div>
+            <p className="text-[11px] text-blue-200/60 pt-2">
+              The Raptor Academics • Mansarovar, Jaipur
             </p>
           </div>
-          <button
-            type="button"
-            onClick={onClose}
-            className="w-9 h-9 rounded-full bg-white/10 hover:bg-red-600 text-white flex items-center justify-center transition-colors shrink-0 cursor-pointer"
-          >
-            <FaTimes size={15} />
-          </button>
         </div>
 
+        {/* RIGHT SCROLLABLE FORM PANEL */}
         <div
           data-lenis-prevent="true"
-          className="overflow-y-auto overscroll-contain flex-1"
+          className="lg:col-span-8 overflow-y-auto overscroll-contain max-h-[92vh] flex flex-col bg-white"
         >
+          {/* Top Bar with Close Button */}
+          <div className="px-6 py-4 md:px-8 border-b border-slate-100 flex items-center justify-between sticky top-0 bg-white/95 backdrop-blur-xs z-20">
+            <div className="flex items-center gap-2 text-xs font-extrabold text-[#0f2547]">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span>THE RAPTOR ACADEMICS • APPLICATION DESK</span>
+            </div>
+            <button
+              type="button"
+              onClick={onClose}
+              className="hidden lg:flex w-8 h-8 rounded-full bg-slate-100 hover:bg-red-600 text-slate-600 hover:text-white items-center justify-center transition-colors cursor-pointer"
+            >
+              <FaTimes size={14} />
+            </button>
+          </div>
+
           {submitted ? (
-            <div className="p-8 md:p-12 text-center space-y-5">
+            <div className="p-8 md:p-12 text-center space-y-5 my-auto">
               <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
                 <FaCheckCircle size={34} />
               </div>
-              <h4 className="text-2xl font-extrabold text-[#0f2547]">
-                Application Submitted for 2027 Intake!
+              <h4 className="text-2xl font-black text-[#0f2547]">
+                Application Request Received!
               </h4>
               <p className="text-slate-600 text-sm max-w-md mx-auto leading-relaxed">
-                Thank you, <strong>{formData.firstName}</strong>! Your application for{' '}
-                <strong className="text-[#0f2547]">{to2027(formData.program)}</strong> at{' '}
-                <strong className="text-red-600">{formData.institute.split('–')[0]}</strong> has been received by our Jaipur Admission Desk.
+                Thank you, <strong>{formData.firstName}</strong>! Our Malta specialist in Jaipur has received your 2027 inquiry for{' '}
+                <strong className="text-[#0f2547]">{formData.program}</strong> at{' '}
+                <strong className="text-red-600">{formData.institute.split('–')[0]}</strong>.
               </p>
               <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 max-w-md mx-auto text-xs text-slate-600 space-y-1">
-                <p className="font-bold text-[#0f2547]">The Raptor Academics • Jaipur</p>
-                <p>Call / WhatsApp: (+91) 72320 10105 • theraptoracademics@gmail.com</p>
+                <p className="font-bold text-[#0f2547]">Direct Helpline & WhatsApp</p>
+                <p>(+91) 72320 10105 • theraptoracademics@gmail.com</p>
               </div>
               <button
                 type="button"
                 onClick={onClose}
                 className="bg-[#0f2547] hover:bg-red-600 text-white font-bold text-sm px-8 py-3.5 rounded-xl transition-colors cursor-pointer"
               >
-                Close Window
+                Done
               </button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="p-6 md:p-8 space-y-8">
+            <form onSubmit={handleSubmit} className="p-6 md:p-8 space-y-7">
+              {/* SECTION 1: STUDENT DETAILS */}
               <div className="space-y-4">
-                <p className="text-xs font-extrabold uppercase tracking-widest text-red-600 border-b border-slate-200 pb-2">
-                  1 • Your Details
-                </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="flex items-center gap-2.5">
+                  <span className="w-6 h-6 rounded-lg bg-[#0f2547] text-white text-xs font-black flex items-center justify-center">
+                    01
+                  </span>
+                  <h4 className="text-sm font-extrabold uppercase tracking-wider text-[#0f2547]">
+                    Personal & Contact Details
+                  </h4>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                    <label className="block text-xs font-bold text-slate-600 mb-1">
                       First name <span className="text-red-600">*</span>
                     </label>
                     <input
@@ -863,12 +1002,12 @@ const ApplyNowModal = ({ isOpen, onClose, initialCollegeName, initialProgramName
                       required
                       value={formData.firstName}
                       onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                      placeholder="First name"
-                      className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-300 focus:border-[#0f2547] focus:outline-none"
+                      placeholder="Enter first name"
+                      className="w-full px-3.5 py-2.5 text-sm rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-[#0f2547] focus:outline-none"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                    <label className="block text-xs font-bold text-slate-600 mb-1">
                       Last name <span className="text-red-600">*</span>
                     </label>
                     <input
@@ -876,19 +1015,45 @@ const ApplyNowModal = ({ isOpen, onClose, initialCollegeName, initialProgramName
                       required
                       value={formData.lastName}
                       onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                      placeholder="Last name"
-                      className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-300 focus:border-[#0f2547] focus:outline-none"
+                      placeholder="Enter last name"
+                      className="w-full px-3.5 py-2.5 text-sm rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-[#0f2547] focus:outline-none"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                    <label className="block text-xs font-bold text-slate-600 mb-1">
+                      Mobile / WhatsApp <span className="text-red-600">*</span>
+                    </label>
+                    <input
+                      type="tel"
+                      required
+                      value={formData.mobile}
+                      onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
+                      placeholder="+91 98765 43210"
+                      className="w-full px-3.5 py-2.5 text-sm rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-[#0f2547] focus:outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-slate-600 mb-1">
+                      Email ID <span className="text-red-600">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      required
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      placeholder="you@example.com"
+                      className="w-full px-3.5 py-2.5 text-sm rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-[#0f2547] focus:outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-slate-600 mb-1">
                       Gender <span className="text-red-600">*</span>
                     </label>
                     <select
                       required
                       value={formData.gender}
                       onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
-                      className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-300 focus:border-[#0f2547] focus:outline-none bg-white"
+                      className="w-full px-3.5 py-2.5 text-sm rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-[#0f2547] focus:outline-none"
                     >
                       <option value="">Select gender</option>
                       <option value="Male">Male</option>
@@ -897,67 +1062,36 @@ const ApplyNowModal = ({ isOpen, onClose, initialCollegeName, initialProgramName
                     </select>
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1.5">
-                      Mobile number <span className="text-red-600">*</span>
-                    </label>
-                    <input
-                      type="tel"
-                      required
-                      value={formData.mobile}
-                      onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
-                      placeholder="e.g. +91 98765 43210"
-                      className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-300 focus:border-[#0f2547] focus:outline-none"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1.5">
-                      Email ID <span className="text-red-600">*</span>
-                    </label>
-                    <input
-                      type="email"
-                      required
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      placeholder="Your confirmation will be sent here"
-                      className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-300 focus:border-[#0f2547] focus:outline-none"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1.5">
-                      Country <span className="text-red-600">*</span>
+                    <label className="block text-xs font-bold text-slate-600 mb-1">
+                      City / State <span className="text-red-600">*</span>
                     </label>
                     <input
                       type="text"
                       required
-                      value={formData.country}
-                      onChange={(e) => setFormData({ ...formData, country: e.target.value })}
-                      className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-300 focus:border-[#0f2547] focus:outline-none"
+                      value={formData.address}
+                      onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                      placeholder="e.g. Jaipur, Rajasthan"
+                      className="w-full px-3.5 py-2.5 text-sm rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-[#0f2547] focus:outline-none"
                     />
                   </div>
                 </div>
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1.5">
-                    Current address <span className="text-red-600">*</span>
-                  </label>
-                  <textarea
-                    rows={2}
-                    required
-                    value={formData.address}
-                    onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                    placeholder="Full residential address"
-                    className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-300 focus:border-[#0f2547] focus:outline-none"
-                  />
-                </div>
               </div>
 
+              {/* SECTION 2: PROGRAM & COUNSELING PREFERENCE */}
               <div className="space-y-4">
-                <p className="text-xs font-extrabold uppercase tracking-widest text-red-600 border-b border-slate-200 pb-2">
-                  2 • Course & Branch
-                </p>
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1.5">
-                      Select institute <span className="text-red-600">*</span>
+                <div className="flex items-center gap-2.5">
+                  <span className="w-6 h-6 rounded-lg bg-[#0f2547] text-white text-xs font-black flex items-center justify-center">
+                    02
+                  </span>
+                  <h4 className="text-sm font-extrabold uppercase tracking-wider text-[#0f2547]">
+                    Institution & Program Selection (2027)
+                  </h4>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                  <div className="sm:col-span-2">
+                    <label className="block text-xs font-bold text-slate-600 mb-1">
+                      Preferred Institution <span className="text-red-600">*</span>
                     </label>
                     <select
                       required
@@ -965,13 +1099,16 @@ const ApplyNowModal = ({ isOpen, onClose, initialCollegeName, initialProgramName
                       onChange={(e) => {
                         const newInst = e.target.value;
                         const found = institutionsData.find((c) => c.name === newInst);
+                        const firstTitle = found?.courses?.[0]
+                          ? formatCourseTitleForCollege(found.courses[0].title, found.name)
+                          : '';
                         setFormData({
                           ...formData,
                           institute: newInst,
-                          program: found?.courses?.[0]?.title || ''
+                          program: firstTitle
                         });
                       }}
-                      className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-300 focus:border-[#0f2547] focus:outline-none bg-white font-semibold text-[#0f2547]"
+                      className="w-full px-3.5 py-2.5 text-sm rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-[#0f2547] focus:outline-none font-bold text-[#0f2547]"
                     >
                       {institutionsData.map((inst) => (
                         <option key={inst.id} value={inst.name}>
@@ -981,145 +1118,134 @@ const ApplyNowModal = ({ isOpen, onClose, initialCollegeName, initialProgramName
                     </select>
                   </div>
 
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1.5">
-                      Select program <span className="text-red-600">*</span>
+                  <div className="sm:col-span-2">
+                    <label className="block text-xs font-bold text-slate-600 mb-1">
+                      Preferred Program <span className="text-red-600">*</span>
                     </label>
                     <select
                       required
                       value={formData.program}
                       onChange={(e) => setFormData({ ...formData, program: e.target.value })}
-                      className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-300 focus:border-[#0f2547] focus:outline-none bg-white font-semibold text-[#0f2547]"
+                      className="w-full px-3.5 py-2.5 text-sm rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-[#0f2547] focus:outline-none font-bold text-[#0f2547]"
                     >
-                      {selectedCollegeObj?.courses?.map((c, idx) => (
-                        <option key={idx} value={c.title}>
-                          {to2027(c.title)} • {extractDurationBadge(c)}
-                        </option>
-                      ))}
+                      {selectedCollegeObj?.courses?.map((c, idx) => {
+                        const formattedProgTitle = formatCourseTitleForCollege(
+                          c.title,
+                          selectedCollegeObj.name
+                        );
+                        return (
+                          <option key={idx} value={formattedProgTitle}>
+                            {formattedProgTitle} • {extractDurationBadge(c, selectedCollegeObj.name)}
+                          </option>
+                        );
+                      })}
                     </select>
                   </div>
 
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1.5">
-                      The Raptor Academics branch you want to connect with <span className="text-red-600">*</span>
+                  <div className="sm:col-span-2">
+                    <label className="block text-xs font-bold text-slate-600 mb-1">
+                      Counselling Preference <span className="text-red-600">*</span>
                     </label>
                     <select
                       required
                       value={formData.branch}
                       onChange={(e) => setFormData({ ...formData, branch: e.target.value })}
-                      className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-300 focus:border-[#0f2547] focus:outline-none bg-white"
+                      className="w-full px-3.5 py-2.5 text-sm rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-[#0f2547] focus:outline-none"
                     >
                       <option value="Jaipur Head Office (Mansarovar)">
-                        Jaipur Office (120/64, New Sanganer Rd, Mansarovar, Jaipur)
+                        Visit Jaipur Office (120/64, New Sanganer Rd, Mansarovar)
                       </option>
-                      <option value="Online Counseling (Pan-India)">
-                        Online / Video Counseling (Pan-India Support)
+                      <option value="Online Video Counseling">
+                        Online Video / Phone Counselling (Pan-India)
                       </option>
                     </select>
                   </div>
                 </div>
               </div>
 
-              <div className="space-y-4">
-                <div>
-                  <p className="text-xs font-extrabold uppercase tracking-widest text-red-600 border-b border-slate-200 pb-2">
-                    3 • Upload Documents
-                  </p>
-                  <p className="text-xs text-slate-500 mt-1.5">
-                    Each upload must be a PDF or clear scan (max 4 MB). Combine multiple pages into one PDF before uploading.
-                  </p>
-                </div>
-
-                {[
-                  {
-                    key: 'academic',
-                    title: 'Academic documents *',
-                    sub: '10th, 12th and Graduation — all in one PDF • max 4 MB'
-                  },
-                  {
-                    key: 'passport',
-                    title: 'Passport *',
-                    sub: 'Photo page and Address page — in one PDF • max 4 MB'
-                  },
-                  {
-                    key: 'cv',
-                    title: 'Updated CV & other certificates *',
-                    sub: 'CV and certificates — all in one PDF • max 4 MB'
-                  },
-                  {
-                    key: 'other',
-                    title: 'Other documents',
-                    sub: 'English proficiency, MOI, etc. — all in one PDF (optional) • max 4 MB'
-                  }
-                ].map((doc) => (
-                  <div
-                    key={doc.key}
-                    className="p-4 rounded-2xl border border-slate-200 bg-slate-50/70 flex flex-col sm:flex-row sm:items-center justify-between gap-3"
-                  >
-                    <div>
-                      <p className="text-xs font-extrabold text-[#0f2547]">{doc.title}</p>
-                      <p className="text-[11px] text-slate-500">{doc.sub}</p>
-                      <p className="text-[11px] font-semibold text-emerald-700 mt-1">
-                        {files[doc.key] ? `Selected: ${files[doc.key].name}` : 'No file chosen — or drop a PDF here'}
-                      </p>
-                    </div>
-                    <label className="inline-flex items-center gap-2 bg-white hover:bg-slate-100 text-[#0f2547] border border-slate-300 font-bold text-xs px-4 py-2 rounded-xl cursor-pointer shrink-0 transition-colors">
-                      <FaFileUpload size={12} className="text-red-600" />
-                      Choose PDF
-                      <input
-                        type="file"
-                        accept=".pdf,.jpg,.jpeg,.png"
-                        className="hidden"
-                        onChange={(e) =>
-                          setFiles({ ...files, [doc.key]: e.target.files?.[0] || null })
-                        }
-                      />
-                    </label>
+              {/* SECTION 3: OPTIONAL DOCUMENT READINESS (SIMPLE YES / NO ONLY — NO FILE UPLOAD) */}
+              <div className="space-y-3.5 bg-slate-50/90 p-5 rounded-2xl border border-slate-200/80">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2.5">
+                    <span className="w-6 h-6 rounded-lg bg-red-600 text-white text-xs font-black flex items-center justify-center">
+                      03
+                    </span>
+                    <h4 className="text-sm font-extrabold uppercase tracking-wider text-[#0f2547]">
+                      Document Availability
+                    </h4>
                   </div>
-                ))}
-
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1.5">
-                    Description of other documents
-                  </label>
-                  <textarea
-                    rows={2}
-                    value={formData.otherDocsDesc}
-                    onChange={(e) => setFormData({ ...formData, otherDocsDesc: e.target.value })}
-                    placeholder="Mention what is included in your 'Other documents' PDF — e.g. Medium of Instruction (MOI) letter, work experience letters..."
-                    className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-300 focus:border-[#0f2547] focus:outline-none"
-                  />
+                  <span className="text-[11px] font-bold text-slate-400 bg-white px-2.5 py-0.5 rounded-full border border-slate-200">
+                    Optional • No Upload Needed
+                  </span>
                 </div>
 
-                <label className="flex items-start gap-2.5 text-xs text-slate-600 cursor-pointer pt-1">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                  {docChecklistQuestions.map((item) => {
+                    const currentVal = formData[item.key];
+                    return (
+                      <div
+                        key={item.key}
+                        className="bg-white p-3.5 rounded-xl border border-slate-200/90 flex items-center justify-between gap-3"
+                      >
+                        <span className="text-xs font-bold text-[#0f2547] leading-snug">
+                          {item.label}
+                        </span>
+                        <div className="flex items-center gap-1.5 shrink-0">
+                          {['Yes', 'No'].map((option) => (
+                            <button
+                              key={option}
+                              type="button"
+                              onClick={() =>
+                                setFormData({ ...formData, [item.key]: option })
+                              }
+                              className={`px-3 py-1 rounded-lg text-xs font-extrabold transition-all cursor-pointer ${
+                                currentVal === option
+                                  ? option === 'Yes'
+                                    ? 'bg-emerald-600 text-white shadow-2xs'
+                                    : 'bg-slate-700 text-white shadow-2xs'
+                                  : 'bg-slate-100 text-slate-500 hover:bg-slate-200'
+                              }`}
+                            >
+                              {option}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Submit Row */}
+              <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-t border-slate-100">
+                <label className="flex items-center gap-2 text-xs text-slate-600 cursor-pointer">
                   <input
                     type="checkbox"
                     required
                     checked={formData.consent}
                     onChange={(e) => setFormData({ ...formData, consent: e.target.checked })}
-                    className="mt-0.5 rounded border-slate-300 text-red-600 focus:ring-red-500"
+                    className="rounded border-slate-300 text-red-600 focus:ring-red-500"
                   />
                   <span>
-                    I confirm that the details and documents provided are correct, and I allow{' '}
-                    <strong className="text-[#0f2547]">The Raptor Academics</strong> to share them with the selected institution for my 2027 application. <span className="text-red-600">*</span>
+                    I authorize <strong className="text-[#0f2547]">The Raptor Academics</strong> to contact me regarding 2027 admissions.
                   </span>
                 </label>
-              </div>
 
-              <div className="pt-3 flex items-center justify-end gap-3 border-t border-slate-200">
-                <button
-                  type="button"
-                  onClick={onClose}
-                  className="px-5 py-3 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-100 transition-colors cursor-pointer"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="bg-[#0f2547] hover:bg-red-600 text-white font-extrabold text-xs uppercase tracking-wider px-7 py-3.5 rounded-xl shadow-lg transition-colors cursor-pointer"
-                >
-                  Submit application
-                </button>
+                <div className="flex items-center gap-2.5 self-end sm:self-auto shrink-0">
+                  <button
+                    type="button"
+                    onClick={onClose}
+                    className="px-4 py-3 rounded-xl text-xs font-bold text-slate-500 hover:bg-slate-100 transition-colors cursor-pointer"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="bg-red-600 hover:bg-[#0f2547] text-white font-extrabold text-xs uppercase tracking-wider px-6 py-3.5 rounded-xl shadow-lg shadow-red-600/20 transition-colors cursor-pointer flex items-center gap-2"
+                  >
+                    Submit Request <FaArrowRight size={11} />
+                  </button>
+                </div>
               </div>
             </form>
           )}
@@ -1133,7 +1259,6 @@ const ApplyNowModal = ({ isOpen, onClose, initialCollegeName, initialProgramName
 // 6. MAIN INSTITUTIONS DIRECTORY PAGE
 // ==========================================
 const Institutions = () => {
-  // Check URL hash on initial load so shared links (#avanza-training-academy) open that exact college!
   const getInitialCollegeFromUrl = () => {
     if (typeof window !== 'undefined' && window.location.hash) {
       const hashSlug = window.location.hash.replace('#', '').toLowerCase();
@@ -1158,7 +1283,6 @@ const Institutions = () => {
     programName: ''
   });
 
-  // Listen to hash changes (if someone pastes a different #college link)
   useEffect(() => {
     const onHashChange = () => {
       const hashSlug = window.location.hash.replace('#', '').toLowerCase();
@@ -1268,7 +1392,6 @@ const Institutions = () => {
     });
   };
 
-  // Copies the EXACT shareable link for the currently active institution!
   const handleCopyLink = () => {
     const slug = getCollegeSlug(activeCollege);
     const shareUrl = `${window.location.origin}${window.location.pathname}#${slug}`;
@@ -1323,11 +1446,8 @@ const Institutions = () => {
         </div>
       </div>
 
-      {/* ==========================================
-          1. ORIGINAL RAPTOR ACADEMICS SPLIT EDITORIAL HERO
-      ========================================== */}
+      {/* 1. ORIGINAL RAPTOR ACADEMICS SPLIT EDITORIAL HERO */}
       <section className="relative pt-36 pb-24 md:pt-44 md:pb-28 bg-[#0b1930] text-white overflow-hidden px-4 md:px-10 print:hidden">
-        {/* Background Campus Photography Overlay + Crimson/Navy Mesh */}
         <div
           className="absolute inset-0 bg-cover bg-center opacity-15 pointer-events-none"
           style={{
@@ -1339,7 +1459,6 @@ const Institutions = () => {
         <div className="absolute -top-24 right-1/4 w-[500px] h-[500px] bg-red-600/20 rounded-full blur-[150px] pointer-events-none" />
 
         <div className="max-w-[1560px] mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          {/* Left Column: Original Branding & Copy */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
@@ -1362,7 +1481,6 @@ const Institutions = () => {
               Discover {institutionsData.length} government-licensed higher education institutions offering {totalProgramsCount}+ career-focused Diplomas, Bachelor’s, and Master’s degrees. Enjoy 24–48 hour offer letters without IELTS and pay your main tuition fee after visa approval.
             </p>
 
-            {/* Pill Highlights Bar */}
             <div className="flex flex-wrap items-center gap-3 pt-2">
               <button
                 type="button"
@@ -1380,7 +1498,6 @@ const Institutions = () => {
             </div>
           </motion.div>
 
-          {/* Right Column: Raptor Academics 2027 Advantage Showcase Card */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -1778,6 +1895,7 @@ const Institutions = () => {
                         <CourseAccordion
                           key={index}
                           course={course}
+                          collegeName={activeCollege.name}
                           isOpen={openCourseIndex === index}
                           onToggle={() =>
                             setOpenCourseIndex(openCourseIndex === index ? null : index)
@@ -1804,23 +1922,43 @@ const Institutions = () => {
                           {tuitionParsed.cards.map((item, idx) => (
                             <div
                               key={idx}
-                              className="p-5 rounded-2xl bg-[#f8fafc] border-2 border-slate-200"
+                              className="p-5 rounded-2xl bg-[#f8fafc] border-2 border-slate-200 flex flex-col justify-between gap-2"
                             >
-                              <span className="text-xs font-bold text-slate-600 block leading-snug">
-                                {item.label}
-                              </span>
-                              <span className="text-2xl md:text-3xl font-black text-red-600 mt-1.5 block">
-                                {item.amount}
-                              </span>
+                              <div>
+                                <span className="text-xs font-extrabold text-[#0f2547] block leading-snug">
+                                  {item.label}
+                                </span>
+                                <span className="text-2xl md:text-3xl font-black text-red-600 mt-1.5 block">
+                                  {item.amount}
+                                </span>
+                                {item.subBreakdown && (
+                                  <span className="text-[11px] font-semibold text-slate-500 block mt-1 leading-snug">
+                                    {item.subBreakdown}
+                                  </span>
+                                )}
+                              </div>
+
+                              {item.payAfterVisaNote && (
+                                <span className="inline-block text-[11px] font-extrabold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-lg mt-1 leading-tight">
+                                  ✓ {item.payAfterVisaNote}
+                                </span>
+                              )}
                             </div>
                           ))}
                         </div>
                       )}
 
-                      {tuitionParsed.fullText && (
-                        <div className="p-5 rounded-2xl bg-blue-50/70 border border-blue-200 text-xs md:text-sm text-slate-800 leading-relaxed font-semibold space-y-1.5">
-                          {splitIntoCleanLines(tuitionParsed.fullText).map((line, idx) => (
-                            <p key={idx}>• {line}</p>
+                      {tuitionParsed.formattedLines.length > 0 && (
+                        <div className="p-5 rounded-2xl bg-blue-50/70 border border-blue-200 text-xs md:text-sm text-slate-800 leading-relaxed font-semibold space-y-2.5">
+                          {tuitionParsed.formattedLines.map((lineObj, idx) => (
+                            <div key={idx}>
+                              <p>• {lineObj.main}</p>
+                              {lineObj.subNote && (
+                                <p className="text-emerald-700 font-extrabold text-xs pl-3 mt-0.5">
+                                  {lineObj.subNote}
+                                </p>
+                              )}
+                            </div>
                           ))}
                         </div>
                       )}
@@ -1893,9 +2031,7 @@ const Institutions = () => {
         </p>
       </div>
 
-      {/* ==========================================
-          4. BOTTOM QUICK COMPARISON TABLE (Minimal Tuition, Strictly Own App Fee)
-      ========================================== */}
+      {/* 4. BOTTOM QUICK COMPARISON TABLE */}
       <section
         id="quick-comparison-matrix"
         className="max-w-[1560px] mx-auto px-4 md:px-10 py-12 md:py-16 print:hidden"
@@ -1959,7 +2095,6 @@ const Institutions = () => {
                         activeCollege.id === inst.id ? 'bg-blue-50/70' : 'bg-white'
                       }`}
                     >
-                      {/* 1. Institution */}
                       <td className="py-4 px-4">
                         <button
                           type="button"
@@ -1973,7 +2108,6 @@ const Institutions = () => {
                         </span>
                       </td>
 
-                      {/* 2. Short 2027 Intake */}
                       <td className="py-4 px-3.5 font-medium text-slate-700 whitespace-nowrap">
                         {shortIntake === 'Jan / Apr / Jul / Oct 2027' ? (
                           <div>
@@ -1985,7 +2119,6 @@ const Institutions = () => {
                         )}
                       </td>
 
-                      {/* 3. Ultra-Minimal Diploma Tuition (Only 1-2 short lines, zero clutter!) */}
                       <td className="py-4 px-3.5 whitespace-nowrap">
                         <span className="font-bold text-slate-900 block">
                           {minimalTuition.primary}
@@ -1997,7 +2130,6 @@ const Institutions = () => {
                         )}
                       </td>
 
-                      {/* 4. Application Fee (Strictly from your institutionsData.js) */}
                       <td className="py-4 px-3.5">
                         <span className="font-bold text-slate-900 block">{ownAppFee.primary}</span>
                         {ownAppFee.secondary && (
@@ -2007,7 +2139,6 @@ const Institutions = () => {
                         )}
                       </td>
 
-                      {/* 5. Interview */}
                       <td className="py-4 px-3.5">
                         <span
                           className={`font-extrabold text-xs ${
@@ -2020,27 +2151,22 @@ const Institutions = () => {
                         </span>
                       </td>
 
-                      {/* 6. Gap Accepted */}
                       <td className="py-4 px-3.5 font-medium text-slate-700 whitespace-nowrap">
                         {gapShort}
                       </td>
 
-                      {/* 7. Language Test */}
                       <td className="py-4 px-3.5 font-medium text-slate-700">
                         {ieltsShort}
                       </td>
 
-                      {/* 8. Offer Letter Speed */}
                       <td className="py-4 px-3.5 font-medium text-slate-800 whitespace-nowrap">
                         {offerSpeed}
                       </td>
 
-                      {/* 9. Tuition Payable After Visa */}
                       <td className="py-4 px-3.5 font-semibold text-slate-800">
                         {payAfterVisaText}
                       </td>
 
-                      {/* 10. Action */}
                       <td className="py-4 px-4 text-right">
                         <button
                           type="button"

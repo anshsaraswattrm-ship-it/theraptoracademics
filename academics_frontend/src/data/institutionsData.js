@@ -1804,23 +1804,23 @@ export const institutionsData = [
     ]
   },
 
-  // ==========================================
+ // ==========================================
   // 6. 21 ACADEMY
   // ==========================================
   {
     id: "academy21",
     name: "21 Academy – Best Institute for AI, HR & Digital Marketing",
     location: "Naxxar, Malta",
-    accreditation: "MFHEA Licensed Higher Education Institution | Awarding body: MQF / Get Qualified / Investing in Skills / Training Pays Scheme",
+    accreditation: "MFHEA Licensed Further & Higher Education Institution (Licence No. 2018-017) | Awarding body: MQF / Get Qualified / Investing in Skills / Training Pays Scheme",
     established: "2018",
     seoCategory: "Top AI & Digital Marketing College in Malta | Best HR Master Degree",
-    flagshipCourses: "Diploma in AI for Professional Use, Diploma in Digital Marketing, and Master’s in Human Resources Management",
-    about: "Founded in 2018, 21 Academy is Malta’s leading innovative education centre committed to providing high-quality education to students from all backgrounds. Specializing in modern fields like Artificial Intelligence (AI), Employment Law, Digital Marketing, Corporate Governance, Business, Education, and HR, all study programmes are locally designed and accredited for European market requirements. Academic staff are active professionals delivering part-time training while practising their professions.",
+    flagshipCourses: "Undergraduate Diploma in Business Administration (MQF/EQF Level 5), Masters in Human Resources Management (MQF/EQF Level 7), Undergraduate Diploma in Digital Marketing (MQF/EQF Level 5), and Diploma in AI for Professional Use",
+    about: "Founded in 2018, 21 Academy Malta is an MFHEA-licensed Further and Higher Education Institution (Licence No. 2018-017) committed to providing high-quality education to students from all backgrounds. Specializing in Business Administration, Human Resources Management, Digital Marketing, Artificial Intelligence (AI), Employment Law, and Corporate Governance, all study programmes are locally designed and accredited at MQF/EQF Levels 5 and 7 for European market requirements.",
     highlights: {
-      intake: "January / April / July / October 2027 (Every 2 Months)",
-      eligibility: "10th Pass Eligible | Age 18+",
+      intake: "January / April / July / October 2027 (Multiple intakes each year)",
+      eligibility: "10th / 12th Pass Eligible | Age 18+ (23+ Mature Route for Masters)",
       gap: "Maximum 3 Years",
-      ielts: "No IELTS / PTE Required",
+      ielts: "No IELTS / PTE Required (Minimum CEFR B1 / IELTS 4.0 for UG; C1 or Head of Academy Interview for Masters)",
       interview: "Mandatory College Interview Required",
       applicationFee: "€150 Application Fee (Post-Interview) | €50 Admin Fee (Before Interview)",
       tuitionFeeSummary: "UG Diploma: €7,500 | PG Diploma / Master: €8,000 | MBA: Year 1: €8,000 | 6 Months: €4,000 (Pay Tuition Fees AFTER Visa Approval)",
@@ -1830,21 +1830,141 @@ export const institutionsData = [
     },
     courses: [
       {
-        title: "Undergraduate Diploma in Business Administration (1 Year)",
-        overview: "Locally designed and accredited business administration qualification preparing students for corporate and administrative roles across Malta and Europe.",
+        title: "Undergraduate Diploma in Business Administration (MQF/EQF Level 5)",
+        overview: "The Undergraduate Diploma in Business Administration (MQF/EQF Level 5) is a 60 ECTS qualification delivered by 21 Academy Malta, a licensed further and higher education institution regulated by the Malta Further and Higher Education Authority (MFHEA). The programme gives learners a practical grounding in business planning, management and decision-making. It covers business creation, financial analysis, marketing and research, strategic management, human resource management and data management, and concludes with a research project.",
         keyDetails: [
-          { label: "Duration", value: "1 Year" },
-          { label: "Tuition Fee", value: "€7,500 (Pay Tuition ONLY after Visa Approval)" },
+          { label: "MQF/EQF Level", value: "Level 5 (60 ECTS)" },
+          { label: "Provider", value: "21 Academy Malta – MFHEA-licensed Further & Higher Education Institution (Licence No. 2018-017)" },
+          { label: "Duration & Mode", value: "12 Months Full-Time │ Face-to-Face" },
+          { label: "Total Learning Hours", value: "1,500 Hours (306 contact hours)" },
+          { label: "Venue", value: "21 Business Centre, Malta" },
+          { label: "Delivery Language", value: "English" },
+          { label: "Start/Intake Date", value: "Multiple intakes each year – January / April / July / October 2027" },
+          { label: "Tuition Fee", value: "€7,500 (Non-EU International – Pay Tuition ONLY after Visa Approval)" },
           { label: "Application Fees", value: "€150 Application Fee (After Interview) | €50 Admin Fee (Before Interview)" }
+        ],
+        entryRequirements: [
+          "Academic / Work Route: A higher secondary school certificate, an A-Level or an equivalent MQF Level 3 qualification, OR three years of work experience.",
+          "English Language: Students from non-majority English-speaking countries must show English competency – minimum CEFR B1 or IELTS 4.0 in each component.",
+          "Who Should Apply: Anyone without a formal qualification at a higher level, individuals re-entering employment after a period of absence or planning a career change, employees seeking job progression into administrative or senior management roles, and individuals interested in starting their own business."
+        ],
+        modules: [
+          "Creating a Business (8 ECTS)",
+          "Financial Analysis (8 ECTS)",
+          "Marketing and Research (8 ECTS)",
+          "Strategic Management (8 ECTS)",
+          "Human Resource Management (8 ECTS)",
+          "Managing Data and its Implications (8 ECTS)",
+          "Research Project (12 ECTS)"
+        ],
+        learningOutcomes: [
+          "Business Foundations: Understand the origins of business administration and the main management methodologies.",
+          "Innovation & Planning: Appreciate the difference between creativity and innovation and understand the roles of planning, recruitment, structuring, leading and influencing.",
+          "Business Environment: Understand the internal and external environments in which a business operates and how goals are set and decisions are made."
+        ],
+        assessmentSummary: "Assessment is based on self-assessments, in-class presentations following group work, reflective notes, assignments and a final research project.",
+        careers: [
+          { role: "Business Administrator / Company Manager", sector: "Corporate, SME & Service Companies", startSalary: "€20,000 – €25,000 (approx. ₹18.0L – ₹22.5L INR)", midSalary: "€30,000 – €45,000 (approx. ₹27.0L – ₹40.5L INR)" },
+          { role: "HR Officer / Administrator", sector: "Corporate, Tech & Public Sector", startSalary: "€18,000 – €25,000 (approx. ₹16.2L – ₹22.5L INR)", midSalary: "€26,000 – €44,000 (approx. ₹23.4L – ₹39.6L INR)" },
+          { role: "Sales & Marketing Executive", sector: "Retail, Services & Agencies", startSalary: "€19,000 – €24,000 (approx. ₹17.1L – ₹21.6L INR)", midSalary: "€27,000 – €36,000 (approx. ₹24.3L – ₹32.4L INR)" },
+          { role: "Business Owner / Entrepreneur", sector: "Self-Employed / Own Business", startSalary: "Variable – depends on the business", midSalary: "Variable – depends on the business" }
+        ],
+        benefits: [
+          "Exit Awards: Individual modules can also be recognised as stand-alone Level 5 awards.",
+          "Degree Progression: The qualification may support applications to MQF Level 6 programmes, subject to the admission rules of the receiving institution.",
+          "Accredited in Malta: 21 Academy Malta is an MFHEA-licensed institution (Licence No. 2018-017) at MQF/EQF Level 5."
         ]
       },
       {
-        title: "Undergraduate Diploma in Digital Marketing (1 Year)",
-        overview: "High-demand career pathway equipping students with practical digital marketing, social media, and campaign management skills.",
+        title: "Masters in Human Resources Management (MQF/EQF Level 7)",
+        overview: "The Masters in Human Resources Management (MQF/EQF Level 7) is a 90 ECTS postgraduate programme offered by 21 Academy Malta. The MFHEA deems the Master's to be at Level 7 of the Malta Qualifications Framework and the European Qualifications Framework. The programme covers the key areas of HRM from a theoretical perspective while grounding them in the realities of today's world of work, with a strong focus on talent acquisition, reward, people development, leadership, engagement, employee relations, wellbeing, coaching and mentoring.",
         keyDetails: [
-          { label: "Duration", value: "1 Year" },
-          { label: "Tuition Fee", value: "€7,500 (Pay Tuition ONLY after Visa Approval)" },
+          { label: "MQF/EQF Level", value: "Level 7 (90 ECTS)" },
+          { label: "Provider", value: "21 Academy Malta – MFHEA-licensed Further & Higher Education Institution (Licence No. 2018-017)" },
+          { label: "Duration & Mode", value: "1 Year Full-Time │ Face-to-Face" },
+          { label: "Total Learning Hours", value: "2,250 Hours (450 contact hours)" },
+          { label: "Venue", value: "21 Academy, Naxxar, Malta" },
+          { label: "Delivery Language", value: "English" },
+          { label: "Start/Intake Date", value: "Multiple intakes each year – January / April / July / October 2027" },
+          { label: "Tuition Fee", value: "€8,000 (Non-EU International – Pay Tuition ONLY after Visa Approval)" },
           { label: "Application Fees", value: "€150 Application Fee (After Interview) | €50 Admin Fee (Before Interview)" }
+        ],
+        entryRequirements: [
+          "Academic Route: A first degree at MQF Level 6 in HRM, business studies or any other subject (minimum second-class honours) and a good command of written and spoken English (minimum C1).",
+          "Mature Student Route: Candidates aged 23 or over at course start, subject to an interview by the Head of the Academy that considers their experience and command of English.",
+          "Exemptions: Candidates who already hold an MQF Level 7 award with similar learning outcomes may receive exemptions of up to 18 ECTS (two modules)."
+        ],
+        modules: [
+          "Human Resource Management in Context (9 ECTS)",
+          "HR Planning, Talent Acquisition, Retention and Reward Strategies (9 ECTS)",
+          "Developing, Leading and Engaging People (9 ECTS)",
+          "Employee Relations and Wellbeing (9 ECTS)",
+          "Business Skills and Performance Management (9 ECTS)",
+          "Coaching and Mentoring (9 ECTS)",
+          "Research Methods (6 ECTS)",
+          "Human Resource Management Research Project (30 ECTS)"
+        ],
+        learningOutcomes: [
+          "Critical HRM Knowledge: Develop a critical understanding of the key areas of HRM and how they affect organisational performance.",
+          "Evidence-Based Decisions: Use an HR framework, research and data to take informed decisions and solve problems.",
+          "Contemporary Trends: Critically analyse current HR trends and align initiatives accordingly.",
+          "HR Leadership: Plan, develop and implement key HRM functions and communicate effectively with specialist and non-specialist audiences."
+        ],
+        assessmentSummary: "Assessment is based on assignments, portfolios, presentations based on group work, reflective notes, filmed and supervised practical coaching sessions, and a final project assessment.",
+        careers: [
+          { role: "HR Associate / HR Advisor", sector: "Corporate, Tech & Public Sector", startSalary: "€20,000 – €26,000 (approx. ₹18.0L – ₹23.4L INR)", midSalary: "€28,000 – €36,000 (approx. ₹25.2L – ₹32.4L INR)" },
+          { role: "HR Specialist / HR Business Partner", sector: "Multinationals, iGaming & Financial Services", startSalary: "€26,000 – €32,000 (approx. ₹23.4L – ₹28.8L INR)", midSalary: "€32,000 – €44,000 (approx. ₹28.8L – ₹39.6L INR)" },
+          { role: "HR Manager / Head of HR", sector: "Corporate & Industrial Enterprises", startSalary: "€30,000 – €37,000 (approx. ₹27.0L – ₹33.3L INR)", midSalary: "€37,000 – €52,000+ (approx. ₹33.3L – ₹46.8L+ INR)" },
+          { role: "HR Director / Chief Human Resources Officer", sector: "Executive Leadership & Multinationals", startSalary: "€38,000 – €48,000 (approx. ₹34.2L – ₹43.2L INR)", midSalary: "€52,000 – €75,000+ (approx. ₹46.8L – ₹67.5L+ INR)" }
+        ],
+        note: "The course prepares students for such roles but does not offer any guarantee of employment.",
+        benefits: [
+          "Exit Awards: Students who do not complete the full Master's can leave with a Post-Graduate Certificate (30 ECTS) or a Post-Graduate Diploma (60 ECTS) in Human Resource Management.",
+          "Career Progression: The Level 7 qualification supports progression into senior HR and people-management roles."
+        ]
+      },
+      {
+        title: "Undergraduate Diploma in Digital Marketing (MQF/EQF Level 5)",
+        overview: "The Undergraduate Diploma in Digital Marketing (MQF/EQF Level 5) introduces students to the science of digital marketing and its importance for business success. Learners discover how to plan and run results-oriented digital campaigns and how to choose the right digital tools – including email marketing, social media marketing and search engine marketing – to reach their audience. The course also shows the strengths of digital marketing compared with traditional marketing. It is delivered by 21 Academy Malta, an MFHEA-licensed institution.",
+        keyDetails: [
+          { label: "MQF/EQF Level", value: "Level 5" },
+          { label: "Provider", value: "21 Academy Malta – MFHEA-licensed Further & Higher Education Institution (Licence No. 2018-017)" },
+          { label: "Duration & Mode", value: "18 Months Part-Time │ Live Online (1 Year Full-Time International Pathway Available)" },
+          { label: "Delivery Language", value: "English" },
+          { label: "Tuition Fee", value: "€2,750 (Directory Listing) | €7,500 (Non-EU International – Pay Tuition ONLY after Visa Approval)" },
+          { label: "Application Fees", value: "€150 Application Fee (After Interview) | €50 Admin Fee (Before Interview)" }
+        ],
+        entryRequirements: [
+          "Minimum MQF Level 4 qualifications in three subjects and a good command of English (minimum C1), OR",
+          "Three years of working experience in business administration with previous marketing or digital marketing experience.",
+          "Who Should Apply: Anyone interested in marketing and digital communications, self-employed professionals who want to promote their own business online, and employees who want to better understand digital marketing and apply it in their work."
+        ],
+        modules: [
+          "Basic marketing principles and digital marketing planning",
+          "PESTEL and SWOT analysis, and defining target groups",
+          "Digital channels, digital media and marketing content writing",
+          "Website optimisation and SEO",
+          "Google Ads campaigns and social media planning",
+          "Google Analytics and measuring the results of digital marketing",
+          "Email marketing lists and CRM platforms for promotional emails",
+          "Social media advertising and online advertising strategy",
+          "Marketing budgets, lawful handling of personal data, and copyright ethics"
+        ],
+        learningOutcomes: [
+          "Digital Marketing Planning: Develop a digital marketing plan, including PESTEL and SWOT analysis and target group definition.",
+          "Content & Channels: Write marketing content and manage digital channels, social media planning and online advertising.",
+          "SEO & Analytics: Understand website optimisation and SEO, Google Ads campaigns and Google Analytics reporting.",
+          "Email & CRM: Build email marketing lists and use CRM platforms for promotional emails.",
+          "Budgets & Compliance: Handle marketing budgets and personal data lawfully and diligently.",
+          "Digital Content Creation: Create and edit digital content with respect for copyright ethics."
+        ],
+        careers: [
+          { role: "Digital Marketing Specialist", sector: "Agencies, iGaming, E-commerce & Tech", startSalary: "€20,000 – €26,000 (approx. ₹18.0L – ₹23.4L INR)", midSalary: "€28,000 – €38,000 (approx. ₹25.2L – ₹34.2L INR)" },
+          { role: "Marketing Executive / Marketer", sector: "Corporate, Retail & Hospitality", startSalary: "€19,000 – €24,000 (approx. ₹17.1L – ₹21.6L INR)", midSalary: "€27,000 – €36,000 (approx. ₹24.3L – ₹32.4L INR)" },
+          { role: "Communications Executive", sector: "Media, Corporate & Public Sector", startSalary: "€20,000 – €25,000 (approx. ₹18.0L – ₹22.5L INR)", midSalary: "€28,000 – €37,000 (approx. ₹25.2L – ₹33.3L INR)" }
+        ],
+        benefits: [
+          "Higher Study: As an MQF Level 5 qualification, it can support applications to MQF Level 6 programmes in marketing, business or communications, subject to the admission rules of the receiving institution."
         ]
       },
       {
@@ -1864,15 +1984,6 @@ export const institutionsData = [
           { label: "Tuition Fee", value: "€7,500 (Pay Tuition ONLY after Visa Approval)" },
           { label: "Application Fees", value: "€150 Application Fee (After Interview) | €50 Admin Fee (Before Interview)" }
         ]
-      },
-      {
-        title: "Master’s in Human Resources Management (2 Years)",
-        overview: "Top-rated HR Master's Degree preparing graduates for executive human capital leadership and European employment law compliance.",
-        keyDetails: [
-          { label: "Duration", value: "2 Years" },
-          { label: "Tuition Fee", value: "€8,000 (Pay Tuition ONLY after Visa Approval)" },
-          { label: "Application Fees", value: "€150 Application Fee (After Interview) | €50 Admin Fee (Before Interview)" }
-        ]
       }
     ]
   },
@@ -1883,73 +1994,263 @@ export const institutionsData = [
   {
     id: "thinktalent",
     name: "Think Talent (OTHM Qualifications Center) – Best UK-Accredited College in Malta",
-    location: "Birkirkara, Malta",
-    accreditation: "MFHEA Licensed Higher Education Institution (License No: 2017-004) & Authorized OTHM UK Center",
-    established: "2017",
+    location: "Centris Business Gateway, Triq is-Salib tal-Imriehel, Birkirkara CBD 3020, Malta",
+    accreditation: "MFHEA Licensed Higher Education Institution (License No: 2017-004) & Registered OTHM UK Center (DCO Registration 2301752)",
+    established: "2009",
     seoCategory: "Top UK Degree Pathway in Malta | Best OTHM Diploma College",
-    flagshipCourses: "OTHM Level 5 & Level 7 Diplomas in Strategic Management and HR",
-    about: "Think Talent delivers UK-regulated OTHM Level 5 and Level 7 qualifications in Malta, giving international students dual recognition and a direct top-up route to British university degrees. Study programmes are designed and accredited to prepare students for the specific requirements of local and European corporate markets.",
+    flagshipCourses: "OTHM Level 5 Diploma in Business Management (MQF Level 5), OTHM Level 5 Diploma in Tourism and Hospitality Management (MQF Level 5), OTHM Level 5 Diploma in Health and Social Care Management (MQF Level 5), OTHM Level 7 Diploma in Strategic Management and Leadership (MQF 7), and OTHM Level 7 Diploma in Human Resource Management (MQF 7)",
+    about: "Think Talent is a Malta-based training, HR and corporate consultancy company founded in 2009 that runs accredited diplomas and awards at MQF Levels 4 to 7. Licensed by the Malta Further and Higher Education Authority (MFHEA, Licence No. 2017-004) and a registered OTHM centre (DCO Registration 2301752), Think Talent offers UK OTHM qualifications in Malta alongside being the local provider of the Institute of Directors (IoD) and a PMI partner as part of The Remarkable Collective.",
     highlights: {
-      intake: "Flexible Monthly Intakes",
-      eligibility: "10th Pass Eligible | Age 18+",
+      intake: "Flexible Monthly Intakes (Multiple intakes each year)",
+      eligibility: "10th / 12th Pass Eligible | Age 18+ (UG) | Age 21+ (PG)",
       gap: "Unlimited Gap Accepted",
       ielts: "No IELTS / PTE Required",
       interview: "Direct Admission (No Interview)",
       applicationFee: "€200",
-      tuitionFeeSummary: "UG Diploma: €6,500 | PG Diploma: €7,500 (Payable AFTER Visa Approval)",
+      tuitionFeeSummary: "UG Diploma: €6,500 (Non-EU) / €4,500 (EU) | PG Diploma: €7,500 (Non-EU) / €5,500 (EU) (Payable AFTER Visa Approval)",
       visa: "20 Hours/Week Legal Work Permit | 3/6/9/12 Months PSW Visa | 70% Fee Refund under Get Qualified Scheme | PR Pathway after 5 Years",
       processingSpeed: "Offer Letter in 2 Working Days",
       accommodation: "Private Rental Support Provided"
     },
     courses: [
       {
-        title: "OTHM Level 5 Diploma in Business Management (1 Year)",
-        overview: "UK Credit Equivalent undergraduate diploma providing foundational business management and operational leadership skills.",
+        title: "OTHM Level 5 Diploma in Business Management (MQF Level 5)",
+        overview: "The OTHM Level 5 Diploma in Business Management gives learners a strong foundation for a career in a wide range of organisations. It is designed to make each learner business ready: a confident, independent thinker with detailed knowledge of business and management and the skills to adapt quickly to change. The content covers human resource management, marketing, management accounting, business law and business strategy, and learners finish by creating a viable business plan.",
         keyDetails: [
-          { label: "Awarding Body", value: "OTHM (UK)" },
-          { label: "Duration", value: "1 Year" },
-          { label: "Tuition Fee", value: "€6,500 (Payable AFTER Visa Approval)" },
-          { label: "Application Fee", value: "€200" }
+          { label: "MQF/EQF Level", value: "OTHM Level 5, MQF Level 5" },
+          { label: "Awarding Body", value: "OTHM Qualifications (UK), delivered by Think Talent" },
+          { label: "MFHEA Licence", value: "2017-004" },
+          { label: "Duration & Mode", value: "1 Year Part-Time │ Face-to-Face" },
+          { label: "Learning Hours / Credits", value: "120 credits, 600 guided learning hours, 1,200 total qualification time" },
+          { label: "Intake", value: "Multiple intakes each year" },
+          { label: "Tuition Fee", value: "€4,500 (Malta / EU) │ €6,500 (Non-EU – Payable AFTER Visa Approval)" },
+          { label: "Delivery Location", value: "ThinkTalent Training Room, Mriehel (Birkirkara CBD), Malta" },
+          { label: "Delivery Language", value: "English" }
+        ],
+        entryRequirements: [
+          "A relevant Level 4 diploma or equivalent qualification.",
+          "GCE Advanced Level in 3 subjects or an equivalent qualification.",
+          "Mature learners (over 21) with relevant management experience.",
+          "Minimum Age: 18+.",
+          "English Language: Learners from non-majority English-speaking countries must provide evidence of English language competency."
+        ],
+        modules: [
+          "Principles and Concepts of Strategy (20 credits): Business strategy theories and options.",
+          "The Management of Human Resources (20 credits): HR functions and their impact.",
+          "Marketing for Managers (20 credits): Marketing concepts and functions.",
+          "Business Law for Managers (20 credits): Business-related laws and their effect on businesses.",
+          "Management Accounting and Decision Making (20 credits): Accounting tools for decisions.",
+          "Business Start-up; Conception to Market (20 credits): Starting a business and writing a business plan."
+        ],
+        learningOutcomes: [
+          "The principles of business strategy and how to assess a business's micro and macro environment.",
+          "The purpose and functions of human resource management.",
+          "The functions of marketing and how internal and external factors affect it.",
+          "Key business laws and how they affect businesses.",
+          "How to use management accounting to solve problems and create a business plan for a new venture."
+        ],
+        assessmentSummary: "Assessment is through coursework and presentations, and each unit is assessed on a pass or fail basis.",
+        careers: [
+          { role: "Operations Coordinator", sector: "Process and team support", startSalary: "€18,000 – €22,000 (approx. ₹16.2L – ₹19.8L INR)", midSalary: "€25,000 – €32,000 (approx. ₹22.5L – ₹28.8L INR)" },
+          { role: "Team Leader / Supervisor", sector: "People and performance", startSalary: "€20,000 – €25,000 (approx. ₹18.0L – ₹22.5L INR)", midSalary: "€27,000 – €35,000 (approx. ₹24.3L – ₹31.5L INR)" },
+          { role: "Business Development Executive", sector: "Marketing and sales support", startSalary: "€20,000 – €26,000 (approx. ₹18.0L – ₹23.4L INR)", midSalary: "€28,000 – €38,000 (approx. ₹25.2L – ₹34.2L INR)" },
+          { role: "Management Trainee", sector: "Business management", startSalary: "€18,000 – €22,000 (approx. ₹16.2L – ₹19.8L INR)", midSalary: "€26,000 – €34,000 (approx. ₹23.4L – ₹30.6L INR)" }
+        ],
+        benefits: [
+          "Business-ready focus: Built to produce confident, independent business thinkers.",
+          "Start-up skills: Learners produce a viable business plan.",
+          "Academic Progression: Opens routes to further study (including OTHM Level 6 Diploma in Business Management) or employment."
         ]
       },
       {
-        title: "OTHM Level 5 Diploma in Tourism and Hospitality Management (1 Year)",
-        overview: "UK-regulated qualification preparing learners for supervisory and management roles in international hospitality and tourism.",
+        title: "OTHM Level 5 Diploma in Tourism and Hospitality Management (MQF Level 5)",
+        overview: "The OTHM Level 5 Diploma in Tourism and Hospitality Management is a specialist programme that gives learners depth of knowledge and understanding of the key areas of the tourism and hospitality sector. It is designed for people who want to deepen their knowledge and gain a recognised qualification in the field.",
         keyDetails: [
-          { label: "Awarding Body", value: "OTHM (UK)" },
-          { label: "Duration", value: "1 Year" },
-          { label: "Tuition Fee", value: "€6,500 (Payable AFTER Visa Approval)" },
-          { label: "Application Fee", value: "€200" }
+          { label: "MQF/EQF Level", value: "OTHM Level 5, MQF Level 5" },
+          { label: "Awarding Body", value: "OTHM Qualifications (UK), delivered by Think Talent" },
+          { label: "MFHEA Licence", value: "2017-004" },
+          { label: "Duration & Mode", value: "1 Year Part-Time │ Face-to-Face" },
+          { label: "Learning Hours / Credits", value: "120 credits, 600 guided learning hours, 1,200 total qualification time" },
+          { label: "Intake", value: "Multiple intakes each year" },
+          { label: "Tuition Fee", value: "€4,500 (Malta / EU) │ €6,500 (Non-EU – Payable AFTER Visa Approval)" },
+          { label: "Delivery Location", value: "ThinkTalent Training Room, Mriehel (Birkirkara CBD), Malta" },
+          { label: "Delivery Language", value: "English" }
+        ],
+        entryRequirements: [
+          "A relevant Level 4 diploma or equivalent qualification.",
+          "GCE Advanced Level in 3 subjects or an equivalent qualification.",
+          "Mature learners (over 21) with relevant management experience.",
+          "Minimum Age: 18+.",
+          "English Language: Learners from non-majority English-speaking countries must provide evidence of English language competency."
+        ],
+        modules: [
+          "Digital Marketing Management for Tourism and Hospitality (20 credits): Digital marketing and online market research.",
+          "Operations Management (20 credits): Systems, planning and visitor attraction management.",
+          "Management Accounting (20 credits): Financial statements, working capital and revenue management.",
+          "Management of Human Resources (20 credits): HR functions in a business.",
+          "Tourism and Hospitality Customer Relationship Management (20 credits): Customer decision making and service levels.",
+          "Contemporary Issues in Tourism and Hospitality (20 credits): Trends and change in the industry."
+        ],
+        learningOutcomes: [
+          "The principles of digital marketing management for tourism and hospitality businesses.",
+          "How operations management benefits tourism and hospitality businesses.",
+          "How to prepare and interpret financial statements and manage working capital and revenue.",
+          "How to manage customer relationships and monitor service levels.",
+          "The contemporary issues and trends shaping the tourism and hospitality industry."
+        ],
+        assessmentSummary: "Assessment is through coursework and presentations, and each unit is assessed on a pass or fail basis.",
+        careers: [
+          { role: "Hospitality Operations Supervisor", sector: "Day-to-day operations", startSalary: "€18,000 – €23,000 (approx. ₹16.2L – ₹20.7L INR)", midSalary: "€26,000 – €34,000 (approx. ₹23.4L – ₹30.6L INR)" },
+          { role: "Guest Relations Executive", sector: "Customer service", startSalary: "€17,000 – €21,000 (approx. ₹15.3L – ₹18.9L INR)", midSalary: "€23,000 – €29,000 (approx. ₹20.7L – ₹26.1L INR)" },
+          { role: "Tourism and Events Coordinator", sector: "Planning and bookings", startSalary: "€18,000 – €23,000 (approx. ₹16.2L – ₹20.7L INR)", midSalary: "€25,000 – €33,000 (approx. ₹22.5L – ₹29.7L INR)" },
+          { role: "Reservations / Revenue Executive", sector: "Sales and revenue", startSalary: "€19,000 – €24,000 (approx. ₹17.1L – ₹21.6L INR)", midSalary: "€27,000 – €36,000 (approx. ₹24.3L – ₹32.4L INR)" }
+        ],
+        benefits: [
+          "Sector-specific: Every unit is built around tourism and hospitality.",
+          "Digital skills: Includes a digital marketing unit written for the sector.",
+          "Academic Progression: Completion supports further study or employment in the tourism and hospitality sector."
         ]
       },
       {
-        title: "OTHM Level 5 Diploma in Health and Social Care (1 Year)",
-        overview: "Prepares learners for care coordination and supervisory roles across European healthcare and residential care settings.",
+        title: "OTHM Level 5 Diploma in Health and Social Care Management (MQF Level 5)",
+        overview: "The OTHM Level 5 Diploma in Health and Social Care Management gives learners the knowledge, understanding and skills needed for a career or further study in the health and social care sector at a managerial level. Learners show their skills by producing evidence from their work or training activities.",
         keyDetails: [
-          { label: "Awarding Body", value: "OTHM (UK)" },
-          { label: "Duration", value: "1 Year" },
-          { label: "Tuition Fee", value: "€6,500 (Payable AFTER Visa Approval)" },
-          { label: "Application Fee", value: "€200" }
+          { label: "MQF/EQF Level", value: "OTHM Level 5, MQF Level 5" },
+          { label: "Awarding Body", value: "OTHM Qualifications (UK), delivered by Think Talent" },
+          { label: "MFHEA Licence", value: "2017-004" },
+          { label: "Duration & Mode", value: "1 Year Part-Time │ Face-to-Face" },
+          { label: "Learning Hours / Credits", value: "120 credits, 600 guided learning hours, 1,200 total qualification time" },
+          { label: "Intake", value: "Multiple intakes each year" },
+          { label: "Tuition Fee", value: "€4,500 (Malta / EU) │ €6,500 (Non-EU – Payable AFTER Visa Approval). A €2,000 third-country-national administration fee applies to student visa applications." },
+          { label: "Delivery Location", value: "ThinkTalent Training Room, Mriehel (Birkirkara CBD), Malta" },
+          { label: "Delivery Language", value: "English" }
+        ],
+        entryRequirements: [
+          "A relevant Level 4 diploma or equivalent qualification.",
+          "GCE Advanced Level in 3 subjects or an equivalent qualification.",
+          "Mature learners (over 21) with relevant management experience.",
+          "Minimum Age: 18+.",
+          "English Language: Learners from non-majority English-speaking countries must provide evidence of English language competency."
+        ],
+        modules: [
+          "Working in Partnership in Health and Social Care (20 credits): Partnership working and relationships.",
+          "Managing the Safeguarding and Protection of Vulnerable Individuals (20 credits): Legal framework and service management.",
+          "Health Education and Promoting Wellbeing (20 credits): Health education and behaviour change.",
+          "Team Management in Health and Social Care (20 credits): Team performance and culture.",
+          "Professional Supervision Practice in Health and Social Care (20 credits): Providing and reflecting on supervision.",
+          "Research Methods in Health and Social Care (20 credits): Planning and carrying out a research project."
+        ],
+        learningOutcomes: [
+          "How to work in partnership with others and evaluate that partnership working.",
+          "The legal framework and procedures for safeguarding and protecting vulnerable individuals.",
+          "Approaches to health education and models of behaviour change.",
+          "How to manage a team, agree performance objectives and support a positive culture.",
+          "How to plan and carry out a research project in a health and social care setting."
+        ],
+        assessmentSummary: "Assessment is through coursework and a research project, using evidence from work or training activities.",
+        careers: [
+          { role: "Care Services Team Leader", sector: "Team and service management", startSalary: "€18,000 – €23,000 (approx. ₹16.2L – ₹20.7L INR)", midSalary: "€25,000 – €32,000 (approx. ₹22.5L – ₹28.8L INR)" },
+          { role: "Safeguarding Coordinator", sector: "Protection of vulnerable people", startSalary: "€19,000 – €24,000 (approx. ₹17.1L – ₹21.6L INR)", midSalary: "€26,000 – €34,000 (approx. ₹23.4L – ₹30.6L INR)" },
+          { role: "Health Promotion Officer", sector: "Health education", startSalary: "€19,000 – €24,000 (approx. ₹17.1L – ₹21.6L INR)", midSalary: "€26,000 – €34,000 (approx. ₹23.4L – ₹30.6L INR)" },
+          { role: "Care Service Manager (entry level)", sector: "Service operations", startSalary: "€22,000 – €28,000 (approx. ₹19.8L – ₹25.2L INR)", midSalary: "€30,000 – €40,000 (approx. ₹27.0L – ₹36.0L INR)" }
+        ],
+        benefits: [
+          "Managerial focus: Aimed at managerial roles in health and social care.",
+          "Safeguarding skills: Includes a dedicated unit on protecting vulnerable individuals.",
+          "Academic Progression: Completion supports further study or employment at a managerial level in health and social care."
         ]
       },
       {
-        title: "OTHM Level 5 Diploma in Strategic Management and Leadership (1 Year)",
-        overview: "Develops strategic planning and team leadership capabilities with direct progression to UK Bachelor Top-Up degrees.",
+        title: "OTHM Level 7 Diploma in Strategic Management and Leadership (MQF 7)",
+        overview: "The OTHM Level 7 Diploma in Strategic Management and Leadership develops strategic management and leadership skills for managers who have the authority and personal attributes to turn organisational strategy into effective operational performance. It reflects current practice and builds high-level understanding of strategic management and leadership in the workplace, with a clear work-related emphasis on practical skills alongside theory.",
         keyDetails: [
-          { label: "Awarding Body", value: "OTHM (UK)" },
-          { label: "Duration", value: "1 Year" },
-          { label: "Tuition Fee", value: "€6,500 (Payable AFTER Visa Approval)" },
-          { label: "Application Fee", value: "€200" }
+          { label: "MQF/EQF Level", value: "OTHM Level 7, MQF 7" },
+          { label: "Awarding Body", value: "OTHM Qualifications (UK), delivered by Think Talent" },
+          { label: "MFHEA Licence", value: "2017-004" },
+          { label: "Duration & Mode", value: "1 Year Part-Time │ Face-to-Face" },
+          { label: "Learning Hours / Credits", value: "120 credits (80 mandatory, 40 optional), 600 guided learning hours, 1,200 total qualification time" },
+          { label: "Intake", value: "Multiple intakes each year" },
+          { label: "Tuition Fee", value: "€5,500 (Malta / EU) │ €7,500 (Non-EU – Payable AFTER Visa Approval)" },
+          { label: "Delivery Location", value: "ThinkTalent Training Room, Mriehel (Birkirkara CBD), Malta" },
+          { label: "Delivery Language", value: "English" }
+        ],
+        entryRequirements: [
+          "An honours degree in a related subject, a UK Level 6 diploma or an equivalent overseas qualification, OR mature learners with management experience (to be checked with Think Talent before registering).",
+          "Minimum Age: 21+.",
+          "English Language: Learners from non-majority English-speaking countries must provide evidence of English language competency."
+        ],
+        modules: [
+          "Mandatory: Strategic Management (20 credits): Strategy analysis, implementation and change.",
+          "Mandatory: Strategic Leadership (20 credits): Leadership approaches, ethics and organisational performance.",
+          "Mandatory: Strategic Human Resource Management (20 credits): HR planning and strategy.",
+          "Mandatory: Advanced Business Research Methods (20 credits): Research design and proposal writing.",
+          "Optional (choose 2, 40 credits): Strategic Financial Management, Supply Chain and Operations Management, Entrepreneurship and Innovation, Globalisation and Corporate Governance, Strategic Change Management, Strategic Marketing."
+        ],
+        learningOutcomes: [
+          "How to analyse external influences on strategy and appraise strategic options.",
+          "How to develop and monitor strategic change plans.",
+          "The principles and impact of contemporary leadership and ethical decision making.",
+          "How to plan human resource strategies and understand the legal and ethical side of HR policy.",
+          "How to design business research methodologies and develop a research proposal."
+        ],
+        assessmentSummary: "Assessment is through coursework, with a work-related emphasis on practical skills alongside theory.",
+        careers: [
+          { role: "Operations Manager", sector: "Turning strategy into operations", startSalary: "€30,000 – €38,000 (approx. ₹27.0L – ₹34.2L INR)", midSalary: "€40,000 – €60,000 (approx. ₹36.0L – ₹54.0L INR)" },
+          { role: "Strategy / Business Analyst", sector: "Strategic analysis", startSalary: "€26,000 – €32,000 (approx. ₹23.4L – ₹28.8L INR)", midSalary: "€34,000 – €48,000 (approx. ₹30.6L – ₹43.2L INR)" },
+          { role: "Project / Programme Manager", sector: "Change and delivery", startSalary: "€30,000 – €38,000 (approx. ₹27.0L – ₹34.2L INR)", midSalary: "€40,000 – €58,000 (approx. ₹36.0L – ₹52.2L INR)" },
+          { role: "Management Consultant", sector: "Advisory and improvement", startSalary: "€28,000 – €36,000 (approx. ₹25.2L – ₹32.4L INR)", midSalary: "€40,000 – €60,000 (approx. ₹36.0L – ₹54.0L INR)" }
+        ],
+        benefits: [
+          "Postgraduate-level qualification at MQF Level 7.",
+          "Flexible pathway: Learners choose 2 of 6 optional units to match their goals.",
+          "Work-related emphasis: Practical skills alongside theory, assessed through coursework."
         ]
       },
       {
-        title: "OTHM Level 7 Diploma in Human Resource Management (1 Year)",
-        overview: "Master's Level Qualification equipping professionals with strategic HRM capabilities and direct access to UK Master's / MBA Top-Up programs.",
+        title: "OTHM Level 7 Diploma in Human Resource Management (MQF 7)",
+        overview: "The OTHM Level 7 Diploma in Human Resource Management equips learners with the skills and understanding needed for effective human resource management that supports strategic decision-making and helps an organisation keep its competitive edge. It is aimed at learners who want to develop their career in HRM.",
         keyDetails: [
-          { label: "Awarding Body", value: "OTHM (UK)" },
-          { label: "Duration", value: "1 Year" },
-          { label: "Tuition Fee", value: "€7,500 (Payable AFTER Visa Approval)" },
-          { label: "Application Fee", value: "€200" }
+          { label: "MQF/EQF Level", value: "OTHM Level 7, MQF 7" },
+          { label: "Awarding Body", value: "OTHM Qualifications (UK), delivered by Think Talent" },
+          { label: "MFHEA Licence", value: "2017-004" },
+          { label: "Duration & Mode", value: "1 Year Part-Time │ Face-to-Face" },
+          { label: "Learning Hours / Credits", value: "120 credits, 600 guided learning hours, 1,200 total qualification time" },
+          { label: "Intake", value: "Multiple intakes each year" },
+          { label: "Tuition Fee", value: "€5,500 (Malta / EU) │ €7,500 (Non-EU – Payable AFTER Visa Approval)" },
+          { label: "Delivery Location", value: "ThinkTalent Training Room, Mriehel (Birkirkara CBD), Malta" },
+          { label: "Delivery Language", value: "English" }
+        ],
+        entryRequirements: [
+          "An honours degree in a related subject, a UK Level 6 diploma or an equivalent overseas qualification, OR mature learners with management experience (to be checked with Think Talent before registering).",
+          "Minimum Age: 21+.",
+          "English Language: Learners from non-majority English-speaking countries must provide evidence of English language competency."
+        ],
+        modules: [
+          "Strategic Human Resource Management (20 credits): HR planning and strategy.",
+          "Engagement of Employees and Organisational Learning (20 credits): HR action plans for engagement and performance.",
+          "Leadership Development and Performance Management (20 credits): Leadership, motivation and teamwork.",
+          "Global Resourcing, Talent and Reward Management (20 credits): Global talent and reward systems.",
+          "Managing Employment Relations and Employment Law (20 credits): Contracts, recruitment legislation and employment protection.",
+          "Business Research Methods (20 credits): Research design and proposal writing."
+        ],
+        learningOutcomes: [
+          "The role of strategic management of human resources and how to plan effective HR strategies.",
+          "How to design and implement HR action plans that promote employee engagement and performance.",
+          "The concepts of leadership, motivation, teamwork and communication.",
+          "How to analyse performance and reward management and global talent challenges.",
+          "Employment law, recruitment and selection legislation, and employment relations processes."
+        ],
+        assessmentSummary: "Assessment is through coursework, including a research proposal in the Business Research Methods unit.",
+        careers: [
+          { role: "HR Manager", sector: "People strategy and policy", startSalary: "€30,000 – €37,000 (approx. ₹27.0L – ₹33.3L INR)", midSalary: "€37,000 – €52,000 (approx. ₹33.3L – ₹46.8L INR)" },
+          { role: "HR Business Partner", sector: "Advising business leaders", startSalary: "€26,000 – €32,000 (approx. ₹23.4L – ₹28.8L INR)", midSalary: "€32,000 – €44,000 (approx. ₹28.8L – ₹39.6L INR)" },
+          { role: "Talent Acquisition Specialist", sector: "Recruitment and selection", startSalary: "€22,000 – €28,000 (approx. ₹19.8L – ₹25.2L INR)", midSalary: "€28,000 – €38,000 (approx. ₹25.2L – ₹34.2L INR)" },
+          { role: "Learning & Development Manager", sector: "Training and development", startSalary: "€28,000 – €35,000 (approx. ₹25.2L – ₹31.5L INR)", midSalary: "€35,000 – €48,000 (approx. ₹31.5L – ₹43.2L INR)" }
+        ],
+        benefits: [
+          "Postgraduate-level HR qualification at MQF Level 7.",
+          "Employment law included: A full unit on employment relations and law.",
+          "Research skills: A business research methods unit builds a research proposal."
         ]
       }
     ]
@@ -1961,50 +2262,198 @@ export const institutionsData = [
   {
     id: "eec",
     name: "EEC-ITIS Malta Tourism & Languages Institute – Best Hospitality Institute",
-    location: "San Ġwann / Kappara, Malta",
-    accreditation: "MFHEA Licensed Higher Education Institute (License No: 2008-TC-003) | Awarding Body: MQF",
+    location: "EEC-ITIS Building, 9 Triq S. Pietru (St Peter’s Street), San Ġwann SGN 2310, Malta",
+    accreditation: "MFHEA Licensed Further & Higher Education Institution (License No: 2008-TC-003) | Awarding Body: EEC-ITIS / MQF",
     established: "2008",
     seoCategory: "#1 Tourism & Hospitality Institute in Malta | Top European Hospitality School",
-    flagshipCourses: "B.Sc. (Honours) in International Tourism & Hospitality Management",
-    about: "Dedicated exclusively to European tourism, hotel management, and foreign languages, EEC-ITIS Malta is recognized as a top hospitality institute in Europe. It combines academic education with real-world practical hotel internships and internationally accredited degrees.",
+    flagshipCourses: "Bachelor of Arts (Honours) in International Tourism and Hospitality Management (MQF/EQF Level 6), Higher Diploma in International Tourism and Hospitality Management (MQF/EQF Level 5), and Diploma in International Tourism and Hospitality Management (MQF/EQF Level 5)",
+    about: "EEC-ITIS Malta Tourism and Languages Institute is a licensed Further and Higher Education Institution in San Ġwann, Malta, regulated by the Malta Further and Higher Education Authority (MFHEA, Licence No. 2008-TC-003). It has two faculties: the Faculty of Tourism & Hospitality Management and the Faculty of Languages with its International Language Centre. The Institute also runs a Career Services & Placement Office, offers student accommodation and support services, and delivers a linked progression pathway from Diploma (Year 1) to Higher Diploma (Year 2) and Bachelor of Arts (Honours) (Year 3).",
     highlights: {
-      intake: "Feb/Mar, Jun/Jul, Oct/Nov (January / April / July / October - 2027)",
-      eligibility: "10th Pass Eligible | Age 18+",
+      intake: "4 Jan, 26 Apr, 26 Jul, 29 Nov 2027 (First Monday of Jan & Last Mondays of Mar, Jul, Nov)",
+      eligibility: "10th / 12th Pass Eligible | Minimum Age 17+ (or 3+ years tourism work experience + interview)",
       gap: "Unlimited Gap Accepted",
-      ielts: "No IELTS / PTE Required",
-      interview: "Basic College Assessment / Interview Required",
+      ielts: "No IELTS / PTE Required (or IELTS 5.5 / TOEFL 72 / Pearson JETSET Level 5 / Cambridge CAE B2)",
+      interview: "Basic College Assessment / Suitability Interview Required",
       applicationFee: "€200",
-      tuitionFeeSummary: "UG / PG Diploma: €6,500 | B.Sc. (Honours): Year 1: €8,000 | Year 2: €4,000 | Year 3: €4,000 (Payable AFTER Visa Approval)",
+      tuitionFeeSummary: "Diploma (MQF/EQF Level 5): €6,500 (Non-EU) / €2,700 (EU) | Higher Diploma (MQF/EQF Level 5, 2 Yrs): €6,500/yr (€13,000 total) | BA (Honours) (MQF/EQF Level 6, 3 Yrs): Yr 1 €6,500, Yr 2 €6,500, Yr 3 €7,000 (€20,000 total – Payable AFTER Visa Approval)",
       visa: "20 Hours/Week Legal Work Permit | 3/6/9/12 Months PSW Visa | 70% Fee Refund under Get Qualified Scheme | PR Pathway after 5 Years",
       processingSpeed: "Express 48-Hour Offer Letter | Daily VFS Appointments Available",
       accommodation: "EEC Official Hostel Letter provided for Visa Filing"
     },
     courses: [
       {
-        title: "Level 5 Diploma in International Tourism & Hospitality Management (1 Year)",
-        overview: "Foundational 1-year diploma combining academic hospitality principles with practical training in the European tourism sector.",
+        title: "Diploma in International Tourism and Hospitality Management (MQF/EQF Level 5)",
+        overview: "The Diploma in International Tourism and Hospitality Management is a one-year intensive programme that serves as a gateway to the travel, tourism and hospitality sectors. It gives students cross-departmental communication skills, a grounding in economics, and the technical knowledge to design and manage industry facilities. It is also the first exit qualification of the Bachelor Degree with Honours, so students can progress to the Higher Diploma and then the degree.",
         keyDetails: [
-          { label: "Duration", value: "1 Year" },
-          { label: "Tuition Fee", value: "€6,500 (Payable AFTER Visa Approval)" },
-          { label: "Application Fee", value: "€200" }
+          { label: "MQF/EQF Level", value: "Level 5 (RQF England Level 5)" },
+          { label: "Awarding Body", value: "EEC-ITIS, accredited by MFHEA as a Higher Education Programme" },
+          { label: "MFHEA Licence", value: "2008-TC-003" },
+          { label: "Duration & Mode", value: "1 Year Full-Time │ Face-to-Face" },
+          { label: "ECTS / Credits", value: "60 ECTS, 120 UK credits" },
+          { label: "Total Learning Hours", value: "1,500 Hours" },
+          { label: "Intake", value: "4 Jan 2027, 26 Apr 2027, 26 Jul 2027, 29 Nov 2027 (all subject to demand)" },
+          { label: "Tuition Fee", value: "€2,700 (EU/EEA) │ €6,500 (Non-EU – Payable AFTER Visa Approval)" },
+          { label: "Delivery Location", value: "EEC-ITIS Building, San Ġwann, Malta" }
+        ],
+        entryRequirements: [
+          "Minimum Age: 17+.",
+          "Academic Route: School leaving certificate and a completed approved secondary or tertiary qualification.",
+          "Work Experience Route: At least 3 years of work experience in tourism plus a suitability interview.",
+          "English Language: Evidence of English: IELTS Academic 5.5, TOEFL paper 525, TOEFL internet 72, Pearson JETSET Level 5 or Cambridge CAE B2."
+        ],
+        modules: [
+          "People Skills and Negotiation Skills (6 ECTS): Dealing with clients and diverse needs.",
+          "e-Tourism (6 ECTS): Information systems and digital tools in tourism.",
+          "Communication Skills (6 ECTS): Communication within organisations.",
+          "Geography of Travel and Destinations (6 ECTS): Tourism resources and travel flows.",
+          "Economics for Tourism (6 ECTS): Economic theory applied to tourism.",
+          "International Hotel Resort Facilities and Operations (6 ECTS): Design of tourism facilities.",
+          "Tourism and Hospitality Accounting (6 ECTS): Financial reporting in hospitality.",
+          "Tourism, Culture and its Environment (6 ECTS): The economic, cultural and ecological setting of tourism.",
+          "Tourism Marketing (6 ECTS): Marketing concepts and e-marketing.",
+          "Managerial Leadership for Tourism and Culture Organisation (6 ECTS): Leadership and team dynamics."
+        ],
+        learningOutcomes: [
+          "How to communicate with different departments and sectors in the tourism industry.",
+          "The economic concepts behind tourism and hospitality.",
+          "How facilities for tourists are designed and operated.",
+          "How to apply accounting and financial knowledge in the industry.",
+          "How to apply marketing concepts to real situations at work."
+        ],
+        assessmentSummary: "Teaching uses lectures, seminars, group work, debates and case studies. Assessment is through assignments, coursework and written exams.",
+        careers: [
+          { role: "Front Office / Reception Executive", sector: "Guest service", startSalary: "€17,000 – €21,000 (approx. ₹15.3L – ₹18.9L INR)", midSalary: "€23,000 – €29,000 (approx. ₹20.7L – ₹26.1L INR)" },
+          { role: "Travel Consultant", sector: "Bookings and itineraries", startSalary: "€17,000 – €21,000 (approx. ₹15.3L – ₹18.9L INR)", midSalary: "€22,000 – €28,000 (approx. ₹19.8L – ₹25.2L INR)" },
+          { role: "Events Coordinator", sector: "Planning and operations", startSalary: "€18,000 – €23,000 (approx. ₹16.2L – ₹20.7L INR)", midSalary: "€25,000 – €33,000 (approx. ₹22.5L – ₹29.7L INR)" },
+          { role: "Hospitality Supervisor", sector: "Team and operations", startSalary: "€18,000 – €23,000 (approx. ₹16.2L – ₹20.7L INR)", midSalary: "€26,000 – €34,000 (approx. ₹23.4L – ₹30.6L INR)" }
+        ],
+        benefits: [
+          "Progression pathway: First exit qualification of the Bachelor Degree with Honours (continue to Higher Diploma and then the degree).",
+          "Practical teaching: Lectures, seminars, group work, debates and case studies.",
+          "Career support: The Institute has a Career Services & Placement Office."
         ]
       },
       {
-        title: "Level 6 Higher Diploma in International Tourism & Hospitality Management (2 Years)",
-        overview: "Advanced 2-year diploma building supervisory and operational hotel management competencies.",
+        title: "Higher Diploma in International Tourism and Hospitality Management (MQF/EQF Level 5)",
+        overview: "The Higher Diploma in International Tourism and Hospitality Management is a two-year programme that builds a full understanding of the socio-cultural, geographical and technological factors shaping modern tourism. Graduates are prepared to tackle complex marketing challenges and apply strategic insights to professional operations. It includes a 640-hour internship and is the second exit qualification of the Bachelor Degree with Honours.",
         keyDetails: [
-          { label: "Duration", value: "2 Years" },
-          { label: "Tuition Fee", value: "€6,500 / year (Payable AFTER Visa Approval)" },
-          { label: "Application Fee", value: "€200" }
+          { label: "MQF/EQF Level", value: "Level 5 (RQF England Level 5)" },
+          { label: "Awarding Body", value: "EEC-ITIS, accredited by MFHEA as a Higher Education Programme" },
+          { label: "MFHEA Licence", value: "2008-TC-003" },
+          { label: "Duration & Mode", value: "2 Years Full-Time │ Face-to-Face" },
+          { label: "ECTS / Credits", value: "120 ECTS, 240 UK credits" },
+          { label: "Total Learning Hours", value: "3,340 Hours (includes a 640-hour internship)" },
+          { label: "Intake", value: "26 Apr 2027 and 29 Nov 2027 (subject to demand)" },
+          { label: "Tuition Fee", value: "€2,700 per year (EU/EEA) │ €6,500 per year, €13,000 in total (Non-EU – Payable AFTER Visa Approval)" },
+          { label: "Delivery Location", value: "EEC-ITIS Building, San Ġwann, Malta" }
+        ],
+        entryRequirements: [
+          "Minimum Age: 17+.",
+          "Academic Route: School leaving certificate and a completed approved secondary or tertiary qualification.",
+          "Work Experience Route: At least 3 years of work experience in tourism plus a suitability interview.",
+          "English Language: Evidence of English: IELTS Academic 5.5, TOEFL paper 525, TOEFL internet 72, Pearson JETSET Level 5 or Cambridge CAE B2."
+        ],
+        modules: [
+          "Year 1 (60 ECTS): People Skills and Negotiation Skills (6 ECTS), e-Tourism (6 ECTS), Communication Skills (6 ECTS), Geography of Travel and Destinations (6 ECTS), Economics for Tourism (6 ECTS), International Hotel Resort Facilities and Operations (6 ECTS), Tourism and Hospitality Accounting (6 ECTS), Tourism, Culture and its Environment (6 ECTS), Tourism Marketing (6 ECTS), Managerial Leadership for Tourism and Culture Organisation (6 ECTS).",
+          "Year 2 (60 ECTS): Financial Decision Making for Hospitality Professionals (6 ECTS): Advanced accounting for tourism and hospitality.",
+          "Quantitative Analyses for Tourism (6 ECTS): Maths and statistics for management.",
+          "Travel and Transport Management (6 ECTS): The link between tourism and transport.",
+          "Economics for Tourism Development and Planning (6 ECTS): Sustainable tourism planning.",
+          "Tourist Attraction and Heritage Management (6 ECTS): Attractions, events and heritage.",
+          "Tourism Operations Management (6 ECTS): Operations tools for tourism businesses.",
+          "Resort and Destination Management (6 ECTS): Resort planning, finance and marketing.",
+          "Financial Management for the Leisure Tourism and Hospitality Industry (6 ECTS): Financial planning and control.",
+          "Internship, October to February (12 ECTS, 640 hours): Hotel, resort or tourism office placement."
+        ],
+        learningOutcomes: [
+          "The socio-cultural, geographical and technological factors that shape tourism.",
+          "How to handle complex marketing challenges in tourism.",
+          "Financial management for leisure, tourism and hospitality businesses.",
+          "How to plan sustainable tourism development and manage attractions and resorts.",
+          "How to apply skills through a work placement in a real hospitality setting."
+        ],
+        assessmentSummary: "Teaching uses lectures, seminars, group work, debates and case studies. Assessment is through assignments, coursework and written exams, together with the work placement.",
+        careers: [
+          { role: "Resort / Hotel Operations Supervisor", sector: "Operations and service", startSalary: "€19,000 – €24,000 (approx. ₹17.1L – ₹21.6L INR)", midSalary: "€27,000 – €36,000 (approx. ₹24.3L – ₹32.4L INR)" },
+          { role: "Destination Marketing Executive", sector: "Tourism marketing", startSalary: "€20,000 – €25,000 (approx. ₹18.0L – ₹22.5L INR)", midSalary: "€28,000 – €37,000 (approx. ₹25.2L – ₹33.3L INR)" },
+          { role: "Attractions and Events Coordinator", sector: "Visitor experience", startSalary: "€19,000 – €24,000 (approx. ₹17.1L – ₹21.6L INR)", midSalary: "€26,000 – €34,000 (approx. ₹23.4L – ₹30.6L INR)" },
+          { role: "Tourism Operations Coordinator", sector: "Planning and logistics", startSalary: "€19,000 – €24,000 (approx. ₹17.1L – ₹21.6L INR)", midSalary: "€26,000 – €35,000 (approx. ₹23.4L – ₹31.5L INR)" }
+        ],
+        benefits: [
+          "640-hour internship: Placement in hotels, resorts, tourism offices or information centres (October to February).",
+          "Progression pathway: Second exit qualification of the Bachelor Degree with Honours, with entry to the final year.",
+          "Career support: The Institute has a Career Services & Placement Office."
         ]
       },
       {
-        title: "B.Sc. (Honours) Degree in International Tourism & Hospitality Management (3 Years)",
-        overview: "Top-ranked 3-year honours degree preparing graduates for senior management and executive careers across international hotel chains and tourism boards.",
+        title: "Bachelor of Arts (Honours) in International Tourism and Hospitality Management (MQF/EQF Level 6)",
+        overview: "The Bachelor Degree with Honours in International Tourism and Hospitality Management is the Institute’s flagship three-year degree. It combines academic theory with advanced management practice and ends with a major dissertation and an independent research project. Students explore global socio-economic issues, the impact of transport, human resources, customer service excellence and enterprise project management. It has built-in exit points at the Diploma (Year 1) and Higher Diploma (Year 2).",
         keyDetails: [
-          { label: "Duration", value: "3 Years" },
-          { label: "Tuition Fee", value: "Year 1: €8,000 | Year 2: €4,000 | Year 3: €4,000 (Payable AFTER Visa Approval)" },
-          { label: "Application Fee", value: "€200" }
+          { label: "MQF/EQF Level", value: "Level 6 (RQF England Level 6)" },
+          { label: "Awarding Body", value: "EEC-ITIS, accredited by MFHEA as a Higher Education Programme" },
+          { label: "MFHEA Licence", value: "2008-TC-003" },
+          { label: "Duration & Mode", value: "3 Years Full-Time │ Face-to-Face" },
+          { label: "ECTS / Credits", value: "180 ECTS, 360 UK credits" },
+          { label: "Total Learning Hours", value: "4,840 Hours" },
+          { label: "Intake", value: "Four intakes a year: first Monday of January and last Mondays of March, July and November (subject to demand)" },
+          { label: "Tuition Fee", value: "EU/EEA: €2,700 (Year 1), €2,700 (Year 2), €3,200 (Year 3) │ Non-EU: €6,500 (Year 1), €6,500 (Year 2), €7,000 (Year 3), €20,000 in total (Payable AFTER Visa Approval)" },
+          { label: "Delivery Location", value: "EEC-ITIS Building, San Ġwann, Malta" }
+        ],
+        entryRequirements: [
+          "Minimum Age: 17+.",
+          "Academic Route: School leaving certificate and a completed approved secondary or tertiary qualification.",
+          "Work Experience Route: At least 3 years of work experience in tourism plus a suitability interview.",
+          "English Language: Evidence of English: IELTS Academic 5.5, TOEFL paper 525, TOEFL internet 72, Pearson JETSET Level 5 or Cambridge CAE B2."
+        ],
+        modules: [
+          "Year 1 (60 ECTS – Diploma Level): People Skills and Negotiation Skills (6 ECTS): Dealing with clients and diverse needs in tourism and hospitality.",
+          "Year 1: e-Tourism (6 ECTS): Information systems, ICTs, and digital marketing tools in tourism.",
+          "Year 1: Communication Skills (6 ECTS): Organisational and interpersonal communication with sector stakeholders.",
+          "Year 1: Geography of Travel and Destinations (6 ECTS): Tourism resources, destination geography, and travel flow patterns.",
+          "Year 1: Economics for Tourism (6 ECTS): Economic theory and concepts applied to tourism and hospitality.",
+          "Year 1: International Hotel Resort Facilities and Operations (6 ECTS): Layout, design, and operations of tourism and resort facilities.",
+          "Year 1: Tourism and Hospitality Accounting (6 ECTS): Financial accounting and reporting for hospitality businesses.",
+          "Year 1: Tourism, Culture and its Environment (6 ECTS): Economic, cultural, and ecological context of tourism.",
+          "Year 1: Tourism Marketing (6 ECTS): Tourism marketing principles and digital promotion.",
+          "Year 1: Managerial Leadership for Tourism and Culture Organisation (6 ECTS): Leadership and team dynamics in tourism organisations.",
+          "Year 2 (60 ECTS – Higher Diploma Level): Financial Decision Making for Hospitality Professionals (6 ECTS): Advanced accounting and financial evaluation in hospitality.",
+          "Year 2: Quantitative Analyses for Tourism (6 ECTS): Mathematical and statistical techniques for tourism management.",
+          "Year 2: Travel and Transport Management (6 ECTS): Relationship between transport operations and tourism management.",
+          "Year 2: Economics for Tourism Development and Planning (6 ECTS): Sustainable tourism planning, policies, and development.",
+          "Year 2: Tourist Attraction and Heritage Management (6 ECTS): Management of attractions, events, and cultural heritage.",
+          "Year 2: Tourism Operations Management (6 ECTS): Operational tools and management for tourism enterprises.",
+          "Year 2: Resort and Destination Management (6 ECTS): Planning, finance, and marketing of resorts and destinations.",
+          "Year 2: Financial Management for the Leisure Tourism and Hospitality Industry (6 ECTS): Financial planning and control in leisure and hospitality.",
+          "Year 2: Internship, October to February (12 ECTS, 640 hours): Practical work placement in a hotel, resort, or tourism office.",
+          "Year 3 (60 ECTS): Tourism Society and Culture (6 ECTS): Tourism, culture and social impacts.",
+          "Year 3: Socio-economic Issues in Hospitality and Tourism (6 ECTS): Economy, employment, poverty and environment.",
+          "Year 3: Contemporary Global Issues in Travel and Tourism (6 ECTS): Global politics and tourism trends.",
+          "Year 3: Travel and Transport International Tourism and Impacts (6 ECTS): International tourism and its development.",
+          "Year 3: Human Resource Management in Tourism (6 ECTS): People management in tourism organisations.",
+          "Year 3: Managing Enterprise Tourism Projects (6 ECTS): Project management and EU funding programmes.",
+          "Year 3: Customer Service Management for Tourism (6 ECTS): Service processes and improvement.",
+          "Year 3: Research Methods and Dissertation Proposal (6 ECTS): Research design and literature review.",
+          "Year 3: Dissertation (12 ECTS): Independent research project."
+        ],
+        learningOutcomes: [
+          "The social, economic and political impacts of international tourism.",
+          "How to manage people, customer service and enterprise projects in tourism.",
+          "How to analyse global trends shaping travel and hospitality.",
+          "How to plan and carry out independent research under ethical standards.",
+          "Management skills for roles across the global tourism industry."
+        ],
+        assessmentSummary: "Teaching uses lectures, seminars, group work, debates and case studies. Assessment is through assignments, coursework and written exams, and the degree ends with a 12 ECTS dissertation.",
+        careers: [
+          { role: "Hotel / Resort Manager (graduate trainee)", sector: "Operations leadership", startSalary: "€22,000 – €28,000 (approx. ₹19.8L – ₹25.2L INR)", midSalary: "€35,000 – €55,000 (approx. ₹31.5L – ₹49.5L INR)" },
+          { role: "Tourism Development Officer", sector: "Planning and policy", startSalary: "€22,000 – €28,000 (approx. ₹19.8L – ₹25.2L INR)", midSalary: "€32,000 – €45,000 (approx. ₹28.8L – ₹40.5L INR)" },
+          { role: "Customer Experience Manager", sector: "Service quality", startSalary: "€24,000 – €30,000 (approx. ₹21.6L – ₹27.0L INR)", midSalary: "€34,000 – €48,000 (approx. ₹30.6L – ₹43.2L INR)" },
+          { role: "Tourism Project Coordinator", sector: "Project delivery", startSalary: "€22,000 – €28,000 (approx. ₹19.8L – ₹25.2L INR)", midSalary: "€30,000 – €42,000 (approx. ₹27.0L – ₹37.8L INR)" }
+        ],
+        benefits: [
+          "Honours degree at MQF Level 6 with a 12 ECTS dissertation.",
+          "Flexible exit points: Diploma after Year 1 and Higher Diploma after Year 2.",
+          "Work experience built in: A 640-hour internship in Year 2.",
+          "Further Study: An MQF Level 6 honours degree can support applications to postgraduate study, subject to the admission rules of the receiving institution."
         ]
       }
     ]
@@ -2016,59 +2465,219 @@ export const institutionsData = [
   {
     id: "ssm",
     name: "Swiss School of Management (SSM Malta) – Top Business School in Malta",
-    location: "Sliema / Valletta, Malta",
-    accreditation: "Swiss Accredited & MFHEA Licensed Higher Education Institution",
+    location: "Flat 2, Angelica Court, Giuseppe Cali Street, Ta’ Xbiex, Malta",
+    accreditation: "Swiss Accredited & MFHEA Licensed Higher Education Institution (Licence No. 2024-036)",
     established: "1981 (Global), Malta Campus",
     seoCategory: "Best Swiss MBA in Malta | Top BBA Business School in Europe",
-    flagshipCourses: "Master of Business Administration (MBA) and Bachelor of Business Administration (BBA)",
-    about: "The Swiss School of Management (SSM) is an accredited private institute of higher education founded in Switzerland. While its head office remains in Switzerland, in 2002 the School moved its operations to Rome, Italy, and established learning centres in Dubai (UAE), Bahrain (GCC), Cairo (Egypt), Brescia (Italy), and Malta. SSM offers Swiss academic rigor combined with European exposure, providing globally respected BBA and MBA qualifications that allow eligible students to travel and work across the 27 EU member countries.",
+    flagshipCourses: "Master of Business Administration (MBA) (MQF/EQF Level 7), Bachelor of Business Administration (BBA) (MQF/EQF Level 6) with 6 Specialisations, Diploma in Business Administration (MQF/EQF Level 5), and Post Graduate Diploma in Leadership and Management (MQF/EQF Level 7)",
+    about: "Swiss School of Management (SSM Malta) is the Malta campus of the Swiss School of Management, licensed by the Malta Further and Higher Education Authority (MFHEA, Licence No. 2024-036). SSM teaches in a flexible blended format: every class can be attended in person or online on weekday evenings, and sessions are live-streamed and recorded so students can combine study with part-time work. Programmes include the Bachelor of Business Administration (BBA) with six specialisations, the 18-month MBA, the Post Graduate Diploma in Leadership and Management, and the Doctor of Business Administration.",
     highlights: {
-      intake: "Flexible Monthly Intakes",
-      eligibility: "10th Pass Eligible | Age 18+",
+      intake: "Flexible Monthly Intakes (Multiple intakes each year)",
+      eligibility: "10th / 12th Pass Eligible | Age 18+ (UG) | Professionals with Bachelor's / Work Experience (PG)",
       gap: "Unlimited Gap Accepted",
-      ielts: "No Mandatory IELTS / PTE Required",
+      ielts: "No Mandatory IELTS / PTE Required (Exempt if schooling/degree in English; else IELTS 6.0 UG / 6.5 PG)",
       interview: "College Interview Required",
       applicationFee: "€150",
-      tuitionFeeSummary: "UG / PG Diploma: €7,000 | BBA: Year 1: €8,000 | Year 2: €4,000 | Year 3: €4,000 | MBA: Year 1: €8,000 | 6 Months: €4,000 (Pay Tuition Fees ONLY after Visa Approval)",
+      tuitionFeeSummary: "UG / PG Diploma: €7,000 | BBA: Year 1: €8,000 | Year 2: €4,000 | Year 3: €4,000 | MBA: €12,000 total (€4,000 enrolment + €3,000, €3,000, €2,000 instalments / Year 1: €8,000 | 6 Months: €4,000 – Pay Tuition Fees ONLY after Visa Approval)",
       visa: "20 Hours/Week Legal Work Permit | 3/6/9/12 Months PSW Visa | 70% Fee Refund under Get Qualified Scheme | PR Pathway after 5 Years",
       processingSpeed: "Offer Letter within 2 Working Days",
       accommodation: "Private Rental Agreement Support"
     },
     courses: [
       {
-        title: "Level 5 Diploma in Business Administration (1 Year)",
-        overview: "1-year undergraduate business diploma delivering Swiss quality business education in Malta.",
+        title: "Diploma in Business Administration (MQF/EQF Level 5)",
+        overview: "The Diploma in Business Administration is the first year of SSM’s three-year BBA. It builds a foundation in management, accounting, marketing, finance, economics and communication, and includes a basic internship of at least 100 hours. Students who continue move on to the Higher Diploma in Year 2 and the Bachelor’s degree in Year 3.",
         keyDetails: [
-          { label: "Duration", value: "1 Year" },
-          { label: "Tuition Fee", value: "€7,000 (Pay Tuition ONLY after Visa Approval)" },
-          { label: "Application Fee", value: "€150" }
+          { label: "MQF/EQF Level", value: "Level 5" },
+          { label: "Awarding Body", value: "Swiss School of Management, regulated under the Maltese higher education framework" },
+          { label: "MFHEA Licence", value: "2024-036" },
+          { label: "Duration & Mode", value: "1 Year (Year 1 of the 3-year BBA) │ Blended: in person or online" },
+          { label: "ECTS / Learning Hours", value: "60 ECTS (15 modules of 4 ECTS). Each module has 30 contact hours plus 60 hours of self-directed study" },
+          { label: "Intake", value: "Multiple intakes each year" },
+          { label: "Tuition Fee", value: "€7,000 (Non-EU International – Pay Tuition ONLY after Visa Approval)" },
+          { label: "Delivery Location", value: "Flat 2, Angelica Court, Giuseppe Cali Street, Ta’ Xbiex, Malta" }
+        ],
+        entryRequirements: [
+          "Academic Route: Completed secondary education, for example a Swiss Matura, German Abitur, French Baccalaureate, English A-Levels, International Baccalaureate, US High School Diploma, IGCSE with GCE A-Level, or Maltese higher secondary certificate.",
+          "12 Years of Schooling: Applicants with 12 years of schooling who do not hold one of these must first complete a 30-credit freshman programme.",
+          "English Language: Exempt if secondary schooling was in English. Otherwise IELTS 6.0, TOEFL iBT 61, Pearson 44 or Duolingo 95."
+        ],
+        modules: [
+          "Leadership Fundamentals (4 ECTS): Leadership principles, team dynamics and ethical decisions.",
+          "English for Business Communication (4 ECTS): Business writing, speaking and presentations.",
+          "Management Dynamics (4 ECTS): Planning, organising, leading and controlling.",
+          "Communication Skills (4 ECTS): Verbal, written and digital business communication.",
+          "Accounting Principles (4 ECTS): The accounting cycle and financial statements under IFRS.",
+          "Principles of Marketing (4 ECTS): Segmentation, targeting, positioning and the marketing mix.",
+          "Mathematical Tools for Business (4 ECTS): Algebra, calculus and financial mathematics.",
+          "Human Resource Management (4 ECTS): Recruitment, performance and employee relations.",
+          "Managerial Statistics (4 ECTS): Data analysis and decision-making.",
+          "Intercultural Management (4 ECTS): Managing across cultures.",
+          "Business Information Systems (4 ECTS): ERP, databases and business intelligence.",
+          "Principles of Financial Management (4 ECTS): Financial analysis and investment.",
+          "Business Economics (4 ECTS): Demand, supply, pricing and the macro environment.",
+          "Business & Entrepreneurship Principles (4 ECTS): Launching and growing a venture.",
+          "Internship (4 ECTS): At least 100 hours of supervised practical training, in person or remote."
+        ],
+        learningOutcomes: [
+          "The core functions of a business and how they connect.",
+          "How to read financial statements and apply basic accounting and financial management.",
+          "Marketing, HR and management principles used in real organisations.",
+          "Business communication and intercultural skills for international workplaces.",
+          "How to plan a new business through the entrepreneurship module."
+        ],
+        careers: [
+          { role: "Business Administrator", sector: "Planning and coordination", startSalary: "€18,000 – €22,000 (approx. ₹16.2L – ₹19.8L INR)", midSalary: "€25,000 – €34,000 (approx. ₹22.5L – ₹30.6L INR)" },
+          { role: "Marketing Assistant", sector: "Campaigns and content", startSalary: "€17,000 – €21,000 (approx. ₹15.3L – ₹18.9L INR)", midSalary: "€24,000 – €30,000 (approx. ₹21.6L – ₹27.0L INR)" },
+          { role: "Operations Coordinator", sector: "Process and team support", startSalary: "€18,000 – €22,000 (approx. ₹16.2L – ₹19.8L INR)", midSalary: "€25,000 – €32,000 (approx. ₹22.5L – ₹28.8L INR)" },
+          { role: "Junior Finance Assistant", sector: "Accounting support", startSalary: "€17,000 – €21,000 (approx. ₹15.3L – ₹18.9L INR)", midSalary: "€24,000 – €31,000 (approx. ₹21.6L – ₹27.9L INR)" }
+        ],
+        benefits: [
+          "Built-in internship: At least 100 hours of supervised practical training, in person or remote.",
+          "Flexible delivery: Blended classes with recordings, in the evenings.",
+          "Progression pathway: Continues into the Higher Diploma (Year 2) and the Bachelor’s degree (Year 3) at SSM Malta."
         ]
       },
       {
-        title: "Level 6 Bachelor of Business Administration (BBA) (3 Years)",
-        overview: "Globally respected Swiss Business Degree combining international business theory with practical European exposure.",
+        title: "Bachelor of Business Administration (BBA) (MQF/EQF Level 6)",
+        overview: "The Bachelor of Business Administration (BBA) gives students a broad knowledge of the functional areas of a company and how they connect, with the option to specialise in one field. It is a full-time, 180 ECTS programme over three years, taught through case studies, presentations, internships, company visits and talks by industry experts. It ends with a thesis, which can be a research dissertation or a start-up business model. Specialisations: Dynamic Leadership for the Digital Era, Entrepreneurship, Investment & Financial Risk Management, Luxury Fashion Business, Luxury Management, and Marketing in the Digital Age.",
         keyDetails: [
-          { label: "Duration", value: "3 Years" },
+          { label: "MQF/EQF Level", value: "Level 6" },
+          { label: "Awarding Body", value: "Swiss School of Management, regulated under the Maltese higher education framework" },
+          { label: "MFHEA Licence", value: "2024-036" },
+          { label: "Duration & Mode", value: "3 Years Full-Time │ Blended: in person or online" },
+          { label: "ECTS / Learning Hours", value: "180 ECTS. Each module has 30 contact hours plus 60 hours of self-directed study" },
+          { label: "Specialisations (6)", value: "Dynamic Leadership for the Digital Era, Entrepreneurship, Investment & Financial Risk Management, Luxury Fashion Business, Luxury Management, Marketing in the Digital Age" },
           { label: "Tuition Fee", value: "Year 1: €8,000 | Year 2: €4,000 | Year 3: €4,000 (Pay Tuition ONLY after Visa Approval)" },
-          { label: "Application Fee", value: "€150" }
+          { label: "Delivery Location", value: "Flat 2, Angelica Court, Giuseppe Cali Street, Ta’ Xbiex, Malta" }
+        ],
+        entryRequirements: [
+          "Academic Route: Completed secondary education, for example a Swiss Matura, German Abitur, French Baccalaureate, English A-Levels, International Baccalaureate, US High School Diploma, IGCSE with GCE A-Level, or Maltese higher secondary certificate.",
+          "12 Years of Schooling: Applicants with 12 years of schooling who do not hold one of these must first complete a 30-credit freshman programme.",
+          "Recognition of Prior Learning: Available.",
+          "English Language: Exempt if secondary schooling was in English. Otherwise IELTS 6.0, TOEFL iBT 61, Pearson 44 or Duolingo 95."
+        ],
+        modules: [
+          "Year 1 – Diploma in Business Administration (60 ECTS): Leadership Fundamentals, English for Business Communication, Management Dynamics, Communication Skills, Accounting Principles, Principles of Marketing, Mathematical Tools for Business, Human Resource Management, Managerial Statistics, Intercultural Management, Business Information Systems, Principles of Financial Management, Business Economics, Business & Entrepreneurship Principles, Internship (100+ hours).",
+          "Year 2 – Higher Diploma in Business Administration (60 ECTS, 4 ECTS per module): Organizational Behaviour, Intermediate English for Business Communications, Corporate Financial Planning & Analysis, Consumer Behaviour, Digital Marketing, Management Accounting for Business Decisions, Total Quality Management, Business Intelligence, Business Analytics & Introduction to AI, Banking & Financial Technology (FinTech), Business Law, Global Trade & Economic Development, Sales Management, Innovation & Design Thinking, Internship.",
+          "Year 3 – Bachelor of Business Administration (60 ECTS): Cultural & Emotional Intelligence for Business Leaders, Advanced English for Business Communication, Research Proposal, Advanced Marketing, Business Coding & Programming, AI for Business Optimization, Venture Capital & Private Equity, Logistics & Supply Chain Management, Business Transformation in the Digital Economy, Internship (at least 100 hours), Thesis (8 ECTS), plus 3 Specialisation electives (4 ECTS each)."
+        ],
+        learningOutcomes: [
+          "How to analyse complex business situations with theories, models and data to make evidence-based decisions.",
+          "How to formulate sustainable, ethical and legally compliant business strategies.",
+          "How to lead teams: organising, delegating and monitoring tasks.",
+          "How to communicate and present business ideas clearly and persuasively.",
+          "How to use data analytics, AI and digital technologies to improve business performance."
+        ],
+        careers: [
+          { role: "Junior Banker / Financial Analyst", sector: "Finance and investment", startSalary: "€22,000 – €28,000 (approx. ₹19.8L – ₹25.2L INR)", midSalary: "€32,000 – €45,000 (approx. ₹28.8L – ₹40.5L INR)" },
+          { role: "Risk Analyst", sector: "Financial risk", startSalary: "€24,000 – €30,000 (approx. ₹21.6L – ₹27.0L INR)", midSalary: "€34,000 – €48,000 (approx. ₹30.6L – ₹43.2L INR)" },
+          { role: "Digital Marketer / Content Creator", sector: "Marketing and community", startSalary: "€19,000 – €24,000 (approx. ₹17.1L – ₹21.6L INR)", midSalary: "€27,000 – €36,000 (approx. ₹24.3L – ₹32.4L INR)" },
+          { role: "Recruiter / Talent Expert", sector: "People and hiring", startSalary: "€20,000 – €25,000 (approx. ₹18.0L – ₹22.5L INR)", midSalary: "€28,000 – €38,000 (approx. ₹25.2L – ₹34.2L INR)" },
+          { role: "Data Analyst", sector: "Business analytics", startSalary: "€22,000 – €28,000 (approx. ₹19.8L – ₹25.2L INR)", midSalary: "€32,000 – €45,000 (approx. ₹28.8L – ₹40.5L INR)" }
+        ],
+        benefits: [
+          "Six specialisations: From digital marketing to luxury management and financial risk.",
+          "Internships in every year: At least 100 hours each, in person or remote.",
+          "Exit Awards: Year 1 leads to the Diploma in Business Administration and Year 2 to the Higher Diploma in Business Administration.",
+          "Postgraduate Study: Supports progression to postgraduate programmes such as the SSM MBA."
         ]
       },
       {
-        title: "Level 6/7 Master of Business Administration (MBA) (18 Months)",
-        overview: "Globally ranked Swiss MBA designed for future executives and international business leaders.",
+        title: "Master of Business Administration (MBA) (MQF/EQF Level 7)",
+        overview: "The Master of Business Administration (MBA) is an 18-month, 90 ECTS programme in global leadership and management. It builds the knowledge, skills and strategic thinking needed to lead in changing local and global business environments, with a focus on cross-cultural leadership, business strategy, financial planning and sustainable business practice. The curriculum mixes theory with case studies, simulations and real-life projects, and ends with a final thesis of about 12,000 words. Students can also earn an exit award (Post Graduate Diploma in Leadership and Management) after 65 ECTS.",
         keyDetails: [
-          { label: "Duration", value: "18 Months" },
-          { label: "Tuition Fee", value: "Year 1: €8,000 | 6 Months: €4,000 (Pay Tuition ONLY after Visa Approval)" },
-          { label: "Application Fee", value: "€150" }
+          { label: "MQF/EQF Level", value: "Level 7" },
+          { label: "Awarding Body", value: "Swiss School of Management, regulated under the Maltese higher education framework" },
+          { label: "MFHEA Licence", value: "2024-036" },
+          { label: "Duration & Mode", value: "18 Months │ Blended: in person or online, weekday evenings" },
+          { label: "ECTS / Learning Hours", value: "90 ECTS. Each module has 30 contact hours plus 60 hours of self-directed study" },
+          { label: "Tuition Fee", value: "€12,000 in total (€4,000 enrolment + €3,000, €3,000, €2,000 instalments at 3, 6 & 9 months | Year 1: €8,000 | 6 Months: €4,000). Application fee €150. One-time admin fee CHF 3,000 (refundable if visa refused)." },
+          { label: "Delivery Location", value: "Flat 2, Angelica Court, Giuseppe Cali Street, Ta’ Xbiex, Malta" }
+        ],
+        entryRequirements: [
+          "Professional Route: Aimed at professionals with demonstrated experience in business.",
+          "Recognition of Prior Learning: Available.",
+          "English Language: Exempt if schooling or the bachelor’s degree was in English. Otherwise IELTS 6.5, TOEFL iBT 71, Pearson 50 or Duolingo 100."
+        ],
+        modules: [
+          "Globalization (4 ECTS): Globalisation and its effects on economies and societies.",
+          "Leadership 360 Degrees (5 ECTS): Leadership theories and a personal development plan.",
+          "Accounting & Financial Management (4 ECTS): Financial statements and capital budgeting.",
+          "International Law & Ethics (4 ECTS): Legal and ethical issues in international business.",
+          "Global Macroeconomics & International Finance (4 ECTS): Global economic systems and financial markets.",
+          "Management in the Digital Economy (4 ECTS): Digital business models and tools.",
+          "Negotiating Globally (4 ECTS): Negotiation in multicultural settings.",
+          "HRM & Organizational Behavior (4 ECTS): People management and team dynamics.",
+          "Competitive Strategy (4 ECTS): Strategy formulation and implementation.",
+          "Investment & Wealth Management (4 ECTS): Portfolio and investment principles.",
+          "Strategic Marketing & Social Media Planning (4 ECTS): Digital marketing strategy.",
+          "Managing and Leading in Different Countries (5 ECTS): Cross-cultural leadership.",
+          "Individual & Organizational Leadership Skills (5 ECTS): Emotional intelligence and teamwork.",
+          "Managing Business Ethics (5 ECTS): Ethics and corporate social responsibility.",
+          "Research Methodologies for Business (5 ECTS, online): Research design and proposal.",
+          "Final Thesis (25 ECTS, online): Business plan thesis of about 12,000 words."
+        ],
+        learningOutcomes: [
+          "How to evaluate local and global business environments and their effect on strategy.",
+          "How to assess cross-cultural leadership approaches and lead diverse teams.",
+          "How to design business strategies using advanced management frameworks.",
+          "How to make data-driven decisions that improve profitability and sustainability.",
+          "How to lead organisational change in local and global settings."
+        ],
+        careers: [
+          { role: "Department Manager", sector: "Team and operations leadership", startSalary: "€32,000 – €42,000 (approx. ₹28.8L – ₹37.8L INR)", midSalary: "€45,000 – €65,000 (approx. ₹40.5L – ₹58.5L INR)" },
+          { role: "Regional / Senior Manager", sector: "Multi-site management", startSalary: "€40,000 – €55,000 (approx. ₹36.0L – ₹49.5L INR)", midSalary: "€55,000 – €80,000 (approx. ₹49.5L – ₹72.0L INR)" },
+          { role: "Business Consultant", sector: "Strategy and advisory", startSalary: "€32,000 – €42,000 (approx. ₹28.8L – ₹37.8L INR)", midSalary: "€48,000 – €70,000 (approx. ₹43.2L – ₹63.0L INR)" },
+          { role: "Director / Executive Manager", sector: "Senior leadership", startSalary: "€55,000 – €75,000 (approx. ₹49.5L – ₹67.5L INR)", midSalary: "€75,000 – €110,000+ (approx. ₹67.5L – ₹99.0L+ INR)" }
+        ],
+        benefits: [
+          "Optional specialisation tracks: Leading Effective Teams, Strategic Planning and Executive Leadership, each with a professional certificate.",
+          "Exit award: A Post Graduate Diploma in Leadership and Management after 65 ECTS.",
+          "Blended delivery: Classes are live-streamed and recorded.",
+          "Doctoral Study: SSM also offers a Doctor of Business Administration."
         ]
       },
       {
-        title: "Level 7 Diploma in Leadership & Management (1 Year)",
-        overview: "Postgraduate diploma focusing on executive leadership, corporate governance, and strategic management.",
+        title: "Post Graduate Diploma in Leadership and Management (MQF/EQF Level 7)",
+        overview: "The Post Graduate Diploma in Leadership and Management gives professionals the knowledge, skills and strategic insight to lead in fast-changing local and global business settings. It focuses on critical-thinking leaders who can manage diverse teams, navigate complex markets and drive innovation across borders. It is a homegrown Level 7 qualification of 65 ECTS and is also the exit qualification of the SSM MBA. Students take an international assessment provided by Peregrine Global Services.",
         keyDetails: [
-          { label: "Duration", value: "1 Year" },
-          { label: "Tuition Fee", value: "€7,000 (Pay Tuition ONLY after Visa Approval)" },
-          { label: "Application Fee", value: "€150" }
+          { label: "MQF/EQF Level", value: "Level 7 (EQF Level 7)" },
+          { label: "Awarding Body", value: "Swiss School of Management (homegrown qualification)" },
+          { label: "MFHEA Licence", value: "2024-036" },
+          { label: "Duration & Mode", value: "1 Year Full-Time volume │ Blended" },
+          { label: "ECTS / Learning Hours", value: "65 ECTS. Each module has 30 contact hours plus 60 hours of self-directed study" },
+          { label: "Tuition Fee", value: "€7,000 (Non-EU International – Pay Tuition ONLY after Visa Approval)" },
+          { label: "Delivery Location", value: "Flat 2, Angelica Court, Giuseppe Cali Street, Ta’ Xbiex, Malta" }
+        ],
+        entryRequirements: [
+          "Work Experience: 2 years of work experience (internships count).",
+          "Academic Qualification: A bachelor’s degree or equivalent (180 ECTS).",
+          "Recognition of Prior Learning: Available.",
+          "English Language: Exempt if schooling or the bachelor’s degree was in English. Otherwise IELTS 6.5, TOEFL iBT 71, Pearson 50 or Duolingo 100."
+        ],
+        modules: [
+          "Semester 1 (October to March): Leadership 360 Degrees (5 ECTS), HRM & Organizational Behavior (4 ECTS), Research Methodologies for Business (5 ECTS), Negotiating Globally (4 ECTS), Global Macroeconomics & International Finance (4 ECTS), International Law & Ethics (4 ECTS).",
+          "Semester 2 (April to September): Globalization (4 ECTS), Accounting & Financial Management (4 ECTS), Management in the Digital Economy (4 ECTS), Strategic Marketing & Social Media Planning (4 ECTS), Competitive Strategy (4 ECTS), Investment & Wealth Management (4 ECTS).",
+          "Semester 3 (October to February – Global Management & Leadership Specialisation): Managing and Leading in Different Countries (5 ECTS), Individual & Organizational Leadership Skills (5 ECTS), Managing Business Ethics (5 ECTS)."
+        ],
+        learningOutcomes: [
+          "How to evaluate local and global business environments and their effect on strategy.",
+          "How to assess leadership approaches in cross-cultural settings.",
+          "How to design business strategies using advanced management frameworks.",
+          "How to lead diverse teams with cross-cultural leadership techniques.",
+          "How to lead organisational change and apply data-driven decisions."
+        ],
+        careers: [
+          { role: "Team Leader / Supervisor", sector: "Team performance", startSalary: "€22,000 – €28,000 (approx. ₹19.8L – ₹25.2L INR)", midSalary: "€30,000 – €38,000 (approx. ₹27.0L – ₹34.2L INR)" },
+          { role: "Department Manager", sector: "Operations leadership", startSalary: "€32,000 – €42,000 (approx. ₹28.8L – ₹37.8L INR)", midSalary: "€45,000 – €62,000 (approx. ₹40.5L – ₹55.8L INR)" },
+          { role: "Operations / Project Manager", sector: "Delivery and change", startSalary: "€32,000 – €42,000 (approx. ₹28.8L – ₹37.8L INR)", midSalary: "€42,000 – €58,000 (approx. ₹37.8L – ₹52.2L INR)" },
+          { role: "Business Consultant", sector: "Strategy and advisory", startSalary: "€30,000 – €40,000 (approx. ₹27.0L – ₹36.0L INR)", midSalary: "€45,000 – €65,000 (approx. ₹40.5L – ₹58.5L INR)" }
+        ],
+        benefits: [
+          "Postgraduate Level 7 qualification with 65 ECTS.",
+          "International assessment: Provided by Peregrine Global Services.",
+          "MBA Pathway: Exit qualification of the SSM MBA; credits can count toward the full MBA."
         ]
       }
     ]
@@ -2080,64 +2689,387 @@ export const institutionsData = [
   {
     id: "besc",
     name: "BESC Graduate College Malta",
-    location: "St Paul’s Bay, Malta",
-    accreditation: "Licensed by MFHEA (Malta Further & Higher Education Authority) | Awarding Body: Qualifi",
+    location: "BELS, 550 West, St Paul’s Street, St Paul’s Bay, Malta (HQ: Signature Portomaso, St Julian’s)",
+    accreditation: "Licensed by MFHEA (Licence No. 2023.011) | QUALIFI Approved Centre (Centre No. QCN8204)",
     established: "1991 (International University Centre Network)",
-    about: "BESC Graduate College Malta was established as the European academic extension of the International University Centre, which has been active in European higher education since 1991. With 35 years of academic experience, the institution focuses on innovative, practical, and student-centred education through smaller classes, practical workshops, and real-world learning, with a strong focus on applied neuroscience, health, behavioural sciences, cognition, and performance.",
+    seoCategory: "UK Ofqual-Regulated QUALIFI Diplomas in Malta | Applied Neuroscience, Health & Leadership",
+    flagshipCourses: "11 QUALIFI Diplomas (MQF/EQF Level 5, MQF/EQF Level 6 & MQF/EQF Level 7) in Business, Health & Social Care, Psychology, Hospitality, Logistics, Health & Wellness Coaching, and MSc Sport Neuroscience",
+    about: "BESC Graduate College Malta is an international graduate college focused on applied neuroscience, health, human performance and leadership. It is a Higher Education Institution accredited by the Malta Further and Higher Education Authority (MFHEA, Licence No. 2023.011) and a QUALIFI Approved Centre (Centre No. QCN8204), delivering UK Ofqual-regulated QUALIFI diplomas at Levels 5, 6 and 7 in Malta. Programmes run in a blended format, combining the Virtual Learning Environment with sessions at the Malta campus, and intakes follow a quarterly rolling cycle.",
     highlights: {
-      intake: "Every 2 Months",
-      eligibility: "Age 18+ | UG: 12th / Higher Secondary + Diploma (min 1-yr diploma preferable, qualification from 2020 or later) | PG: Bachelor's completed (from 2020 or later)",
+      intake: "Quarterly rolling (July, October, January and April trimesters – every 2 months)",
+      eligibility: "Age 18+ | UG: Level 3/4 or 12th + Diploma (qualification from 2020 or later) | PG: Bachelor's completed (from 2020 or later)",
       gap: "Qualification from 2020 or later",
-      ielts: "IELTS Optional - Minimum 5.0 (LOR & MOI helpful if arranged)",
+      ielts: "IELTS Optional – Minimum 5.0 (IELTS 6.0 for Level 6/7; LOR & MOI helpful)",
       interview: "Not Required",
-      applicationFee: "€150",
+      applicationFee: "€150 (First tuition instalment refunded if student visa is refused)",
       tuitionFeeSummary: "Diploma: €6,750 | Master: €8,000 (Pay Tuition AFTER Visa Approval)",
-      visa: "20 Hours/Week Part-time Work | 6, 9, 12 Months Post-Study Work Visa",
+      visa: "20 Hours/Week Part-time Work | 6, 9, 12 Months Post-Study Work Visa | 70% Get Qualified Scheme Tax Credit",
       processingSpeed: "Offer Letter within 2 Days",
       documentsRequired: "Passport, Educational Documents & Application Form"
     },
     courses: [
       {
-        title: "Level 5 Undergraduate Diplomas (1 Year)",
-        overview: "Practical 1-year undergraduate diplomas connecting academic knowledge with real-world applications.",
+        title: "QUALIFI Level 5 Diploma in Business Management (MQF/EQF Level 5)",
+        overview: "The QUALIFI Level 5 Diploma in Business Management builds strong managerial foundations across operations, leadership, strategy and organisational performance. It deals with complex organisational issues and opportunities, and its units are designed to lead into the final year of a UK honours degree. The qualification is UK-regulated (QAN 601/6049/4).",
         keyDetails: [
-          { label: "Duration", value: "1 Year" },
+          { label: "MQF/EQF Level", value: "Level 5 (RQF Level 5)" },
+          { label: "Awarding Body", value: "QUALIFI Ltd (UK), delivered by BESC Graduate College as an approved centre" },
+          { label: "Duration & Mode", value: "12 Months │ Blended" },
+          { label: "Credits / Hours", value: "120 credits (6 units of 20 credits), 1,200 total qualification time" },
           { label: "Tuition Fee", value: "€6,750 (Pay Tuition AFTER Visa Approval)" },
-          { label: "Application Fee", value: "€150" }
+          { label: "Delivery Location", value: "BELS, 550 West, St Paul’s Street, St Paul’s Bay, Malta" }
+        ],
+        entryRequirements: [
+          "Learners are normally expected to hold a Level 3 or Level 4 qualification, or have managerial work experience.",
+          "Qualification from 2020 or later preferred for international student routes."
         ],
         modules: [
-          "Level 5 Undergraduate Diploma in Business Management (1 year)",
-          "Level 5 Undergraduate Diploma in Health and Social Care (1 year)",
-          "Level 5 Undergraduate Diploma in Psychology (1 year)",
-          "Level 5 Undergraduate Diploma in Health and Wellness Coaching (1 year)",
-          "Level 5 Undergraduate Diploma in Hospitality & Tourism Management (1 year)"
+          "Responding to the Changing Business Environment (20 credits)",
+          "Effective Decision Making (20 credits)",
+          "Business Development (20 credits)",
+          "Business Models and Growing Organisations (20 credits)",
+          "Customer Management (20 credits)",
+          "Risk Management and Organisations (20 credits)"
+        ],
+        learningOutcomes: [
+          "How to respond to a changing business environment.",
+          "How to make effective, evidence-based decisions.",
+          "How to develop a business and understand growing business models.",
+          "How to manage customers and customer relationships.",
+          "How to identify and manage risk in organisations."
+        ],
+        careers: [
+          { role: "Operations Coordinator", sector: "Process and team support", startSalary: "€18,000 – €22,000 (approx. ₹16.2L – ₹19.8L INR)", midSalary: "€25,000 – €32,000 (approx. ₹22.5L – ₹28.8L INR)" },
+          { role: "Team Leader / Supervisor", sector: "People and performance", startSalary: "€20,000 – €25,000 (approx. ₹18.0L – ₹22.5L INR)", midSalary: "€27,000 – €35,000 (approx. ₹24.3L – ₹31.5L INR)" },
+          { role: "Business Development Executive", sector: "Growth and sales support", startSalary: "€20,000 – €26,000 (approx. ₹18.0L – ₹23.4L INR)", midSalary: "€28,000 – €38,000 (approx. ₹25.2L – ₹34.2L INR)" },
+          { role: "Customer Success Coordinator", sector: "Customer management", startSalary: "€18,000 – €23,000 (approx. ₹16.2L – ₹20.7L INR)", midSalary: "€25,000 – €33,000 (approx. ₹22.5L – ₹29.7L INR)" }
+        ],
+        benefits: [
+          "Degree pathway: QUALIFI states the diploma leads into the final year of a UK honours degree.",
+          "Direct employment: Learners can also move straight into a related profession.",
+          "Blended study: Online and on-campus learning."
         ]
       },
       {
-        title: "Level 6 Diploma in Business Management, Leadership and Innovation (1 Year)",
-        overview: "Bachelor-level qualification focusing on corporate leadership, business innovation, and strategic growth.",
+        title: "QUALIFI Level 5 Diploma in Health and Social Care (MQF/EQF Level 5)",
+        overview: "The QUALIFI Level 5 Diploma in Health and Social Care gives learners essential knowledge of care delivery, safeguarding, ethics and community health systems. It is designed to equip learners for a career or further study in the health and social care sector at a managerial level, and it leads into the final year of a UK honours degree (QAN 601/5442/1).",
         keyDetails: [
-          { label: "Duration", value: "1 Year" },
+          { label: "MQF/EQF Level", value: "Level 5 (RQF Level 5)" },
+          { label: "Awarding Body", value: "QUALIFI Ltd (UK), delivered by BESC Graduate College as an approved centre" },
+          { label: "Duration & Mode", value: "12 Months │ Blended" },
+          { label: "Credits / Hours", value: "120 credits, 1,200 total qualification time" },
           { label: "Tuition Fee", value: "€6,750 (Pay Tuition AFTER Visa Approval)" },
-          { label: "Application Fee", value: "€150" }
+          { label: "Delivery Location", value: "BELS, 550 West, St Paul’s Street, St Paul’s Bay, Malta" }
+        ],
+        modules: [
+          "Principles Underpinning Health and Social Care",
+          "The Management of Quality in Health and Social Care",
+          "Partnership Working in Health and Social Care",
+          "Working with Service Users with Complex Needs",
+          "Research Project"
+        ],
+        learningOutcomes: [
+          "The principles that underpin health and social care practice.",
+          "How to manage quality in care services.",
+          "How to work in partnership with other professionals and organisations.",
+          "How to support service users with complex needs.",
+          "How to carry out a research project in a care setting."
+        ],
+        careers: [
+          { role: "Care Services Team Leader", sector: "Team and service management", startSalary: "€18,000 – €23,000 (approx. ₹16.2L – ₹20.7L INR)", midSalary: "€25,000 – €32,000 (approx. ₹22.5L – ₹28.8L INR)" },
+          { role: "Social Care Worker", sector: "Direct care and support", startSalary: "€16,000 – €20,000 (approx. ₹14.4L – ₹18.0L INR)", midSalary: "€21,000 – €27,000 (approx. ₹18.9L – ₹24.3L INR)" },
+          { role: "Care Quality Coordinator", sector: "Standards and quality", startSalary: "€19,000 – €24,000 (approx. ₹17.1L – ₹21.6L INR)", midSalary: "€26,000 – €34,000 (approx. ₹23.4L – ₹30.6L INR)" },
+          { role: "Community Care Coordinator", sector: "Community services", startSalary: "€18,000 – €23,000 (approx. ₹16.2L – ₹20.7L INR)", midSalary: "€25,000 – €32,000 (approx. ₹22.5L – ₹28.8L INR)" }
+        ],
+        benefits: [
+          "Managerial-level focus: Aimed at the health and social care sector.",
+          "Degree pathway: Leads into the final year of a UK honours degree.",
+          "Research skills: Includes a research project."
         ]
       },
       {
-        title: "Level 7 Postgraduate Diplomas (1 Year)",
-        overview: "Advanced postgraduate qualifications specializing in applied neuroscience, psychology, healthcare, and strategic crisis management.",
+        title: "QUALIFI Level 5 Extended Diploma in Psychology (MQF/EQF Level 5)",
+        overview: "The QUALIFI Level 5 Extended Diploma in Psychology explores core psychological theories, research methods and applied practice across human behaviour. The Extended Diploma combines the Level 4 and Level 5 Diplomas, and learners who complete only the Level 4 part receive the Level 4 Diploma in Psychology (QAN 610/3465/4).",
         keyDetails: [
-          { label: "Duration", value: "1 Year" },
+          { label: "MQF/EQF Level", value: "Level 5 (RQF Level 5)" },
+          { label: "Awarding Body", value: "QUALIFI Ltd (UK), delivered by BESC Graduate College as an approved centre" },
+          { label: "Duration & Mode", value: "12 Months │ Blended" },
+          { label: "Credits", value: "240 credits (Level 4 and Level 5 combined)" },
           { label: "Tuition Fee", value: "€6,750 (Pay Tuition AFTER Visa Approval)" },
-          { label: "Application Fee", value: "€150" }
+          { label: "Delivery Location", value: "BELS, 550 West, St Paul’s Street, St Paul’s Bay, Malta" }
         ],
         modules: [
-          "Level 7 Postgraduate Diploma in Health and Social Care (1 year)",
-          "Level 7 Postgraduate Diploma in Psychology (1 year)",
-          "Level 7 Postgraduate Diploma in Strategic Management & Leadership (1 year)",
-          "Level 7 Postgraduate Diploma in Human Performance Neuroscience (1 year)",
-          "Level 7 Postgraduate Diploma in Logistics & Supply Chain Crisis Management (1 year)",
-          "Level 7 Postgraduate Diploma in Hospitality & Tourism Management (1 year)",
-          "Level 7 Postgraduate Diploma in Behavioural Neuroscience for Business (1 year)"
+          "The Scope of Psychology",
+          "Social and Developmental Psychology",
+          "Research Methods and Applied Psychological Practice (Level 4 & Level 5 Units)"
+        ],
+        learningOutcomes: [
+          "The scope and main approaches of psychology.",
+          "Social and developmental psychology.",
+          "Research methods used to investigate human behaviour."
+        ],
+        careers: [
+          { role: "Psychology / Support Assistant", sector: "Behavioural support", startSalary: "€17,000 – €22,000 (approx. ₹15.3L – ₹19.8L INR)", midSalary: "€23,000 – €30,000 (approx. ₹20.7L – ₹27.0L INR)" },
+          { role: "Research Assistant", sector: "Data collection and analysis", startSalary: "€18,000 – €23,000 (approx. ₹16.2L – ₹20.7L INR)", midSalary: "€25,000 – €33,000 (approx. ₹22.5L – ₹29.7L INR)" },
+          { role: "HR / Recruitment Assistant", sector: "People and hiring", startSalary: "€18,000 – €23,000 (approx. ₹16.2L – ₹20.7L INR)", midSalary: "€25,000 – €32,000 (approx. ₹22.5L – ₹28.8L INR)" },
+          { role: "Community Support Worker", sector: "Wellbeing support", startSalary: "€16,000 – €21,000 (approx. ₹14.4L – ₹18.9L INR)", midSalary: "€22,000 – €28,000 (approx. ₹19.8L – ₹25.2L INR)" }
+        ],
+        benefits: [
+          "Progression routes: QUALIFI Level 6 Diploma, a university first degree, or employment in a related profession.",
+          "Exit point: A Level 4 Diploma in Psychology is awarded after 120 Level 4 credits."
+        ]
+      },
+      {
+        title: "QUALIFI Level 5 Diploma in Hospitality and Tourism Management (MQF/EQF Level 5)",
+        overview: "The QUALIFI Level 5 Diploma in Hospitality and Tourism Management teaches the fundamentals of hospitality operations, tourism strategy and service excellence. It deals with complex organisational issues, and its units are designed to dovetail into the final year of an undergraduate degree (QAN 603/4404/0).",
+        keyDetails: [
+          { label: "MQF/EQF Level", value: "Level 5 (RQF Level 5)" },
+          { label: "Awarding Body", value: "QUALIFI Ltd (UK), delivered by BESC Graduate College as an approved centre" },
+          { label: "Duration & Mode", value: "12 Months │ Blended" },
+          { label: "Credits / Hours", value: "120 credits, 1,200 total qualification time" },
+          { label: "Tuition Fee", value: "€6,750 (Pay Tuition AFTER Visa Approval)" },
+          { label: "Delivery Location", value: "BELS, 550 West, St Paul’s Street, St Paul’s Bay, Malta" }
+        ],
+        entryRequirements: [
+          "Qualifications at Level 3 or 4, or managerial work experience, or a first degree in another discipline."
+        ],
+        modules: [
+          "Tourism Destination Management (30 credits)",
+          "Entrepreneurship in Tourism and Hospitality Management (30 credits)",
+          "Cultural Tourism Management (30 credits)",
+          "Hospitality Operations & Service Excellence (30 credits)"
+        ],
+        learningOutcomes: [
+          "How to manage tourism destinations.",
+          "How to apply entrepreneurship in tourism and hospitality businesses.",
+          "How culture shapes tourism and how to manage cultural tourism.",
+          "How to develop a business start-up plan for a niche travel and tourism market."
+        ],
+        careers: [
+          { role: "Hospitality Supervisor", sector: "Day-to-day operations", startSalary: "€18,000 – €23,000 (approx. ₹16.2L – ₹20.7L INR)", midSalary: "€26,000 – €34,000 (approx. ₹23.4L – ₹30.6L INR)" },
+          { role: "Guest Relations Executive", sector: "Customer service", startSalary: "€17,000 – €21,000 (approx. ₹15.3L – ₹18.9L INR)", midSalary: "€23,000 – €29,000 (approx. ₹20.7L – ₹26.1L INR)" },
+          { role: "Tourism Destination Officer", sector: "Destination planning", startSalary: "€19,000 – €24,000 (approx. ₹17.1L – ₹21.6L INR)", midSalary: "€26,000 – €34,000 (approx. ₹23.4L – ₹30.6L INR)" },
+          { role: "Events Coordinator", sector: "Planning and delivery", startSalary: "€18,000 – €23,000 (approx. ₹16.2L – ₹20.7L INR)", midSalary: "€25,000 – €33,000 (approx. ₹22.5L – ₹29.7L INR)" }
+        ],
+        benefits: [
+          "Degree pathway: Dovetails into the final year of an undergraduate degree.",
+          "Enterprise focus: Includes a unit on tourism and hospitality entrepreneurship."
+        ]
+      },
+      {
+        title: "QUALIFI Level 6 Diploma in Business Management, Leadership and Innovation (MQF/EQF Level 6)",
+        overview: "The QUALIFI Level 6 Diploma in Business Management, Leadership and Innovation strengthens strategic leadership capabilities and drives innovation in modern organisations. It gives learners a firm grounding in business management and leadership, with a basis for further academic study, and it focuses on how the functional areas of an organisation link to its overall strategy (QAN 603/7473/1).",
+        keyDetails: [
+          { label: "MQF/EQF Level", value: "Level 6 (RQF Level 6)" },
+          { label: "Awarding Body", value: "QUALIFI Ltd (UK), delivered by BESC Graduate College as an approved centre" },
+          { label: "Duration & Mode", value: "12 Months │ Blended" },
+          { label: "Credits / Hours", value: "120 credits (6 units of 20 credits), 1,200 total qualification time, 600 guided learning hours" },
+          { label: "Tuition Fee", value: "€6,750 (Pay Tuition AFTER Visa Approval)" },
+          { label: "Delivery Location", value: "BELS, 550 West, St Paul’s Street, St Paul’s Bay, Malta" }
+        ],
+        entryRequirements: [
+          "A Level 5 qualification. Experienced managers without formal qualifications may be considered through interview. Two supporting references are normally required.",
+          "English Language: IELTS 6 (or equivalent) for applicants whose first language is not English (QUALIFI specification)."
+        ],
+        modules: [
+          "Leadership in a Changing World (20 credits): Leadership in turbulent times and your own leadership style.",
+          "Introduction to Contemporary Business Strategy: Sustainable Business Growth (20 credits): Sustainability, CSR and responsible growth.",
+          "Finance for Strategic Decision-makers (20 credits): Financial information, markets and spreadsheets.",
+          "Leadership in Multicultural Contexts (20 credits): Culture, institutions and leadership.",
+          "Creating Futures: Sustainable Enterprise and Innovation (20 credits): Innovation and entrepreneurship in society.",
+          "Sustainable Risk Management (20 credits): Quantitative and qualitative risk techniques."
+        ],
+        learningOutcomes: [
+          "Problem-solving and critical-thinking techniques in business situations.",
+          "How organisations and their management systems work, including at international level.",
+          "How to manage budgets and perform financial analysis for decisions.",
+          "Managerial and leadership skills for managing team performance.",
+          "How to apply research methods to support effective decisions."
+        ],
+        careers: [
+          { role: "Department / Team Manager", sector: "Team leadership", startSalary: "€26,000 – €34,000 (approx. ₹23.4L – ₹30.6L INR)", midSalary: "€35,000 – €48,000 (approx. ₹31.5L – ₹43.2L INR)" },
+          { role: "Business Analyst", sector: "Strategy and finance", startSalary: "€24,000 – €30,000 (approx. ₹21.6L – ₹27.0L INR)", midSalary: "€32,000 – €45,000 (approx. ₹28.8L – ₹40.5L INR)" },
+          { role: "Innovation / Project Coordinator", sector: "Change and delivery", startSalary: "€22,000 – €28,000 (approx. ₹19.8L – ₹25.2L INR)", midSalary: "€30,000 – €40,000 (approx. ₹27.0L – ₹36.0L INR)" },
+          { role: "Business Development Manager", sector: "Growth and strategy", startSalary: "€28,000 – €36,000 (approx. ₹25.2L – ₹32.4L INR)", midSalary: "€38,000 – €55,000 (approx. ₹34.2L – ₹49.5L INR)" }
+        ],
+        benefits: [
+          "Progression routes: QUALIFI Level 7 Diplomas, or directly into a related profession.",
+          "Work-related assessment: Realistic, work-based tasks and case studies."
+        ]
+      },
+      {
+        title: "QUALIFI Level 7 Diploma in Strategic Management and Leadership (MQF/EQF Level 7)",
+        overview: "The QUALIFI Level 7 Diploma in Strategic Management and Leadership helps learners master strategic decision-making, organisational leadership and high-level management frameworks. It is a Master’s-equivalent diploma that develops and rewards the business managers of today and the future, and it leads to a dissertation stage at a UK university to complete a Master’s degree (QAN 601/5335/0).",
+        keyDetails: [
+          { label: "MQF/EQF Level", value: "Level 7 (RQF Level 7)" },
+          { label: "Awarding Body", value: "QUALIFI Ltd (UK), delivered by BESC Graduate College as an approved centre" },
+          { label: "Duration & Mode", value: "12 Months │ Blended" },
+          { label: "Credits / Hours", value: "120 credits, 1,200 total qualification time" },
+          { label: "Tuition Fee", value: "€6,750 (Pay Tuition AFTER Visa Approval)" },
+          { label: "Delivery Location", value: "BELS, 550 West, St Paul’s Street, St Paul’s Bay, Malta" }
+        ],
+        modules: [
+          "Manage Team Performance to Support Strategy",
+          "Information Management and Strategic Decision Taking",
+          "Leading a Strategic Management Project",
+          "Strategic Direction",
+          "Strategic Planning"
+        ],
+        learningOutcomes: [
+          "How to critically evaluate and synthesise current management tools, techniques and models.",
+          "How to set strategic direction and plan strategically.",
+          "How to manage information for strategic decisions.",
+          "How to lead strategic projects and team performance.",
+          "How to become an independent, self-directed learner who keeps developing through their career."
+        ],
+        careers: [
+          { role: "Operations Manager", sector: "Turning strategy into operations", startSalary: "€30,000 – €38,000 (approx. ₹27.0L – ₹34.2L INR)", midSalary: "€40,000 – €60,000 (approx. ₹36.0L – ₹54.0L INR)" },
+          { role: "Strategy Analyst", sector: "Strategic analysis", startSalary: "€26,000 – €32,000 (approx. ₹23.4L – ₹28.8L INR)", midSalary: "€34,000 – €48,000 (approx. ₹30.6L – ₹43.2L INR)" },
+          { role: "Project / Programme Manager", sector: "Change and delivery", startSalary: "€30,000 – €38,000 (approx. ₹27.0L – ₹34.2L INR)", midSalary: "€40,000 – €58,000 (approx. ₹36.0L – ₹52.2L INR)" },
+          { role: "Management Consultant", sector: "Advisory and improvement", startSalary: "€28,000 – €36,000 (approx. ₹25.2L – ₹32.4L INR)", midSalary: "€40,000 – €60,000 (approx. ₹36.0L – ₹54.0L INR)" }
+        ],
+        benefits: [
+          "Master’s pathway: Completion leads to a dissertation at a UK university for a Master’s degree.",
+          "Further study: QUALIFI also offers a Level 8 Diploma in Strategic Management and Leadership."
+        ]
+      },
+      {
+        title: "QUALIFI Level 7 Diploma in Health and Social Care (MQF/EQF Level 7)",
+        overview: "The QUALIFI Level 7 Diploma in Health and Social Care prepares learners to lead complex health and social care systems through evidence-based policy, governance and service design. It gives learners an understanding of management in the sector, and it includes specialised units on researching and implementing improvement for an employer and within the sector (QAN 610/1483/7).",
+        keyDetails: [
+          { label: "MQF/EQF Level", value: "Level 7 (RQF Level 7)" },
+          { label: "Awarding Body", value: "QUALIFI Ltd (UK), delivered by BESC Graduate College as an approved centre" },
+          { label: "Duration & Mode", value: "12 Months │ Blended" },
+          { label: "Credits / Hours", value: "120 credits, 1,200 total qualification time" },
+          { label: "Tuition Fee", value: "€6,750 (Pay Tuition AFTER Visa Approval)" },
+          { label: "Delivery Location", value: "BELS, 550 West, St Paul’s Street, St Paul’s Bay, Malta" }
+        ],
+        modules: [
+          "Leading Change in Health and Social Care",
+          "Health and Social Care Leadership & Governance",
+          "Researching and Implementing Service Improvement"
+        ],
+        learningOutcomes: [
+          "Theories of leadership used in health and social care settings.",
+          "How to research and implement improvement for an employer and within the sector.",
+          "How to lead change in health and social care."
+        ],
+        careers: [
+          { role: "Care Service Manager", sector: "Service leadership", startSalary: "€26,000 – €34,000 (approx. ₹23.4L – ₹30.6L INR)", midSalary: "€36,000 – €50,000 (approx. ₹32.4L – ₹45.0L INR)" },
+          { role: "Health and Social Care Policy Officer", sector: "Policy and governance", startSalary: "€26,000 – €33,000 (approx. ₹23.4L – ₹29.7L INR)", midSalary: "€34,000 – €46,000 (approx. ₹30.6L – ₹41.4L INR)" },
+          { role: "Quality and Improvement Lead", sector: "Service improvement", startSalary: "€26,000 – €33,000 (approx. ₹23.4L – ₹29.7L INR)", midSalary: "€34,000 – €46,000 (approx. ₹30.6L – ₹41.4L INR)" },
+          { role: "Senior Care Coordinator", sector: "Team and service delivery", startSalary: "€22,000 – €28,000 (approx. ₹19.8L – ₹25.2L INR)", midSalary: "€29,000 – €38,000 (approx. ₹26.1L – ₹34.2L INR)" }
+        ],
+        benefits: [
+          "Progression routes: QUALIFI Level 8 in Strategic Management and Leadership, a Master’s degree at a university partner, or employment in a related profession."
+        ]
+      },
+      {
+        title: "QUALIFI Level 7 Diploma in Psychology (MQF/EQF Level 7)",
+        overview: "The QUALIFI Level 7 Diploma in Psychology develops advanced psychological expertise across assessment, therapeutic models and applied mental health practice. It is a Master’s-equivalent diploma (QAN 610/2064/3).",
+        keyDetails: [
+          { label: "MQF/EQF Level", value: "Level 7 (RQF Level 7)" },
+          { label: "Awarding Body", value: "QUALIFI Ltd (UK), delivered by BESC Graduate College as an approved centre" },
+          { label: "Duration & Mode", value: "12 Months │ Blended" },
+          { label: "Credits / Hours", value: "120 credits, 1,200 total qualification time" },
+          { label: "Tuition Fee", value: "€6,750 (Pay Tuition AFTER Visa Approval)" },
+          { label: "Delivery Location", value: "BELS, 550 West, St Paul’s Street, St Paul’s Bay, Malta" }
+        ],
+        learningOutcomes: [
+          "Advanced psychological assessment.",
+          "Therapeutic models used in practice.",
+          "Applied mental health practice."
+        ],
+        careers: [
+          { role: "Psychology Support Specialist", sector: "Assessment support", startSalary: "€20,000 – €26,000 (approx. ₹18.0L – ₹23.4L INR)", midSalary: "€27,000 – €36,000 (approx. ₹24.3L – ₹32.4L INR)" },
+          { role: "Wellbeing Programme Coordinator", sector: "Mental health programmes", startSalary: "€20,000 – €26,000 (approx. ₹18.0L – ₹23.4L INR)", midSalary: "€27,000 – €36,000 (approx. ₹24.3L – ₹32.4L INR)" },
+          { role: "Research Associate", sector: "Applied research", startSalary: "€22,000 – €28,000 (approx. ₹19.8L – ₹25.2L INR)", midSalary: "€30,000 – €40,000 (approx. ₹27.0L – ₹36.0L INR)" },
+          { role: "HR Wellbeing Advisor", sector: "Workplace wellbeing", startSalary: "€24,000 – €30,000 (approx. ₹21.6L – ₹27.0L INR)", midSalary: "€32,000 – €44,000 (approx. ₹28.8L – ₹39.6L INR)" }
+        ],
+        note: "Clinical psychology practice normally needs separate professional registration.",
+        benefits: [
+          "Master’s-equivalent level at RQF Level 7.",
+          "Applied focus: Assessment, therapeutic models and mental health practice."
+        ]
+      },
+      {
+        title: "QUALIFI Level 7 Diploma in Hospitality and Tourism Management (MQF/EQF Level 7)",
+        overview: "The QUALIFI Level 7 Diploma in Hospitality and Tourism Management advances learners’ expertise in global hospitality strategy, tourism development and high-level service management. It is a Master’s-equivalent diploma (QAN 603/2655/4).",
+        keyDetails: [
+          { label: "MQF/EQF Level", value: "Level 7 (RQF Level 7)" },
+          { label: "Awarding Body", value: "QUALIFI Ltd (UK), delivered by BESC Graduate College as an approved centre" },
+          { label: "Duration & Mode", value: "12 Months │ Blended" },
+          { label: "Credits / Hours", value: "120 credits, 1,200 total qualification time" },
+          { label: "Tuition Fee", value: "€6,750 (Pay Tuition AFTER Visa Approval)" },
+          { label: "Delivery Location", value: "BELS, 550 West, St Paul’s Street, St Paul’s Bay, Malta" }
+        ],
+        learningOutcomes: [
+          "Global hospitality strategy.",
+          "Tourism development.",
+          "High-level service management."
+        ],
+        careers: [
+          { role: "Hotel / Resort Manager", sector: "Operations leadership", startSalary: "€30,000 – €40,000 (approx. ₹27.0L – ₹36.0L INR)", midSalary: "€42,000 – €60,000 (approx. ₹37.8L – ₹54.0L INR)" },
+          { role: "Tourism Development Officer", sector: "Planning and policy", startSalary: "€24,000 – €30,000 (approx. ₹21.6L – ₹27.0L INR)", midSalary: "€32,000 – €45,000 (approx. ₹28.8L – ₹40.5L INR)" },
+          { role: "Guest Experience Manager", sector: "Service quality", startSalary: "€26,000 – €33,000 (approx. ₹23.4L – ₹29.7L INR)", midSalary: "€34,000 – €46,000 (approx. ₹30.6L – ₹41.4L INR)" },
+          { role: "Revenue Manager", sector: "Pricing and sales", startSalary: "€28,000 – €36,000 (approx. ₹25.2L – ₹32.4L INR)", midSalary: "€38,000 – €52,000 (approx. ₹34.2L – ₹46.8L INR)" }
+        ],
+        benefits: [
+          "Master’s-equivalent level at RQF Level 7.",
+          "Strategy focus: Global hospitality and tourism development."
+        ]
+      },
+      {
+        title: "QUALIFI Level 7 Diploma in Logistics and Supply Chain Crisis Management (MQF/EQF Level 7)",
+        overview: "The QUALIFI Level 7 Diploma in Logistics and Supply Chain Crisis Management is a qualification for aspiring strategic leaders in the logistics and supply chain sector. It teaches learners to manage complex supply chain disruptions through strategic planning, risk mitigation and crisis leadership (QAN 603/6067/7).",
+        keyDetails: [
+          { label: "MQF/EQF Level", value: "Level 7 (RQF Level 7)" },
+          { label: "Awarding Body", value: "QUALIFI Ltd (UK), delivered by BESC Graduate College as an approved centre" },
+          { label: "Duration & Mode", value: "12 Months │ Blended" },
+          { label: "Credits / Hours", value: "120 credits, 1,200 total qualification time" },
+          { label: "Tuition Fee", value: "€6,750 (Pay Tuition AFTER Visa Approval)" },
+          { label: "Delivery Location", value: "BELS, 550 West, St Paul’s Street, St Paul’s Bay, Malta" }
+        ],
+        learningOutcomes: [
+          "How to manage supply chain disruptions with strategic planning.",
+          "Risk mitigation in logistics and supply chains.",
+          "Crisis leadership for supply chain operations."
+        ],
+        careers: [
+          { role: "Supply Chain Manager", sector: "Planning and operations", startSalary: "€32,000 – €42,000 (approx. ₹28.8L – ₹37.8L INR)", midSalary: "€45,000 – €65,000 (approx. ₹40.5L – ₹58.5L INR)" },
+          { role: "Logistics Manager", sector: "Transport and distribution", startSalary: "€28,000 – €36,000 (approx. ₹25.2L – ₹32.4L INR)", midSalary: "€38,000 – €52,000 (approx. ₹34.2L – ₹46.8L INR)" },
+          { role: "Procurement Manager", sector: "Sourcing and suppliers", startSalary: "€28,000 – €36,000 (approx. ₹25.2L – ₹32.4L INR)", midSalary: "€38,000 – €52,000 (approx. ₹34.2L – ₹46.8L INR)" },
+          { role: "Supply Chain Risk Analyst", sector: "Disruption and risk", startSalary: "€26,000 – €32,000 (approx. ₹23.4L – ₹28.8L INR)", midSalary: "€34,000 – €46,000 (approx. ₹30.6L – ₹41.4L INR)" }
+        ],
+        benefits: [
+          "Progression routes: A QUALIFI Level 7 or 8 Diploma, employment in a related profession, or a dissertation for a Master’s degree at a partner university."
+        ]
+      },
+      {
+        title: "QUALIFI Level 7 Diploma in Health and Wellness Coaching (MQF/EQF Level 7)",
+        overview: "The QUALIFI Level 7 Diploma in Health and Wellness Coaching develops advanced coaching skills grounded in behavioural science, health psychology and evidence-based wellness frameworks. It is a Master’s-equivalent diploma (QAN 603/2953/1).",
+        keyDetails: [
+          { label: "MQF/EQF Level", value: "Level 7 (RQF Level 7)" },
+          { label: "Awarding Body", value: "QUALIFI Ltd (UK), delivered by BESC Graduate College as an approved centre" },
+          { label: "Duration & Mode", value: "12 Months │ Blended" },
+          { label: "Credits / Hours", value: "120 credits, 1,200 total qualification time" },
+          { label: "Tuition Fee", value: "€6,750 (Pay Tuition AFTER Visa Approval)" },
+          { label: "Delivery Location", value: "BELS, 550 West, St Paul’s Street, St Paul’s Bay, Malta" }
+        ],
+        learningOutcomes: [
+          "Advanced coaching skills for health and wellness.",
+          "How behavioural science and health psychology inform coaching.",
+          "How to use evidence-based wellness frameworks."
+        ],
+        careers: [
+          { role: "Health and Wellness Coach", sector: "One-to-one coaching", startSalary: "€18,000 – €24,000 (approx. ₹16.2L – ₹21.6L INR)", midSalary: "€26,000 – €36,000 (approx. ₹23.4L – ₹32.4L INR)" },
+          { role: "Corporate Wellbeing Consultant", sector: "Workplace wellbeing", startSalary: "€24,000 – €30,000 (approx. ₹21.6L – ₹27.0L INR)", midSalary: "€32,000 – €44,000 (approx. ₹28.8L – ₹39.6L INR)" },
+          { role: "Lifestyle Programme Coordinator", sector: "Programme delivery", startSalary: "€19,000 – €24,000 (approx. ₹17.1L – ₹21.6L INR)", midSalary: "€26,000 – €34,000 (approx. ₹23.4L – ₹30.6L INR)" },
+          { role: "Independent Coach / Consultant", sector: "Self-employed practice", startSalary: "Variable – depends on clients and practice", midSalary: "Variable – depends on clients and practice" }
+        ],
+        benefits: [
+          "Master’s-equivalent level at RQF Level 7.",
+          "Evidence-based approach: Grounded in behavioural science and health psychology."
         ]
       },
       {
@@ -2158,76 +3090,467 @@ export const institutionsData = [
   {
     id: "gcm",
     name: "Global College Malta",
-    location: "SmartCity Malta, SCM 01, Ricasoli, Malta",
-    accreditation: "European Accredited Higher Educational Institution | Awarding body: MQF/EQF",
-    established: "Over a decade in Malta",
-    about: "Global College Malta is one of the Mediterranean region’s most prestigious and forward-thinking private higher education institutions. Renowned for offering exceptional undergraduate, postgraduate, and doctoral courses, GCM provides holistic, world-class education and cross-discipline curricula with strong linkages to local and international industry.",
+    location: "Global College Malta, SmartCity Malta, SCM01, Ricasoli, Malta",
+    accreditation: "MFHEA Licensed Further & Higher Education Institution (Licence No. 2012-TC-005) | Awarding body: MQF/EQF",
+    established: "2012",
+    seoCategory: "MQF/EQF Level 6 & Level 7 Degrees at SmartCity Malta | BA, MBA, MSc & DBA",
+    flagshipCourses: "Bachelor of Arts in Management (MQF/EQF Level 6), Bachelor of Arts in Marketing (MQF/EQF Level 6), Bachelor of Arts in Management with Human Resources (MQF/EQF Level 6), Bachelor of Arts in Accounting and Finance (MQF/EQF Level 6), Bachelor of Arts in Tourism and Events Management (MQF/EQF Level 6), Undergraduate Diploma in Management (MQF/EQF Level 5), Master of Business Administration (MBA) (MQF/EQF Level 7), Master of Science in Management (MQF/EQF Level 7), Master of Science in Management with Human Resources (MQF/EQF Level 7), Master of Science in Tourism and Events Management (MQF/EQF Level 7), and DBA",
+    about: "Global College Malta is a private higher education institution at SmartCity Malta, Ricasoli, licensed by the Malta Further and Higher Education Authority (MFHEA, Licence No. 2012-TC-005). Its programmes are accredited by the MFHEA and mapped to the MQF/EQF, running face-to-face, full-time or part-time, in English across four schools: Business, Economics & Finance, Health & Social Care, and Logistics, Operations & Informatics.",
     highlights: {
-      intake: "Every 2 Months",
-      eligibility: "UG: Min 50% in A/As/12th Grade | Foundation Medical Science: O/11th Grade/IB with Physics, Chemistry, Biology | PG: Min 50% in Bachelor's | DBA: Master's + Min 5 Years Senior Managerial Work Experience",
+      intake: "4 Jan, 5 Apr, 5 Jul, 27 Sep and 6 Dec 2027",
+      eligibility: "Age 19+ (UG) | Age 21+ (PG) | UG: Maltese Matriculation / 3 A-Levels (Grade 5 English) or 50% in 12th | PG: Recognised Bachelor's | DBA: Master's + Min 5 Years Senior Managerial Work Experience",
       gap: "Maximum 5 Years Study Gap",
-      ielts: "Minimum 5.5 IELTS or Medium of Instruction (MOI) Letter",
+      ielts: "Minimum 5.5 IELTS or Medium of Instruction (MOI) Letter (Exempt if English secondary/degree)",
       interview: "College Interview Required",
-      applicationFee: "VFS Appointment Fee: €150 (Non-Refundable) | Application Fee: €100 | Registration Fee: €250 | Visa Supporting Documents Fee: €200",
-      tuitionFeeSummary: "UG Diploma: €7,000 | Foundation Diploma: €14,000 | Foundation Award: €5,500 | Specialised Diploma: €6,500 | Bachelor's: €6,100/yr | BA Tourism: €7,500/yr | Bachelor Top-Up: €6,500 | PG Diploma: €8,000 | Master's: €10,000 | MBA: €9,000 | MBA Logistics: €10,000 | DBA: Yr 1 €9,500, Yr 2 €9,500, Yr 3 €8,000, Yrs 4–7 €3,000/yr",
+      applicationFee: "Application €100, Registration €250, Visa Support Document €200 (plus €150 VFS Appointment Fee)",
+      tuitionFeeSummary: "UG Diploma: €7,000 | Bachelor's: €6,100/yr | BA Tourism: €7,500/yr | Bachelor Top-Up: €6,500 | PG Diploma: €8,000 | Master's: €10,000 | MBA: €9,000 | MBA Logistics: €10,000 | DBA: Yr 1 €9,500, Yr 2 €9,500, Yr 3 €8,000, Yrs 4–7 €3,000/yr",
       visa: "20 Hours/Week Part-time Work | 6, 9, 12 Months Post-Study Work Visa | 70% tuition fee refund as tax rebate under Get Qualified Scheme",
-      lectureSchedule: "Generally 2–3 days a week | Financial Crime Diploma: 2 days/week evening | DBA: 2 days on weekends",
+      lectureSchedule: "Face-to-face, full-time or part-time (2–3 days/week)",
       documentsRequired: "Updated CV, academic transcripts, Police Conduct Certificate, passport/ID, English Language qualification (IELTS 5.5 or MOI), Personal Statement, 1 reference letter, 1 passport photo"
     },
     courses: [
       {
-        title: "Foundation & Undergraduate Diplomas (10–12 Months)",
-        overview: "Foundational and specialized diplomas designed to prepare students for undergraduate degrees or specialized compliance careers.",
-        feeStructure: [
-          { category: "Undergraduate Diploma in Management (12 Months)", amount: "€7,000", notes: "2–3 days/week" },
-          { category: "Undergraduate Diploma in Foundation Medical Science (12 Months)", amount: "€14,000", notes: "Requires Physics, Chemistry, Biology in 11th/O-Level" },
-          { category: "Award in Foundation in Business and Management (10 Months)", amount: "€5,500", notes: "O/11th Grade/IB Diploma eligible" },
-          { category: "Diploma in Financial Crime Compliance, AML & CFT (12 Months)", amount: "€6,500", notes: "2 days a week in the evening" }
+        title: "Bachelor of Arts in Management (MQF/EQF Level 6)",
+        overview: "The Bachelor of Arts in Management is an internationally focused degree that builds the business skills for a career as an entrepreneur or in a multinational organisation. Students learn the building blocks of business and management alongside marketing, accounting and finance, data analysis, economics and entrepreneurship, using problem-based learning. It is studied full-time over three years, with two semesters each year.",
+        keyDetails: [
+          { label: "MQF/EQF Level", value: "Level 6 (Bachelor degree)" },
+          { label: "Awarding Body", value: "Global College Malta, MFHEA-accredited programme" },
+          { label: "Duration & Mode", value: "36 Months Full-Time (part-time also offered) │ Face-to-Face" },
+          { label: "ECTS / Learning Hours", value: "180 ECTS, 4,500 total hours (780 contact, 220 assessment, 3,500 self-study)" },
+          { label: "Intake", value: "4 Jan, 5 Apr, 5 Jul, 27 Sep and 6 Dec 2027" },
+          { label: "Tuition Fee", value: "€6,100 per year for 3 years, plus €100 application, €250 registration and €200 visa support document in Year 1" },
+          { label: "Delivery Location", value: "SmartCity Malta, SCM01, Ricasoli, Malta" }
+        ],
+        entryRequirements: [
+          "Maltese Matriculation Route: A matriculation certificate or equivalent (two advanced and three intermediate subjects, Systems of Knowledge, and Grade 5 or better in English), or",
+          "A-Level Route: Three Advanced Level subjects (MQF 4) or equivalent with Grade 5 in English.",
+          "Minimum Age: 19+."
         ],
         modules: [
-          "Undergraduate Diploma in Management (12 Months)",
-          "Undergraduate Diploma in Foundation Medical Science (12 Months)",
-          "Award in Foundation in Business and Management (10 Months)",
-          "Diploma in Financial Crime Compliance, Anti-Money Laundering and Combating the Financing Of Terrorism (12 Months)"
+          "Principles of Business Management (15 ECTS, Level 5)",
+          "Fundamentals of Management Accounting and Finance (15 ECTS, Level 5)",
+          "Human Resources Management (15 ECTS, Level 5)",
+          "Strategic Management (15 ECTS, Level 5)",
+          "Logistics and Supply Chain Management (15 ECTS, Level 6)",
+          "Marketing Management (15 ECTS, Level 6)",
+          "Effective Leadership (15 ECTS, Level 6)",
+          "Research Methods (15 ECTS, Level 6)",
+          "Enterprise for Managers (15 ECTS, Level 6)",
+          "e-Business (15 ECTS, Level 6)",
+          "Major Project (30 ECTS, Level 6): Dissertation of 12,000 to 15,000 words."
+        ],
+        learningOutcomes: [
+          "Modern business management principles and practices.",
+          "Accountancy, finance, strategic management and HR knowledge.",
+          "Critical analysis and decision-making to propose research-based strategies.",
+          "Research skills, global awareness and cultural insight.",
+          "Communication and problem-solving skills for the professional world."
+        ],
+        assessmentSummary: "Assessment is a 90-minute in-semester test (25%) and a final exam (75%), with a 40% pass mark.",
+        careers: [
+          { role: "Management Trainee", sector: "Business management", startSalary: "€20,000 – €25,000 (approx. ₹18.0L – ₹22.5L INR)", midSalary: "€28,000 – €38,000 (approx. ₹25.2L – ₹34.2L INR)" },
+          { role: "Operations Coordinator", sector: "Process and team support", startSalary: "€18,000 – €22,000 (approx. ₹16.2L – ₹19.8L INR)", midSalary: "€25,000 – €32,000 (approx. ₹22.5L – ₹28.8L INR)" },
+          { role: "Marketing / Business Executive", sector: "Marketing and sales", startSalary: "€20,000 – €26,000 (approx. ₹18.0L – ₹23.4L INR)", midSalary: "€28,000 – €38,000 (approx. ₹25.2L – ₹34.2L INR)" },
+          { role: "Entrepreneur / Business Owner", sector: "Venture creation", startSalary: "Variable – depends on the business", midSalary: "Variable – depends on the business" }
+        ],
+        benefits: [
+          "Degree-level qualification at MQF Level 6 with a supervised dissertation.",
+          "Built-in exit point: The first year can be awarded as the Undergraduate Diploma in Management.",
+          "Postgraduate Study: Continue to master’s programmes such as the MBA or MSc in Management at Global College Malta."
         ]
       },
       {
-        title: "Bachelor of Arts (BA) Degrees & Top-Up Programmes (12–36 Months)",
-        overview: "Industry-aligned 3-year Bachelor of Arts degrees and 1-year Top-Up degrees preparing students for international management careers.",
-        feeStructure: [
-          { category: "Bachelor of Arts Degrees (Standard)", amount: "€6,100 / year", notes: "36 Months Duration" },
-          { category: "BA in Tourism and Events Management", amount: "€7,500 / year", notes: "36 Months Duration" },
-          { category: "BA Top Up Degree in Business and Management", amount: "€6,500", notes: "12 Months Duration" }
+        title: "Bachelor of Arts in Marketing (MQF/EQF Level 6)",
+        overview: "The Bachelor of Arts in Marketing is a three-year degree for students, managers or aspiring managers who want to build their skills and competence in marketing disciplines and functions. It combines core business modules in Year 1 with specialist marketing modules and a major project.",
+        keyDetails: [
+          { label: "MQF/EQF Level", value: "Level 6 (Bachelor degree)" },
+          { label: "Awarding Body", value: "Global College Malta, MFHEA-accredited programme" },
+          { label: "Duration & Mode", value: "36 Months Full-Time (part-time also offered) │ Face-to-Face" },
+          { label: "ECTS / Learning Hours", value: "180 ECTS (375 hours per 15-ECTS module)" },
+          { label: "Intake", value: "4 Jan, 5 Apr, 5 Jul, 27 Sep and 6 Dec 2027" },
+          { label: "Tuition Fee", value: "€6,100 per year reference (confirm current fee with Global College Malta)" },
+          { label: "Delivery Location", value: "SmartCity Malta, SCM01, Ricasoli, Malta" }
+        ],
+        entryRequirements: [
+          "Maltese matriculation certificate or equivalent, or three Advanced Level subjects, with Grade 5 in English. Minimum age 19+."
         ],
         modules: [
-          "Bachelor of Arts in Management (36 Months)",
-          "BA in Marketing (36 Months)",
-          "BA in Management with Psychology (36 Months)",
-          "BA in Management with Human Resources Management (36 Months)",
-          "BA in Accountancy and Finance (36 Months)",
-          "BA Information Technology for Business (36 Months)",
-          "Bachelor of Arts in Tourism and Events Management (36 Months)",
-          "BA Top Up Degree in Business and Management (12 Months)"
+          "Principles of Business Management (15 ECTS)",
+          "Fundamentals of Management Accounting and Finance (15 ECTS)",
+          "Human Resources Management (15 ECTS)",
+          "Strategic Management (15 ECTS)",
+          "Consumer Behaviour (15 ECTS)",
+          "Marketing Analysis (15 ECTS)",
+          "Digital Marketing (15 ECTS)",
+          "Research Methods (15 ECTS)",
+          "International Marketing Management (15 ECTS)",
+          "Services and Relationship Marketing (15 ECTS)",
+          "Major Project (30 ECTS)"
+        ],
+        learningOutcomes: [
+          "Consumer behaviour and what drives buying decisions.",
+          "Marketing analysis and research.",
+          "Digital marketing tools and strategy.",
+          "International marketing and relationship marketing.",
+          "How to plan and complete an independent research project."
+        ],
+        careers: [
+          { role: "Marketing Executive", sector: "Campaign planning", startSalary: "€19,000 – €24,000 (approx. ₹17.1L – ₹21.6L INR)", midSalary: "€27,000 – €36,000 (approx. ₹24.3L – ₹32.4L INR)" },
+          { role: "Digital Marketing Specialist", sector: "Online channels", startSalary: "€20,000 – €26,000 (approx. ₹18.0L – ₹23.4L INR)", midSalary: "€28,000 – €38,000 (approx. ₹25.2L – ₹34.2L INR)" },
+          { role: "Market Research Analyst", sector: "Consumer insight", startSalary: "€20,000 – €26,000 (approx. ₹18.0L – ₹23.4L INR)", midSalary: "€28,000 – €38,000 (approx. ₹25.2L – ₹34.2L INR)" },
+          { role: "Account / Relationship Manager", sector: "Client services", startSalary: "€22,000 – €28,000 (approx. ₹19.8L – ₹25.2L INR)", midSalary: "€30,000 – €42,000 (approx. ₹27.0L – ₹37.8L INR)" }
+        ],
+        benefits: [
+          "Specialist marketing core: Consumer behaviour, analysis, digital and international marketing.",
+          "Degree-level qualification at MQF Level 6.",
+          "Flexible attendance: Full-time or part-time study."
         ]
       },
       {
-        title: "Postgraduate Diplomas, MSc & MBA Degrees (12 Months)",
-        overview: "World-class 1-year Master's and MBA programmes with Day/Evening (D/E) and Evening (E) delivery options.",
-        feeStructure: [
-          { category: "Postgraduate Diploma in Management (with Pathways)", amount: "€8,000", notes: "12 Months (D/E)" },
-          { category: "Master in Business Administration (MBA)", amount: "€9,000", notes: "12 Months (D/E)" },
-          { category: "MBA (Logistics and Supply Chain Management)", amount: "€10,000", notes: "12 Months (D/E)" },
-          { category: "Master of Science (MSc) Degrees", amount: "€10,000", notes: "12 Months" }
+        title: "Bachelor of Arts in Management with Human Resources (MQF/EQF Level 6)",
+        overview: "The Bachelor of Arts in Management with Human Resources is for students, managers or aspiring managers who want to broaden their skills across a wide range of business and management disciplines, including human resources management. It is a three-year, 180 ECTS degree.",
+        keyDetails: [
+          { label: "MQF/EQF Level", value: "Level 6 (Bachelor degree)" },
+          { label: "Awarding Body", value: "Global College Malta, MFHEA-accredited programme" },
+          { label: "Duration & Mode", value: "36 Months Full-Time (part-time also offered) │ Face-to-Face" },
+          { label: "ECTS", value: "180 ECTS" },
+          { label: "Intake", value: "4 Jan, 5 Apr, 5 Jul, 27 Sep and 6 Dec 2027" },
+          { label: "Tuition Fee", value: "€6,100 per year reference (confirm current fee with Global College Malta)" },
+          { label: "Delivery Location", value: "SmartCity Malta, SCM01, Ricasoli, Malta" }
+        ],
+        entryRequirements: [
+          "Maltese matriculation certificate or equivalent, or three Advanced Level subjects, with Grade 5 in English. Minimum age 19+."
         ],
         modules: [
-          "Postgraduate Diploma in Management – with Pathways available (D/E) (12 Months)",
-          "Master in Business Administration (D/E) (12 Months)",
-          "MBA (Logistics and Supply Chain Management) (D/E) (12 Months)",
-          "Master Science Management (D/E) (12 Months)",
-          "MSc in Management with Human Resources (E) (12 Months)",
-          "MSc in Marketing Management (E) (12 Months)",
-          "MSc in Tourism and Events Management (E) (12 Months)",
-          "MSc in Health and Social Care Management (E) (12 Months)"
+          "Principles of Business Management (15 ECTS)",
+          "Fundamentals of Management Accounting and Finance (15 ECTS)",
+          "Human Resources Management (15 ECTS)",
+          "Strategic Management (15 ECTS)",
+          "Marketing Management (15 ECTS)",
+          "International Human Resources Management (15 ECTS)",
+          "Major Project (30 ECTS)"
+        ],
+        learningOutcomes: [
+          "Strategic HR management and how it supports corporate objectives.",
+          "International HR perspectives.",
+          "Core business skills in accounting, marketing and strategy."
+        ],
+        careers: [
+          { role: "HR Assistant / Coordinator", sector: "HR administration", startSalary: "€18,000 – €23,000 (approx. ₹16.2L – ₹20.7L INR)", midSalary: "€25,000 – €32,000 (approx. ₹22.5L – ₹28.8L INR)" },
+          { role: "Recruitment Consultant", sector: "Hiring and selection", startSalary: "€20,000 – €25,000 (approx. ₹18.0L – ₹22.5L INR)", midSalary: "€28,000 – €38,000 (approx. ₹25.2L – ₹34.2L INR)" },
+          { role: "Training Coordinator", sector: "Employee development", startSalary: "€19,000 – €24,000 (approx. ₹17.1L – ₹21.6L INR)", midSalary: "€26,000 – €34,000 (approx. ₹23.4L – ₹30.6L INR)" },
+          { role: "Junior HR Business Partner", sector: "People advisory", startSalary: "€24,000 – €30,000 (approx. ₹21.6L – ₹27.0L INR)", midSalary: "€32,000 – €42,000 (approx. ₹28.8L – ₹37.8L INR)" }
+        ],
+        benefits: [
+          "HR specialism within a management degree.",
+          "International HR module included.",
+          "Degree-level qualification at MQF Level 6."
+        ]
+      },
+      {
+        title: "Bachelor of Arts in Accounting and Finance (MQF/EQF Level 6)",
+        overview: "The Bachelor of Arts in Accounting and Finance is for students, managers or aspiring managers who want to broaden their knowledge and increase their competence in accounting and finance disciplines and functions. It sits in the School of Economics & Finance, and the college displays an ACCA exemptions link on its site.",
+        keyDetails: [
+          { label: "MQF/EQF Level", value: "Level 6 (Bachelor degree)" },
+          { label: "Awarding Body", value: "Global College Malta, MFHEA-accredited programme" },
+          { label: "Duration & Mode", value: "36 Months Full-Time (part-time also offered) │ Face-to-Face" },
+          { label: "ECTS", value: "180 ECTS" },
+          { label: "Intake", value: "4 Jan, 5 Apr, 5 Jul, 27 Sep and 6 Dec 2027" },
+          { label: "Tuition Fee", value: "€6,100 per year reference (confirm current fee with Global College Malta)" },
+          { label: "Delivery Location", value: "SmartCity Malta, SCM01, Ricasoli, Malta" }
+        ],
+        entryRequirements: [
+          "Maltese matriculation certificate or equivalent, or three Advanced Level subjects, with Grade 5 in English. Minimum age 19+."
+        ],
+        modules: [
+          "Principles of Business Management (15 ECTS)",
+          "Fundamentals of Management Accounting and Finance (15 ECTS)",
+          "Human Resources Management (15 ECTS)",
+          "Strategic Management (15 ECTS)",
+          "Accounting for Corporate Performance (15 ECTS)",
+          "Management Accounting (15 ECTS)",
+          "Financial Management (15 ECTS)",
+          "Major Project (30 ECTS)"
+        ],
+        learningOutcomes: [
+          "How to measure and report financial performance.",
+          "Management accounting for decisions and budgeting.",
+          "Financial management and investment decisions."
+        ],
+        careers: [
+          { role: "Accounts Assistant", sector: "Bookkeeping and reporting", startSalary: "€18,000 – €22,000 (approx. ₹16.2L – ₹19.8L INR)", midSalary: "€25,000 – €32,000 (approx. ₹22.5L – ₹28.8L INR)" },
+          { role: "Management Accountant (trainee)", sector: "Costing and budgets", startSalary: "€22,000 – €27,000 (approx. ₹19.8L – ₹24.3L INR)", midSalary: "€30,000 – €42,000 (approx. ₹27.0L – ₹37.8L INR)" },
+          { role: "Financial Analyst", sector: "Analysis and planning", startSalary: "€22,000 – €28,000 (approx. ₹19.8L – ₹25.2L INR)", midSalary: "€32,000 – €45,000 (approx. ₹28.8L – ₹40.5L INR)" },
+          { role: "Audit Associate", sector: "Assurance", startSalary: "€20,000 – €26,000 (approx. ₹18.0L – ₹23.4L INR)", midSalary: "€28,000 – €40,000 (approx. ₹25.2L – ₹36.0L INR)" }
+        ],
+        benefits: [
+          "Professional exemptions: ACCA exemptions pathway available.",
+          "Degree-level qualification at MQF Level 6.",
+          "Specialist finance core: Corporate performance, management accounting and financial management."
+        ]
+      },
+      {
+        title: "Bachelor of Arts in Tourism and Events Management (MQF/EQF Level 6)",
+        overview: "The Bachelor of Arts in Tourism and Events Management explores the relationship between tourism, events and the wider environment, and develops the skills to evaluate and manage tourism. It is aimed at students with an interest in the tourism sector.",
+        keyDetails: [
+          { label: "MQF/EQF Level", value: "Level 6 (Bachelor degree)" },
+          { label: "Awarding Body", value: "Global College Malta, MFHEA-accredited programme" },
+          { label: "Duration & Mode", value: "36 Months Full-Time (part-time also offered) │ Face-to-Face" },
+          { label: "ECTS", value: "180 ECTS" },
+          { label: "Intake", value: "4 Jan, 5 Apr, 5 Jul, 27 Sep and 6 Dec 2027" },
+          { label: "Tuition Fee", value: "€7,500 / year" },
+          { label: "Delivery Location", value: "SmartCity Malta, SCM01, Ricasoli, Malta" }
+        ],
+        entryRequirements: [
+          "Maltese matriculation certificate or equivalent, or three Advanced Level subjects, with Grade 5 in English. Minimum age 19+."
+        ],
+        modules: [
+          "Principles of Business Management (15 ECTS)",
+          "Fundamentals of Management Accounting and Finance (15 ECTS)",
+          "Human Resources Management (15 ECTS)",
+          "Strategic Management (15 ECTS)",
+          "Consumer Behaviour (15 ECTS)",
+          "The Travel and Tourism Business (15 ECTS)",
+          "Digital Marketing in Tourism, Events and Hospitality (15 ECTS)",
+          "Research Methods (15 ECTS)",
+          "Entrepreneurship in the Tourism, Events and Hospitality Industry (15 ECTS)",
+          "Events and Project Management (15 ECTS)",
+          "Major Project (30 ECTS)"
+        ],
+        learningOutcomes: [
+          "How tourism and events relate to the wider environment.",
+          "How to manage tourism businesses and events projects.",
+          "Digital marketing for tourism, events and hospitality.",
+          "How to start and run tourism and hospitality ventures.",
+          "How to carry out an independent research project."
+        ],
+        careers: [
+          { role: "Events Coordinator", sector: "Planning and delivery", startSalary: "€18,000 – €23,000 (approx. ₹16.2L – ₹20.7L INR)", midSalary: "€25,000 – €33,000 (approx. ₹22.5L – ₹29.7L INR)" },
+          { role: "Tourism Operations Officer", sector: "Tourism services", startSalary: "€19,000 – €24,000 (approx. ₹17.1L – ₹21.6L INR)", midSalary: "€26,000 – €34,000 (approx. ₹23.4L – ₹30.6L INR)" },
+          { role: "Travel Consultant", sector: "Bookings and itineraries", startSalary: "€17,000 – €21,000 (approx. ₹15.3L – ₹18.9L INR)", midSalary: "€22,000 – €28,000 (approx. ₹19.8L – ₹25.2L INR)" },
+          { role: "Hospitality Marketing Executive", sector: "Digital promotion", startSalary: "€20,000 – €25,000 (approx. ₹18.0L – ₹22.5L INR)", midSalary: "€28,000 – €36,000 (approx. ₹25.2L – ₹32.4L INR)" }
+        ],
+        benefits: [
+          "Sector-specific modules: Tourism business, digital marketing and events project management.",
+          "Degree-level qualification at MQF Level 6.",
+          "Flexible attendance: Full-time or part-time study."
+        ]
+      },
+      {
+        title: "Undergraduate Diploma in Management (MQF/EQF Level 5)",
+        overview: "The Undergraduate Diploma in Management is awarded after successfully completing the first year of the Bachelor of Arts in Management (4 modules, 60 ECTS). Students who finish it may continue to Years 2 and 3 to earn the Level 6 BA degree.",
+        keyDetails: [
+          { label: "MQF/EQF Level", value: "Level 5" },
+          { label: "Awarding Body", value: "Global College Malta, MFHEA-accredited programme" },
+          { label: "Duration & Mode", value: "12 Months Full-Time or Part-Time │ Face-to-Face" },
+          { label: "ECTS", value: "60 ECTS (4 modules of 15 ECTS)" },
+          { label: "Intake", value: "4 Jan, 5 Apr, 5 Jul, 27 Sep and 6 Dec 2027" },
+          { label: "Tuition Fee", value: "€7,000" },
+          { label: "Delivery Location", value: "SmartCity Malta, SCM01, Ricasoli, Malta" }
+        ],
+        entryRequirements: [
+          "Maltese matriculation certificate or equivalent, or three Advanced Level subjects, with Grade 5 in English. Minimum age 19+."
+        ],
+        modules: [
+          "Foundations of Management (15 ECTS)",
+          "Economics (15 ECTS)",
+          "Accountancy and Finance (15 ECTS)",
+          "Quantitative Methods and Research (15 ECTS)"
+        ],
+        learningOutcomes: [
+          "The foundations of management and organisations.",
+          "Economics for business decisions.",
+          "Accountancy and finance basics.",
+          "Quantitative methods and research skills."
+        ],
+        careers: [
+          { role: "Business Administrator", sector: "Coordination and planning", startSalary: "€18,000 – €22,000 (approx. ₹16.2L – ₹19.8L INR)", midSalary: "€25,000 – €34,000 (approx. ₹22.5L – ₹30.6L INR)" },
+          { role: "Assistant Manager", sector: "Team support", startSalary: "€20,000 – €25,000 (approx. ₹18.0L – ₹22.5L INR)", midSalary: "€27,000 – €36,000 (approx. ₹24.3L – ₹32.4L INR)" },
+          { role: "Finance / Accounts Assistant", sector: "Financial support", startSalary: "€17,000 – €21,000 (approx. ₹15.3L – ₹18.9L INR)", midSalary: "€24,000 – €31,000 (approx. ₹21.6L – ₹27.9L INR)" }
+        ],
+        benefits: [
+          "Direct route to a degree: The diploma is Year 1 of the BA in Management (continue to Years 2 and 3 to earn the Level 6 BA degree).",
+          "Level 5 qualification with 60 ECTS."
+        ]
+      },
+      {
+        title: "Master of Business Administration (MBA) (MQF/EQF Level 7)",
+        overview: "The Master of Business Administration (MBA) is a 90 ECTS master’s degree covering marketing, accounting and finance, strategy, organisational behaviour, leadership, economics and e-business, finishing with a major project. It is delivered face-to-face, full-time or part-time, for students aged 21 and over.",
+        keyDetails: [
+          { label: "MQF/EQF Level", value: "Level 7 (Masters degree)" },
+          { label: "Awarding Body", value: "Global College Malta, MFHEA-accredited programme" },
+          { label: "Duration & Mode", value: "12 Months Full-Time or Part-Time │ Face-to-Face" },
+          { label: "ECTS / Learning Hours", value: "90 ECTS (8 ECTS modules of 200 hours, and a 26 ECTS project of 650 hours)" },
+          { label: "Intake", value: "4 Jan, 5 Apr, 5 Jul, 27 Sep and 6 Dec 2027" },
+          { label: "Tuition Fee", value: "€9,000 (MBA) | €10,000 (MBA Logistics and Supply Chain Management)" },
+          { label: "Delivery Location", value: "SmartCity Malta, SCM01, Ricasoli, Malta" }
+        ],
+        entryRequirements: [
+          "A recognised bachelor’s degree. Minimum age 21+."
+        ],
+        modules: [
+          "Marketing in Practice (8 ECTS)",
+          "Accountancy and Finance (8 ECTS)",
+          "Research Methods (8 ECTS)",
+          "Strategic Management (8 ECTS)",
+          "Organisational Behaviour and Human Resources Management (8 ECTS)",
+          "Leadership (8 ECTS)",
+          "Economics (8 ECTS)",
+          "e-Business (8 ECTS)",
+          "Major Project (26 ECTS)"
+        ],
+        learningOutcomes: [
+          "Strategic management and competitive decision-making.",
+          "Leadership and organisational behaviour.",
+          "Financial and marketing tools for managers.",
+          "E-business and digital strategy.",
+          "How to complete a major research project."
+        ],
+        careers: [
+          { role: "Department / Team Manager", sector: "Team leadership", startSalary: "€32,000 – €42,000 (approx. ₹28.8L – ₹37.8L INR)", midSalary: "€45,000 – €65,000 (approx. ₹40.5L – ₹58.5L INR)" },
+          { role: "Business Consultant", sector: "Strategy and advisory", startSalary: "€32,000 – €42,000 (approx. ₹28.8L – ₹37.8L INR)", midSalary: "€48,000 – €70,000 (approx. ₹43.2L – ₹63.0L INR)" },
+          { role: "Marketing / Product Manager", sector: "Growth and planning", startSalary: "€30,000 – €40,000 (approx. ₹27.0L – ₹36.0L INR)", midSalary: "€42,000 – €60,000 (approx. ₹37.8L – ₹54.0L INR)" },
+          { role: "Entrepreneur / Founder", sector: "Venture leadership", startSalary: "Variable – depends on the business", midSalary: "Variable – depends on the business" }
+        ],
+        benefits: [
+          "Master’s-level qualification at MQF Level 7 with 90 ECTS.",
+          "Broad management core: Strategy, finance, marketing, leadership and e-business.",
+          "Doctoral Study: Progression route to the Doctor of Business Administration (DBA)."
+        ]
+      },
+      {
+        title: "Master of Science in Management (MQF/EQF Level 7)",
+        overview: "The Master of Science in Management helps students, with or without a business background, develop knowledge of contemporary management through a detailed look at the theory and practice of key business areas. It prepares graduates to deliver best practice in private, public or third-sector workplaces and to motivate, inspire and manage effectively.",
+        keyDetails: [
+          { label: "MQF/EQF Level", value: "Level 7 (Masters degree)" },
+          { label: "Awarding Body", value: "Global College Malta, MFHEA-accredited programme" },
+          { label: "Duration & Mode", value: "12 Months Full-Time or Part-Time │ Face-to-Face" },
+          { label: "ECTS / Learning Hours", value: "90 ECTS (8 ECTS modules of 200 hours, and a 26 ECTS project of 650 hours)" },
+          { label: "Intake", value: "4 Jan, 5 Apr, 5 Jul, 27 Sep and 6 Dec 2027" },
+          { label: "Tuition Fee", value: "€10,000" },
+          { label: "Delivery Location", value: "SmartCity Malta, SCM01, Ricasoli, Malta" }
+        ],
+        entryRequirements: [
+          "A recognised bachelor’s degree, with or without a business background. Minimum age 21+."
+        ],
+        modules: [
+          "Marketing in Practice (8 ECTS)",
+          "Accountancy and Finance (8 ECTS)",
+          "Research Methods (8 ECTS)",
+          "Strategic Management (8 ECTS)",
+          "Organisational Behaviour and Human Resources Management (8 ECTS)",
+          "Leadership (8 ECTS)",
+          "Enterprise for Managers (8 ECTS)",
+          "International Management (8 ECTS)",
+          "Major Project (26 ECTS)"
+        ],
+        learningOutcomes: [
+          "Contemporary management theory and practice.",
+          "How to apply best practice in private, public and third-sector organisations.",
+          "Leadership and people management skills.",
+          "International management and enterprise skills.",
+          "How to carry out a major research project."
+        ],
+        careers: [
+          { role: "Operations Manager", sector: "Operations leadership", startSalary: "€30,000 – €38,000 (approx. ₹27.0L – ₹34.2L INR)", midSalary: "€40,000 – €60,000 (approx. ₹36.0L – ₹54.0L INR)" },
+          { role: "Business Analyst", sector: "Analysis and strategy", startSalary: "€26,000 – €32,000 (approx. ₹23.4L – ₹28.8L INR)", midSalary: "€34,000 – €48,000 (approx. ₹30.6L – ₹43.2L INR)" },
+          { role: "Project Manager", sector: "Delivery and change", startSalary: "€30,000 – €38,000 (approx. ₹27.0L – ₹34.2L INR)", midSalary: "€40,000 – €58,000 (approx. ₹36.0L – ₹52.2L INR)" },
+          { role: "Management Consultant", sector: "Advisory", startSalary: "€28,000 – €36,000 (approx. ₹25.2L – ₹32.4L INR)", midSalary: "€40,000 – €60,000 (approx. ₹36.0L – ₹54.0L INR)" }
+        ],
+        benefits: [
+          "Open to different backgrounds: No business degree needed.",
+          "Master’s-level qualification at MQF Level 7.",
+          "International focus: Includes an international management module."
+        ]
+      },
+      {
+        title: "Master of Science in Management with Human Resources (MQF/EQF Level 7)",
+        overview: "The MSc in Management with Human Resources explores the management of people from a social, cultural and political point of view, while developing senior-level management skills and encouraging creative thinking. It reflects the view that people are a company’s most valued asset and that organisations are committed to employee well-being and retention.",
+        keyDetails: [
+          { label: "MQF/EQF Level", value: "Level 7 (Masters degree)" },
+          { label: "Awarding Body", value: "Global College Malta, MFHEA-accredited programme" },
+          { label: "Duration & Mode", value: "12 Months Full-Time or Part-Time │ Face-to-Face" },
+          { label: "ECTS / Learning Hours", value: "90 ECTS (8 ECTS modules of 200 hours, and a 26 ECTS project of 650 hours)" },
+          { label: "Intake", value: "4 Jan, 5 Apr, 5 Jul, 27 Sep and 6 Dec 2027" },
+          { label: "Tuition Fee", value: "€10,000" },
+          { label: "Delivery Location", value: "SmartCity Malta, SCM01, Ricasoli, Malta" }
+        ],
+        entryRequirements: [
+          "A recognised bachelor’s degree. Minimum age 21+."
+        ],
+        modules: [
+          "Marketing in Practice (8 ECTS)",
+          "Accountancy and Finance (8 ECTS)",
+          "Research Methods (8 ECTS)",
+          "Strategic Management (8 ECTS)",
+          "Organisational Behaviour and Human Resources Management (8 ECTS)",
+          "Leadership (8 ECTS)",
+          "Human Resource Management in Practice (8 ECTS)",
+          "Employee Development (8 ECTS)",
+          "Major Project (26 ECTS)"
+        ],
+        learningOutcomes: [
+          "How to manage people from social, cultural and political perspectives.",
+          "HR practice and employee development.",
+          "Senior-level management skills and creative thinking.",
+          "Leadership and organisational behaviour.",
+          "How to carry out a major research project in HR."
+        ],
+        careers: [
+          { role: "HR Manager", sector: "People strategy", startSalary: "€30,000 – €37,000 (approx. ₹27.0L – ₹33.3L INR)", midSalary: "€37,000 – €52,000 (approx. ₹33.3L – ₹46.8L INR)" },
+          { role: "HR Business Partner", sector: "Advising leaders", startSalary: "€26,000 – €32,000 (approx. ₹23.4L – ₹28.8L INR)", midSalary: "€32,000 – €44,000 (approx. ₹28.8L – ₹39.6L INR)" },
+          { role: "Talent Acquisition Specialist", sector: "Recruitment", startSalary: "€22,000 – €28,000 (approx. ₹19.8L – ₹25.2L INR)", midSalary: "€28,000 – €38,000 (approx. ₹25.2L – ₹34.2L INR)" },
+          { role: "Learning & Development Manager", sector: "Employee development", startSalary: "€28,000 – €35,000 (approx. ₹25.2L – ₹31.5L INR)", midSalary: "€35,000 – €48,000 (approx. ₹31.5L – ₹43.2L INR)" }
+        ],
+        benefits: [
+          "HR specialism at master’s level.",
+          "Employee development module included.",
+          "Master’s-level qualification at MQF Level 7."
+        ]
+      },
+      {
+        title: "Master of Science in Tourism and Events Management (MQF/EQF Level 7)",
+        overview: "The MSc in Tourism and Events Management immerses students in real-world challenges with access to industry leaders and elective choices to suit their development. It gives both a comprehensive conceptual knowledge and a practical understanding of key areas within tourism and events.",
+        keyDetails: [
+          { label: "MQF/EQF Level", value: "Level 7 (Master degree)" },
+          { label: "Awarding Body", value: "Global College Malta, MFHEA-accredited programme" },
+          { label: "Duration & Mode", value: "12 Months Full-Time or Part-Time │ Face-to-Face" },
+          { label: "ECTS / Learning Hours", value: "90 ECTS (8 ECTS modules of 200 hours, and a 26 ECTS project of 650 hours)" },
+          { label: "Intake", value: "4 Jan, 5 Apr, 5 Jul, 27 Sep and 6 Dec 2027" },
+          { label: "Tuition Fee", value: "€10,000" },
+          { label: "Delivery Location", value: "SmartCity Malta, SCM01, Ricasoli, Malta" }
+        ],
+        entryRequirements: [
+          "A recognised bachelor’s degree. Minimum age 21+."
+        ],
+        modules: [
+          "Research Methods (8 ECTS)",
+          "Strategic Management (8 ECTS)",
+          "Consumer Behaviour Insights (8 ECTS)",
+          "Services and Relationship Marketing (8 ECTS)",
+          "The Travel and Tourism Business (8 ECTS)",
+          "Entrepreneurship in the Tourism, Events and Hospitality Industry (8 ECTS)",
+          "Digital Marketing and Social Media in Tourism and Events Management (8 ECTS)",
+          "Managing an Event (8 ECTS)",
+          "Major Project (26 ECTS)"
+        ],
+        learningOutcomes: [
+          "Consumer behaviour and relationship marketing in tourism.",
+          "Digital marketing and social media for tourism and events.",
+          "How to start and manage tourism and events ventures.",
+          "How to plan and manage an event.",
+          "How to carry out a major research project."
+        ],
+        careers: [
+          { role: "Events Manager", sector: "Event planning and delivery", startSalary: "€26,000 – €33,000 (approx. ₹23.4L – ₹29.7L INR)", midSalary: "€34,000 – €46,000 (approx. ₹30.6L – ₹41.4L INR)" },
+          { role: "Tourism Business Manager", sector: "Operations and strategy", startSalary: "€28,000 – €36,000 (approx. ₹25.2L – ₹32.4L INR)", midSalary: "€38,000 – €52,000 (approx. ₹34.2L – ₹46.8L INR)" },
+          { role: "Destination Marketing Manager", sector: "Marketing and promotion", startSalary: "€28,000 – €36,000 (approx. ₹25.2L – ₹32.4L INR)", midSalary: "€38,000 – €50,000 (approx. ₹34.2L – ₹45.0L INR)" },
+          { role: "Hospitality Entrepreneur", sector: "Venture creation", startSalary: "Variable – depends on the business", midSalary: "Variable – depends on the business" }
+        ],
+        benefits: [
+          "Industry access: Students meet industry leaders.",
+          "Hands-on module: Includes Managing an Event.",
+          "Master’s-level qualification at MQF Level 7."
         ]
       },
       {
@@ -2255,57 +3578,172 @@ export const institutionsData = [
     id: "gbs",
     name: "GBS Malta (Global Banking School) – Top 10 Business School in Malta",
     location: "Triq il-Karmnu, St. Julian's, Malta",
-    accreditation: "MFHEA Licensed Higher Education Institution (Licence No. 2022-010)",
-    established: "2010 (GBS Group)",
-    seoCategory: "Top 10 Business School in Malta | Best Cybersecurity & MBA Institute",
-    flagshipCourses: "Master of Business Administration (MBA), Bachelor in IT (AI & Cybersecurity), and Bachelor in Public Health",
-    about: "Located in St. Julian's, Global Banking School (GBS) Malta is consistently ranked among the Top 10 Business Schools in Malta. Boasting a 98% employability rate, GBS Malta provides industry-centric degrees, high scholarships (including a Flat 25% MBA Scholarship), and high post-study career success.",
+    accreditation: "MFHEA Licensed Higher Education Institution (Licence No. 2022-010) | Part of Global Education (GEDU)",
+    established: "2010 (GBS Group), Licensed in Malta 2022",
+    seoCategory: "Top 10 Business School in Malta | Best Cybersecurity, AI, Public Health & MBA Institute",
+    flagshipCourses: "Award in Business Management and Study Skills (MQF/EQF Level 4), Award in Information Technology and Study Skills (MQF/EQF Level 4), BSc (Hons) Health, Social Care and Wellbeing (MQF/EQF Level 6), BSc (Hons) Computer Science and Information Technology (MQF/EQF Level 6), MBA, MSc IT Management, and Master of Public Health",
+    about: "GBS Malta (Global Banking School) is a private higher education institution in St Julian’s, Malta, and part of Global Education (GEDU), which teaches over 60,000 students in 12 countries. The Global Banking School began in 2010 as a finance and investment banking training centre, and GBS Malta is licensed by the Malta Further and Higher Education Authority (MFHEA, Licence No. 2022-010). Its programmes are aligned with the MQF and EQF, running full-time and face-to-face at the Malta campus in business and management, information technology, and health and social care.",
     highlights: {
-      intake: "Sept/Oct Intake Open",
-      eligibility: "Min 50% in 12th Class (CBSE, ICSE, RBSE & State Boards accepted | NIOS/Private Not Accepted)",
+      intake: "February, May and October 2027 (Apply by 17 Feb 2027 for May 2027 intake)",
+      eligibility: "Min 50% in 12th Class (CBSE, ICSE, RBSE & State Boards accepted | NIOS/Private Not Accepted) | MQF Level 2 for Level 4 Awards; MQF Level 4 for BSc Degrees",
       gap: "Standard Academic Gap Evaluated",
-      ielts: "IELTS 6.0 Overall (no band < 5.5) / PTE 53–54 / Duolingo 105 | MOI Accepted without IELTS",
-      interview: "Admissions Assessment",
+      ielts: "IELTS 5.0 / Duolingo 80 / PTE 41 (Level 4 Awards) | IELTS 6.0 Overall (no band < 5.5) / PTE 53–54 / Duolingo 105 (Degrees) | MOI Accepted",
+      interview: "Admissions Interview / Assessment Required",
       applicationFee: "Contact Campus for Terms (50% Tuition Fee Payment After Offer Letter)",
-      tuitionFeeSummary: "Diploma (L4): €5,000/Yr | Bachelor Programs: €6,000/Yr (Total: €18,000) | Masters & MBA: €7,500/Yr (Actual Fee €10,000 - 25% Flat Scholarship Applied)",
+      tuitionFeeSummary: "Level 4 Awards: €5,000/Yr | Bachelor Programs: €6,000/Yr (Total: €18,000) | Masters & MBA: €7,500/Yr (Actual Fee €10,000 - 25% Flat Scholarship Applied)",
       visa: "20 Hours/Week Legal Work Permit | 9 Months PSW Visa | 70% Fee Refund under Get Qualified Scheme | PR Pathway after 5 Years"
     },
     courses: [
       {
-        title: "Level 4 Diploma in Business & Information Technology (1 Year)",
-        overview: "Foundational 1-year Level 4 programs preparing students for undergraduate honours degrees in business or computing.",
+        title: "Award in Business Management and Study Skills (MQF/EQF Level 4)",
+        overview: "The Award in Business Management and Study Skills gives students an academic and professional foundation in essential and contemporary areas of business and management, together with the study skills needed to succeed in higher education. It also introduces project management in a business setting and helps students build a career plan. Graduates can progress to an honours degree in business and management at MQF Levels 5 and 6.",
         keyDetails: [
-          { label: "Duration", value: "1 Year" },
-          { label: "Tuition Fee", value: "€5,000 / Year (50% Payment After Offer Letter)" }
+          { label: "MQF/EQF Level", value: "Comparable to Level 4 (Further Education Programme)" },
+          { label: "Awarding Body", value: "GBS HE Malta. Awarded qualifications: Award in Business Management and Study Skills; Pre-Tertiary Certificate in Business, Management and Study Skills" },
+          { label: "Duration & Mode", value: "1 Year Full-Time │ Face-to-Face" },
+          { label: "ECTS / Learning Hours", value: "60 ECTS (120 UK credits), six modules of 10 ECTS, 250 hours each" },
+          { label: "Intake", value: "February, May and October 2027" },
+          { label: "Tuition Fee", value: "€5,000 per year" },
+          { label: "Delivery Location", value: "GBS Malta campus, St Julian’s, Malta" }
+        ],
+        entryRequirements: [
+          "At least MQF/EQF Level 2 certificates in business or management-related subjects. Mature learners in junior management roles and learners from family businesses are also considered, and applicants must show commitment to study.",
+          "English Language: IELTS Academic 5.0 overall, or equivalent (TOEFL iBT 45, PTE 41, Duolingo 80, LanguageCert 46)."
         ],
         modules: [
-          "Diploma in Business (L4 Program) (1 Year)",
-          "Diploma in Information Technology (L4 Program) (1 Year)"
+          "Developing Academic Skills (10 ECTS): Academic writing, referencing and research basics.",
+          "Understanding Business and Organisations (10 ECTS): Types of business, management functions and the business environment.",
+          "Communication and Digital Literacy Skills (10 ECTS): Communication theory and digital tools.",
+          "Contemporary Topics in Business and Management (10 ECTS): Strategy, sustainability, ethics, e-business and entrepreneurship.",
+          "Effective Study and Career Planning (10 ECTS): Study practice, self-reflection and a career plan.",
+          "Business Project (10 ECTS): A business project proposal with budget and timeline."
+        ],
+        learningOutcomes: [
+          "An understanding of the business environment in which organisations operate.",
+          "Different approaches to management and leadership.",
+          "The impact of globalisation on businesses.",
+          "Effective study skills and career planning.",
+          "Communication and digital technologies, including e-business."
+        ],
+        assessmentSummary: "Assessment is by coursework: essays, case studies, presentations and portfolios, graded pass, merit or distinction.",
+        careers: [
+          { role: "Junior Manager", sector: "Team coordination", startSalary: "€18,000 – €22,000 (approx. ₹16.2L – ₹19.8L INR)", midSalary: "€25,000 – €32,000 (approx. ₹22.5L – ₹28.8L INR)" },
+          { role: "Business Administrator", sector: "Administration and planning", startSalary: "€17,000 – €21,000 (approx. ₹15.3L – ₹18.9L INR)", midSalary: "€24,000 – €31,000 (approx. ₹21.6L – ₹27.9L INR)" },
+          { role: "Customer Service Supervisor", sector: "Service operations", startSalary: "€17,000 – €21,000 (approx. ₹15.3L – ₹18.9L INR)", midSalary: "€23,000 – €30,000 (approx. ₹20.7L – ₹27.0L INR)" }
+        ],
+        benefits: [
+          "Degree pathway: Designed to lead to an honours degree in business and management at MQF Levels 5 and 6.",
+          "Junior management: Graduates may also qualify for junior management positions.",
+          "Career planning: Each student writes a career plan."
         ]
       },
       {
-        title: "Bachelor in Public Health & Bachelor in IT (Cyber Security & AI) (3 Years)",
-        overview: "High-demand 3-year European Bachelor degrees in Healthcare and Digital Technology / Cyber Security & Artificial Intelligence.",
+        title: "Award in Information Technology and Study Skills (MQF/EQF Level 4)",
+        overview: "The Award in Information Technology and Study Skills is a one-year, Level 4 programme that prepares students for higher-level IT study by combining IT fundamentals with academic study skills.",
         keyDetails: [
-          { label: "Duration", value: "3 Years" },
-          { label: "Tuition Fee", value: "€6,000 / Year (Total Fee: €18,000)" }
+          { label: "MQF/EQF Level", value: "Level 4" },
+          { label: "Awarding Body", value: "GBS HE Malta" },
+          { label: "Duration & Mode", value: "1 Year Full-Time │ Face-to-Face" },
+          { label: "ECTS", value: "60 ECTS per year" },
+          { label: "Intake", value: "February, May and October 2027" },
+          { label: "Tuition Fee", value: "€5,000 per year" },
+          { label: "Delivery Location", value: "GBS Malta campus, St Julian’s, Malta" }
         ],
-        modules: [
-          "Bachelor in Public Health - Healthcare (3 Years) – High European Healthcare Demand",
-          "Bachelor in IT - Digital Technology, Cyber Security & AI (3 Years) – Top Ranked Tech Degree"
+        entryRequirements: [
+          "English Language: IELTS 5.0, Duolingo 80 or PTE 41 (confirm academic criteria with GBS Malta)."
+        ],
+        learningOutcomes: [
+          "IT foundations for higher-level study.",
+          "Academic study skills needed in higher education.",
+          "How technology is used in business environments."
+        ],
+        careers: [
+          { role: "IT Support Assistant", sector: "Basic technical support", startSalary: "€16,000 – €20,000 (approx. ₹14.4L – ₹18.0L INR)", midSalary: "€22,000 – €28,000 (approx. ₹19.8L – ₹25.2L INR)" },
+          { role: "Service Desk Agent", sector: "User support", startSalary: "€16,000 – €20,000 (approx. ₹14.4L – ₹18.0L INR)", midSalary: "€22,000 – €28,000 (approx. ₹19.8L – ₹25.2L INR)" },
+          { role: "Junior Technical Support Specialist", sector: "Systems support", startSalary: "€17,000 – €21,000 (approx. ₹15.3L – ₹18.9L INR)", midSalary: "€24,000 – €31,000 (approx. ₹21.6L – ₹27.9L INR)" },
+          { role: "Office IT Assistant", sector: "Office technology", startSalary: "€16,000 – €20,000 (approx. ₹14.4L – ₹18.0L INR)", midSalary: "€21,000 – €27,000 (approx. ₹18.9L – ₹24.3L INR)" }
+        ],
+        benefits: [
+          "Progression route: Leads to the BSc (Hons) Computer Science and Information Technology at GBS Malta.",
+          "Foundation level: Builds IT and study skills for degree study."
         ]
       },
       {
-        title: "Master of Business Administration (MBA) & Masters in Healthcare / IT (1 Year)",
-        overview: "1-year intensive Master's degrees and MBA with a Flat 25% Scholarship applied for international students.",
+        title: "BSc (Hons) Health, Social Care and Wellbeing (MQF/EQF Level 6)",
+        overview: "The BSc (Hons) Health, Social Care and Wellbeing is a three-year honours degree in the health and social care sector, delivered face-to-face at the Malta campus.",
+        keyDetails: [
+          { label: "MQF/EQF Level", value: "Level 6" },
+          { label: "Awarding Body", value: "GBS HE Malta" },
+          { label: "Duration & Mode", value: "3 Years Full-Time │ Face-to-Face" },
+          { label: "ECTS", value: "180 ECTS (60 per year)" },
+          { label: "Intake", value: "February, May and October 2027" },
+          { label: "Tuition Fee", value: "€6,000 per year, €18,000 in total" },
+          { label: "Delivery Location", value: "GBS Malta campus, St Julian’s, Malta" }
+        ],
+        learningOutcomes: [
+          "Knowledge and skills for working in the health and social care sector."
+        ],
+        careers: [
+          { role: "Health and Wellbeing Support Worker", sector: "Direct support", startSalary: "€16,000 – €21,000 (approx. ₹14.4L – ₹18.9L INR)", midSalary: "€22,000 – €28,000 (approx. ₹19.8L – ₹25.2L INR)" },
+          { role: "Community Care Coordinator", sector: "Community services", startSalary: "€18,000 – €23,000 (approx. ₹16.2L – ₹20.7L INR)", midSalary: "€25,000 – €32,000 (approx. ₹22.5L – ₹28.8L INR)" },
+          { role: "Health Promotion Assistant", sector: "Health education", startSalary: "€18,000 – €23,000 (approx. ₹16.2L – ₹20.7L INR)", midSalary: "€25,000 – €32,000 (approx. ₹22.5L – ₹28.8L INR)" }
+        ],
+        benefits: [
+          "Honours degree at MQF Level 6.",
+          "Master’s Study: Graduates may continue to the Master of Public Health at GBS Malta, subject to its entry requirements."
+        ]
+      },
+      {
+        title: "BSc (Hons) Computer Science and Information Technology (MQF/EQF Level 6)",
+        overview: "The BSc (Hons) Computer Science and Information Technology is a three-year degree that balances theory with hands-on experience. Students build programming skills, learn operating systems and explore machine learning and AI, and finish with a Final Year Project that tackles a real-world challenge. It prepares graduates for roles in software engineering, cybersecurity, cloud computing and data analysis.",
+        keyDetails: [
+          { label: "MQF/EQF Level", value: "Level 6 (Higher Education Programme)" },
+          { label: "Awarding Body", value: "GBS HE Malta. Awarded qualification: BSc (Hons) Computer Science and Information Technology" },
+          { label: "Duration & Mode", value: "3 Years Full-Time │ Face-to-Face" },
+          { label: "ECTS / Learning Hours", value: "180 ECTS (60 per year), modules of 10 ECTS and 250 hours each" },
+          { label: "Intake", value: "February, May and October 2027" },
+          { label: "Tuition Fee", value: "€6,000 per year, €18,000 in total" },
+          { label: "Delivery Location", value: "GBS Malta campus, St Julian’s, Malta" }
+        ],
+        entryRequirements: [
+          "A qualification at or equivalent to MFHEA MQF Level 4, with at least one subject in computing, IT or a related field. All applicants attend an admissions interview.",
+          "English Language: An accepted English test taken within 2 years of the start date (IELTS 6.0)."
+        ],
+        modules: [
+          "Year 1 (Level 5): Programming 1 (Basic Programming), Fundamentals of Computer Systems, Algorithms and Software Design, Mathematics for Computing, Networking Technologies, Group Project in Computer Science.",
+          "Year 2 (Level 5): Programming 2: Advanced Programming, Security Systems, Solutions and Practice, Cloud Technologies and Cloud Storage, Operating Systems: Principles and Practices, Data Science and Introduction to AI, Software Engineering and Design.",
+          "Year 3 (Level 6): User Experience Design Principles, Machine Learning and AI, DevOps and Cloud Computing, Emerging Technologies, Final Year Project."
+        ],
+        learningOutcomes: [
+          "Programming from basics to advanced.",
+          "Computer systems and operating systems.",
+          "Cloud technologies, security and DevOps.",
+          "Data science, machine learning and AI.",
+          "How to deliver a group project and an independent final year project."
+        ],
+        careers: [
+          { role: "Software Developer", sector: "Programming and design", startSalary: "€22,000 – €30,000 (approx. ₹19.8L – ₹27.0L INR)", midSalary: "€35,000 – €55,000 (approx. ₹31.5L – ₹49.5L INR)" },
+          { role: "Cloud / DevOps Engineer", sector: "Cloud and infrastructure", startSalary: "€26,000 – €34,000 (approx. ₹23.4L – ₹30.6L INR)", midSalary: "€40,000 – €60,000 (approx. ₹36.0L – ₹54.0L INR)" },
+          { role: "Data Analyst", sector: "Data science", startSalary: "€22,000 – €28,000 (approx. ₹19.8L – ₹25.2L INR)", midSalary: "€32,000 – €45,000 (approx. ₹28.8L – ₹40.5L INR)" },
+          { role: "Cybersecurity Analyst", sector: "Security systems", startSalary: "€24,000 – €32,000 (approx. ₹21.6L – ₹28.8L INR)", midSalary: "€36,000 – €55,000 (approx. ₹32.4L – ₹49.5L INR)" }
+        ],
+        benefits: [
+          "Honours degree at MQF Level 6 with a final year project.",
+          "Industry-relevant curriculum: Programming, AI, cybersecurity and cloud computing.",
+          "Master’s Study: Graduates may continue to the MSc Information Technology Management at GBS Malta."
+        ]
+      },
+      {
+        title: "Master of Business Administration (MBA), MSc IT Management & Master of Public Health (1 Year)",
+        overview: "1-year intensive Master's degrees (MBA, MSc Information Technology Management, and Master of Public Health) with a Flat 25% Scholarship applied for international students.",
         keyDetails: [
           { label: "Duration", value: "1 Year" },
           { label: "Tuition Fee", value: "€7,500 / Year (Actual Fee €10,000 - 25% Flat Scholarship Applied)" }
         ],
         modules: [
           "Master of Business Administration (MBA) (1 Year) – Flat 25% Scholarship Applied",
-          "Masters in Healthcare (1 Year)",
-          "Masters in Information Technology (1 Year)"
+          "MSc Information Technology Management (1 Year)",
+          "Master of Public Health (MPH) (1 Year)"
         ]
       }
     ]

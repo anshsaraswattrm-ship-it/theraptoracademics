@@ -26,7 +26,7 @@ const caseStudiesData = [
     result: "5.0 ★ Rating • Verified Client",
     metrics: ["Fast Processing", "Expert Advice", "Norway Visa"],
     desc: "I was worried about my Norway visitor visa, but Raptor Academics made it so simple. Thank you for your dedication and expert advice!",
-    image: "https://res.cloudinary.com/ppkvzeli/image/upload/v1794900843/57.webp"
+    image: "https://res.cloudinary.com/ppkvzeli/image/upload/v1795177209/01.webp"
   },
   {
     id: "REV-03",
@@ -35,7 +35,7 @@ const caseStudiesData = [
     result: "5.0 ★ Rating • Verified Client",
     metrics: ["Stress-Free Journey", "Expert Guidance", "Dream Achieved"],
     desc: "I can't thank Raptor Academics enough for their expert guidance and support. They truly made my Malta student visa journey stress-free!",
-    image: "https://res.cloudinary.com/ppkvzeli/image/upload/v1794900843/59.webp"
+    image: "https://res.cloudinary.com/ppkvzeli/image/upload/v1795177208/03.webp"
   },
   {
     id: "REV-04",
@@ -44,7 +44,7 @@ const caseStudiesData = [
     result: "5.0 ★ Rating • Verified Client",
     metrics: ["Great Professionalism", "Helpful Team", "Knowledgeable"],
     desc: "The team at Raptor Academics is incredibly knowledgeable and helpful. They handled my Malta student visa process with great professionalism!",
-    image: "https://res.cloudinary.com/ppkvzeli/image/upload/v1794900843/62.webp"
+    image: "https://res.cloudinary.com/ppkvzeli/image/upload/v1795177208/04.webp"
   },
   {
     id: "REV-05",
@@ -53,7 +53,7 @@ const caseStudiesData = [
     result: "5.0 ★ Rating • Verified Client",
     metrics: ["Top-Notch Service", "Norway Trip", "Highly Recommended"],
     desc: "From consultation to approval, Raptor Academics provided top-notch service. A big thanks for making my Norway trip possible! A Big Thanks",
-    image: "https://res.cloudinary.com/ppkvzeli/image/upload/v1794900843/58.webp"
+    image: "https://res.cloudinary.com/ppkvzeli/image/upload/v1795177209/02.webp"
   },
   {
     id: "REV-06",

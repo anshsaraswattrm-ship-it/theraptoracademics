@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import React, { useEffect, useRef } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Lenis from 'lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -18,33 +18,15 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsAndConditions from './pages/TermsAndConditions';
 import CursorTrail from './components/CursorTrail';
 import RaptorChatWidget from './components/RaptorChatWidget';
+import Courses from './pages/Courses';
+import MaltaUpdates from './pages/MaltaUpdates';
+import BackToTop from './components/BackToTop';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Automatically scroll to top or deep-linked section/institution panel
-const ScrollToTop = () => {
-  const { pathname, hash } = useLocation();
-
-  useEffect(() => {
-    if (hash) {
-      setTimeout(() => {
-        const targetId = hash.replace('#', '');
-        const directEl = document.getElementById(targetId);
-        const panel = directEl || document.getElementById('institution-detail-panel');
-        if (panel) {
-          const y = panel.getBoundingClientRect().top + window.scrollY - 110;
-          window.scrollTo({ top: y, behavior: 'smooth' });
-        }
-      }, 150);
-    } else {
-      window.scrollTo(0, 0);
-    }
-  }, [pathname, hash]);
-
-  return null;
-};
-
 const App = () => {
+  const lenisRef = useRef(null);
+
   useEffect(() => {
     // Initialize Lenis Smooth Scroll
     const lenis = new Lenis({
@@ -52,6 +34,8 @@ const App = () => {
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
     });
+    lenisRef.current = lenis;
+    window.__lenis = lenis;
 
     // Sync Lenis scroll with GSAP ScrollTrigger
     lenis.on('scroll', ScrollTrigger.update);
@@ -66,12 +50,14 @@ const App = () => {
     return () => {
       gsap.ticker.remove(updateTicker);
       lenis.destroy();
+      lenisRef.current = null;
+      delete window.__lenis;
     };
   }, []);
 
   return (
     <Router>
-      <ScrollToTop />
+      <BackToTop lenisRef={lenisRef} />
       <div className="w-full min-h-screen bg-gray-50 text-gray-900 font-sans cursor-default">
         {/* Custom Magnetic Cursor + Mix-Blend-Difference + Particle Trail */}
         <CursorTrail />
@@ -83,11 +69,14 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/institutions" element={<Institutions />} />
+          <Route path="/courses" element={<Courses />} />
+          <Route path="/malta-updates" element={<MaltaUpdates />} />
+          <Route path="/malta-updates/:slug" element={<MaltaUpdates />} />
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/blogs/:slug" element={<BlogPost />} />
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/free-counselling" element={<FreeCounselling />} />
-          
+
           {/* Student Care & Legal Pages */}
           <Route path="/student-care-process" element={<StudentCareProcess />} />
           <Route path="/disclaimer" element={<Disclaimer />} />

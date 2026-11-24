@@ -10,28 +10,28 @@ const stepsData = [
     title: "Profile Assessment & Counselling",
     desc: "Share your academic background, career interests, preferred destination and budget. Our counsellors help you explore suitable courses and institutions in Malta and other selected European countries based on your profile.",
     badge: "Get Your Profile Assessed",
-    image: "https://res.cloudinary.com/ppkvzeli/image/upload/v1794899393/Education_Counseling.png"
+    image: "https://res.cloudinary.com/ppkvzeli/image/upload/v1795176282/4_Steps_01_1254_x_1254.webp"
   },
   {
     num: "02",
     title: "Course Selection & University Applications",
     desc: "Explore relevant undergraduate, postgraduate and professional programmes. Get guidance on comparing institutions, understanding entry requirements and preparing your admission application.",
     badge: "Explore Study Options",
-    image: "https://res.cloudinary.com/ppkvzeli/image/upload/v1794899392/University_Applications.png"
+    image: "https://res.cloudinary.com/ppkvzeli/image/upload/v1795176282/4_Steps_02_1254_x_1254.webp"
   },
   {
     num: "03",
     title: "Documentation & Student Visa Guidance",
     desc: "Understand the supporting documents required for your chosen destination. Get guidance on academic records, financial evidence, health insurance, accommodation requirements and the relevant student visa application process.",
     badge: " Get Visa Guidance",
-    image: "https://res.cloudinary.com/ppkvzeli/image/upload/v1794899393/Hostel_VFS_Documentation.png"
+    image: "https://res.cloudinary.com/ppkvzeli/image/upload/v1795176282/4_Steps_03_1254_x_1254.webp"
   },
   {
     num: "04",
     title: "Pre-Departure Preparation",
     desc: "Once your admission and visa formalities are complete, prepare for your international education journey. Get guidance on travel planning, accommodation considerations, essential documents and pre-departure preparation.",
     badge: "Plan Your Journey",
-    image: "https://res.cloudinary.com/ppkvzeli/image/upload/v1794899397/Visa_Processing_Pay_After_Visa.png"
+    image: "https://res.cloudinary.com/ppkvzeli/image/upload/v1795176282/4_Steps_04_1254_x_1254.webp"
   }
 ];
 

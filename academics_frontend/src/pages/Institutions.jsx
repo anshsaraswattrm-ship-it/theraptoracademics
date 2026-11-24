@@ -67,7 +67,7 @@ const getCollegeSlug = (college) => {
 };
 
 // ==========================================
-// 3. SMART FORMATTERS FOR 2027, LA VALLETTE MBA & CLEAN CARDS
+// 3. SMART FORMATTERS (100% DRIVEN BY institutionsData.js)
 // ==========================================
 const to2027 = (val) => {
   if (typeof val !== 'string') return val;
@@ -102,7 +102,7 @@ const formatLaValletteMbaText = (val = '', collegeName = '', isMbaCourse = false
 };
 
 const extractLicense = (text = '') => {
-  const match = text.match(/Licen[cs]e\s*(?:No\.?|Number)?\s*[:\-]?\s*([0-9]{4}[A-Za-z0-9\-]*)/i);
+  const match = text.match(/Licen[cs]e\s*(?:No\.?|Number)?\s*[:\-]?\s*([0-9]{4}[A-Za-z0-9.\-]*)/i);
   if (match && match[1]) return `Licence No. ${match[1]}`;
   return 'MFHEA Accredited';
 };
@@ -115,11 +115,16 @@ const splitIntoCleanLines = (val = '') => {
     .filter(Boolean);
 };
 
+// 100% live parser from inst.highlights.intake
 const formatShortIntake = (raw = '') => {
   const text = to2027(raw);
-  if (/flexible\s*monthly/i.test(text) && !/january|april/i.test(text)) {
-    return 'Flexible monthly';
+  if (!text) return '—';
+  if (/flexible\s*monthly/i.test(text)) return 'Flexible monthly';
+  if (/quarterly\s*rolling/i.test(text)) return 'Quarterly (Jan/Apr/Jul/Oct)';
+  if (/every\s*2\s*months/i.test(text) && !/january|february/i.test(text)) {
+    return 'Every 2 months (2027)';
   }
+
   let cleaned = text.split('(')[0].trim();
   const monthMap = {
     January: 'Jan',
@@ -145,29 +150,33 @@ const formatShortIntake = (raw = '') => {
   return cleaned;
 };
 
+// 100% live parser from inst.highlights.tuitionFeeSummary
 const formatMinimalTableTuition = (raw = '') => {
   const parts = splitIntoCleanLines(raw);
-  if (parts.length === 0) return { primary: '€6,500', secondary: '' };
+  if (parts.length === 0) return { primary: '—', secondary: '' };
 
   let diplomaFee = '';
+  let level4Fee = '';
   let ugFee = '';
   let pgFee = '';
   let nbcFee = '';
 
   parts.forEach((p) => {
-    const euroMatch = p.match(/€\s?[\d,]+(?:\s*[-–]\s*€\s?[\d,]+)?/);
+    const euroMatch = p.match(/€\s?[\d,]+(?:\s*[-–]\s*€\s?[\d,]+)?(?:\/[Yy]r)?/);
     if (!euroMatch) return;
     const amt = euroMatch[0].replace(/\s+/g, '').replace(/,+$/, '');
 
     if (/nbc|nursing\s*bridging/i.test(p)) {
       nbcFee = `NBC ${amt}`;
+    } else if (/level\s*4\s*awards/i.test(p)) {
+      level4Fee = `L4 ${amt}`;
     } else if (/ug\s*\/\s*pg\s*diploma/i.test(p)) {
       diplomaFee = amt;
     } else if (/ug\s*diploma/i.test(p)) {
       ugFee = `UG ${amt}`;
     } else if (/pg\s*diploma/i.test(p)) {
       pgFee = `PG ${amt}`;
-    } else if (!diplomaFee && /diploma/i.test(p)) {
+    } else if (!diplomaFee && /^diploma/i.test(p)) {
       diplomaFee = amt;
     }
   });
@@ -181,17 +190,28 @@ const formatMinimalTableTuition = (raw = '') => {
   if (diplomaFee) {
     return { primary: diplomaFee, secondary: '' };
   }
+  if (level4Fee) {
+    return { primary: level4Fee, secondary: '' };
+  }
 
-  const allEuros = raw.match(/€\s?[\d,]+/g) || [];
+  const allEuros = raw.match(/€\s?[\d,]+(?:\/[Yy]r)?/g) || [];
   return {
     primary: allEuros[0] ? allEuros[0].replace(/\s+/g, '').replace(/,+$/, '') : to2027(parts[0]),
     secondary: ''
   };
 };
 
+// 100% live parser from inst.highlights.applicationFee
 const formatOwnAppFee = (raw = '') => {
   const clean = to2027(raw).trim();
   if (!clean) return { primary: '—', secondary: '' };
+  if (/contact\s*campus/i.test(clean)) {
+    const parenMatch = clean.match(/\(([^)]+)\)/);
+    return {
+      primary: 'Per Campus Terms',
+      secondary: parenMatch ? parenMatch[1].trim() : ''
+    };
+  }
   const lines = splitIntoCleanLines(clean);
   const firstLine = lines[0];
   const parenMatch = firstLine.match(/^([^()]+)\(([^)]+)\)(.*)$/);
@@ -207,63 +227,91 @@ const formatOwnAppFee = (raw = '') => {
   };
 };
 
+// 100% live parser from inst.highlights.interview
 const formatCompactInterview = (raw = '') => {
   const text = to2027(raw);
+  if (!text) return { label: '—', tone: 'amber' };
   if (/direct\s*admission/i.test(text)) return { label: 'None (direct admission)', tone: 'green' };
   if (/no\s*interview|not\s*required|none/i.test(text)) return { label: 'None', tone: 'green' };
   if (/basic/i.test(text)) return { label: 'Basic assessment', tone: 'amber' };
   if (/mandatory/i.test(text)) return { label: 'Mandatory', tone: 'amber' };
+  if (/admissions\s*interview/i.test(text)) return { label: 'Assessment / Interview', tone: 'amber' };
   if (/required/i.test(text)) return { label: 'Required', tone: 'amber' };
   return { label: text.split('(')[0].trim(), tone: 'amber' };
 };
 
+// 100% live parser from inst.highlights.gap
 const formatCompactGap = (raw = '') => {
   const text = to2027(raw);
+  if (!text) return '—';
   if (/unlimited/i.test(text)) return 'Unlimited';
-  if (/up\s*to\s*3\s*years/i.test(text)) return 'Up to 3 years';
-  if (/max(?:imum)?\s*3\s*years/i.test(text)) return 'Max 3 years';
+  if (/2020\s*or\s*later/i.test(text)) return '2020 or later';
+  if (/standard\s*academic\s*gap/i.test(text)) return 'Evaluated case-by-case';
   if (/up\s*to\s*(\d+)\s*years/i.test(text)) {
     const m = text.match(/up\s*to\s*(\d+)\s*years/i);
     return `Up to ${m[1]} years`;
   }
+  if (/max(?:imum)?\s*(\d+)\s*years/i.test(text)) {
+    const m = text.match(/max(?:imum)?\s*(\d+)\s*years/i);
+    return `Max ${m[1]} years`;
+  }
   return text.split('(')[0].trim();
 };
 
+// 100% live parser from inst.highlights.ielts
 const formatCompactIelts = (raw = '') => {
   const text = to2027(raw);
+  if (!text) return '—';
+  if (/no\s*mandatory\s*ielts/i.test(text)) return 'No mandatory IELTS';
+  if (/ielts\s*optional/i.test(text)) return 'IELTS optional (MOI / 5.0)';
   if (/not\s*mandatory/i.test(text) && /ielts/i.test(text)) return 'IELTS not mandatory';
   if (/no\s*ielts\s*\/?\s*pte|without\s*ielts\s*\/?\s*pte/i.test(text)) return 'No IELTS / PTE';
+  if (/moi\s*accepted/i.test(text) && /5\.5|6\.0/i.test(text)) return 'IELTS 5.0–6.0 / MOI';
+  if (/5\.5\s*ielts.*moi/i.test(text)) return 'IELTS 5.5 or MOI';
   if (/no\s*ielts|without\s*ielts/i.test(text)) return 'No IELTS';
   return text.split('(')[0].trim();
 };
 
-const formatCompactOfferSpeed = (raw = '', collegeName = '') => {
-  const text = to2027(raw);
-  if (/same\s*day/i.test(text) || /uniplural/i.test(collegeName)) return 'Same day (express)';
-  if (/48\s*hours.*express/i.test(text) || /eec-itis/i.test(collegeName)) return '48 hours (express)';
-  if (/48\s*hours|24.*48/i.test(text)) return '48 hours';
+// 100% live parser from inst.highlights.processingSpeed (zero hardcoded fallbacks!)
+const formatCompactOfferSpeed = (raw = '') => {
+  const text = to2027(raw).trim();
+  if (!text) return 'Per campus schedule';
+  if (/same[-\s]*day/i.test(text)) return 'Same day (express)';
+  if (/express\s*48[-\s]*hour/i.test(text)) return '48 hours (express)';
+  if (/48\s*hours/i.test(text)) return '48 hours';
   if (/2\s*working\s*days/i.test(text)) return '2 working days';
-  if (/2\s*days/i.test(text)) return '2 days';
-  if (/3.*5\s*working/i.test(text)) return '3–5 working days';
-  return text ? text.split('(')[0].trim() : '48 hours';
+  if (/2[-\s]*days?/i.test(text)) return '2 days';
+  return text.split('|')[0].trim();
 };
 
+// 100% live parser from inst.highlights.tuitionFeeSummary & inst.highlights.applicationFee
 const formatPayAfterVisaColumn = (inst) => {
-  const full = `${inst.name} ${inst.flagshipCourses || ''} ${inst.highlights?.tuitionFeeSummary || ''} ${inst.highlights?.visa || ''}`;
-  if (/uniplural/i.test(inst.name)) return 'NBC & UG Diploma';
-  if (/malita/i.test(inst.name)) return 'Bachelor Degree';
-  if (/think\s*talent/i.test(inst.name)) return 'PG Diploma';
-  if (/eec-itis/i.test(inst.name)) return 'B.Sc. (Honours)';
-  if (/la\s*vallette/i.test(inst.name)) return 'MBA & Diplomas';
-  if (/avanza/i.test(inst.name)) return 'MBA & Diplomas';
-  if (/learn\s*key/i.test(inst.name)) return 'MBA & Diplomas';
-  if (/21\s*academy/i.test(inst.name)) return 'MBA';
-  if (/swiss\s*school|ssm/i.test(inst.name)) return 'MBA & BBA';
-  if (/besc/i.test(inst.name)) return 'Qualifi Programs';
-  if (/global\s*college/i.test(inst.name)) return 'BA, MSc & MBA';
-  if (/gbs/i.test(inst.name)) return 'MSc & MBA';
-  if (/pay.*after.*visa/i.test(full)) return 'Eligible Programs';
-  return 'Selected Courses';
+  const summary = to2027(inst.highlights?.tuitionFeeSummary || '');
+  const appFee = to2027(inst.highlights?.applicationFee || '');
+
+  if (/50%\s*tuition\s*fee\s*payment\s*after\s*offer\s*letter/i.test(appFee)) {
+    return '50% after Offer Letter';
+  }
+
+  if (!/after\s*visa/i.test(summary)) {
+    return 'Before visa / per year';
+  }
+
+  const hasDiploma = /diploma/i.test(summary);
+  const hasMba = /\bmba\b/i.test(summary);
+  const hasMsc = /\bmsc\b|master/i.test(summary);
+  const hasBachelor = /b\.?sc|bachelor|\bbba\b/i.test(summary);
+  const hasNbc = /\bnbc\b/i.test(summary);
+
+  if (hasNbc && hasDiploma && !hasMba && !hasBachelor) return 'NBC & UG Diploma';
+  if (hasBachelor && !hasMba && !hasDiploma) return 'B.Sc. (Honours)';
+  if (hasMba && hasBachelor && hasDiploma) return 'Diplomas, BBA & MBA';
+  if (hasMba && hasMsc && hasDiploma) return 'Diplomas, MSc & MBA';
+  if (hasMba && hasDiploma) return 'Diplomas & MBA';
+  if (hasDiploma && hasMsc) return 'Diplomas & Master’s';
+  if (hasDiploma) return 'All Diplomas';
+
+  return 'Eligible Programs';
 };
 
 const extractDurationBadge = (course, collegeName = '') => {
@@ -276,7 +324,7 @@ const extractDurationBadge = (course, collegeName = '') => {
     /duration|length|year|month|week/i.test(d.label)
   );
   if (dur) {
-    const shortMatch = dur.value.match(/(\d+\s*(?:Years?|Months?|Weeks?))/i);
+    const shortMatch = dur.value.match(/(\d+(?:\.\d+)?\s*(?:Years?|Months?|Weeks?))/i);
     return shortMatch ? shortMatch[1] : dur.value.split('(')[0].trim();
   }
   return 'Full-Time';
@@ -782,8 +830,6 @@ const CourseAccordion = ({ course, collegeName, isOpen, onToggle, onApplyCourse 
 
 // ==========================================
 // 5. ORIGINAL RAPTOR ACADEMICS APPLY MODAL
-//    - Split Two-Panel Branded Design
-//    - Step 3 Optional with Simple Yes / No Buttons (No File Upload)
 // ==========================================
 const ApplyNowModal = ({ isOpen, onClose, initialCollegeName, initialProgramName }) => {
   const [formData, setFormData] = useState({
@@ -869,7 +915,6 @@ const ApplyNowModal = ({ isOpen, onClose, initialCollegeName, initialProgramName
         transition={{ duration: 0.25 }}
         className="bg-white w-full max-w-4xl rounded-[2rem] shadow-2xl overflow-hidden border border-slate-200/80 my-auto max-h-[92vh] grid grid-cols-1 lg:grid-cols-12"
       >
-        {/* LEFT BRANDED SUMMARY SIDEBAR (Raptor Academics Original Look) */}
         <div className="lg:col-span-4 bg-gradient-to-b from-[#0b1930] via-[#0f2547] to-[#16315c] text-white p-6 md:p-8 flex flex-col justify-between relative overflow-hidden">
           <div className="absolute -bottom-16 -left-16 w-52 h-52 bg-red-600/20 rounded-full blur-3xl pointer-events-none" />
 
@@ -896,7 +941,6 @@ const ApplyNowModal = ({ isOpen, onClose, initialCollegeName, initialProgramName
               </p>
             </div>
 
-            {/* Selected Institute Mini Card */}
             <div className="bg-white/10 border border-white/15 rounded-2xl p-3.5 space-y-2.5 backdrop-blur-xs">
               <div className="h-24 rounded-xl overflow-hidden">
                 <img
@@ -934,12 +978,10 @@ const ApplyNowModal = ({ isOpen, onClose, initialCollegeName, initialProgramName
           </div>
         </div>
 
-        {/* RIGHT SCROLLABLE FORM PANEL */}
         <div
           data-lenis-prevent="true"
           className="lg:col-span-8 overflow-y-auto overscroll-contain max-h-[92vh] flex flex-col bg-white"
         >
-          {/* Top Bar with Close Button */}
           <div className="px-6 py-4 md:px-8 border-b border-slate-100 flex items-center justify-between sticky top-0 bg-white/95 backdrop-blur-xs z-20">
             <div className="flex items-center gap-2 text-xs font-extrabold text-[#0f2547]">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
@@ -981,7 +1023,6 @@ const ApplyNowModal = ({ isOpen, onClose, initialCollegeName, initialProgramName
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="p-6 md:p-8 space-y-7">
-              {/* SECTION 1: STUDENT DETAILS */}
               <div className="space-y-4">
                 <div className="flex items-center gap-2.5">
                   <span className="w-6 h-6 rounded-lg bg-[#0f2547] text-white text-xs font-black flex items-center justify-center">
@@ -1077,7 +1118,6 @@ const ApplyNowModal = ({ isOpen, onClose, initialCollegeName, initialProgramName
                 </div>
               </div>
 
-              {/* SECTION 2: PROGRAM & COUNSELING PREFERENCE */}
               <div className="space-y-4">
                 <div className="flex items-center gap-2.5">
                   <span className="w-6 h-6 rounded-lg bg-[#0f2547] text-white text-xs font-black flex items-center justify-center">
@@ -1163,7 +1203,6 @@ const ApplyNowModal = ({ isOpen, onClose, initialCollegeName, initialProgramName
                 </div>
               </div>
 
-              {/* SECTION 3: OPTIONAL DOCUMENT READINESS (SIMPLE YES / NO ONLY — NO FILE UPLOAD) */}
               <div className="space-y-3.5 bg-slate-50/90 p-5 rounded-2xl border border-slate-200/80">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2.5">
@@ -1216,7 +1255,6 @@ const ApplyNowModal = ({ isOpen, onClose, initialCollegeName, initialProgramName
                 </div>
               </div>
 
-              {/* Submit Row */}
               <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-t border-slate-100">
                 <label className="flex items-center gap-2 text-xs text-slate-600 cursor-pointer">
                   <input
@@ -2031,7 +2069,7 @@ const Institutions = () => {
         </p>
       </div>
 
-      {/* 4. BOTTOM QUICK COMPARISON TABLE */}
+      {/* 4. BOTTOM QUICK COMPARISON TABLE (100% LIVE FROM institutionsData.js) */}
       <section
         id="quick-comparison-matrix"
         className="max-w-[1560px] mx-auto px-4 md:px-10 py-12 md:py-16 print:hidden"
@@ -2077,15 +2115,15 @@ const Institutions = () => {
               <tbody className="divide-y divide-slate-200 text-xs md:text-[13px] align-top">
                 {institutionsData.map((inst) => {
                   const shortTitle = inst.name.split('–')[0].trim();
-                  const shortIntake = formatShortIntake(inst.highlights?.intake || 'Jan / Apr / Jul / Oct 2027');
+                  const shortIntake = formatShortIntake(inst.highlights?.intake || '');
                   const minimalTuition = formatMinimalTableTuition(
-                    inst.highlights?.tuitionFeeSummary || '€6,500'
+                    inst.highlights?.tuitionFeeSummary || ''
                   );
                   const ownAppFee = formatOwnAppFee(inst.highlights?.applicationFee || '');
-                  const interviewObj = formatCompactInterview(inst.highlights?.interview || 'None');
-                  const gapShort = formatCompactGap(inst.highlights?.gap || 'Unlimited');
-                  const ieltsShort = formatCompactIelts(inst.highlights?.ielts || 'No IELTS / PTE');
-                  const offerSpeed = formatCompactOfferSpeed(inst.highlights?.processingSpeed, inst.name);
+                  const interviewObj = formatCompactInterview(inst.highlights?.interview || '');
+                  const gapShort = formatCompactGap(inst.highlights?.gap || '');
+                  const ieltsShort = formatCompactIelts(inst.highlights?.ielts || '');
+                  const offerSpeed = formatCompactOfferSpeed(inst.highlights?.processingSpeed || '');
                   const payAfterVisaText = formatPayAfterVisaColumn(inst);
 
                   return (
@@ -2103,7 +2141,7 @@ const Institutions = () => {
                         >
                           {shortTitle}
                         </button>
-                        <span className="text-[11px] text-slate-400 block mt-0.5">
+                        <span className="text-[11px] text-slate-400 block mt-0.5 max-w-[200px] truncate">
                           {inst.location}
                         </span>
                       </td>
@@ -2133,7 +2171,7 @@ const Institutions = () => {
                       <td className="py-4 px-3.5">
                         <span className="font-bold text-slate-900 block">{ownAppFee.primary}</span>
                         {ownAppFee.secondary && (
-                          <span className="text-[11px] text-slate-500 leading-tight block mt-0.5 max-w-[150px]">
+                          <span className="text-[11px] text-slate-500 leading-tight block mt-0.5 max-w-[160px]">
                             {ownAppFee.secondary}
                           </span>
                         )}

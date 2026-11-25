@@ -1,7 +1,7 @@
-import React, { useRef, Suspense } from 'react';
+import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { Float, MeshDistortMaterial, Environment, Torus } from '@react-three/drei';
+import { useFrame } from '@react-three/fiber';
+import { Float, MeshDistortMaterial, Environment } from '@react-three/drei';
 import { Link } from 'react-router-dom';
 import { CheckCircle2, MapPin, Clock, Briefcase, Plane, Zap, ShieldCheck, DollarSign } from 'lucide-react';
 import { FaArrowRight, FaUniversity } from 'react-icons/fa';
@@ -50,44 +50,48 @@ const MorphingRaptorOrb = () => {
 
 const HeroSection = () => {
   return (
-    <section className="relative pt-36 pb-20 md:pt-44 md:pb-24 px-4 md:px-12 bg-white overflow-hidden">
+    <section className="relative pt-32 pb-16 sm:pt-36 sm:pb-20 xl:pt-44 xl:pb-24 px-4 sm:px-8 md:px-12 bg-white overflow-hidden">
       <div className="absolute top-16 left-0 w-96 h-96 bg-red-100/40 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-10 right-10 w-[450px] h-[450px] bg-[#1b365d]/10 rounded-full blur-[130px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
-        <motion.div 
+      <div className="max-w-7xl mx-auto grid grid-cols-1 xl:grid-cols-12 gap-10 xl:gap-12 items-center relative z-10">
+        {/* CENTERED ON MOBILE & ALL TABLETS (< 1280px), LEFT-ALIGNED ON DESKTOP (1280px+) */}
+        <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
-          className="lg:col-span-7 space-y-6 z-10"
+          className="xl:col-span-7 flex flex-col items-center text-center xl:items-start xl:text-left space-y-6 z-10"
         >
           <div className="inline-flex items-center gap-2.5 bg-red-50 border border-red-100 px-4 py-1.5 rounded-full">
             <span className="w-2 h-2 rounded-full bg-red-600 animate-ping" />
-            <span className="text-red-600 font-extrabold text-xs uppercase tracking-widest">
-            YOUR GLOBAL EDUCATION JOURNEY STARTS HERE
+            <span className="text-red-600 font-extrabold text-[11px] sm:text-xs uppercase tracking-widest">
+              YOUR GLOBAL EDUCATION JOURNEY STARTS HERE
             </span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-[62px] font-extrabold text-[#0f2547] leading-[1.1] tracking-tight">
-          Study in Europe & <br />
-          Malta with  {' '}
+          <h1 className="text-3xl sm:text-5xl xl:text-[62px] font-extrabold text-[#0f2547] leading-[1.12] tracking-tight max-w-3xl xl:max-w-none">
+            Study in Europe &amp; <br className="hidden sm:inline" />
+            Malta with{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-red-600 to-red-800 drop-shadow-sm">
-            The Raptor Academics
+              The Raptor Academics
             </span>
           </h1>
 
-          <p className="text-base md:text-lg text-gray-600 max-w-xl leading-relaxed">
-          The Raptor Academics helps Indian students explore higher education opportunities across Europe, with specialised guidance for Malta and support for other selected European destinations. <strong className="text-[#1b365d]">From choosing the right course and institution to admission applications, student visa documentation and pre-departure preparation.</strong>
+          <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl xl:max-w-xl leading-relaxed">
+            The Raptor Academics helps Indian students explore higher education opportunities across Europe, with specialised guidance for Malta and support for other selected European destinations.{' '}
+            <strong className="text-[#1b365d]">
+              From choosing the right course and institution to admission applications, student visa documentation and pre-departure preparation.
+            </strong>
           </p>
 
-          <div className="p-5 border-l-4 border-red-600 bg-gradient-to-r from-red-50/90 to-red-50/20 text-[#0f2547] rounded-r-2xl max-w-lg shadow-sm">
-            <p className="font-extrabold text-base md:text-lg leading-snug">
-            From Course Selection to Visa Guidance  — <br />
-              <span className="text-red-600">We're Here to Help You Move Forward.</span>
+          <div className="w-full p-5 border-t-4 xl:border-t-0 xl:border-l-4 border-red-600 bg-gradient-to-r from-red-50/90 to-red-50/30 text-[#0f2547] rounded-2xl xl:rounded-l-none xl:rounded-r-2xl max-w-2xl xl:max-w-lg shadow-sm">
+            <p className="font-extrabold text-sm sm:text-base md:text-lg leading-snug">
+              From Course Selection to Visa Guidance — <br />
+              <span className="text-red-600">We&apos;re Here to Help You Move Forward.</span>
             </p>
           </div>
 
-          <div className="flex flex-wrap gap-3 pt-1">
+          <div className="flex flex-wrap items-center justify-center xl:justify-start gap-2.5 sm:gap-3 pt-1">
             <span className="flex items-center gap-2 text-xs font-bold text-[#1b365d] bg-[#1b365d]/5 px-3.5 py-2 rounded-xl border border-[#1b365d]/15">
               <CheckCircle2 size={15} className="text-red-600 shrink-0" /> Without IELTS / PTE
             </span>
@@ -95,25 +99,25 @@ const HeroSection = () => {
               <CheckCircle2 size={15} className="text-red-600 shrink-0" /> Pay Fee AFTER Visa
             </span>
             <span className="flex items-center gap-2 text-xs font-bold text-[#1b365d] bg-[#1b365d]/5 px-3.5 py-2 rounded-xl border border-[#1b365d]/15">
-              <CheckCircle2 size={15} className="text-red-600 shrink-0" /> 10th Pass & Gap Accepted
+              <CheckCircle2 size={15} className="text-red-600 shrink-0" /> 10th Pass &amp; Gap Accepted
             </span>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 pt-3">
-            <Link to="/free-counselling">
+          <div className="w-full sm:w-auto flex flex-col sm:flex-row items-center justify-center xl:justify-start gap-3.5 sm:gap-4 pt-2">
+            <Link to="/free-counselling" className="w-full sm:w-auto">
               <motion.button
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-red-600/30 flex items-center justify-center gap-3 transition-all"
+                className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-red-600/30 flex items-center justify-center gap-3 transition-all cursor-pointer"
               >
                 Book Free Counselling <FaArrowRight size={14} />
               </motion.button>
             </Link>
-            <Link to="/institutions">
+            <Link to="/institutions" className="w-full sm:w-auto">
               <motion.button
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                className="w-full sm:w-auto bg-[#1b365d] hover:bg-[#122644] text-white font-bold px-8 py-4 rounded-xl flex items-center justify-center gap-2.5 transition-all shadow-md"
+                className="w-full sm:w-auto bg-[#1b365d] hover:bg-[#122644] text-white font-bold px-8 py-4 rounded-xl flex items-center justify-center gap-2.5 transition-all shadow-md cursor-pointer"
               >
                 <FaUniversity className="text-red-400" /> Explore Partner Colleges
               </motion.button>
@@ -121,30 +125,31 @@ const HeroSection = () => {
           </div>
         </motion.div>
 
-        <motion.div 
+        {/* RIGHT HERO VISUAL + NON-CLIPPING BADGES */}
+        <motion.div
           initial={{ opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8 }}
-          className="lg:col-span-5 relative"
+          className="xl:col-span-5 relative w-full max-w-2xl mx-auto xl:max-w-none"
         >
-          <div className="relative h-[560px] sm:h-[600px] w-full">
-            <div className="w-full h-[480px] sm:h-[520px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white relative z-10 group">
-              <img 
-                src="https://res.cloudinary.com/ppkvzeli/image/upload/v1794896190/hero-img.jpg" 
-                alt="Study in Malta Valletta" 
+          <div className="relative xl:h-[600px] w-full flex flex-col gap-4 xl:block">
+            <div className="w-full h-[380px] sm:h-[460px] xl:h-[520px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white relative z-10 group">
+              <img
+                src="https://res.cloudinary.com/ppkvzeli/image/upload/v1794896190/hero-img.jpg"
+                alt="Study in Malta Valletta"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0b1b33]/90 via-[#0b1b33]/25 to-transparent" />
-              
-              <div className="absolute top-5 right-5 bg-[#1b365d]/80 backdrop-blur-md border border-white/20 text-white px-3.5 py-1.5 rounded-full text-[11px] font-bold flex items-center gap-1.5">
-                <MapPin size={13} className="text-red-400" /> Valletta & Birkirkara, Malta
+
+              <div className="absolute top-4 right-4 sm:top-5 sm:right-5 bg-[#1b365d]/85 backdrop-blur-md border border-white/20 text-white px-3.5 py-1.5 rounded-full text-[11px] font-bold flex items-center gap-1.5">
+                <MapPin size={13} className="text-red-400 shrink-0" /> Valletta &amp; Birkirkara, Malta
               </div>
 
-              <div className="absolute bottom-6 left-6 right-6 text-white">
+              <div className="absolute bottom-5 left-5 right-5 sm:bottom-6 sm:left-6 sm:right-6 text-white">
                 <span className="bg-red-600 text-[10px] font-extrabold uppercase tracking-widest px-3 py-1 rounded-full">
                   Schengen Zone • EU
                 </span>
-                <h3 className="text-2xl font-extrabold mt-2 leading-tight">
+                <h3 className="text-xl sm:text-2xl font-extrabold mt-2 leading-tight">
                   European Degree + Work Permit
                 </h3>
                 <p className="text-xs text-gray-200 mt-1">
@@ -153,12 +158,40 @@ const HeroSection = () => {
               </div>
             </div>
 
-            <motion.div 
+            {/* MOBILE & ALL TABLETS (< 1280px): CLEAN 2-COLUMN NON-OVERLAPPING CARDS */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 xl:hidden z-20">
+              <div className="bg-[#1b365d] text-white px-5 py-4 rounded-2xl shadow-lg border border-[#2a4d80] flex items-center justify-center sm:justify-start gap-3.5">
+                <div className="w-11 h-11 rounded-xl bg-red-600 text-white flex items-center justify-center font-bold shrink-0">
+                  <Clock size={21} />
+                </div>
+                <div className="min-w-0 text-left">
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-red-300">
+                    Express Offer
+                  </p>
+                  <p className="text-sm font-extrabold">In 24–48 Hours</p>
+                </div>
+              </div>
+
+              <div className="bg-[#1b365d] text-white px-5 py-4 rounded-2xl shadow-lg border border-[#2a4d80] flex items-center justify-center sm:justify-start gap-3.5">
+                <div className="w-11 h-11 rounded-xl bg-red-600 text-white flex items-center justify-center font-bold shrink-0">
+                  <Briefcase size={21} />
+                </div>
+                <div className="min-w-0 text-left">
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-red-300">
+                    Legal Work Permit
+                  </p>
+                  <p className="text-sm font-extrabold">20 Hrs/Week + PSW</p>
+                </div>
+              </div>
+            </div>
+
+            {/* DESKTOP (1280px+): FLOATING OVERLAPPING CARDS */}
+            <motion.div
               animate={{ y: [-8, 8, -8] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute bottom-6 left-0 bg-[#1b365d] text-white px-5 py-3.5 rounded-2xl shadow-2xl border border-[#2a4d80] flex items-center gap-3.5 z-30"
+              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+              className="hidden xl:flex absolute bottom-6 left-0 bg-[#1b365d] text-white px-5 py-3.5 rounded-2xl shadow-2xl border border-[#2a4d80] items-center gap-3.5 z-30"
             >
-              <div className="w-11 h-11 rounded-xl bg-red-600 text-white flex items-center justify-center font-bold">
+              <div className="w-11 h-11 rounded-xl bg-red-600 text-white flex items-center justify-center font-bold shrink-0">
                 <Clock size={22} />
               </div>
               <div>
@@ -167,12 +200,12 @@ const HeroSection = () => {
               </div>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               animate={{ y: [8, -8, 8] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute bottom-6 right-0 bg-[#1b365d] text-white px-5 py-3.5 rounded-2xl shadow-2xl border border-[#2a4d80] flex items-center gap-3.5 z-30"
+              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+              className="hidden xl:flex absolute bottom-6 right-0 bg-[#1b365d] text-white px-5 py-3.5 rounded-2xl shadow-2xl border border-[#2a4d80] items-center gap-3.5 z-30"
             >
-              <div className="w-11 h-11 rounded-xl bg-red-600 text-white flex items-center justify-center font-bold">
+              <div className="w-11 h-11 rounded-xl bg-red-600 text-white flex items-center justify-center font-bold shrink-0">
                 <Briefcase size={22} />
               </div>
               <div>
@@ -184,7 +217,8 @@ const HeroSection = () => {
         </motion.div>
       </div>
 
-      <div className="max-w-7xl mx-auto mt-16 bg-white shadow-2xl shadow-gray-200/80 border border-gray-100 rounded-3xl p-8 md:px-12 md:py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative z-20">
+      {/* BOTTOM 4 FEATURE HIGHLIGHTS */}
+      <div className="max-w-7xl mx-auto mt-12 xl:mt-16 bg-white shadow-2xl shadow-gray-200/80 border border-gray-100 rounded-3xl p-6 sm:p-8 md:px-12 md:py-10 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 sm:gap-8 relative z-20">
         <div className="flex items-center gap-4 text-[#0f2547] hover:text-red-600 transition group cursor-default">
           <div className="text-red-600 bg-red-50 group-hover:bg-[#1b365d] group-hover:text-white p-4 rounded-2xl shrink-0 transition-colors shadow-sm">
             <Plane size={28} />

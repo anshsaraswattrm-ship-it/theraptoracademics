@@ -26,9 +26,10 @@ import {
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { institutionsData } from '../data/institutionsData';
+import logo from '../assets/logo.png';
 
 // ==========================================
-// 1. INSTITUTION IMAGES MAP
+// 1. INSTITUTION CAMPUS IMAGES & LOGOS MAP
 // ==========================================
 const COLLEGE_IMAGES = {
   "La Vallette": "https://res.cloudinary.com/ppkvzeli/image/upload/v1794901696/R.jpg",
@@ -45,6 +46,22 @@ const COLLEGE_IMAGES = {
   "GBS": "https://res.cloudinary.com/ppkvzeli/image/upload/v1794906533/gbs.jpg"
 };
 
+// Official University / College Logos used specifically for clean Print Header
+const COLLEGE_LOGOS = {
+  "La Vallette": "https://res.cloudinary.com/ppkvzeli/image/upload/v1795079938/La-Vallette-institute-PNG-08-360x312-1-1.png",
+  "Avanza": "https://res.cloudinary.com/ppkvzeli/image/upload/v1795079938/gabriel-bajada-malta-avanza-training-academy-logo-primary-jpg.webp",
+  "Uniplural": "https://res.cloudinary.com/ppkvzeli/image/upload/v1795079937/OIP.webp",
+  "Malita": "https://res.cloudinary.com/ppkvzeli/image/upload/v1795079938/malita-logo-dark-scaled.png",
+  "Learn Key": "https://res.cloudinary.com/ppkvzeli/image/upload/v1795079939/Learnkey-malta-logo.png",
+  "21 Academy": "https://res.cloudinary.com/ppkvzeli/image/upload/v1795079938/4-removebg-preview.webp",
+  "Think Talent": "https://res.cloudinary.com/ppkvzeli/image/upload/v1795079938/ThinkTalent.webp",
+  "EEC-ITIS": "https://res.cloudinary.com/ppkvzeli/image/upload/v1795080664/eec_itis_logo.webp",
+  "Swiss School": "https://res.cloudinary.com/ppkvzeli/image/upload/v1795079938/logo.png",
+  "BESC": "https://res.cloudinary.com/ppkvzeli/image/upload/v1795079939/Logo_Malta_DEFINITIVO.png",
+  "Global College": "https://res.cloudinary.com/ppkvzeli/image/upload/v1795079937/Logo-transparent-GCM-01-300x63-1.png",
+  "GBS": "https://res.cloudinary.com/ppkvzeli/image/upload/v1795079937/gbs_social_profile_gbs-malta_twitter-400-x-400-svg.png"
+};
+
 const DEFAULT_FALLBACK_IMAGES = Object.values(COLLEGE_IMAGES);
 
 const getCollegeImage = (college, index = 0) => {
@@ -56,6 +73,17 @@ const getCollegeImage = (college, index = 0) => {
     }
   }
   return DEFAULT_FALLBACK_IMAGES[index % DEFAULT_FALLBACK_IMAGES.length];
+};
+
+const getCollegeLogo = (college, index = 0) => {
+  if (college?.logo) return college.logo;
+  const name = college?.name || '';
+  for (const [key, url] of Object.entries(COLLEGE_LOGOS)) {
+    if (name.toLowerCase().includes(key.toLowerCase())) {
+      return url;
+    }
+  }
+  return getCollegeImage(college, index);
 };
 
 // ==========================================
@@ -115,7 +143,6 @@ const splitIntoCleanLines = (val = '') => {
     .filter(Boolean);
 };
 
-// 100% live parser from inst.highlights.intake
 const formatShortIntake = (raw = '') => {
   const text = to2027(raw);
   if (!text) return '—';
@@ -150,7 +177,6 @@ const formatShortIntake = (raw = '') => {
   return cleaned;
 };
 
-// 100% live parser from inst.highlights.tuitionFeeSummary
 const formatMinimalTableTuition = (raw = '') => {
   const parts = splitIntoCleanLines(raw);
   if (parts.length === 0) return { primary: '—', secondary: '' };
@@ -201,7 +227,6 @@ const formatMinimalTableTuition = (raw = '') => {
   };
 };
 
-// 100% live parser from inst.highlights.applicationFee
 const formatOwnAppFee = (raw = '') => {
   const clean = to2027(raw).trim();
   if (!clean) return { primary: '—', secondary: '' };
@@ -227,7 +252,6 @@ const formatOwnAppFee = (raw = '') => {
   };
 };
 
-// 100% live parser from inst.highlights.interview
 const formatCompactInterview = (raw = '') => {
   const text = to2027(raw);
   if (!text) return { label: '—', tone: 'amber' };
@@ -240,7 +264,6 @@ const formatCompactInterview = (raw = '') => {
   return { label: text.split('(')[0].trim(), tone: 'amber' };
 };
 
-// 100% live parser from inst.highlights.gap
 const formatCompactGap = (raw = '') => {
   const text = to2027(raw);
   if (!text) return '—';
@@ -258,7 +281,6 @@ const formatCompactGap = (raw = '') => {
   return text.split('(')[0].trim();
 };
 
-// 100% live parser from inst.highlights.ielts
 const formatCompactIelts = (raw = '') => {
   const text = to2027(raw);
   if (!text) return '—';
@@ -272,7 +294,6 @@ const formatCompactIelts = (raw = '') => {
   return text.split('(')[0].trim();
 };
 
-// 100% live parser from inst.highlights.processingSpeed (zero hardcoded fallbacks!)
 const formatCompactOfferSpeed = (raw = '') => {
   const text = to2027(raw).trim();
   if (!text) return 'Per campus schedule';
@@ -284,7 +305,6 @@ const formatCompactOfferSpeed = (raw = '') => {
   return text.split('|')[0].trim();
 };
 
-// 100% live parser from inst.highlights.tuitionFeeSummary & inst.highlights.applicationFee
 const formatPayAfterVisaColumn = (inst) => {
   const summary = to2027(inst.highlights?.tuitionFeeSummary || '');
   const appFee = to2027(inst.highlights?.applicationFee || '');
@@ -437,7 +457,7 @@ const CourseAccordion = ({ course, collegeName, isOpen, onToggle, onApplyCourse 
                   Fee: {fmt(headlineFee.amount)}
                 </span>
               )}
-              <span className="text-[11px] font-semibold text-slate-400">
+              <span className="text-[11px] font-semibold text-slate-400 print:hidden">
                 {isOpen ? 'Click to collapse details' : 'Click to view full fee, modules & career salaries'}
               </span>
             </div>
@@ -463,7 +483,7 @@ const CourseAccordion = ({ course, collegeName, isOpen, onToggle, onApplyCourse 
 
       <div className={`${isOpen ? 'block' : 'hidden print:block'}`}>
         <div className="p-6 md:p-8 space-y-8 border-t border-slate-200 bg-[#f8fafc]/70 print:bg-white">
-          
+
           {/* 1. COURSE OVERVIEW + HIGHLIGHT FEE BANNER */}
           <div className="grid grid-cols-1 xl:grid-cols-12 gap-6 items-stretch">
             {course.overview && (
@@ -1455,6 +1475,7 @@ const Institutions = () => {
   }, [activeCollege]);
 
   const activeCampusImage = getCollegeImage(activeCollege, activeCollegeIndex);
+  const activeUniversityLogo = getCollegeLogo(activeCollege, activeCollegeIndex);
 
   return (
     <div className="min-h-screen bg-[#f1f5f9] font-sans print:bg-white">
@@ -1462,611 +1483,667 @@ const Institutions = () => {
         <Navbar />
       </div>
 
-      {/* OFFICIAL PRINT-ONLY HEADER */}
-      <div className="hidden print:block border-b-4 border-[#0f2547] pb-5 mb-8 px-4 pt-4">
-        <div className="flex items-center justify-between">
-          <div>
-            <p className="text-xs font-extrabold uppercase tracking-widest text-red-600">
-              Official 2027 Institution & Fee Prospectus
-            </p>
-            <h1 className="text-3xl font-black text-[#0f2547] mt-0.5">
-              THE RAPTOR ACADEMICS
-            </h1>
-            <p className="text-xs font-semibold text-slate-600 mt-1">
-              120/64, New Sanganer Rd, Sector 12, Mansarovar, Jaipur, Rajasthan 302020
-            </p>
-          </div>
-          <div className="text-right text-xs font-bold text-[#0f2547] space-y-1">
-            <p>Phone / WhatsApp: (+91) 72320 10105</p>
-            <p>Email: theraptoracademics@gmail.com</p>
-            <p>Web: www.theraptoracademics.com</p>
-          </div>
-        </div>
-      </div>
+      {/* WRAPPER TABLE FOR CLEAN MULTI-PAGE PRINT HEADER & BOTTOM-PINNED FOOTER */}
+      <table className="w-full border-collapse block print:table">
+        {/* REPEATING OFFICIAL PRINT-ONLY LETTERHEAD HEADER */}
+        <thead className="hidden print:table-header-group">
+          <tr>
+            <td>
+              <div className="border-b-2 border-[#0f2547] pb-4 mb-6 pt-1">
+                <div className="flex items-center justify-between gap-8">
+                  <div className="shrink-0">
+                    <img
+                      src={logo}
+                      alt="The Raptor Academics"
+                      className="h-14 w-auto object-contain"
+                    />
+                  </div>
 
-      {/* 1. ORIGINAL RAPTOR ACADEMICS SPLIT EDITORIAL HERO */}
-      <section className="relative pt-36 pb-24 md:pt-44 md:pb-28 bg-[#0b1930] text-white overflow-hidden px-4 md:px-10 print:hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center opacity-15 pointer-events-none"
-          style={{
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&q=80')"
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0b1930] via-[#0f2547]/95 to-[#0b1930]/90 pointer-events-none" />
-        <div className="absolute -top-24 right-1/4 w-[500px] h-[500px] bg-red-600/20 rounded-full blur-[150px] pointer-events-none" />
-
-        <div className="max-w-[1560px] mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="lg:col-span-7 space-y-5"
-          >
-            <div className="inline-flex items-center gap-2.5 bg-red-600/20 border border-red-500/40 px-4 py-1.5 rounded-full">
-              <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-              <span className="text-red-300 font-extrabold uppercase tracking-widest text-xs">
-                Official Partner Network • 2027 Admissions Open
-              </span>
-            </div>
-
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-[1.08] tracking-tight">
-              Explore Accredited <br />
-              <span className="text-red-500">Colleges & Universities</span> In Malta
-            </h1>
-
-            <p className="text-blue-100/85 text-base md:text-lg leading-relaxed max-w-2xl">
-              Discover {institutionsData.length} government-licensed higher education institutions offering {totalProgramsCount}+ career-focused Diplomas, Bachelor’s, and Master’s degrees. Enjoy 24–48 hour offer letters without IELTS and pay your main tuition fee after visa approval.
-            </p>
-
-            <div className="flex flex-wrap items-center gap-3 pt-2">
-              <button
-                type="button"
-                onClick={() => openApplyModal(activeCollege.name)}
-                className="bg-red-600 hover:bg-red-700 text-white font-extrabold text-xs md:text-sm px-7 py-4 rounded-xl shadow-lg shadow-red-600/30 transition-all flex items-center gap-2 cursor-pointer"
-              >
-                Start 2027 Application <FaArrowRight size={12} />
-              </button>
-              <a
-                href="#quick-comparison-matrix"
-                className="bg-white/10 hover:bg-white/20 text-white border border-white/20 font-bold text-xs md:text-sm px-6 py-4 rounded-xl transition-all"
-              >
-                Jump to Side-by-Side Matrix
-              </a>
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.15 }}
-            className="lg:col-span-5"
-          >
-            <div className="bg-white/10 backdrop-blur-xl border border-white/15 rounded-3xl p-6 md:p-8 shadow-2xl space-y-6">
-              <div className="flex items-center justify-between border-b border-white/15 pb-4">
-                <div>
-                  <span className="text-[11px] font-extrabold uppercase tracking-widest text-red-400 block">
-                    The Raptor Academics Advantage
-                  </span>
-                  <h3 className="text-xl font-black text-white mt-0.5">
-                    2027 Malta Intake Snapshot
-                  </h3>
-                </div>
-                <div className="w-12 h-12 rounded-2xl bg-red-600 flex items-center justify-center text-white shadow-lg">
-                  <FaUniversity size={22} />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div className="bg-[#0b1930]/70 border border-white/10 rounded-2xl p-4">
-                  <span className="text-2xl md:text-3xl font-black text-white block">
-                    {institutionsData.length} Colleges
-                  </span>
-                  <span className="text-xs text-blue-200/80 font-medium mt-1 block">
-                    MFHEA & Qualifi / OTHM Accredited
-                  </span>
-                </div>
-                <div className="bg-[#0b1930]/70 border border-white/10 rounded-2xl p-4">
-                  <span className="text-2xl md:text-3xl font-black text-red-400 block">
-                    {totalProgramsCount}+ Courses
-                  </span>
-                  <span className="text-xs text-blue-200/80 font-medium mt-1 block">
-                    MQF Level 4, 5, 6 & 7 Programs
-                  </span>
-                </div>
-              </div>
-
-              <div className="space-y-2.5 text-xs md:text-sm text-blue-100 font-semibold">
-                <div className="flex items-center gap-2.5">
-                  <FaCheckCircle className="text-emerald-400 shrink-0" />
-                  <span>Pay Main Course Tuition Fee AFTER Visa Approval</span>
-                </div>
-                <div className="flex items-center gap-2.5">
-                  <FaCheckCircle className="text-emerald-400 shrink-0" />
-                  <span>Up to 70% Tuition Refund via Malta 'Get Qualified' Scheme</span>
-                </div>
-                <div className="flex items-center gap-2.5">
-                  <FaCheckCircle className="text-emerald-400 shrink-0" />
-                  <span>10th / 12th Pass & Study Gaps Accepted Without IELTS</span>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* 2. SEARCH & FILTER BAR */}
-      <section className="max-w-[1560px] mx-auto px-4 md:px-10 -mt-12 relative z-20 print:hidden">
-        <div className="bg-white rounded-3xl p-5 md:p-7 shadow-xl shadow-slate-900/5 border border-slate-200/90 space-y-5">
-          <div className="relative">
-            <FaSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search by course, city, or institution — e.g. Nursing, MBA, Hospitality, No Interview, Birkirkara..."
-              className="w-full pl-11 pr-28 py-3.5 md:py-4 bg-slate-50 border border-slate-200 rounded-2xl text-sm md:text-base text-[#0f2547] font-medium focus:bg-white focus:border-[#0f2547] focus:outline-none transition-all"
-            />
-            {searchQuery && (
-              <button
-                type="button"
-                onClick={() => setSearchQuery('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-500 hover:text-red-600 px-3 py-1.5 rounded-lg bg-slate-200/70 cursor-pointer"
-              >
-                Clear
-              </button>
-            )}
-          </div>
-
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="text-[11px] font-extrabold uppercase tracking-wider text-slate-400 mr-1">
-                Filter By Stream:
-              </span>
-              {filterCategories.map((cat) => (
-                <button
-                  key={cat}
-                  type="button"
-                  onClick={() => handleFilterClick(cat)}
-                  className={`text-xs font-bold px-4 py-2 rounded-full border transition-all cursor-pointer ${
-                    selectedFilter === cat
-                      ? 'bg-[#0f2547] text-white border-[#0f2547] shadow-sm scale-[1.02]'
-                      : 'bg-white text-slate-600 border-slate-200 hover:border-red-300 hover:text-red-600'
-                  }`}
-                >
-                  {cat}
-                </button>
-              ))}
-            </div>
-
-            <span className="text-xs font-bold text-slate-500">
-              Showing {filteredColleges.length} of {institutionsData.length} institutions
-            </span>
-          </div>
-        </div>
-      </section>
-
-      {/* 3. MAIN WIDE SPLIT DIRECTORY LAYOUT */}
-      <section
-        id="institution-detail-panel"
-        className="max-w-[1560px] mx-auto px-4 md:px-10 py-10 flex flex-col lg:flex-row gap-8 items-start print:p-0 print:block"
-      >
-        {/* Left Sticky Sidebar */}
-        <div
-          data-lenis-prevent="true"
-          className="w-full lg:w-[27%] lg:sticky lg:top-28 space-y-2.5 max-h-[82vh] overflow-y-auto overscroll-contain pr-1.5 print:hidden"
-        >
-          {filteredColleges.length === 0 ? (
-            <div className="bg-white p-6 rounded-2xl border border-slate-200 text-center space-y-3">
-              <p className="text-sm font-bold text-[#0f2547]">
-                No institutions match "{searchQuery || selectedFilter}"
-              </p>
-              <button
-                type="button"
-                onClick={() => {
-                  setSearchQuery('');
-                  setSelectedFilter('All');
-                }}
-                className="text-xs font-extrabold text-red-600 underline cursor-pointer"
-              >
-                Reset all filters
-              </button>
-            </div>
-          ) : (
-            filteredColleges.map((college, index) => {
-              const isSelected = activeCollege.id === college.id;
-              const shortName = college.name.split('–')[0].trim();
-              return (
-                <button
-                  key={college.id}
-                  type="button"
-                  onClick={() => handleCollegeChange(college)}
-                  className={`w-full text-left p-4 rounded-2xl border transition-all flex items-center gap-3.5 cursor-pointer ${
-                    isSelected
-                      ? 'bg-white border-2 border-[#0f2547] shadow-lg shadow-[#0f2547]/10'
-                      : 'bg-white/90 border-slate-200/90 hover:bg-white hover:border-slate-300'
-                  }`}
-                >
-                  <span
-                    className={`w-8 h-8 rounded-xl text-xs font-black flex items-center justify-center shrink-0 transition-colors ${
-                      isSelected
-                        ? 'bg-[#0f2547] text-white'
-                        : 'bg-slate-100 text-slate-600'
-                    }`}
-                  >
-                    {index + 1}
-                  </span>
-                  <div className="min-w-0 flex-1">
-                    <p
-                      className={`font-extrabold text-sm leading-snug truncate ${
-                        isSelected ? 'text-[#0f2547]' : 'text-slate-800'
-                      }`}
-                    >
-                      {shortName}
+                  <div className="text-right space-y-0.5">
+                    <span className="inline-block bg-red-50 text-red-600 border border-red-200 text-[9px] font-extrabold uppercase tracking-widest px-2.5 py-0.5 rounded-full">
+                      Official 2027 Institution &amp; Fee Prospectus
+                    </span>
+                    <p className="text-[11px] font-extrabold text-[#0f2547] pt-0.5">
+                      (+91) 72320 10105 &nbsp;|&nbsp; theraptoracademics@gmail.com
                     </p>
-                    <p className="text-[11px] font-medium text-slate-500 truncate mt-0.5">
-                      {college.location} • {college.courses?.length || 0} Programs
+                    <p className="text-[10px] font-medium text-slate-600">
+                      120/64, New Sanganer Rd, Sector 12, Mansarovar, Jaipur, Rajasthan 302020
+                    </p>
+                    <p className="text-[10px] font-bold text-[#0f2547]">
+                      www.theraptoracademics.com
                     </p>
                   </div>
-                  <FaChevronRight
-                    size={11}
-                    className={`shrink-0 transition-transform ${
-                      isSelected ? 'text-red-600 translate-x-0.5' : 'text-slate-300'
-                    }`}
-                  />
-                </button>
-              );
-            })
-          )}
-        </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </thead>
 
-        {/* Right Detailed Institution View */}
-        <div className="w-full lg:w-[73%] print:w-full">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeCollege.id}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -12 }}
-              transition={{ duration: 0.3 }}
-              className="bg-white rounded-3xl shadow-xl shadow-slate-900/5 border border-slate-200/90 overflow-hidden print:shadow-none print:border-0"
-            >
-              {/* INSTITUTION HERO HEADER */}
-              <div className="relative p-6 md:p-10 border-b border-slate-200 overflow-hidden">
+        {/* MAIN PAGE CONTENT (SCREEN + PRINT) */}
+        <tbody className="block print:table-row-group">
+          <tr className="block print:table-row">
+            <td className="block print:table-cell">
+              {/* 1. ORIGINAL RAPTOR ACADEMICS SPLIT EDITORIAL HERO */}
+              <section className="relative pt-36 pb-24 md:pt-44 md:pb-28 bg-[#0b1930] text-white overflow-hidden px-4 md:px-10 print:hidden">
                 <div
-                  className="absolute inset-0 bg-cover bg-center opacity-[0.10] pointer-events-none scale-105"
-                  style={{ backgroundImage: `url(${activeCampusImage})` }}
+                  className="absolute inset-0 bg-cover bg-center opacity-15 pointer-events-none"
+                  style={{
+                    backgroundImage:
+                      "url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&q=80')"
+                  }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/75 pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#0b1930] via-[#0f2547]/95 to-[#0b1930]/90 pointer-events-none" />
+                <div className="absolute -top-24 right-1/4 w-[500px] h-[500px] bg-red-600/20 rounded-full blur-[150px] pointer-events-none" />
 
-                <div className="relative z-10 space-y-6">
-                  <div className="flex flex-wrap items-center justify-between gap-4">
-                    {activeCollege.seoCategory ? (
-                      <span className="inline-block text-xs font-extrabold text-red-600 uppercase tracking-widest bg-red-50/90 border border-red-100 px-3.5 py-1.5 rounded-full">
-                        {to2027(activeCollege.seoCategory)}
+                <div className="max-w-[1560px] mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                  <motion.div
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="lg:col-span-7 space-y-5"
+                  >
+                    <div className="inline-flex items-center gap-2.5 bg-red-600/20 border border-red-500/40 px-4 py-1.5 rounded-full">
+                      <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+                      <span className="text-red-300 font-extrabold uppercase tracking-widest text-xs">
+                        Official Partner Network • 2027 Admissions Open
                       </span>
-                    ) : <div />}
+                    </div>
 
-                    <div className="flex flex-wrap items-center gap-2.5 print:hidden">
+                    <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-[1.08] tracking-tight">
+                      Explore Accredited <br />
+                      <span className="text-red-500">Colleges & Universities</span> In Malta
+                    </h1>
+
+                    <p className="text-blue-100/85 text-base md:text-lg leading-relaxed max-w-2xl">
+                      Discover {institutionsData.length} government-licensed higher education institutions offering {totalProgramsCount}+ career-focused Diplomas, Bachelor’s, and Master’s degrees. Enjoy 24–48 hour offer letters without IELTS and pay your main tuition fee after visa approval.
+                    </p>
+
+                    <div className="flex flex-wrap items-center gap-3 pt-2">
                       <button
                         type="button"
                         onClick={() => openApplyModal(activeCollege.name)}
-                        className="bg-red-600 hover:bg-red-700 text-white font-extrabold text-xs md:text-sm px-6 py-3 rounded-xl shadow-md shadow-red-600/20 transition-all cursor-pointer flex items-center gap-2"
+                        className="bg-red-600 hover:bg-red-700 text-white font-extrabold text-xs md:text-sm px-7 py-4 rounded-xl shadow-lg shadow-red-600/30 transition-all flex items-center gap-2 cursor-pointer"
                       >
-                        Apply <FaArrowRight size={11} />
+                        Start 2027 Application <FaArrowRight size={12} />
                       </button>
-                      <button
-                        type="button"
-                        onClick={handleCopyLink}
-                        className="bg-white/90 hover:bg-slate-100 text-slate-700 font-bold text-xs px-4 py-3 rounded-xl border border-slate-200 transition-colors flex items-center gap-1.5 cursor-pointer shadow-2xs"
+                      <a
+                        href="#quick-comparison-matrix"
+                        className="bg-white/10 hover:bg-white/20 text-white border border-white/20 font-bold text-xs md:text-sm px-6 py-4 rounded-xl transition-all"
                       >
-                        <FaCopy size={12} />{' '}
-                        {copiedLink
-                          ? `Copied #${getCollegeSlug(activeCollege)}!`
-                          : 'Copy link'}
-                      </button>
-                      <button
-                        type="button"
-                        onClick={handlePrintInstitution}
-                        className="bg-white/90 hover:bg-slate-100 text-slate-700 font-bold text-xs px-4 py-3 rounded-xl border border-slate-200 transition-colors flex items-center gap-1.5 cursor-pointer shadow-2xs"
-                      >
-                        <FaPrint size={12} /> Print
-                      </button>
+                        Jump to Side-by-Side Matrix
+                      </a>
                     </div>
-                  </div>
+                  </motion.div>
 
-                  <div className="grid grid-cols-1 xl:grid-cols-12 gap-6 items-center">
-                    <div className="xl:col-span-7 space-y-4">
-                      <h2 className="text-2xl md:text-4xl font-black text-[#0f2547] leading-tight">
-                        {to2027(activeCollege.name)}
-                      </h2>
-
-                      <div className="flex flex-wrap items-center gap-2.5">
-                        <span className="inline-flex items-center gap-1.5 bg-slate-100 text-slate-800 px-3.5 py-1.5 rounded-full text-xs font-bold border border-slate-200">
-                          <FaMapMarkerAlt className="text-red-600" size={12} />{' '}
-                          {to2027(activeCollege.location)}
-                        </span>
-                        <span className="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-800 border border-emerald-200 px-3.5 py-1.5 rounded-full text-xs font-extrabold">
-                          <FaAward size={12} /> {extractLicense(activeCollege.accreditation)}
-                        </span>
-                        <span className="inline-flex items-center gap-1.5 bg-blue-50 text-[#0f2547] border border-blue-200 px-3.5 py-1.5 rounded-full text-xs font-extrabold">
-                          2027 Intakes Open
-                        </span>
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: 0.15 }}
+                    className="lg:col-span-5"
+                  >
+                    <div className="bg-white/10 backdrop-blur-xl border border-white/15 rounded-3xl p-6 md:p-8 shadow-2xl space-y-6">
+                      <div className="flex items-center justify-between border-b border-white/15 pb-4">
+                        <div>
+                          <span className="text-[11px] font-extrabold uppercase tracking-widest text-red-400 block">
+                            The Raptor Academics Advantage
+                          </span>
+                          <h3 className="text-xl font-black text-white mt-0.5">
+                            2027 Malta Intake Snapshot
+                          </h3>
+                        </div>
+                        <div className="w-12 h-12 rounded-2xl bg-red-600 flex items-center justify-center text-white shadow-lg">
+                          <FaUniversity size={22} />
+                        </div>
                       </div>
 
-                      <p className="text-xs md:text-sm font-semibold text-slate-600 leading-relaxed">
-                        <strong className="text-[#0f2547]">Accreditation:</strong>{' '}
-                        {to2027(activeCollege.accreditation)}
-                      </p>
-                    </div>
-
-                    <div className="xl:col-span-5">
-                      <div className="relative h-48 md:h-56 rounded-2xl overflow-hidden shadow-lg border-4 border-white group">
-                        <img
-                          src={activeCampusImage}
-                          alt={activeCollege.name}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#0f2547]/80 via-transparent to-transparent" />
-                        <div className="absolute bottom-3 left-3.5 right-3.5 flex items-center justify-between text-white">
-                          <span className="text-xs font-extrabold bg-black/40 backdrop-blur-xs px-3 py-1 rounded-full">
-                            📍 {activeCollege.location}
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="bg-[#0b1930]/70 border border-white/10 rounded-2xl p-4">
+                          <span className="text-2xl md:text-3xl font-black text-white block">
+                            {institutionsData.length} Colleges
                           </span>
-                          <span className="text-[11px] font-extrabold bg-red-600 px-2.5 py-1 rounded-full">
-                            2027 Partner
+                          <span className="text-xs text-blue-200/80 font-medium mt-1 block">
+                            MFHEA & Qualifi / OTHM Accredited
+                          </span>
+                        </div>
+                        <div className="bg-[#0b1930]/70 border border-white/10 rounded-2xl p-4">
+                          <span className="text-2xl md:text-3xl font-black text-red-400 block">
+                            {totalProgramsCount}+ Courses
+                          </span>
+                          <span className="text-xs text-blue-200/80 font-medium mt-1 block">
+                            MQF Level 4, 5, 6 & 7 Programs
                           </span>
                         </div>
                       </div>
+
+                      <div className="space-y-2.5 text-xs md:text-sm text-blue-100 font-semibold">
+                        <div className="flex items-center gap-2.5">
+                          <FaCheckCircle className="text-emerald-400 shrink-0" />
+                          <span>Pay Main Course Tuition Fee AFTER Visa Approval</span>
+                        </div>
+                        <div className="flex items-center gap-2.5">
+                          <FaCheckCircle className="text-emerald-400 shrink-0" />
+                          <span>Up to 70% Tuition Refund via Malta 'Get Qualified' Scheme</span>
+                        </div>
+                        <div className="flex items-center gap-2.5">
+                          <FaCheckCircle className="text-emerald-400 shrink-0" />
+                          <span>10th / 12th Pass & Study Gaps Accepted Without IELTS</span>
+                        </div>
+                      </div>
                     </div>
+                  </motion.div>
+                </div>
+              </section>
+
+              {/* 2. SEARCH & FILTER BAR */}
+              <section className="max-w-[1560px] mx-auto px-4 md:px-10 -mt-12 relative z-20 print:hidden">
+                <div className="bg-white rounded-3xl p-5 md:p-7 shadow-xl shadow-slate-900/5 border border-slate-200/90 space-y-5">
+                  <div className="relative">
+                    <FaSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
+                    <input
+                      type="text"
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      placeholder="Search by course, city, or institution — e.g. Nursing, MBA, Hospitality, No Interview, Birkirkara..."
+                      className="w-full pl-11 pr-28 py-3.5 md:py-4 bg-slate-50 border border-slate-200 rounded-2xl text-sm md:text-base text-[#0f2547] font-medium focus:bg-white focus:border-[#0f2547] focus:outline-none transition-all"
+                    />
+                    {searchQuery && (
+                      <button
+                        type="button"
+                        onClick={() => setSearchQuery('')}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-500 hover:text-red-600 px-3 py-1.5 rounded-lg bg-slate-200/70 cursor-pointer"
+                      >
+                        Clear
+                      </button>
+                    )}
+                  </div>
+
+                  <div className="flex flex-wrap items-center justify-between gap-4">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="text-[11px] font-extrabold uppercase tracking-wider text-slate-400 mr-1">
+                        Filter By Stream:
+                      </span>
+                      {filterCategories.map((cat) => (
+                        <button
+                          key={cat}
+                          type="button"
+                          onClick={() => handleFilterClick(cat)}
+                          className={`text-xs font-bold px-4 py-2 rounded-full border transition-all cursor-pointer ${
+                            selectedFilter === cat
+                              ? 'bg-[#0f2547] text-white border-[#0f2547] shadow-sm scale-[1.02]'
+                              : 'bg-white text-slate-600 border-slate-200 hover:border-red-300 hover:text-red-600'
+                          }`}
+                        >
+                          {cat}
+                        </button>
+                      ))}
+                    </div>
+
+                    <span className="text-xs font-bold text-slate-500">
+                      Showing {filteredColleges.length} of {institutionsData.length} institutions
+                    </span>
                   </div>
                 </div>
-              </div>
+              </section>
 
-              {/* MAIN INSTITUTION CONTENT BODY */}
-              <div className="p-6 md:p-10 space-y-10">
-                <div>
-                  <h3 className="text-xs font-extrabold uppercase tracking-widest text-[#0f2547] mb-2.5">
-                    About The Institution
-                  </h3>
-                  <p className="text-slate-700 leading-relaxed text-sm md:text-base">
-                    {to2027(activeCollege.about)}
-                  </p>
-
-                  {activeCollege.flagshipCourses && (
-                    <div className="mt-5 bg-red-50/70 border-l-4 border-red-600 p-4 md:p-5 rounded-r-2xl">
-                      <span className="text-[11px] font-extrabold text-red-600 uppercase tracking-widest block">
-                        Flagship / Popular Courses (2027)
-                      </span>
-                      <span className="text-sm md:text-base font-extrabold text-[#0f2547] mt-1 block">
-                        {to2027(activeCollege.flagshipCourses)}
-                      </span>
+              {/* 3. MAIN WIDE SPLIT DIRECTORY LAYOUT */}
+              <section
+                id="institution-detail-panel"
+                className="max-w-[1560px] mx-auto px-4 md:px-10 py-10 flex flex-col lg:flex-row gap-8 items-start print:p-0 print:block"
+              >
+                {/* Left Sticky Sidebar */}
+                <div
+                  data-lenis-prevent="true"
+                  className="w-full lg:w-[27%] lg:sticky lg:top-28 space-y-2.5 max-h-[82vh] overflow-y-auto overscroll-contain pr-1.5 print:hidden"
+                >
+                  {filteredColleges.length === 0 ? (
+                    <div className="bg-white p-6 rounded-2xl border border-slate-200 text-center space-y-3">
+                      <p className="text-sm font-bold text-[#0f2547]">
+                        No institutions match "{searchQuery || selectedFilter}"
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setSearchQuery('');
+                          setSelectedFilter('All');
+                        }}
+                        className="text-xs font-extrabold text-red-600 underline cursor-pointer"
+                      >
+                        Reset all filters
+                      </button>
                     </div>
+                  ) : (
+                    filteredColleges.map((college, index) => {
+                      const isSelected = activeCollege.id === college.id;
+                      const shortName = college.name.split('–')[0].trim();
+                      return (
+                        <button
+                          key={college.id}
+                          type="button"
+                          onClick={() => handleCollegeChange(college)}
+                          className={`w-full text-left p-4 rounded-2xl border transition-all flex items-center gap-3.5 cursor-pointer ${
+                            isSelected
+                              ? 'bg-white border-2 border-[#0f2547] shadow-lg shadow-[#0f2547]/10'
+                              : 'bg-white/90 border-slate-200/90 hover:bg-white hover:border-slate-300'
+                          }`}
+                        >
+                          <span
+                            className={`w-8 h-8 rounded-xl text-xs font-black flex items-center justify-center shrink-0 transition-colors ${
+                              isSelected
+                                ? 'bg-[#0f2547] text-white'
+                                : 'bg-slate-100 text-slate-600'
+                            }`}
+                          >
+                            {index + 1}
+                          </span>
+                          <div className="min-w-0 flex-1">
+                            <p
+                              className={`font-extrabold text-sm leading-snug truncate ${
+                                isSelected ? 'text-[#0f2547]' : 'text-slate-800'
+                              }`}
+                            >
+                              {shortName}
+                            </p>
+                            <p className="text-[11px] font-medium text-slate-500 truncate mt-0.5">
+                              {college.location} • {college.courses?.length || 0} Programs
+                            </p>
+                          </div>
+                          <FaChevronRight
+                            size={11}
+                            className={`shrink-0 transition-transform ${
+                              isSelected ? 'text-red-600 translate-x-0.5' : 'text-slate-300'
+                            }`}
+                          />
+                        </button>
+                      );
+                    })
                   )}
                 </div>
 
-                {/* KEY ADMISSION HIGHLIGHTS */}
-                {activeCollege.highlights && (
-                  <div>
-                    <h3 className="text-xs font-extrabold uppercase tracking-widest text-[#0f2547] mb-4">
-                      Key Admission Highlights (2027 Intakes)
-                    </h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                      <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200/90">
-                        <span className="text-[11px] font-extrabold text-slate-400 uppercase tracking-wider block">
-                          Intake (2027)
-                        </span>
-                        <p className="text-sm md:text-base font-extrabold text-[#0f2547] mt-1.5 leading-snug">
-                          {to2027(activeCollege.highlights.intake)}
-                        </p>
-                      </div>
-
-                      <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200/90">
-                        <span className="text-[11px] font-extrabold text-slate-400 uppercase tracking-wider block">
-                          Eligibility & Minimum Age
-                        </span>
-                        <p className="text-sm md:text-base font-extrabold text-[#0f2547] mt-1.5 leading-snug">
-                          {to2027(activeCollege.highlights.eligibility)}
-                        </p>
-                      </div>
-
-                      <div className="p-5 rounded-2xl bg-emerald-50/70 border border-emerald-200">
-                        <span className="text-[11px] font-extrabold text-emerald-700 uppercase tracking-wider block">
-                          Gap Acceptance
-                        </span>
-                        <p className="text-sm md:text-base font-extrabold text-emerald-950 mt-1.5 leading-snug">
-                          {to2027(activeCollege.highlights.gap)}
-                        </p>
-                      </div>
-
-                      <div className="p-5 rounded-2xl bg-emerald-50/70 border border-emerald-200">
-                        <span className="text-[11px] font-extrabold text-emerald-700 uppercase tracking-wider block">
-                          Language Test
-                        </span>
-                        <p className="text-sm md:text-base font-extrabold text-emerald-950 mt-1.5 leading-snug">
-                          {to2027(activeCollege.highlights.ielts)}
-                        </p>
-                      </div>
-
-                      {activeCollege.highlights.interview && (
-                        <div className="p-5 rounded-2xl bg-amber-50/80 border border-amber-200">
-                          <span className="text-[11px] font-extrabold text-amber-800 uppercase tracking-wider block">
-                            Interview Requirement
-                          </span>
-                          <p className="text-sm md:text-base font-extrabold text-amber-950 mt-1.5 leading-snug">
-                            {to2027(activeCollege.highlights.interview)}
-                          </p>
-                        </div>
-                      )}
-
-                      {activeCollege.highlights.applicationFee && (
-                        <div className="p-5 rounded-2xl bg-red-50/60 border border-red-200">
-                          <span className="text-[11px] font-extrabold text-red-700 uppercase tracking-wider block">
-                            Application / Offer Fee
-                          </span>
-                          <div className="mt-1.5 space-y-1">
-                            {splitIntoCleanLines(activeCollege.highlights.applicationFee).map((line, i) => (
-                              <p key={i} className="text-sm md:text-base font-black text-red-600 leading-snug">
-                                {line}
-                              </p>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                )}
-
-                {/* OFFERED PROGRAMS */}
-                {activeCollege.courses && activeCollege.courses.length > 0 && (
-                  <div>
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
-                      <h3 className="text-sm md:text-base font-extrabold uppercase tracking-wider text-[#0f2547]">
-                        Offered Programs ({activeCollege.courses.length}) — Click Any Program To Expand Full Details
-                      </h3>
-                      <span className="text-xs font-extrabold text-red-600 bg-red-50 px-3 py-1 rounded-full">
-                        ★ Pay Tuition Fee After Visa Options Available
-                      </span>
-                    </div>
-
-                    <div className="space-y-4">
-                      {activeCollege.courses.map((course, index) => (
-                        <CourseAccordion
-                          key={index}
-                          course={course}
-                          collegeName={activeCollege.name}
-                          isOpen={openCourseIndex === index}
-                          onToggle={() =>
-                            setOpenCourseIndex(openCourseIndex === index ? null : index)
-                          }
-                          onApplyCourse={(courseTitle) =>
-                            openApplyModal(activeCollege.name, courseTitle)
-                          }
+                {/* Right Detailed Institution View */}
+                <div className="w-full lg:w-[73%] print:w-full">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={activeCollege.id}
+                      initial={{ opacity: 0, y: 12 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -12 }}
+                      transition={{ duration: 0.3 }}
+                      className="bg-white rounded-3xl shadow-xl shadow-slate-900/5 border border-slate-200/90 overflow-hidden print:shadow-none print:border-0"
+                    >
+                      {/* INSTITUTION HERO HEADER */}
+                      <div className="relative p-6 md:p-10 border-b border-slate-200 overflow-hidden print:p-0 print:pb-6">
+                        {/* Screen-only background campus watermark */}
+                        <div
+                          className="absolute inset-0 bg-cover bg-center opacity-[0.10] pointer-events-none scale-105 print:hidden"
+                          style={{ backgroundImage: `url(${activeCampusImage})` }}
                         />
-                      ))}
-                    </div>
-                  </div>
-                )}
+                        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/75 pointer-events-none print:hidden" />
 
-                {/* BOTTOM SPLIT: TUITION FEE STRUCTURE + VISA & WORK BENEFITS */}
-                {activeCollege.highlights && (
-                  <div className="pt-8 border-t border-slate-200 grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div className="space-y-4">
-                      <h4 className="text-xs font-extrabold uppercase tracking-widest text-[#0f2547]">
-                        Tuition Fee Structure Overview (2027)
-                      </h4>
+                        <div className="relative z-10 space-y-6">
+                          <div className="flex flex-wrap items-center justify-between gap-4">
+                            {activeCollege.seoCategory ? (
+                              <span className="inline-block text-xs font-extrabold text-red-600 uppercase tracking-widest bg-red-50/90 border border-red-100 px-3.5 py-1.5 rounded-full">
+                                {to2027(activeCollege.seoCategory)}
+                              </span>
+                            ) : <div />}
 
-                      {tuitionParsed.cards.length > 0 && (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                          {tuitionParsed.cards.map((item, idx) => (
-                            <div
-                              key={idx}
-                              className="p-5 rounded-2xl bg-[#f8fafc] border-2 border-slate-200 flex flex-col justify-between gap-2"
-                            >
-                              <div>
-                                <span className="text-xs font-extrabold text-[#0f2547] block leading-snug">
-                                  {item.label}
-                                </span>
-                                <span className="text-2xl md:text-3xl font-black text-red-600 mt-1.5 block">
-                                  {item.amount}
-                                </span>
-                                {item.subBreakdown && (
-                                  <span className="text-[11px] font-semibold text-slate-500 block mt-1 leading-snug">
-                                    {item.subBreakdown}
-                                  </span>
-                                )}
-                              </div>
-
-                              {item.payAfterVisaNote && (
-                                <span className="inline-block text-[11px] font-extrabold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-lg mt-1 leading-tight">
-                                  ✓ {item.payAfterVisaNote}
-                                </span>
-                              )}
-                            </div>
-                          ))}
-                        </div>
-                      )}
-
-                      {tuitionParsed.formattedLines.length > 0 && (
-                        <div className="p-5 rounded-2xl bg-blue-50/70 border border-blue-200 text-xs md:text-sm text-slate-800 leading-relaxed font-semibold space-y-2.5">
-                          {tuitionParsed.formattedLines.map((lineObj, idx) => (
-                            <div key={idx}>
-                              <p>• {lineObj.main}</p>
-                              {lineObj.subNote && (
-                                <p className="text-emerald-700 font-extrabold text-xs pl-3 mt-0.5">
-                                  {lineObj.subNote}
-                                </p>
-                              )}
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="space-y-5">
-                      <div>
-                        <h4 className="text-xs font-extrabold uppercase tracking-widest text-[#0f2547] mb-3">
-                          Visa & Work Benefits
-                        </h4>
-                        <div className="space-y-2.5">
-                          {to2027(activeCollege.highlights.visa || '')
-                            .split(/\s*(?:\||•|;|\.)\s*/)
-                            .filter(Boolean)
-                            .map((point, i) => (
-                              <div
-                                key={i}
-                                className="flex items-start gap-2.5 text-xs md:text-sm font-semibold text-slate-700"
+                            <div className="flex flex-wrap items-center gap-2.5 print:hidden">
+                              <button
+                                type="button"
+                                onClick={() => openApplyModal(activeCollege.name)}
+                                className="bg-red-600 hover:bg-red-700 text-white font-extrabold text-xs md:text-sm px-6 py-3 rounded-xl shadow-md shadow-red-600/20 transition-all cursor-pointer flex items-center gap-2"
                               >
-                                <FaCheckCircle
-                                  className="text-emerald-600 mt-0.5 shrink-0"
-                                  size={15}
-                                />
-                                <span>{point}</span>
+                                Apply <FaArrowRight size={11} />
+                              </button>
+                              <button
+                                type="button"
+                                onClick={handleCopyLink}
+                                className="bg-white/90 hover:bg-slate-100 text-slate-700 font-bold text-xs px-4 py-3 rounded-xl border border-slate-200 transition-colors flex items-center gap-1.5 cursor-pointer shadow-2xs"
+                              >
+                                <FaCopy size={12} />{' '}
+                                {copiedLink
+                                  ? `Copied #${getCollegeSlug(activeCollege)}!`
+                                  : 'Copy link'}
+                              </button>
+                              <button
+                                type="button"
+                                onClick={handlePrintInstitution}
+                                className="bg-white/90 hover:bg-slate-100 text-slate-700 font-bold text-xs px-4 py-3 rounded-xl border border-slate-200 transition-colors flex items-center gap-1.5 cursor-pointer shadow-2xs"
+                              >
+                                <FaPrint size={12} /> Print
+                              </button>
+                            </div>
+                          </div>
+
+                          <div className="grid grid-cols-1 xl:grid-cols-12 gap-6 items-center print:flex print:items-center print:justify-between print:gap-6">
+                            <div className="xl:col-span-7 space-y-4 print:flex-1">
+                              <h2 className="text-2xl md:text-4xl font-black text-[#0f2547] leading-tight print:text-2xl">
+                                {to2027(activeCollege.name)}
+                              </h2>
+
+                              <div className="flex flex-wrap items-center gap-2.5">
+                                <span className="inline-flex items-center gap-1.5 bg-slate-100 text-slate-800 px-3.5 py-1.5 rounded-full text-xs font-bold border border-slate-200">
+                                  <FaMapMarkerAlt className="text-red-600" size={12} />{' '}
+                                  {to2027(activeCollege.location)}
+                                </span>
+                                <span className="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-800 border border-emerald-200 px-3.5 py-1.5 rounded-full text-xs font-extrabold">
+                                  <FaAward size={12} /> {extractLicense(activeCollege.accreditation)}
+                                </span>
+                                <span className="inline-flex items-center gap-1.5 bg-blue-50 text-[#0f2547] border border-blue-200 px-3.5 py-1.5 rounded-full text-xs font-extrabold">
+                                  2027 Intakes Open
+                                </span>
                               </div>
-                            ))}
+
+                              <p className="text-xs md:text-sm font-semibold text-slate-600 leading-relaxed">
+                                <strong className="text-[#0f2547]">Accreditation:</strong>{' '}
+                                {to2027(activeCollege.accreditation)}
+                              </p>
+                            </div>
+
+                            {/* Screen-Only Campus Photo Card */}
+                            <div className="xl:col-span-5 print:hidden">
+                              <div className="relative h-48 md:h-56 rounded-2xl overflow-hidden shadow-lg border-4 border-white group">
+                                <img
+                                  src={activeCampusImage}
+                                  alt={activeCollege.name}
+                                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#0f2547]/80 via-transparent to-transparent" />
+                                <div className="absolute bottom-3 left-3.5 right-3.5 flex items-center justify-between text-white">
+                                  <span className="text-xs font-extrabold bg-black/40 backdrop-blur-xs px-3 py-1 rounded-full">
+                                    📍 {activeCollege.location}
+                                  </span>
+                                  <span className="text-[11px] font-extrabold bg-red-600 px-2.5 py-1 rounded-full">
+                                    2027 Partner
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Print-Only University Logo Badge (Replaces Campus Pic on Print) */}
+                            <div className="hidden print:flex items-center justify-center bg-white border-2 border-slate-200 rounded-2xl p-3 w-36 h-24 shrink-0">
+                              <img
+                                src={activeUniversityLogo}
+                                alt={`${activeCollege.name} Logo`}
+                                className="max-w-full max-h-full object-contain"
+                              />
+                            </div>
+                          </div>
                         </div>
                       </div>
 
-                      {activeCollege.highlights.processingSpeed && (
+                      {/* MAIN INSTITUTION CONTENT BODY */}
+                      <div className="p-6 md:p-10 space-y-10 print:p-0 print:pt-6">
                         <div>
-                          <h4 className="text-xs font-extrabold uppercase tracking-widest text-[#0f2547] mb-2">
-                            Processing Speed
-                          </h4>
-                          <div className="flex items-start gap-2.5 text-xs md:text-sm font-semibold text-slate-800 bg-emerald-50/70 p-4 rounded-xl border border-emerald-200">
-                            <FaClock className="text-emerald-600 mt-0.5 shrink-0" size={15} />
-                            <span>{to2027(activeCollege.highlights.processingSpeed)}</span>
-                          </div>
-                        </div>
-                      )}
+                          <h3 className="text-xs font-extrabold uppercase tracking-widest text-[#0f2547] mb-2.5">
+                            About The Institution
+                          </h3>
+                          <p className="text-slate-700 leading-relaxed text-sm md:text-base">
+                            {to2027(activeCollege.about)}
+                          </p>
 
-                      {activeCollege.highlights.accommodation && (
-                        <div>
-                          <h4 className="text-xs font-extrabold uppercase tracking-widest text-[#0f2547] mb-2">
-                            Accommodation Support
-                          </h4>
-                          <div className="flex items-start gap-2.5 text-xs md:text-sm font-semibold text-slate-800 bg-slate-50 p-4 rounded-xl border border-slate-200">
-                            <FaShieldAlt className="text-[#0f2547] mt-0.5 shrink-0" size={15} />
-                            <span>{to2027(activeCollege.highlights.accommodation)}</span>
-                          </div>
+                          {activeCollege.flagshipCourses && (
+                            <div className="mt-5 bg-red-50/70 border-l-4 border-red-600 p-4 md:p-5 rounded-r-2xl">
+                              <span className="text-[11px] font-extrabold text-red-600 uppercase tracking-widest block">
+                                Flagship / Popular Courses (2027)
+                              </span>
+                              <span className="text-sm md:text-base font-extrabold text-[#0f2547] mt-1 block">
+                                {to2027(activeCollege.flagshipCourses)}
+                              </span>
+                            </div>
+                          )}
                         </div>
-                      )}
-                    </div>
-                  </div>
-                )}
-              </div>
-            </motion.div>
-          </AnimatePresence>
-        </div>
-      </section>
 
-      {/* OFFICIAL PRINT-ONLY FOOTER */}
-      <div className="hidden print:block border-t-2 border-slate-300 mt-10 pt-5 px-4 text-xs text-slate-600">
-        <div className="flex items-center justify-between font-bold text-[#0f2547]">
-          <span>The Raptor Academics — Overseas Education & Malta Study Visa Experts</span>
-          <span>Helpline: (+91) 72320 10105 | theraptoracademics@gmail.com</span>
+                        {/* KEY ADMISSION HIGHLIGHTS */}
+                        {activeCollege.highlights && (
+                          <div>
+                            <h3 className="text-xs font-extrabold uppercase tracking-widest text-[#0f2547] mb-4">
+                              Key Admission Highlights (2027 Intakes)
+                            </h3>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                              <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200/90">
+                                <span className="text-[11px] font-extrabold text-slate-400 uppercase tracking-wider block">
+                                  Intake (2027)
+                                </span>
+                                <p className="text-sm md:text-base font-extrabold text-[#0f2547] mt-1.5 leading-snug">
+                                  {to2027(activeCollege.highlights.intake)}
+                                </p>
+                              </div>
+
+                              <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200/90">
+                                <span className="text-[11px] font-extrabold text-slate-400 uppercase tracking-wider block">
+                                  Eligibility & Minimum Age
+                                </span>
+                                <p className="text-sm md:text-base font-extrabold text-[#0f2547] mt-1.5 leading-snug">
+                                  {to2027(activeCollege.highlights.eligibility)}
+                                </p>
+                              </div>
+
+                              <div className="p-5 rounded-2xl bg-emerald-50/70 border border-emerald-200">
+                                <span className="text-[11px] font-extrabold text-emerald-700 uppercase tracking-wider block">
+                                  Gap Acceptance
+                                </span>
+                                <p className="text-sm md:text-base font-extrabold text-emerald-950 mt-1.5 leading-snug">
+                                  {to2027(activeCollege.highlights.gap)}
+                                </p>
+                              </div>
+
+                              <div className="p-5 rounded-2xl bg-emerald-50/70 border border-emerald-200">
+                                <span className="text-[11px] font-extrabold text-emerald-700 uppercase tracking-wider block">
+                                  Language Test
+                                </span>
+                                <p className="text-sm md:text-base font-extrabold text-emerald-950 mt-1.5 leading-snug">
+                                  {to2027(activeCollege.highlights.ielts)}
+                                </p>
+                              </div>
+
+                              {activeCollege.highlights.interview && (
+                                <div className="p-5 rounded-2xl bg-amber-50/80 border border-amber-200">
+                                  <span className="text-[11px] font-extrabold text-amber-800 uppercase tracking-wider block">
+                                    Interview Requirement
+                                  </span>
+                                  <p className="text-sm md:text-base font-extrabold text-amber-950 mt-1.5 leading-snug">
+                                    {to2027(activeCollege.highlights.interview)}
+                                  </p>
+                                </div>
+                              )}
+
+                              {activeCollege.highlights.applicationFee && (
+                                <div className="p-5 rounded-2xl bg-red-50/60 border border-red-200">
+                                  <span className="text-[11px] font-extrabold text-red-700 uppercase tracking-wider block">
+                                    Application / Offer Fee
+                                  </span>
+                                  <div className="mt-1.5 space-y-1">
+                                    {splitIntoCleanLines(activeCollege.highlights.applicationFee).map((line, i) => (
+                                      <p key={i} className="text-sm md:text-base font-black text-red-600 leading-snug">
+                                        {line}
+                                      </p>
+                                    ))}
+                                  </div>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        )}
+
+                        {/* OFFERED PROGRAMS */}
+                        {activeCollege.courses && activeCollege.courses.length > 0 && (
+                          <div>
+                            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                              <h3 className="text-sm md:text-base font-extrabold uppercase tracking-wider text-[#0f2547]">
+                                Offered Programs ({activeCollege.courses.length}) <span className="print:hidden">— Click Any Program To Expand Full Details</span>
+                              </h3>
+                              <span className="text-xs font-extrabold text-red-600 bg-red-50 px-3 py-1 rounded-full">
+                                ★ Pay Tuition Fee After Visa Options Available
+                              </span>
+                            </div>
+
+                            <div className="space-y-4">
+                              {activeCollege.courses.map((course, index) => (
+                                <CourseAccordion
+                                  key={index}
+                                  course={course}
+                                  collegeName={activeCollege.name}
+                                  isOpen={openCourseIndex === index}
+                                  onToggle={() =>
+                                    setOpenCourseIndex(openCourseIndex === index ? null : index)
+                                  }
+                                  onApplyCourse={(courseTitle) =>
+                                    openApplyModal(activeCollege.name, courseTitle)
+                                  }
+                                />
+                              ))}
+                            </div>
+                          </div>
+                        )}
+
+                        {/* BOTTOM SPLIT: TUITION FEE STRUCTURE + VISA & WORK BENEFITS */}
+                        {activeCollege.highlights && (
+                          <div className="pt-8 border-t border-slate-200 grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div className="space-y-4">
+                              <h4 className="text-xs font-extrabold uppercase tracking-widest text-[#0f2547]">
+                                Tuition Fee Structure Overview (2027)
+                              </h4>
+
+                              {tuitionParsed.cards.length > 0 && (
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                                  {tuitionParsed.cards.map((item, idx) => (
+                                    <div
+                                      key={idx}
+                                      className="p-5 rounded-2xl bg-[#f8fafc] border-2 border-slate-200 flex flex-col justify-between gap-2"
+                                    >
+                                      <div>
+                                        <span className="text-xs font-extrabold text-[#0f2547] block leading-snug">
+                                          {item.label}
+                                        </span>
+                                        <span className="text-2xl md:text-3xl font-black text-red-600 mt-1.5 block">
+                                          {item.amount}
+                                        </span>
+                                        {item.subBreakdown && (
+                                          <span className="text-[11px] font-semibold text-slate-500 block mt-1 leading-snug">
+                                            {item.subBreakdown}
+                                          </span>
+                                        )}
+                                      </div>
+
+                                      {item.payAfterVisaNote && (
+                                        <span className="inline-block text-[11px] font-extrabold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-lg mt-1 leading-tight">
+                                          ✓ {item.payAfterVisaNote}
+                                        </span>
+                                      )}
+                                    </div>
+                                  ))}
+                                </div>
+                              )}
+
+                              {tuitionParsed.formattedLines.length > 0 && (
+                                <div className="p-5 rounded-2xl bg-blue-50/70 border border-blue-200 text-xs md:text-sm text-slate-800 leading-relaxed font-semibold space-y-2.5">
+                                  {tuitionParsed.formattedLines.map((lineObj, idx) => (
+                                    <div key={idx}>
+                                      <p>• {lineObj.main}</p>
+                                      {lineObj.subNote && (
+                                        <p className="text-emerald-700 font-extrabold text-xs pl-3 mt-0.5">
+                                          {lineObj.subNote}
+                                        </p>
+                                      )}
+                                    </div>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
+
+                            <div className="space-y-5">
+                              <div>
+                                <h4 className="text-xs font-extrabold uppercase tracking-widest text-[#0f2547] mb-3">
+                                  Visa & Work Benefits
+                                </h4>
+                                <div className="space-y-2.5">
+                                  {to2027(activeCollege.highlights.visa || '')
+                                    .split(/\s*(?:\||•|;|\.)\s*/)
+                                    .filter(Boolean)
+                                    .map((point, i) => (
+                                      <div
+                                        key={i}
+                                        className="flex items-start gap-2.5 text-xs md:text-sm font-semibold text-slate-700"
+                                      >
+                                        <FaCheckCircle
+                                          className="text-emerald-600 mt-0.5 shrink-0"
+                                          size={15}
+                                        />
+                                        <span>{point}</span>
+                                      </div>
+                                    ))}
+                                </div>
+                              </div>
+
+                              {activeCollege.highlights.processingSpeed && (
+                                <div>
+                                  <h4 className="text-xs font-extrabold uppercase tracking-widest text-[#0f2547] mb-2">
+                                    Processing Speed
+                                  </h4>
+                                  <div className="flex items-start gap-2.5 text-xs md:text-sm font-semibold text-slate-800 bg-emerald-50/70 p-4 rounded-xl border border-emerald-200">
+                                    <FaClock className="text-emerald-600 mt-0.5 shrink-0" size={15} />
+                                    <span>{to2027(activeCollege.highlights.processingSpeed)}</span>
+                                  </div>
+                                </div>
+                              )}
+
+                              {activeCollege.highlights.accommodation && (
+                                <div>
+                                  <h4 className="text-xs font-extrabold uppercase tracking-widest text-[#0f2547] mb-2">
+                                    Accommodation Support
+                                  </h4>
+                                  <div className="flex items-start gap-2.5 text-xs md:text-sm font-semibold text-slate-800 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                                    <FaShieldAlt className="text-[#0f2547] mt-0.5 shrink-0" size={15} />
+                                    <span>{to2027(activeCollege.highlights.accommodation)}</span>
+                                  </div>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+              </section>
+            </td>
+          </tr>
+        </tbody>
+
+        {/* RESERVED BOTTOM SPACE ON EVERY PRINTED PAGE SO CONTENT NEVER OVERLAPS FOOTER */}
+        <tfoot className="hidden print:table-footer-group">
+          <tr>
+            <td>
+              <div className="h-20" />
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+
+      {/* FIXED BOTTOM FOOTER ON EVERY PRINTED PAGE */}
+      <div className="hidden print:block raptor-print-footer pt-2">
+        <div className="bg-slate-50 border-t-2 border-[#0f2547] px-3 py-2.5">
+          <div className="flex items-center justify-between gap-6">
+            <div>
+              <p className="text-[11px] font-black text-[#0f2547]">
+                The Raptor Academics — Overseas Education &amp; Malta Study Visa Consultants
+              </p>
+              <p className="text-[10px] text-slate-600">
+                120/64, New Sanganer Rd, Sector 12, Mansarovar, Jaipur, Rajasthan 302020
+              </p>
+            </div>
+
+            <div className="text-right shrink-0">
+              <p className="text-[10px] font-extrabold text-[#0f2547]">
+                Helpline: (+91) 72320 10105 &nbsp;|&nbsp; theraptoracademics@gmail.com
+              </p>
+              <p className="text-[9.5px] text-slate-500">
+                www.theraptoracademics.com &nbsp;•&nbsp; All fees in Euros (€) for 2027 intakes
+              </p>
+            </div>
+          </div>
         </div>
-        <p className="mt-1 text-[11px]">
-          Office: 120/64, New Sanganer Rd, Sector 12, Mansarovar, Jaipur, Rajasthan 302020. All fees are in Euros (€) for 2027 intakes.
-        </p>
       </div>
 
       {/* 4. BOTTOM QUICK COMPARISON TABLE (100% LIVE FROM institutionsData.js) */}

@@ -40,24 +40,24 @@ const partnerCards = partnersList.map((p, i) => ({
   image: partnerImages[i],
   field: p.sub.split('•').pop().trim()
 }));
-const partnerColLeft = partnerCards.filter((_, i) => i % 2 === 0);
-const partnerColRight = partnerCards.filter((_, i) => i % 2 === 1);
 
 const PartnerTile = ({ partner }) => (
-  <Link to="/institutions" className="block pb-3 md:pb-4 group">
-    <div className="relative aspect-square rounded-2xl md:rounded-3xl overflow-hidden border border-white/10">
+  <Link to="/institutions" className="block pb-2 xl:pb-4 group">
+    <div className="relative aspect-square rounded-2xl md:rounded-3xl overflow-hidden border border-white/15 shadow-lg">
       <img
         src={partner.image}
         alt={partner.name}
         loading="lazy"
         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#0b1b33]/85 via-[#0b1b33]/40 to-[#0b1b33]/30" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0b1b33]/90 via-[#0b1b33]/45 to-[#0b1b33]/30" />
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-3">
-        <span className="text-white font-extrabold text-base md:text-xl leading-tight drop-shadow-md">
+        <span className="text-white font-extrabold text-sm sm:text-base md:text-lg xl:text-xl leading-snug drop-shadow-md">
           {partner.name}
         </span>
-        <span className="text-red-300 text-[11px] md:text-xs font-bold mt-1.5">{partner.field}</span>
+        <span className="text-red-300 text-[11px] md:text-xs font-bold mt-1.5">
+          {partner.field}
+        </span>
       </div>
     </div>
   </Link>
@@ -65,20 +65,22 @@ const PartnerTile = ({ partner }) => (
 
 const PartnersSection = () => {
   useEffect(() => {
-    const ctx = gsap.context(() => {
+    const mm = gsap.matchMedia();
+
+    mm.add('(min-width: 1280px)', () => {
       gsap.to('.partner-col-up', {
-        yPercent: -35, 
+        yPercent: -35,
         ease: 'none',
         scrollTrigger: {
           trigger: '.partner-panel',
           start: 'top bottom',
           end: 'bottom top',
-          scrub: 1, 
+          scrub: 1,
         },
       });
 
       gsap.to('.partner-col-down', {
-        yPercent: 35, 
+        yPercent: 35,
         ease: 'none',
         scrollTrigger: {
           trigger: '.partner-panel',
@@ -88,7 +90,8 @@ const PartnersSection = () => {
         },
       });
     });
-    return () => ctx.revert();
+
+    return () => mm.revert();
   }, []);
 
   return (
@@ -96,10 +99,10 @@ const PartnersSection = () => {
       <div className="partner-panel relative max-w-[1700px] mx-auto bg-[#1b365d] rounded-[2.5rem] md:rounded-[3.5rem] overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-96 bg-red-600/15 blur-[150px] pointer-events-none" />
 
-        <div className="relative w-full mx-auto px-4 md:px-8 flex flex-col lg:flex-row items-center justify-between gap-6 md:gap-12 min-h-[700px]">
+        <div className="relative w-full mx-auto px-5 md:px-10 xl:px-8 flex flex-col xl:flex-row items-center justify-between gap-8 xl:gap-12 xl:min-h-[700px]">
           
-          {/* LEFT 2 COLUMNS (Scrolls UP) */}
-          <div className="hidden lg:flex w-1/3 h-[900px] gap-4 overflow-hidden -mt-20">
+          {/* DESKTOP (1280px+): LEFT 2 PARALLAX COLUMNS */}
+          <div className="hidden xl:flex w-1/3 h-[900px] gap-4 overflow-hidden -mt-20">
             <div className="partner-col-up flex flex-col gap-4 w-1/2 pt-32">
               {partnerCards.slice(0, 3).map((partner, i) => (
                 <PartnerTile key={`l1-${i}`} partner={partner} />
@@ -113,27 +116,27 @@ const PartnersSection = () => {
           </div>
 
           {/* CENTER TEXT CONTENT */}
-          <div className="w-full lg:w-1/3 flex flex-col items-center text-center py-16 lg:py-0 z-10 shrink-0">
-            <h2 className="text-3xl md:text-5xl lg:text-[52px] font-light text-white leading-[1.1]">
-            Explore Our Partner  <br />
+          <div className="w-full xl:w-1/3 flex flex-col items-center text-center pt-14 pb-4 md:pt-16 md:pb-6 xl:py-0 z-10 shrink-0">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl xl:text-[52px] font-light text-white leading-[1.12]">
+              Explore Our Partner <br />
               <span className="font-extrabold bg-clip-text text-transparent bg-[linear-gradient(90deg,#ffffff,#dc2626,#dc2626,#ffffff)] bg-[length:200%_auto] animate-[gradientMove_3s_linear_infinite]">
-              Colleges & Institutions
+                Colleges & Institutions
               </span>
               <br /> in Europe
             </h2>
-            <p className="text-blue-100/80 text-sm md:text-base leading-relaxed mt-6 max-w-sm">
-            Choosing the right institution is an important part of studying abroad. Explore selected partner colleges and educational institutions, compare available programmes and understand the academic requirements for your preferred study destination.
+            <p className="text-blue-100/80 text-sm md:text-base leading-relaxed mt-5 max-w-xl xl:max-w-sm">
+              Choosing the right institution is an important part of studying abroad. Explore selected partner colleges and educational institutions, compare available programmes and understand the academic requirements for your preferred study destination.
             </p>
             <Link
               to="/institutions"
-              className="mt-8 inline-block border border-white/70 text-white hover:bg-white hover:text-[#1b365d] font-bold text-sm px-9 py-3.5 rounded-full transition-colors shadow-lg"
+              className="mt-7 inline-block border border-white/70 text-white hover:bg-white hover:text-[#1b365d] font-bold text-sm px-9 py-3.5 rounded-full transition-colors shadow-lg"
             >
               Explore Our Institutions
             </Link>
           </div>
 
-          {/* RIGHT 2 COLUMNS (Scrolls UP & DOWN) */}
-          <div className="hidden lg:flex w-1/3 h-[900px] gap-4 overflow-hidden -mt-20">
+          {/* DESKTOP (1280px+): RIGHT 2 PARALLAX COLUMNS */}
+          <div className="hidden xl:flex w-1/3 h-[900px] gap-4 overflow-hidden -mt-20">
             <div className="partner-col-down flex flex-col gap-4 w-1/2 -mt-20">
               {partnerCards.slice(6, 9).map((partner, i) => (
                 <PartnerTile key={`r1-${i}`} partner={partner} />
@@ -145,12 +148,12 @@ const PartnersSection = () => {
               ))}
             </div>
           </div>
-          
-          {/* MOBILE ONLY */}
-          <div className="lg:hidden w-full grid grid-cols-2 gap-3 pb-10">
-             {partnerCards.map((partner, i) => (
-               <PartnerTile key={`mob-${i}`} partner={partner} />
-             ))}
+
+          {/* MOBILE & TABLET (< 1280px, including iPad Pro landscape/portrait): CLEAN 2 / 3 COLUMN GRID */}
+          <div className="xl:hidden w-full grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-5 pb-12 md:pb-16">
+            {partnerCards.map((partner, i) => (
+              <PartnerTile key={`mob-tab-${i}`} partner={partner} />
+            ))}
           </div>
         </div>
       </div>

@@ -17,3 +17,26 @@ html.lenis, html.lenis body {
     color: #dc2626;
     -webkit-text-stroke: 1.5px #dc2626;
   }
+
+  @media print {
+    @page {
+      size: A4 portrait;
+      margin: 14mm 12mm 22mm 12mm;
+    }
+  
+    body {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      background: #ffffff !important;
+    }
+  
+    /* Pinned bottom footer on every printed page */
+    .raptor-print-footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      background: #ffffff;
+    }
+  }

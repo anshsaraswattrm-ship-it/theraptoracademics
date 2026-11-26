@@ -620,10 +620,10 @@ import {
   FaHeadset,
   FaRedo
 } from 'react-icons/fa';
-import logo from '../assets/logo.png';
 import raptorIcon from '../assets/raptor r logo.png';
 import { institutionsData } from '../data/institutionsData';
 
+const API_BASE_URL = (import.meta.env.VITE_API_URL || 'http://localhost:5000').replace(/\/$/, '');
 const SUPPORT_PHONE_DISPLAY = '(+91) 72320 10105';
 const SUPPORT_PHONE_HREF = 'tel:+917232010105';
 
@@ -649,6 +649,20 @@ const BrandEmblem = ({ className = 'w-12 h-12' }) => (
   </span>
 );
 
+const sendChatLeadToApi = async (payload) => {
+  try {
+    const res = await fetch(`${API_BASE_URL}/api/chat-leads`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    return await res.json();
+  } catch (err) {
+    console.error('Chat Lead API Error:', err);
+    return { success: false };
+  }
+};
+
 // ==========================================
 // SEPARATE CALLBACK MODAL (NAVY + RED + BLACK POINTS)
 // ==========================================
@@ -657,18 +671,31 @@ const CallbackModal = ({ isOpen, onClose, initialName = '' }) => {
   const [phone, setPhone] = useState('');
   const [studentName, setStudentName] = useState(initialName);
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     setStudentName(initialName || '');
     setSubmitted(false);
     setPhone('');
+    setIsSubmitting(false);
   }, [isOpen, initialName]);
 
   if (!isOpen) return null;
 
-  const handleCallbackSubmit = (e) => {
+  const handleCallbackSubmit = async (e) => {
     e.preventDefault();
-    if (!phone.trim()) return;
+    if (!phone.trim() || isSubmitting) return;
+
+    setIsSubmitting(true);
+    await sendChatLeadToApi({
+      leadType: 'callback',
+      name: studentName.trim(),
+      countryCode,
+      phone: phone.trim(),
+      topic: 'Callback Modal Request',
+      choice: '9 AM to 9 PM Callback'
+    });
+    setIsSubmitting(false);
     setSubmitted(true);
   };
 
@@ -781,9 +808,10 @@ const CallbackModal = ({ isOpen, onClose, initialName = '' }) => {
 
             <button
               type="submit"
-              className="w-full bg-red-600 hover:bg-[#0f2547] text-white font-extrabold text-sm py-3.5 rounded-xl shadow-lg shadow-red-600/20 transition-colors cursor-pointer"
+              disabled={isSubmitting}
+              className="w-full bg-red-600 hover:bg-[#0f2547] disabled:opacity-60 text-white font-extrabold text-sm py-3.5 rounded-xl shadow-lg shadow-red-600/20 transition-colors cursor-pointer"
             >
-              Request a call back
+              {isSubmitting ? 'Submitting...' : 'Request a call back'}
             </button>
 
             {/* Single Direct Support Contact (9 AM to 9 PM) */}
@@ -823,9 +851,11 @@ const RaptorChatWidget = () => {
   const [step, setStep] = useState('ASK_NAME');
   const [userName, setUserName] = useState('');
   const [nameInput, setNameInput] = useState('');
+  const [selectedTopic, setSelectedTopic] = useState('');
   const [selectedChoice, setSelectedChoice] = useState('');
   const [selectedUniversity, setSelectedUniversity] = useState('');
   const [phoneInput, setPhoneInput] = useState('');
+  const [isSendingPhone, setIsSendingPhone] = useState(false);
   const [messages, setMessages] = useState([
     {
       id: 'init-1',
@@ -876,6 +906,7 @@ const RaptorChatWidget = () => {
 
   const handleMainOptionClick = (optionLabel) => {
     pushUserMessage(optionLabel);
+    setSelectedTopic(optionLabel);
 
     if (optionLabel === 'Which Intake') {
       pushBotMessage(`${userName}, which intake month are you targeting?`);
@@ -918,27 +949,41 @@ const RaptorChatWidget = () => {
     setStep('ASK_PHONE');
   };
 
-  const handlePhoneSubmit = (e) => {
+  const handlePhoneSubmit = async (e) => {
     e.preventDefault();
     const cleanPhone = phoneInput.trim();
-    if (!cleanPhone) return;
+    if (!cleanPhone || isSendingPhone) return;
 
+    setIsSendingPhone(true);
     pushUserMessage(cleanPhone);
     setPhoneInput('');
+
+    await sendChatLeadToApi({
+      leadType: 'chat',
+      name: userName,
+      countryCode: '+91',
+      phone: cleanPhone,
+      topic: selectedTopic || 'General Chat',
+      choice: selectedChoice || ''
+    });
+
     pushBotMessage(
       `Thank you, ${userName}! We have noted your number (${cleanPhone})${
         selectedChoice ? ` for ${selectedChoice}` : ''
       }. Our team will contact you shortly.`
     );
+    setIsSendingPhone(false);
     setStep('DONE');
   };
 
   const resetChat = () => {
     setUserName('');
     setNameInput('');
+    setSelectedTopic('');
     setSelectedChoice('');
     setSelectedUniversity('');
     setPhoneInput('');
+    setIsSendingPhone(false);
     setStep('ASK_NAME');
     setMessages([
       {
@@ -1149,8 +1194,9 @@ const RaptorChatWidget = () => {
 
                   <button
                     type="submit"
+                    disabled={step === 'ASK_PHONE' && isSendingPhone}
                     aria-label="Send"
-                    className="w-10 h-10 rounded-xl bg-red-600 hover:bg-[#0f2547] text-white flex items-center justify-center shrink-0 transition-colors cursor-pointer"
+                    className="w-10 h-10 rounded-xl bg-red-600 hover:bg-[#0f2547] disabled:opacity-60 text-white flex items-center justify-center shrink-0 transition-colors cursor-pointer"
                   >
                     <FaPaperPlane size={13} />
                   </button>

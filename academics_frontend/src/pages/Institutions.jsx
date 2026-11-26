@@ -28,6 +28,8 @@ import Footer from '../components/Footer';
 import { institutionsData } from '../data/institutionsData';
 import logo from '../assets/logo.png';
 
+const API_BASE_URL = (import.meta.env.VITE_API_URL || 'http://localhost:5000').replace(/\/$/, '');
+
 // ==========================================
 // 1. INSTITUTION CAMPUS IMAGES & LOGOS MAP
 // ==========================================
@@ -872,6 +874,7 @@ const ApplyNowModal = ({ isOpen, onClose, initialCollegeName, initialProgramName
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
@@ -888,6 +891,7 @@ const ApplyNowModal = ({ isOpen, onClose, initialCollegeName, initialProgramName
         program: defaultProg
       }));
       setSubmitted(false);
+      setIsSubmitting(false);
     } else {
       document.body.style.overflow = '';
     }
@@ -911,9 +915,23 @@ const ApplyNowModal = ({ isOpen, onClose, initialCollegeName, initialProgramName
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+    try {
+      await fetch(`${API_BASE_URL}/api/applications`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+    } catch (err) {
+      console.error('Application API Error:', err);
+    } finally {
+      setIsSubmitting(false);
+      setSubmitted(true);
+    }
   };
 
   const docChecklistQuestions = [
@@ -1299,9 +1317,10 @@ const ApplyNowModal = ({ isOpen, onClose, initialCollegeName, initialProgramName
                   </button>
                   <button
                     type="submit"
-                    className="bg-red-600 hover:bg-[#0f2547] text-white font-extrabold text-xs uppercase tracking-wider px-6 py-3.5 rounded-xl shadow-lg shadow-red-600/20 transition-colors cursor-pointer flex items-center gap-2"
+                    disabled={isSubmitting}
+                    className="bg-red-600 hover:bg-[#0f2547] disabled:opacity-60 text-white font-extrabold text-xs uppercase tracking-wider px-6 py-3.5 rounded-xl shadow-lg shadow-red-600/20 transition-colors cursor-pointer flex items-center gap-2"
                   >
-                    Submit Request <FaArrowRight size={11} />
+                    {isSubmitting ? 'Submitting...' : 'Submit Request'} <FaArrowRight size={11} />
                   </button>
                 </div>
               </div>

@@ -25,18 +25,18 @@ import { institutionsData } from '../data/institutionsData';
 // INSTITUTION LOGOS / CAMPUS THUMBNAILS MAP
 // ==========================================
 const COLLEGE_IMAGES = {
-  "La Vallette": "https://res.cloudinary.com/ppkvzeli/image/upload/v1794901696/R.jpg",
-  "Avanza": "https://res.cloudinary.com/ppkvzeli/image/upload/v1794901977/avanza.png",
-  "Uniplural": "https://res.cloudinary.com/ppkvzeli/image/upload/v1794902183/uniplural.jpg",
-  "Malita": "https://res.cloudinary.com/ppkvzeli/image/upload/v1794902377/malita.png",
-  "Learn Key": "https://res.cloudinary.com/ppkvzeli/image/upload/v1794905430/6ab65cc7d1360417047843_1.jpg",
-  "21 Academy": "https://res.cloudinary.com/ppkvzeli/image/upload/v1794905524/21.jpg",
-  "Think Talent": "https://res.cloudinary.com/ppkvzeli/image/upload/v1794905645/TTI_Desktop_Diploma.jpg",
-  "EEC-ITIS": "https://res.cloudinary.com/ppkvzeli/image/upload/v1794905807/eec-itis.png",
-  "Swiss School": "https://res.cloudinary.com/ppkvzeli/image/upload/v1794906060/swiss.avif",
-  "BESC": "https://res.cloudinary.com/ppkvzeli/image/upload/v1794906232/besc.webp",
-  "Global College": "https://res.cloudinary.com/ppkvzeli/image/upload/v1794906355/global.jpg",
-  "GBS": "https://res.cloudinary.com/ppkvzeli/image/upload/v1794906533/gbs.jpg"
+  "La Vallette": "https://res.cloudinary.com/ppkvzeli/image/upload/v1795688615/La_valletta_campus_img.webp",
+  "Avanza": "https://res.cloudinary.com/ppkvzeli/image/upload/v1795688613/Avanza_Campus_Img.webp",
+  "Uniplural": "https://res.cloudinary.com/ppkvzeli/image/upload/v1795688614/Uniplural_Academy_campus_img1.webp",
+  "Malita": "https://res.cloudinary.com/ppkvzeli/image/upload/v1795688614/MICM.webp",
+  "Learn Key": "https://res.cloudinary.com/ppkvzeli/image/upload/v1795688614/Learn_Key_Training_Institute_campus_img_2.webp",
+  "21 Academy": "https://res.cloudinary.com/ppkvzeli/image/upload/v1795688614/21_Academy_Campus_Img.webp",
+  "Think Talent": "https://res.cloudinary.com/ppkvzeli/image/upload/v1795688615/Think_Talent_Campus_Img.webp",
+  "EEC-ITIS": "https://res.cloudinary.com/ppkvzeli/image/upload/v1795688613/EEC-ITIS_Malta_Campus_Img.webp",
+  "Swiss School": "https://res.cloudinary.com/ppkvzeli/image/upload/v1795688614/Swiss_School_Of_Management.webp",
+  "BESC": "https://res.cloudinary.com/ppkvzeli/image/upload/v1795688613/BESC_Graduate_College_Campus_Img.webp",
+  "Global College": "https://res.cloudinary.com/ppkvzeli/image/upload/v1795688613/Global_College_Malta_Campus_Img.webp",
+  "GBS": "https://res.cloudinary.com/ppkvzeli/image/upload/v1795688613/GBS_Malta_Campus_Img.webp"
 };
 
 const DEFAULT_FALLBACK_IMAGES = Object.values(COLLEGE_IMAGES);

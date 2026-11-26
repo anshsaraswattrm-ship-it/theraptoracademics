@@ -21,18 +21,18 @@ const partnersList = [
 ];
 
 const partnerImages = [
-  "https://res.cloudinary.com/ppkvzeli/image/upload/v1794901696/R.jpg",
-  "https://res.cloudinary.com/ppkvzeli/image/upload/v1794901977/avanza.png",
-  "https://res.cloudinary.com/ppkvzeli/image/upload/v1794902183/uniplural.jpg",
-  "https://res.cloudinary.com/ppkvzeli/image/upload/v1794902377/malita.png",
-  "https://res.cloudinary.com/ppkvzeli/image/upload/v1794905430/6ab65cc7d1360417047843_1.jpg",
-  "https://res.cloudinary.com/ppkvzeli/image/upload/v1794905524/21.jpg",
-  "https://res.cloudinary.com/ppkvzeli/image/upload/v1794905645/TTI_Desktop_Diploma.jpg",
-  "https://res.cloudinary.com/ppkvzeli/image/upload/v1794905807/eec-itis.png",
-  "https://res.cloudinary.com/ppkvzeli/image/upload/v1794906060/swiss.avif",
-  "https://res.cloudinary.com/ppkvzeli/image/upload/v1794906232/besc.webp",
-  "https://res.cloudinary.com/ppkvzeli/image/upload/v1794906355/global.jpg",
-  "https://res.cloudinary.com/ppkvzeli/image/upload/v1794906533/gbs.jpg"
+  "https://res.cloudinary.com/ppkvzeli/image/upload/v1795688615/La_valletta_campus_img.webp",
+  "https://res.cloudinary.com/ppkvzeli/image/upload/v1795688613/Avanza_Campus_Img.webp",
+  "https://res.cloudinary.com/ppkvzeli/image/upload/v1795688614/Uniplural_Academy_campus_img1.webp",
+  "https://res.cloudinary.com/ppkvzeli/image/upload/v1795688614/MICM.webp",
+  "https://res.cloudinary.com/ppkvzeli/image/upload/v1795688614/Learn_Key_Training_Institute_campus_img_2.webp",
+  "https://res.cloudinary.com/ppkvzeli/image/upload/v1795688614/21_Academy_Campus_Img.webp",
+  "https://res.cloudinary.com/ppkvzeli/image/upload/v1795688615/Think_Talent_Campus_Img.webp",
+  "https://res.cloudinary.com/ppkvzeli/image/upload/v1795688613/EEC-ITIS_Malta_Campus_Img.webp",
+  "https://res.cloudinary.com/ppkvzeli/image/upload/v1795688614/Swiss_School_Of_Management.webp",
+  "https://res.cloudinary.com/ppkvzeli/image/upload/v1795688613/BESC_Graduate_College_Campus_Img.webp",
+  "https://res.cloudinary.com/ppkvzeli/image/upload/v1795688613/Global_College_Malta_Campus_Img.webp",
+  "https://res.cloudinary.com/ppkvzeli/image/upload/v1795688613/GBS_Malta_Campus_Img.webp"
 ];
 
 const partnerCards = partnersList.map((p, i) => ({

@@ -1,17 +1,25 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { FaArrowRight, FaUniversity, FaClock, FaCheckCircle, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import {
+  FaArrowRight,
+  FaUniversity,
+  FaClock,
+  FaCheckCircle,
+  FaChevronLeft,
+  FaChevronRight
+} from 'react-icons/fa';
 import { RedUnderline } from './Shared';
 import { institutionsData } from '../../data/institutionsData';
 
 const courseCategories = [
-  "All Trending",
-  "Nursing & Healthcare",
-  "Business & MBA",
-  "IT, AI & Cloud",
-  "Hospitality & Tourism",
-  "HR, Psychology & Coaching"
+  'All Courses',
+  'Nursing & Healthcare',
+  'Business & MBA',
+  'IT, AI & Cloud',
+  'Hospitality & Tourism',
+  'HR, Psychology & Coaching',
+  'Logistics & Supply Chain'
 ];
 
 // Helper matching Institutions.jsx deep-link slugs
@@ -20,148 +28,227 @@ const getCollegeSlug = (collegeName = '') => {
   return short.replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 };
 
-// Curated 9 flagship programmes mapped directly to institutionsData.js
-const TRENDING_CONFIG = [
+// Custom Cloudinary images for flagship programmes
+const CUSTOM_COURSE_IMAGES = [
   {
-    collegeId: "lvi",
-    courseMatch: /Nursing Bridging Course/i,
-    fallbackTitle: "Nursing Bridging Course (NBC) – MQF/EQF Level 5",
-    category: "Nursing & Healthcare",
-    badge: "Pay After Visa",
-    durationFallback: "1 Year (50 ECTS)",
-    feeFallback: "€5,500",
-    image: "https://res.cloudinary.com/ppkvzeli/image/upload/v1794910056/Nursing_Bridging_Course_by_the_Waterfront.png"
+    collegeId: 'lvi',
+    match: /Nursing Bridging Course/i,
+    image:
+      'https://res.cloudinary.com/ppkvzeli/image/upload/v1794910056/Nursing_Bridging_Course_by_the_Waterfront.png'
   },
   {
-    collegeId: "lvi",
-    courseMatch: /Nursing Studies/i,
-    fallbackTitle: "B.Sc. in Nursing Studies (MQF/EQF Level 6)",
-    category: "Nursing & Healthcare",
-    badge: "EU Registered Nurse",
-    durationFallback: "3 Years (180 ECTS)",
-    feeFallback: "€7,000 / Yr",
-    image: "https://res.cloudinary.com/ppkvzeli/image/upload/v1794910058/Nursing_Studies_Vaccination_Banner.png"
+    collegeId: 'lvi',
+    match: /Nursing Studies/i,
+    image:
+      'https://res.cloudinary.com/ppkvzeli/image/upload/v1794910058/Nursing_Studies_Vaccination_Banner.png'
   },
   {
-    collegeId: "avanza",
-    courseMatch: /Complete MBA Pathway/i,
-    fallbackTitle: "Complete MBA Pathway (MQF/EQF Level 7 – Dual Award)",
-    category: "Business & MBA",
-    badge: "UK Dual Award",
-    durationFallback: "18 Months (90 ECTS)",
-    feeFallback: "€12,000 Total",
-    image: "https://res.cloudinary.com/ppkvzeli/image/upload/v1794910062/Complete_UK_MBA_Pathway.png"
+    collegeId: 'avanza',
+    match: /Complete MBA Pathway/i,
+    image:
+      'https://res.cloudinary.com/ppkvzeli/image/upload/v1794910062/Complete_UK_MBA_Pathway.png'
   },
   {
-    collegeId: "learnkey",
-    courseMatch: /Software Design, Artificial Intelligence and Cloud Computing/i,
-    fallbackTitle: "B.Sc. in Software Design, AI & Cloud Computing (MQF/EQF Level 6)",
-    category: "IT, AI & Cloud",
-    badge: "High Tech Demand",
-    durationFallback: "3 Years (180 ECTS)",
-    feeFallback: "€6,500 (Yr 1)",
-    image: "https://res.cloudinary.com/ppkvzeli/image/upload/v1794910056/B.Sc._Software_Design__AI_Cloud_Computing.png"
+    collegeId: 'learnkey',
+    match: /Software Design, Artificial Intelligence and Cloud Computing/i,
+    image:
+      'https://res.cloudinary.com/ppkvzeli/image/upload/v1794910056/B.Sc._Software_Design__AI_Cloud_Computing.png'
   },
   {
-    collegeId: "eec",
-    courseMatch: /Bachelor of Arts \(Honours\) in International Tourism/i,
-    fallbackTitle: "BA (Honours) in International Tourism & Hospitality Management (MQF/EQF Level 6)",
-    category: "Hospitality & Tourism",
-    badge: "640-Hr Internship",
-    durationFallback: "3 Years (180 ECTS)",
-    feeFallback: "€6,500 (Yr 1)",
-    image: "https://res.cloudinary.com/ppkvzeli/image/upload/v1794910057/Luxury_Hospitality_Tourism_Program.png"
+    collegeId: 'eec',
+    match: /Bachelor of Arts \(Honours\) in International Tourism/i,
+    image:
+      'https://res.cloudinary.com/ppkvzeli/image/upload/v1794910057/Luxury_Hospitality_Tourism_Program.png'
   },
   {
-    collegeId: "mic",
-    courseMatch: /Logistics and Supply Chain Crisis Management/i,
-    fallbackTitle: "Level 7 Diploma in Logistics & Supply Chain Crisis Management",
-    category: "Business & MBA",
-    badge: "MBA Top-Up Route",
-    durationFallback: "1 Year (Level 7)",
-    feeFallback: "€6,500 / Yr",
-    image: "https://res.cloudinary.com/ppkvzeli/image/upload/v1794910057/Logistics_and_Supply_Chain_Diploma_Banner.png"
-  },
-  {
-    collegeId: "academy21",
-    courseMatch: /AI for Professional Use/i,
-    fallbackTitle: "Undergraduate Diploma in AI for Professional Use",
-    category: "IT, AI & Cloud",
-    badge: "10th Pass • No IELTS",
-    durationFallback: "1 Year",
-    feeFallback: "€7,500",
-    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1000"
-  },
-  {
-    collegeId: "academy21",
-    courseMatch: /Masters in Human Resources Management/i,
-    fallbackTitle: "Masters in Human Resources Management (MQF/EQF Level 7)",
-    category: "HR, Psychology & Coaching",
-    badge: "90 ECTS Master's",
-    durationFallback: "1 Year Full-Time",
-    feeFallback: "€8,000",
-    image: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&q=80&w=1000"
-  },
-  {
-    collegeId: "gcm",
-    courseMatch: /Bachelor of Arts in Management \(MQF\/EQF Level 6\)/i,
-    fallbackTitle: "Bachelor of Arts in Management (MQF/EQF Level 6)",
-    category: "Business & MBA",
-    badge: "SmartCity Campus",
-    durationFallback: "36 Months (180 ECTS)",
-    feeFallback: "€6,100 / Yr",
-    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1000"
+    collegeId: 'mic',
+    match: /Logistics and Supply Chain Crisis Management/i,
+    image:
+      'https://res.cloudinary.com/ppkvzeli/image/upload/v1794910057/Logistics_and_Supply_Chain_Diploma_Banner.png'
   }
 ];
 
+const CATEGORY_FALLBACK_IMAGES = {
+  'Nursing & Healthcare':
+    'https://res.cloudinary.com/ppkvzeli/image/upload/v1794910058/Nursing_Studies_Vaccination_Banner.png',
+  'Business & MBA':
+    'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1000',
+  'IT, AI & Cloud':
+    'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1000',
+  'Hospitality & Tourism':
+    'https://res.cloudinary.com/ppkvzeli/image/upload/v1794910057/Luxury_Hospitality_Tourism_Program.png',
+  'HR, Psychology & Coaching':
+    'https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&q=80&w=1000',
+  'Logistics & Supply Chain':
+    'https://res.cloudinary.com/ppkvzeli/image/upload/v1794910057/Logistics_and_Supply_Chain_Diploma_Banner.png'
+};
+
+const detectCategory = (title = '') => {
+  if (
+    /nursing|early years|early childhood|public health|occupational health|health and social care|health, social care|neuroscience/i.test(
+      title
+    )
+  ) {
+    return 'Nursing & Healthcare';
+  }
+  if (/psychology|coaching|human resource|\bhrm\b/i.test(title)) {
+    return 'HR, Psychology & Coaching';
+  }
+  if (/logistics|supply chain/i.test(title)) {
+    return 'Logistics & Supply Chain';
+  }
+  if (/hospitality|tourism|events management/i.test(title)) {
+    return 'Hospitality & Tourism';
+  }
+  if (
+    /information technology|software design|artificial intelligence|\bai\b|cloud computing|computer science/i.test(
+      title
+    )
+  ) {
+    return 'IT, AI & Cloud';
+  }
+  return 'Business & MBA';
+};
+
+const extractCourseBadge = (title = '', collegeId = '') => {
+  if (/nursing bridging/i.test(title)) return 'Pay After Visa';
+  if (/nursing/i.test(title)) return 'EU Registered Nurse';
+  if (collegeId === 'avanza' && /Complete MBA Pathway/i.test(title))
+    return 'UK Dual Award';
+  if (/dba|doctor/i.test(title)) return 'MQF Level 8 • DBA';
+  if (/mba/i.test(title)) return 'MQF Level 7 • MBA';
+  if (/level 7|master|msc|postgraduate|post graduate/i.test(title))
+    return 'MQF Level 7 • PG';
+  if (/level 6|bachelor|bsc|b\.sc|ba \(/i.test(title))
+    return 'MQF Level 6 • Degree';
+  if (/level 4|pre-tertiary|award in/i.test(title))
+    return 'MQF Level 4 • Foundation';
+  return 'MQF Level 5 • Diploma';
+};
+
+const extractCourseDuration = (course) => {
+  const durDetail = course?.keyDetails?.find((d) => /duration/i.test(d.label));
+  if (durDetail?.value) {
+    const cleaned = durDetail.value
+      .split('│')[0]
+      .split('|')[0]
+      .split('[')[0]
+      .trim();
+    if (cleaned) return cleaned;
+  }
+  const titleMatch = course?.title?.match(
+    /\((\d+(?:\.\d+)?\s*(?:Year|Years|Month|Months)[^)]*)\)/i
+  );
+  if (titleMatch) return titleMatch[1];
+  return 'Full-Time';
+};
+
+const extractCourseFee = (course) => {
+  // 1. Check feeStructure array first for Non-EU / Year 1
+  if (Array.isArray(course?.feeStructure) && course.feeStructure.length > 0) {
+    const nonEuRow =
+      course.feeStructure.find((f) =>
+        /non-eu.*year 1|non-eu tuition fee$/i.test(f.category)
+      ) ||
+      course.feeStructure.find((f) => /year 1/i.test(f.category)) ||
+      course.feeStructure[0];
+    if (nonEuRow?.amount) {
+      return nonEuRow.amount.replace('.00', '');
+    }
+  }
+
+  // 2. Check keyDetails for Tuition Fee
+  const feeDetail = course?.keyDetails?.find((d) =>
+    /tuition|fee/i.test(d.label)
+  );
+  if (feeDetail?.value) {
+    const val = feeDetail.value;
+    // Prefer Non-EU price when both EU and Non-EU are listed
+    const nonEuMatch = val.match(
+      /(?:Non-EU[^€]*)(€[\d,]+(?:\s*\/\s*(?:yr|year)|\s*per\s*year)?)/i
+    );
+    if (nonEuMatch) return nonEuMatch[1].replace(/\s*per\s*year/i, ' / Yr');
+
+    const nonEuBeforeMatch = val.match(
+      /(€[\d,]+(?:\s*\/\s*(?:yr|year)|\s*per\s*year)?)\s*\([^)]*Non-EU/i
+    );
+    if (nonEuBeforeMatch)
+      return nonEuBeforeMatch[1].replace(/\s*per\s*year/i, ' / Yr');
+
+    const firstEuro = val.match(
+      /(€[\d,]+(?:\s*\/\s*(?:yr|year)|\s*per\s*year)?)/i
+    );
+    if (firstEuro) return firstEuro[1].replace(/\s*per\s*year/i, ' / Yr');
+  }
+
+  return 'Pay After Visa';
+};
+
+const getCourseImage = (collegeId, title, category) => {
+  const custom = CUSTOM_COURSE_IMAGES.find(
+    (item) => item.collegeId === collegeId && item.match.test(title)
+  );
+  if (custom) return custom.image;
+  return CATEGORY_FALLBACK_IMAGES[category] || CATEGORY_FALLBACK_IMAGES['Business & MBA'];
+};
+
+const resetScrollBeforeNavigate = () => {
+  if (window.__lenis) {
+    window.__lenis.scrollTo(0, { immediate: true });
+  }
+  window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+};
+
+const DESKTOP_INITIAL_COUNT = 9;
+
 const TrendingCoursesSection = () => {
-  const [selectedCategory, setSelectedCategory] = useState("All Trending");
+  const [selectedCategory, setSelectedCategory] = useState('All Courses');
   const [activeSlide, setActiveSlide] = useState(0);
+  const [visibleDesktopCount, setVisibleDesktopCount] = useState(DESKTOP_INITIAL_COUNT);
   const mobileSliderRef = useRef(null);
 
-  // Dynamically hydrate every card directly from institutionsData.js
-  const trendingCourses = useMemo(() => {
-    return TRENDING_CONFIG.map((item) => {
-      const college = institutionsData.find((c) => c.id === item.collegeId);
-      const matchedCourse = college?.courses?.find((crs) =>
-        item.courseMatch.test(crs.title)
-      );
+  // Dynamically hydrate ALL courses from ALL 12 institutions in institutionsData.js
+  const allCourses = useMemo(() => {
+    return institutionsData.flatMap((college) => {
+      const collegeShortName = college.name.split('–')[0].trim();
+      const collegeSlug = getCollegeSlug(college.name);
 
-      const collegeShortName = college
-        ? college.name.split('–')[0].trim()
-        : 'Accredited Malta College';
-      const collegeSlug = college ? getCollegeSlug(college.name) : '';
-
-      // Extract live duration from course keyDetails if available
-      const durDetail = matchedCourse?.keyDetails?.find((d) =>
-        /duration/i.test(d.label)
-      );
-      const liveDuration = durDetail
-        ? durDetail.value.split('│')[0].split('|')[0].trim()
-        : item.durationFallback;
-
-      return {
-        title: matchedCourse?.title || item.fallbackTitle,
-        category: item.category,
-        badge: item.badge,
-        collegeName: collegeShortName,
-        location: college?.location?.split(',')[0]?.trim() || 'Malta',
-        duration: liveDuration,
-        fee: item.feeFallback,
-        image: item.image,
-        targetUrl: collegeSlug ? `/institutions#${collegeSlug}` : '/institutions',
-        modulesCount: matchedCourse?.modules?.length || 0
-      };
+      return (college.courses || []).map((course) => {
+        const category = detectCategory(course.title);
+        return {
+          collegeId: college.id,
+          collegeSlug,
+          title: course.title,
+          category,
+          badge: extractCourseBadge(course.title, college.id),
+          collegeName: collegeShortName,
+          location: college.location?.split(',')[0]?.trim() || 'Malta',
+          duration: extractCourseDuration(course),
+          fee: extractCourseFee(course),
+          image: getCourseImage(college.id, course.title, category),
+          targetUrl: `/institutions#${collegeSlug}`,
+          modulesCount: course.modules?.length || 0
+        };
+      });
     });
   }, []);
 
-  const filteredCourses =
-    selectedCategory === "All Trending"
-      ? trendingCourses
-      : trendingCourses.filter((c) => c.category === selectedCategory);
+  const filteredCourses = useMemo(() => {
+    if (selectedCategory === 'All Courses') return allCourses;
+    return allCourses.filter((c) => c.category === selectedCategory);
+  }, [allCourses, selectedCategory]);
+
+  const categoryCounts = useMemo(() => {
+    const counts = { 'All Courses': allCourses.length };
+    allCourses.forEach((c) => {
+      counts[c.category] = (counts[c.category] || 0) + 1;
+    });
+    return counts;
+  }, [allCourses]);
 
   useEffect(() => {
     setActiveSlide(0);
+    setVisibleDesktopCount(DESKTOP_INITIAL_COUNT);
     if (mobileSliderRef.current) {
       mobileSliderRef.current.scrollTo({ left: 0, behavior: 'smooth' });
     }
@@ -189,6 +276,13 @@ const TrendingCoursesSection = () => {
     setActiveSlide(Math.max(0, Math.min(currentIndex, filteredCourses.length - 1)));
   };
 
+  const desktopCourses = filteredCourses.slice(0, visibleDesktopCount);
+  const remainingCount = filteredCourses.length - desktopCourses.length;
+  const mobileProgress =
+    filteredCourses.length > 0
+      ? ((activeSlide + 1) / filteredCourses.length) * 100
+      : 0;
+
   return (
     <section className="py-16 md:py-24 px-4 md:px-12 bg-[#f8f9fc] border-y border-gray-200/60">
       <div className="max-w-7xl mx-auto">
@@ -197,7 +291,7 @@ const TrendingCoursesSection = () => {
             ★ 2027 INTAKES OPEN • PAY TUITION AFTER VISA ★
           </p>
           <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900">
-            Explore <RedUnderline>Popular Courses</RedUnderline> to Study in Malta
+            Explore <RedUnderline>All {allCourses.length} Courses</RedUnderline> to Study in Malta
           </h2>
           <p className="text-gray-500 text-sm md:text-base max-w-2xl mx-auto">
             Click any programme below to jump directly to its accredited Malta college, full 2027 fee breakdown, curriculum modules, and expected Schengen salaries.
@@ -205,7 +299,7 @@ const TrendingCoursesSection = () => {
         </div>
 
         {/* Category Filter Pills */}
-        <div className="flex flex-wrap justify-center gap-2 md:gap-2.5 mb-8 md:mb-12 bg-white p-2.5 rounded-3xl md:rounded-full max-w-5xl mx-auto shadow-sm border border-gray-200/80">
+        <div className="flex flex-wrap justify-center gap-2 md:gap-2.5 mb-8 md:mb-12 bg-white p-2.5 rounded-3xl md:rounded-full max-w-6xl mx-auto shadow-sm border border-gray-200/80">
           {courseCategories.map((cat) => (
             <button
               key={cat}
@@ -217,7 +311,10 @@ const TrendingCoursesSection = () => {
                   : 'bg-gray-100 text-gray-700 hover:bg-red-50 hover:text-red-600'
               }`}
             >
-              {cat}
+              {cat}{' '}
+              <span className="opacity-75 text-[11px]">
+                ({categoryCounts[cat] || 0})
+              </span>
             </button>
           ))}
         </div>
@@ -257,13 +354,14 @@ const TrendingCoursesSection = () => {
           >
             {filteredCourses.map((course, idx) => (
               <div
-                key={`mobile-${course.title}-${idx}`}
+                key={`mobile-${course.collegeId}-${course.title}-${idx}`}
                 className="w-[88%] shrink-0 snap-center bg-white rounded-3xl overflow-hidden border border-gray-200/90 shadow-sm flex flex-col"
               >
                 <div className="h-48 overflow-hidden relative bg-slate-900">
                   <img
                     src={course.image}
                     alt={course.title}
+                    loading="lazy"
                     className="w-full h-full object-cover object-top"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none" />
@@ -300,9 +398,15 @@ const TrendingCoursesSection = () => {
                   <div className="pt-3.5 mt-1 border-t border-slate-100 flex items-center justify-between gap-2">
                     <Link
                       to={course.targetUrl}
+                      state={{
+                        collegeId: course.collegeId,
+                        collegeSlug: course.collegeSlug,
+                        courseTitle: course.title
+                      }}
+                      onClick={resetScrollBeforeNavigate}
                       className="inline-flex items-center gap-1.5 text-xs font-extrabold text-red-600 hover:text-[#0f2547] transition-colors"
                     >
-                      View College, Modules & Salaries <FaArrowRight size={10} />
+                      View College, Modules &amp; Salaries <FaArrowRight size={10} />
                     </Link>
                     {course.modulesCount > 0 && (
                       <span className="text-[11px] font-bold text-slate-400 shrink-0">
@@ -315,39 +419,35 @@ const TrendingCoursesSection = () => {
             ))}
           </div>
 
-          {/* Pagination Dots */}
+          {/* Sleek Progress Bar (works cleanly even for 82 courses) */}
           {filteredCourses.length > 1 && (
-            <div className="flex items-center justify-center gap-1.5 mt-3">
-              {filteredCourses.map((_, idx) => (
-                <button
-                  key={idx}
-                  type="button"
-                  onClick={() => scrollMobileToIndex(idx)}
-                  aria-label={`Go to course ${idx + 1}`}
-                  className={`h-2 rounded-full transition-all ${
-                    activeSlide === idx ? 'w-6 bg-red-600' : 'w-2 bg-gray-300'
-                  }`}
+            <div className="mt-3 px-2">
+              <div className="w-full h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-red-600 rounded-full transition-all duration-300"
+                  style={{ width: `${mobileProgress}%` }}
                 />
-              ))}
+              </div>
             </div>
           )}
         </div>
 
-        {/* TABLET & DESKTOP (md+): 3x3 Responsive Course Grid */}
+        {/* TABLET & DESKTOP (md+): Responsive Course Grid */}
         <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredCourses.map((course, idx) => (
+          {desktopCourses.map((course, idx) => (
             <motion.div
-              key={`${course.title}-${idx}`}
+              key={`${course.collegeId}-${course.title}-${idx}`}
               layout
               initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.25 }}
               className="bg-white rounded-3xl overflow-hidden border border-gray-200/90 shadow-sm hover:shadow-xl transition-all flex flex-col group"
             >
               <div className="h-56 overflow-hidden relative bg-slate-900">
                 <img
                   src={course.image}
                   alt={course.title}
+                  loading="lazy"
                   className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none" />
@@ -384,9 +484,15 @@ const TrendingCoursesSection = () => {
                 <div className="pt-4 mt-2 border-t border-slate-100 flex items-center justify-between gap-2">
                   <Link
                     to={course.targetUrl}
+                    state={{
+                      collegeId: course.collegeId,
+                      collegeSlug: course.collegeSlug,
+                      courseTitle: course.title
+                    }}
+                    onClick={resetScrollBeforeNavigate}
                     className="inline-flex items-center gap-2 text-xs font-extrabold text-red-600 hover:text-[#0f2547] transition-colors"
                   >
-                    View College, Modules & Salaries <FaArrowRight size={11} />
+                    View College, Modules &amp; Salaries <FaArrowRight size={11} />
                   </Link>
                   {course.modulesCount > 0 && (
                     <span className="text-[11px] font-bold text-slate-400">
@@ -399,13 +505,45 @@ const TrendingCoursesSection = () => {
           ))}
         </div>
 
+        {/* Load More / Show Less Controls on Tablet & Desktop */}
+        <div className="hidden md:flex items-center justify-center gap-4 mt-10">
+          {remainingCount > 0 && (
+            <button
+              type="button"
+              onClick={() => setVisibleDesktopCount((prev) => prev + 9)}
+              className="px-7 py-3 rounded-xl bg-white border border-gray-300 text-[#0f2547] font-extrabold text-xs md:text-sm hover:border-red-600 hover:text-red-600 transition cursor-pointer shadow-xs"
+            >
+              Load More Courses ({remainingCount} more)
+            </button>
+          )}
+          {remainingCount > 0 && (
+            <button
+              type="button"
+              onClick={() => setVisibleDesktopCount(filteredCourses.length)}
+              className="px-7 py-3 rounded-xl bg-red-50 border border-red-200 text-red-600 font-extrabold text-xs md:text-sm hover:bg-red-600 hover:text-white transition cursor-pointer"
+            >
+              Show All {filteredCourses.length} Courses
+            </button>
+          )}
+          {visibleDesktopCount > DESKTOP_INITIAL_COUNT && remainingCount === 0 && (
+            <button
+              type="button"
+              onClick={() => setVisibleDesktopCount(DESKTOP_INITIAL_COUNT)}
+              className="px-7 py-3 rounded-xl bg-white border border-gray-300 text-[#0f2547] font-extrabold text-xs md:text-sm hover:border-red-600 hover:text-red-600 transition cursor-pointer"
+            >
+              Show Fewer Courses
+            </button>
+          )}
+        </div>
+
         {/* Bottom CTA to Full 12-College Directory */}
         <div className="text-center mt-10 md:mt-12">
           <Link
             to="/institutions"
+            onClick={resetScrollBeforeNavigate}
             className="inline-flex items-center gap-2.5 bg-[#0f2547] hover:bg-red-600 text-white font-extrabold text-xs md:text-sm uppercase tracking-wider px-8 py-4 rounded-2xl shadow-lg transition-colors"
           >
-            Explore All {institutionsData.length} Malta Colleges & Full Matrix <FaArrowRight size={12} />
+            Explore All {institutionsData.length} Malta Colleges &amp; Full Matrix <FaArrowRight size={12} />
           </Link>
         </div>
       </div>

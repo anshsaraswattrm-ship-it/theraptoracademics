@@ -35,14 +35,14 @@ const Navbar = () => {
 
   return (
     <div className="w-full fixed top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100">
-      <div className="px-4 md:px-8 xl:px-10 py-2.5 flex justify-between items-center lg:grid lg:grid-cols-[1fr_auto_1fr] gap-3">
+      <div className="px-4 md:px-10 xl:px-10 py-2.5 flex justify-between items-center lg:grid lg:grid-cols-[1fr_auto_1fr] gap-3 md:gap-6">
 
         {/* Left: Mid-Sized Logo */}
         <Link to="/" className="flex items-center gap-2 cursor-pointer justify-self-start shrink-0">
           <img
             src={logo}
             alt="The Raptor Academics Logo"
-            className="h-16 sm:h-[72px] xl:h-[84px] w-auto max-w-none object-contain"
+            className="h-16 sm:h-[72px] md:h-[74px] xl:h-[84px] w-auto max-w-none object-contain"
           />
         </Link>
 
@@ -98,14 +98,14 @@ const Navbar = () => {
           </a>
         </div>
 
-        {/* Mobile Toggle */}
+        {/* Mobile / Tablet Toggle */}
         <button
           type="button"
-          className="lg:hidden text-[#1b365d] cursor-pointer"
+          className="lg:hidden md:w-11 md:h-11 md:rounded-xl md:border md:border-gray-200 md:bg-white md:shadow-2xs flex items-center justify-center text-[#1b365d] hover:text-red-600 hover:border-red-200 transition-colors cursor-pointer shrink-0"
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle navigation menu"
         >
-          {isOpen ? <X size={28} /> : <Menu size={28} />}
+          {isOpen ? <X size={26} /> : <Menu size={26} />}
         </button>
       </div>
 

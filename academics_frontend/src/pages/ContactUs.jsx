@@ -19,10 +19,10 @@ const ContactUs = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="space-y-10"
+            className="space-y-10 flex flex-col md:items-center md:text-center lg:items-start lg:text-left"
           >
-            <div>
-              <p className="text-red-600 font-bold uppercase tracking-widest text-sm mb-2 flex items-center gap-2">
+            <div className="max-w-2xl md:mx-auto lg:mx-0">
+              <p className="text-red-600 font-bold uppercase tracking-widest text-sm mb-2 flex items-center justify-center lg:justify-start gap-2">
                 ★ QUICK CONTACT ★
               </p>
               <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-4">
@@ -34,9 +34,9 @@ const ContactUs = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full max-w-2xl md:mx-auto lg:mx-0 text-left">
                {/* Location Card */}
-               <div className="flex gap-4 sm:col-span-2">
+               <div className="flex gap-4 sm:col-span-2 bg-white/70 md:bg-transparent p-4 md:p-0 rounded-2xl border border-gray-200/70 md:border-none">
                   <div className="bg-red-50 p-4 rounded-xl text-red-600 self-start shrink-0">
                     <FaMapMarkerAlt size={24} />
                   </div>
@@ -47,7 +47,7 @@ const ContactUs = () => {
                </div>
 
                {/* Phone & Email Card */}
-               <div className="flex gap-4">
+               <div className="flex gap-4 bg-white/70 md:bg-transparent p-4 md:p-0 rounded-2xl border border-gray-200/70 md:border-none">
                   <div className="bg-red-50 p-4 rounded-xl text-red-600 self-start shrink-0">
                     <FaPhoneAlt size={24} />
                   </div>
@@ -56,12 +56,12 @@ const ContactUs = () => {
                     <p className="text-gray-900 font-semibold mb-1">Phone:</p>
                     <p className="text-gray-600 mb-3">(+91) 72320 10105</p>
                     <p className="text-gray-900 font-semibold mb-1">Email:</p>
-                    <a href="mailto:theraptoracademics@gmail.com" className="text-red-600 hover:underline">theraptoracademics@gmail.com</a>
+                    <a href="mailto:theraptoracademics@gmail.com" className="text-red-600 hover:underline break-all sm:break-normal">theraptoracademics@gmail.com</a>
                   </div>
                </div>
 
                {/* Opening Hours Card */}
-               <div className="flex gap-4">
+               <div className="flex gap-4 bg-white/70 md:bg-transparent p-4 md:p-0 rounded-2xl border border-gray-200/70 md:border-none">
                   <div className="bg-red-50 p-4 rounded-xl text-red-600 self-start shrink-0">
                     <FaClock size={24} />
                   </div>
@@ -81,7 +81,7 @@ const ContactUs = () => {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="w-full h-[520px] rounded-2xl overflow-hidden shadow-2xl border-4 border-white"
+            className="w-full max-w-2xl md:mx-auto lg:max-w-none lg:mx-0 h-[440px] md:h-[480px] lg:h-[520px] rounded-2xl overflow-hidden shadow-2xl border-4 border-white"
           >
             <iframe 
               title="The Raptor Academics Jaipur Location"

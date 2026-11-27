@@ -43,8 +43,8 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="w-full bg-[#f8fafc] text-[#334155] pt-20 pb-8 px-4 md:px-12 lg:px-20 border-t border-gray-200 font-sans">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16 mb-16">
+    <footer className="w-full bg-[#f8fafc] text-[#334155] pt-20 pb-8 px-4 md:px-10 lg:px-20 border-t border-gray-200 font-sans">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-x-10 md:gap-y-12 lg:gap-16 mb-16 items-start">
 
         {/* 1. Brand Information */}
         <div className="space-y-6 lg:pr-6">
@@ -52,10 +52,10 @@ const Footer = () => {
             <img
               src={logo}
               alt="The Raptor Academics Logo"
-              className="w-52 md:w-64 object-contain"
+              className="w-52 md:w-56 lg:w-64 object-contain"
             />
           </Link>
-          <p className="text-sm leading-relaxed font-medium">
+          <p className="text-sm leading-relaxed font-medium max-w-sm">
             Expert guidance and trusted support for your study abroad journey. We turn your international education goals into reality with seamless visa and university assistance.
           </p>
 
@@ -81,7 +81,7 @@ const Footer = () => {
         </div>
 
         {/* 2. Quick Links */}
-        <div>
+        <div className="md:pl-4 lg:pl-0">
           <h4 className="text-[#0f2547] font-extrabold text-lg mb-6 flex items-center gap-2.5">
             <span className="w-2 h-2 bg-red-600 rounded-full"></span> Quick Links
           </h4>
@@ -126,7 +126,7 @@ const Footer = () => {
         </div>
 
         {/* 4. Contact Us */}
-        <div>
+        <div className="md:pl-4 lg:pl-0">
           <h4 className="text-[#0f2547] font-extrabold text-lg mb-6 flex items-center gap-2.5">
             <span className="w-2 h-2 bg-red-600 rounded-full"></span> Contact Us
           </h4>
@@ -144,7 +144,7 @@ const Footer = () => {
 
             <div className="flex items-center gap-4 group">
               <div className="bg-red-50 p-2.5 rounded-lg text-red-600 shrink-0 group-hover:scale-110 transition-transform"><FaEnvelope size={15} /></div>
-              <a href="mailto:theraptoracademics@gmail.com" className="hover:text-red-600 transition-colors">theraptoracademics@gmail.com</a>
+              <a href="mailto:theraptoracademics@gmail.com" className="hover:text-red-600 transition-colors break-all md:break-normal">theraptoracademics@gmail.com</a>
             </div>
 
           </div>

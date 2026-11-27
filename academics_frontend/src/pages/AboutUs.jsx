@@ -42,8 +42,8 @@ const floatingEduElements = Array.from({ length: 14 }).map((_, i) => ({
   Icon: eduIconList[i % eduIconList.length],
   left: `${(i * 7 + (i % 3) * 3) % 92}%`,
   size: (i % 3) * 5 + 24,
-  duration: (i % 4) * 2 + 7,
-  delay: (i % 5) * 0.4,
+  duration: (i % 4) * 2 + 5,
+  delay: (i % 5) * 0.3,
   driftX: i % 2 === 0 ? 30 : -30,
 }));
 
@@ -52,8 +52,8 @@ const windStreaks = Array.from({ length: 12 }).map((_, i) => ({
   id: i,
   top: `${(i * 8 + 10) % 88}%`,
   width: `${(i % 3) * 90 + 140}px`,
-  duration: (i % 3) * 0.7 + 1.8,
-  delay: (i % 5) * 0.35,
+  duration: (i % 3) * 0.5 + 1.3,
+  delay: (i % 5) * 0.25,
 }));
 
 // 6 Pillars from SEO Word File
@@ -202,13 +202,13 @@ const AboutUs = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowIntro(false);
-    }, 7200);
+    }, 5200);
     return () => clearTimeout(timer);
   }, []);
 
   const fadeUp = {
     hidden: { opacity: 0, y: 24 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: 'easeOut' } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: 'easeOut' } }
   };
 
   return (
@@ -223,7 +223,7 @@ const AboutUs = () => {
       />
 
       {/* =========================================================
-          SLOW-GLIDING AIRPLANE & GLOBAL EDUCATION INTRO (7.2s)
+          SLOW-GLIDING AIRPLANE & GLOBAL EDUCATION INTRO (5.2s)
       ========================================================= */}
       <AnimatePresence>
         {showIntro && (
@@ -231,13 +231,13 @@ const AboutUs = () => {
             key="global-edu-intro"
             initial={{ opacity: 1 }}
             exit={{ opacity: 0, y: -30, filter: 'blur(12px)' }}
-            transition={{ duration: 1.0, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden bg-[#06080e] select-none"
           >
             <motion.div
               initial={{ scale: 1.16, filter: 'blur(6px)' }}
               animate={{ scale: 1.02, filter: 'blur(3px)' }}
-              transition={{ duration: 7.2, ease: 'easeOut' }}
+              transition={{ duration: 5.2, ease: 'easeOut' }}
               className="absolute inset-0 z-0"
             >
               <img
@@ -276,7 +276,7 @@ const AboutUs = () => {
                   opacity: [0, 0.45, 0.45, 0.45, 0] 
                 }}
                 transition={{
-                  duration: 6.6,
+                  duration: 4.6,
                   ease: 'linear',
                 }}
                 className="relative flex items-center -rotate-6"
@@ -284,22 +284,22 @@ const AboutUs = () => {
                 <div className="flex flex-col gap-2.5 items-end -mr-4">
                   <motion.div
                     animate={{ scaleX: [0.85, 1.15, 0.9], opacity: [0.25, 0.65, 0.25] }}
-                    transition={{ duration: 0.9, repeat: Infinity, ease: 'easeInOut' }}
+                    transition={{ duration: 0.65, repeat: Infinity, ease: 'easeInOut' }}
                     className="w-56 md:w-[360px] h-[2px] bg-gradient-to-l from-white/80 via-red-400/50 to-transparent rounded-full blur-[0.5px]"
                   />
                   <motion.div
                     animate={{ scaleX: [0.95, 1.25, 1], opacity: [0.4, 0.85, 0.4] }}
-                    transition={{ duration: 0.7, repeat: Infinity, ease: 'easeInOut' }}
+                    transition={{ duration: 0.5, repeat: Infinity, ease: 'easeInOut' }}
                     className="w-72 md:w-[500px] h-[4px] bg-gradient-to-l from-red-500 via-amber-400/60 to-transparent rounded-full blur-[1.5px]"
                   />
                   <motion.div
                     animate={{ scaleX: [0.8, 1.1, 0.85], opacity: [0.25, 0.6, 0.25] }}
-                    transition={{ duration: 1.0, repeat: Infinity, ease: 'easeInOut' }}
+                    transition={{ duration: 0.75, repeat: Infinity, ease: 'easeInOut' }}
                     className="w-52 md:w-[320px] h-[2px] bg-gradient-to-l from-white/80 via-white/40 to-transparent rounded-full blur-[0.5px]"
                   />
                   <motion.div
                     animate={{ x: [0, -70], opacity: [0.6, 0], scale: [0.85, 1.35] }}
-                    transition={{ duration: 1.1, repeat: Infinity, ease: 'easeOut' }}
+                    transition={{ duration: 0.8, repeat: Infinity, ease: 'easeOut' }}
                     className="w-16 h-5 border-l-2 border-t border-b border-white/35 rounded-full -mt-6 mr-8"
                   />
                 </div>
@@ -337,7 +337,7 @@ const AboutUs = () => {
             <motion.button
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.5 }}
+              transition={{ delay: 0.2, duration: 0.35 }}
               onClick={() => setShowIntro(false)}
               className="absolute top-7 right-7 z-30 px-5 py-2.5 border border-white/30 hover:border-red-500 bg-white/5 hover:bg-red-600 backdrop-blur-md text-white text-xs tracking-[0.25em] uppercase font-bold rounded-lg transition-all duration-300 cursor-pointer"
             >
@@ -348,7 +348,7 @@ const AboutUs = () => {
               <motion.div
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.9 }}
+                transition={{ delay: 0.2, duration: 0.65 }}
                 className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-md border border-white/15 px-5 py-2 rounded-full text-xs text-gray-200 uppercase tracking-[0.25em] font-semibold mb-6 shadow-lg"
               >
                 <span>INDIA</span>
@@ -359,7 +359,7 @@ const AboutUs = () => {
               <motion.p
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.7, duration: 1.0 }}
+                transition={{ delay: 0.5, duration: 0.7 }}
                 className="text-red-500 font-serif italic text-3xl md:text-4xl tracking-wide mb-1 drop-shadow-md"
               >
                 The Raptor
@@ -368,7 +368,7 @@ const AboutUs = () => {
               <motion.h1
                 initial={{ opacity: 0, scale: 0.92, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
-                transition={{ delay: 1.1, duration: 1.1, ease: 'easeOut' }}
+                transition={{ delay: 0.8, duration: 0.75, ease: 'easeOut' }}
                 className="text-5xl sm:text-7xl md:text-8xl font-serif italic font-bold text-white tracking-tight drop-shadow-[0_10px_35px_rgba(0,0,0,0.9)]"
               >
                 Academics
@@ -377,14 +377,14 @@ const AboutUs = () => {
               <motion.div
                 initial={{ width: 0, opacity: 0 }}
                 animate={{ width: '200px', opacity: 1 }}
-                transition={{ delay: 1.7, duration: 1.0 }}
+                transition={{ delay: 1.2, duration: 0.7 }}
                 className="h-[1px] bg-gradient-to-r from-transparent via-red-500 to-transparent mx-auto my-6"
               />
 
               <motion.p
                 initial={{ opacity: 0, letterSpacing: '0.1em' }}
                 animate={{ opacity: 1, letterSpacing: '0.32em' }}
-                transition={{ delay: 2.0, duration: 1.2 }}
+                transition={{ delay: 1.4, duration: 0.8 }}
                 className="text-gray-200 text-[11px] sm:text-xs md:text-sm uppercase font-semibold"
               >
                 BRIDGING AMBITION TO EUROPEAN UNIVERSITIES
@@ -394,7 +394,7 @@ const AboutUs = () => {
             <motion.div
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
-              transition={{ duration: 7.0, ease: 'linear' }}
+              transition={{ duration: 5.0, ease: 'linear' }}
               className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-red-700 via-red-500 to-white origin-left z-30"
             />
           </motion.div>
@@ -407,7 +407,7 @@ const AboutUs = () => {
       <Navbar />
 
       {/* =========================================================
-          1. HERO SECTION
+1. HERO SECTION
       ========================================================= */}
       <section className="relative pt-40 pb-32 px-4 md:px-12 flex items-center justify-center min-h-[62vh]">
         <div className="absolute inset-0 z-0">
@@ -436,7 +436,7 @@ const AboutUs = () => {
       </section>
 
       {/* =========================================================
-          2. COMMITTED TO YOUR SUCCESS
+2. COMMITTED TO YOUR SUCCESS
       ========================================================= */}
       <section className="py-24 px-4 md:px-12 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -476,7 +476,7 @@ const AboutUs = () => {
           </motion.div>
 
           <motion.div 
-            initial={{ opacity: 0, scale: 0.94 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true, amount: 0.15 }} transition={{ duration: 0.7 }}
+            initial={{ opacity: 0, scale: 0.94 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true, amount: 0.15 }} transition={{ duration: 0.5 }}
             className="w-full h-[430px] bg-gray-200 rounded-3xl overflow-hidden shadow-2xl border-4 border-gray-50"
           >
             <img src="https://images.unsplash.com/photo-1577962917302-cd874c4e31d2?auto=format&fit=crop&q=80" alt="Student Consultation Jaipur" className="w-full h-full object-cover" />
@@ -485,7 +485,7 @@ const AboutUs = () => {
       </section>
 
       {/* =========================================================
-          3. WHY CHOOSE THE RAPTOR ACADEMICS?
+3. WHY CHOOSE THE RAPTOR ACADEMICS?
       ========================================================= */}
       <section className="bg-[#f8fafc] py-20 md:py-24 px-4 md:px-12 border-y border-gray-200/80">
         <div className="max-w-7xl mx-auto">
@@ -566,13 +566,13 @@ const AboutUs = () => {
       </section>
 
       {/* =========================================================
-          4. OUR STORY
+4. OUR STORY
       ========================================================= */}
       <section className="py-24 px-4 md:px-12 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <motion.div 
             initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.15 }} variants={fadeUp}
-            className="space-y-5"
+            className="space-y-5 flex flex-col md:items-center md:text-center lg:items-start lg:text-left"
           >
             <p className="text-red-600 font-extrabold uppercase tracking-widest text-xs">
               ★ SINCE 2016 • JAIPUR TO EUROPE ★
@@ -581,13 +581,13 @@ const AboutUs = () => {
               Our Story <br />
               <span className="text-gray-400 font-bold text-3xl md:text-4xl">Empowering Dreams</span>
             </h2>
-            <p className="text-gray-600 text-lg leading-relaxed">
+            <p className="text-gray-600 text-lg leading-relaxed max-w-2xl md:mx-auto lg:mx-0">
               The Raptor Academics was founded with a vision to make international education more accessible through clear and personalised guidance. Based in Jaipur, we help students explore suitable universities, courses and study opportunities in Malta and selected European destinations.
             </p>
-            <p className="text-gray-600 text-lg leading-relaxed">
+            <p className="text-gray-600 text-lg leading-relaxed max-w-2xl md:mx-auto lg:mx-0">
               Since 2016, our focus has been on understanding student aspirations and supporting them through admissions, documentation and visa guidance.
             </p>
-            <div className="bg-red-50/80 border-l-4 border-red-600 p-4 rounded-r-2xl">
+            <div className="bg-red-50/80 border-l-4 border-red-600 p-4 rounded-r-2xl w-full max-w-xl md:mx-auto lg:mx-0 md:text-center lg:text-left">
               <p className="text-[#0f2547] font-extrabold text-base md:text-lg italic">
                 “Your dreams, our guidance, your global journey.”
               </p>
@@ -595,8 +595,8 @@ const AboutUs = () => {
           </motion.div>
 
           <motion.div 
-            initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.15 }} transition={{ duration: 0.7 }}
-            className="w-full h-[420px] bg-gray-200 rounded-3xl overflow-hidden shadow-xl"
+            initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.15 }} transition={{ duration: 0.5 }}
+            className="w-full max-w-2xl md:mx-auto lg:max-w-none lg:mx-0 h-[420px] bg-gray-200 rounded-3xl overflow-hidden shadow-xl"
           >
             <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80" alt="The Raptor Academics Team Support" className="w-full h-full object-cover" />
           </motion.div>
@@ -604,22 +604,22 @@ const AboutUs = () => {
       </section>
 
       {/* =========================================================
-          5. OUR MISSION & OUR VISION
+5. OUR MISSION & OUR VISION
       ========================================================= */}
       <section className="py-24 px-4 md:px-12 max-w-7xl mx-auto border-t border-gray-100">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <motion.div 
-            initial={{ opacity: 0, x: -40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.15 }} transition={{ duration: 0.7 }}
-            className="w-full h-[520px] bg-gray-200 rounded-3xl overflow-hidden shadow-2xl order-2 lg:order-1"
+            initial={{ opacity: 0, x: -40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.15 }} transition={{ duration: 0.5 }}
+            className="w-full max-w-2xl md:mx-auto lg:max-w-none lg:mx-0 h-[520px] bg-gray-200 rounded-3xl overflow-hidden shadow-2xl order-2 lg:order-1"
           >
             <img src="https://images.unsplash.com/photo-1436450412740-6b988f486c6b?auto=format&fit=crop&q=80" alt="European Architecture & Pathways" className="w-full h-full object-cover" />
           </motion.div>
 
           <motion.div 
             initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.15 }} variants={fadeUp}
-            className="order-1 lg:order-2 space-y-8"
+            className="order-1 lg:order-2 space-y-8 flex flex-col md:items-center md:text-center lg:items-start lg:text-left"
           >
-            <div className="space-y-4">
+            <div className="space-y-4 w-full max-w-2xl md:mx-auto lg:mx-0">
               <h2 className="text-3xl md:text-4xl font-extrabold text-[#0f2547]">
                 Our Mission
               </h2>
@@ -629,11 +629,11 @@ const AboutUs = () => {
               <p className="text-gray-600 text-base md:text-lg leading-relaxed">
                 Our mission is to simplify overseas education through personalised counselling, reliable information and structured admission and visa guidance.
               </p>
-              <div className="pt-1">
+              <div className="pt-1 flex flex-col md:items-center lg:items-start">
                 <p className="text-sm font-extrabold uppercase tracking-wider text-[#0f2547] mb-3">
                   Our Mission Includes:
                 </p>
-                <ul className="space-y-3 text-gray-800 font-semibold text-base">
+                <ul className="space-y-3 text-gray-800 font-semibold text-base text-left inline-block">
                   <li className="flex items-center gap-3">
                     <FaCheckCircle className="text-red-600 shrink-0" />
                     <span>Connecting students with suitable global education opportunities.</span>
@@ -654,7 +654,7 @@ const AboutUs = () => {
               </div>
             </div>
 
-            <div className="bg-[#f8fafc] border border-gray-200 rounded-3xl p-6 md:p-7 space-y-2.5">
+            <div className="bg-[#f8fafc] border border-gray-200 rounded-3xl p-6 md:p-7 space-y-2.5 w-full max-w-2xl md:mx-auto lg:mx-0 md:text-center lg:text-left">
               <span className="text-xs font-extrabold uppercase tracking-widest text-red-600 block">
                 Our Vision
               </span>
@@ -670,7 +670,7 @@ const AboutUs = () => {
       </section>
 
       {/* =========================================================
-          6. HOW WE SUPPORT YOUR STUDY ABROAD JOURNEY
+6. HOW WE SUPPORT YOUR STUDY ABROAD JOURNEY
       ========================================================= */}
       <section className="py-24 px-4 md:px-12 bg-[#0f2547] text-white">
         <div className="max-w-7xl mx-auto">
@@ -718,7 +718,7 @@ const AboutUs = () => {
       </section>
 
       {/* =========================================================
-          7. DIRECTOR'S STORY: FROM JAIPUR TO MALTA (With Director Portrait Side-by-Side)
+7. DIRECTOR'S STORY: FROM JAIPUR TO MALTA (With Director Portrait Side-by-Side)
       ========================================================= */}
       <section className="py-24 px-4 md:px-12 bg-white">
         <div className="max-w-7xl mx-auto">
@@ -781,7 +781,7 @@ const AboutUs = () => {
                     <img
                       src={DIRECTOR_IMAGE}
                       alt="Deependra Singh Rathore - Founder & Director, The Raptor Academics"
-                      className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
+                      className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0f2547] via-[#0f2547]/20 to-transparent" />
@@ -804,7 +804,7 @@ const AboutUs = () => {
       </section>
 
       {/* =========================================================
-          8. MEET OUR EXPERTS & 12 LARGE CLICKABLE PARTNER LOGOS
+8. MEET OUR EXPERTS & 12 LARGE CLICKABLE PARTNER LOGOS
       ========================================================= */}
       <section className="bg-gray-50 py-20 px-4 md:px-12 text-center border-t border-gray-200/70">
         <div className="max-w-4xl mx-auto mb-20 space-y-4">

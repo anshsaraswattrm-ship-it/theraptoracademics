@@ -10,9 +10,7 @@ import {
   FaChevronUp,
   FaNewspaper,
   FaCheckCircle,
-  FaShareAlt,
-  FaBookmark,
-  FaExternalLinkAlt
+  FaShareAlt
 } from 'react-icons/fa';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -534,8 +532,8 @@ const MaltaUpdates = () => {
       {/* MSN-STYLE EDITORIAL MASTHEAD */}
       <section className="pt-32 md:pt-40 pb-12 bg-[#0b1930] text-white px-4 md:px-10 border-b border-white/10">
         <div className="max-w-7xl mx-auto space-y-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-            <div>
+          <div className="flex flex-col md:items-center md:text-center lg:flex-row lg:items-end lg:text-left justify-between gap-4">
+            <div className="flex flex-col md:items-center lg:items-start">
               <div className="inline-flex items-center gap-2 bg-red-600/20 border border-red-500/40 px-3.5 py-1 rounded-full mb-3">
                 <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
                 <span className="text-red-300 font-extrabold uppercase tracking-widest text-[11px]">
@@ -545,18 +543,18 @@ const MaltaUpdates = () => {
               <h1 className="text-3xl sm:text-5xl font-black tracking-tight">
                 Malta <span className="text-red-500">News & Updates</span>
               </h1>
-              <p className="text-blue-100/80 text-sm md:text-base mt-2 max-w-2xl">
-              Verified coverage on Malta Budget 2027, Bill 15 visa &amp; residence permit fees, proof of funds, rent &amp; inflation, and education policy for international students.
+              <p className="text-blue-100/80 text-sm md:text-base mt-2 max-w-2xl md:mx-auto lg:mx-0">
+                Verified coverage on Malta Budget 2027, Bill 15 visa &amp; residence permit fees, proof of funds, rent &amp; inflation, and education policy for international students.
               </p>
             </div>
 
-            <div className="text-xs text-blue-200/80 font-bold">
+            <div className="text-xs text-blue-200/80 font-bold md:text-center lg:text-right">
               Updated: 24 November 2026 • By The Raptor Academics Team
             </div>
           </div>
 
           {/* MSN Category Tabs */}
-          <div className="flex flex-wrap items-center gap-2 pt-2">
+          <div className="flex flex-wrap items-center md:justify-center lg:justify-start gap-2 pt-2">
             {CATEGORIES.map((cat) => (
               <button
                 key={cat}
@@ -594,7 +592,7 @@ const MaltaUpdates = () => {
                 <span className="absolute top-4 left-4 bg-red-600 text-white text-[11px] font-extrabold uppercase tracking-wider px-3.5 py-1 rounded-full shadow">
                   Lead Report • {featuredArticle.category}
                 </span>
-                <div className="absolute bottom-4 left-5 right-5 text-white">
+                <div className="absolute bottom-4 left-5 right-5 text-white md:text-center lg:text-left">
                   <p className="text-xs font-bold text-blue-200 mb-1">
                     {featuredArticle.lastUpdated} • {featuredArticle.readTime}
                   </p>
@@ -604,7 +602,7 @@ const MaltaUpdates = () => {
                 </div>
               </div>
 
-              <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
+              <div className="p-6 flex-1 flex flex-col justify-between space-y-4 md:text-center lg:text-left">
                 <p className="text-sm text-slate-700 leading-relaxed">
                   {featuredArticle.excerpt}
                 </p>

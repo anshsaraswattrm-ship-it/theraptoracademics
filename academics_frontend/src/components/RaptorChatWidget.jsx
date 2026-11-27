@@ -623,7 +623,7 @@ import {
 import raptorIcon from '../assets/raptor r logo.png';
 import { institutionsData } from '../data/institutionsData';
 
-const API_BASE_URL = (import.meta.env.VITE_API_URL || 'http://localhost:5000').replace(/\/$/, '');
+const API_BASE_URL = (import.meta.env.VITE_API_URL || 'https://theraptoracademics.onrender.com').replace(/\/$/, '');
 const SUPPORT_PHONE_DISPLAY = '(+91) 72320 10105';
 const SUPPORT_PHONE_HREF = 'tel:+917232010105';
 

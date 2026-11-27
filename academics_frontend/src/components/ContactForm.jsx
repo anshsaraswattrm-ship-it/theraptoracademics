@@ -14,7 +14,7 @@ import {
   FaPhoneVolume
 } from 'react-icons/fa';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://theraptoracademics.onrender.com';
 
 const inputBase =
   'peer w-full bg-white text-[#0f2547] placeholder-gray-400 text-sm font-semibold pl-12 pr-4 py-4 rounded-2xl border border-gray-200 shadow-sm outline-none transition-all duration-200 hover:border-gray-300 focus:border-red-500 focus:ring-4 focus:ring-red-500/10';

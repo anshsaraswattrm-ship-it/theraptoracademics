@@ -28,7 +28,7 @@ import Footer from '../components/Footer';
 import { institutionsData } from '../data/institutionsData';
 import logo from '../assets/logo.png';
 
-const API_BASE_URL = (import.meta.env.VITE_API_URL || 'http://localhost:5000').replace(/\/$/, '');
+const API_BASE_URL = (import.meta.env.VITE_API_URL || 'https://theraptoracademics.onrender.com').replace(/\/$/, '');
 
 // ==========================================
 // 1. INSTITUTION CAMPUS IMAGES & LOGOS MAP

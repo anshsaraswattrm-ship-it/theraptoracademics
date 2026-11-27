@@ -2355,7 +2355,7 @@
 
 
 
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   FaMapMarkerAlt,
@@ -2375,6 +2375,7 @@ import {
   FaPrint,
   FaTimes,
   FaArrowRight,
+  FaArrowUp,
   FaClock,
   FaShieldAlt,
   FaInfoCircle,
@@ -3692,11 +3693,24 @@ const Institutions = () => {
   const [selectedFilter, setSelectedFilter] = useState('All');
   const [copiedLink, setCopiedLink] = useState(false);
 
+  const collegeListRef = useRef(null);
+  const detailPanelRef = useRef(null);
+
   const [modalState, setModalState] = useState({
     isOpen: false,
     collegeName: '',
     programName: ''
   });
+
+  const scrollToElementWithOffset = (el, offset = 105) => {
+    if (!el) return;
+    const y = el.getBoundingClientRect().top + window.scrollY - offset;
+    if (typeof window !== 'undefined' && window.__lenis) {
+      window.__lenis.scrollTo(y, { immediate: false });
+    } else {
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  };
 
   useEffect(() => {
     const onHashChange = () => {
@@ -3792,11 +3806,16 @@ const Institutions = () => {
     setOpenCourseIndex(null);
     const slug = getCollegeSlug(college);
     window.history.replaceState(null, '', `#${slug}`);
-    const el = document.getElementById('institution-detail-panel');
-    if (el) {
-      const y = el.getBoundingClientRect().top + window.scrollY - 110;
-      window.scrollTo({ top: y, behavior: 'smooth' });
-    }
+    const el = detailPanelRef.current || document.getElementById('institution-detail-panel');
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
+    setTimeout(() => {
+      scrollToElementWithOffset(el, isMobile ? 96 : 110);
+    }, 60);
+  };
+
+  const handleBackToCollegeListOnMobile = () => {
+    const el = collegeListRef.current || document.getElementById('mobile-college-selector');
+    scrollToElementWithOffset(el, 96);
   };
 
   const openApplyModal = (collegeName, programName = '') => {
@@ -4038,10 +4057,12 @@ const Institutions = () => {
               </section>
 
               <section
-                id="institution-detail-panel"
+                id="institution-directory-section"
                 className="max-w-[1560px] mx-auto px-4 md:px-10 py-10 flex flex-col lg:flex-row gap-8 items-start print:p-0 print:block"
               >
                 <div
+                  id="mobile-college-selector"
+                  ref={collegeListRef}
                   data-lenis-prevent="true"
                   className="w-full lg:w-[27%] lg:sticky lg:top-28 space-y-2.5 max-h-[82vh] overflow-y-auto overscroll-contain pr-1.5 print:hidden"
                 >
@@ -4109,7 +4130,24 @@ const Institutions = () => {
                   )}
                 </div>
 
-                <div className="w-full lg:w-[73%] print:w-full">
+                <div
+                  id="institution-detail-panel"
+                  ref={detailPanelRef}
+                  className="w-full lg:w-[73%] scroll-mt-28 print:w-full"
+                >
+                  <div className="lg:hidden mb-3 flex items-center justify-between bg-white px-4 py-2.5 rounded-2xl border border-slate-200 shadow-2xs print:hidden">
+                    <span className="text-[11px] font-extrabold text-[#0f2547] truncate pr-2">
+                      Viewing: {activeCollege.name.split('–')[0].trim()}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={handleBackToCollegeListOnMobile}
+                      className="inline-flex items-center gap-1.5 text-[11px] font-extrabold text-red-600 bg-red-50 px-3 py-1.5 rounded-xl shrink-0 cursor-pointer"
+                    >
+                      <FaArrowUp size={10} /> All {institutionsData.length} Colleges
+                    </button>
+                  </div>
+
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={activeCollege.id}

@@ -54,15 +54,15 @@ const FaqSection = () => {
   return (
     <section className="py-24 md:py-28 px-4 md:px-12 bg-[#f8f9fc] border-t border-gray-200/60">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-        <div className="lg:col-span-5 lg:sticky lg:top-36">
+        <div className="lg:col-span-5 lg:sticky lg:top-36 flex flex-col md:items-center md:text-center lg:items-start lg:text-left">
           <h2 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-[#0f2547] leading-none tracking-tight">
             <RedUnderline>FAQs</RedUnderline>
           </h2>
-          <p className="text-gray-600 text-lg md:text-xl leading-relaxed mt-8 max-w-md">
+          <p className="text-gray-600 text-lg md:text-xl leading-relaxed mt-8 max-w-md md:mx-auto lg:mx-0">
             Straight answers to what students and parents ask us most about studying in Europe and Malta.
           </p>
 
-          <div className="mt-10 p-6 md:p-7 rounded-3xl bg-[#1b365d] text-white max-w-md shadow-xl shadow-[#1b365d]/20">
+          <div className="mt-10 p-6 md:p-7 rounded-3xl bg-[#1b365d] text-white w-full max-w-md md:mx-auto lg:mx-0 text-left shadow-xl shadow-[#1b365d]/20">
             <p className="text-xl font-extrabold leading-snug">Still have a question?</p>
             <p className="text-blue-100/80 text-sm md:text-base mt-2 leading-relaxed">
               Our experts will answer it on a free call.
@@ -123,7 +123,7 @@ const FaqSection = () => {
                         <p className="text-base md:text-lg text-gray-600 leading-relaxed">
                           {faq.a}
                         </p>
-                      </div> 
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>

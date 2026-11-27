@@ -47,7 +47,7 @@ const reelsData = [
   }
 ];
 
-const ReelCard = ({ reel, index }) => {
+const ReelCard = ({ reel }) => {
   const videoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
@@ -86,7 +86,7 @@ const ReelCard = ({ reel, index }) => {
     <motion.div
       whileHover={{ y: -8 }}
       onClick={togglePlay}
-      className="relative aspect-[9/16] rounded-3xl overflow-hidden bg-[#151515] border border-gray-800 shadow-2xl group cursor-pointer select-none"
+      className="relative w-full max-w-[300px] sm:max-w-none mx-auto aspect-[3/4] lg:aspect-[9/16] rounded-3xl overflow-hidden bg-[#151515] border border-gray-800 shadow-2xl group cursor-pointer select-none"
     >
       <video
         ref={videoRef}
@@ -95,7 +95,7 @@ const ReelCard = ({ reel, index }) => {
         loop
         muted={isMuted}
         playsInline
-        className="w-full h-full object-cover transition-transform duration-700"
+        className="w-full h-full object-cover object-top lg:object-center transition-transform duration-700"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/30 pointer-events-none" />
 
@@ -132,34 +132,34 @@ const ReelCard = ({ reel, index }) => {
 
 const ReelsSection = () => {
   return (
-    <section className="py-24 px-4 md:px-12 bg-[#080808] text-white relative overflow-hidden">
+    <section className="py-20 lg:py-24 px-4 sm:px-6 md:px-10 lg:px-12 bg-[#080808] text-white relative overflow-hidden">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-72 bg-red-600/15 blur-[140px] pointer-events-none" />
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
-          <div>
-            <p className="text-red-500 font-bold uppercase tracking-[0.2em] text-xs mb-3 flex items-center gap-2">
+        <div className="flex flex-col items-center text-center lg:items-end lg:text-left lg:flex-row justify-between mb-12 lg:mb-14 gap-6">
+          <div className="max-w-2xl">
+            <p className="text-red-500 font-bold uppercase tracking-[0.2em] text-xs mb-3 flex items-center justify-center lg:justify-start gap-2">
               <span className="w-2 h-2 rounded-full bg-red-600 animate-ping" />
               INSIGHTS FROM OUR FOUNDER & DIRECTOR
             </p>
-            <h2 className="text-3xl md:text-5xl font-extrabold leading-tight">
-            Student <RedUnderline>Stories & Expert</RedUnderline> Guidance
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight">
+              Student <RedUnderline>Stories & Expert</RedUnderline> Guidance
             </h2>
-            <p className="text-gray-400 mt-4 max-w-2xl text-sm md:text-base">
-            Get a closer look at international education through practical insights from our leadership team. Explore destination guides, admission updates, student experiences and guidance on planning your education in Malta and Europe.
+            <p className="text-gray-400 mt-4 text-sm md:text-base leading-relaxed">
+              Get a closer look at international education through practical insights from our leadership team. Explore destination guides, admission updates, student experiences and guidance on planning your education in Malta and Europe.
             </p>
           </div>
-          <a 
-            href="https://www.instagram.com/" 
-            target="_blank" 
+          <a
+            href="https://www.instagram.com/"
+            target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-3 bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-3.5 rounded-xl shadow-lg transition shrink-0 self-start md:self-auto"
+            className="inline-flex items-center justify-center gap-3 bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-3.5 rounded-xl shadow-lg transition shrink-0 self-center lg:self-auto"
           >
             <FaInstagram size={20} /> Follow On Instagram <ArrowUpRight size={18} />
           </a>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-          {reelsData.map((reel, index) => (
-            <ReelCard key={reel.id} reel={reel} index={index} />
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 justify-items-center">
+          {reelsData.map((reel) => (
+            <ReelCard key={reel.id} reel={reel} />
           ))}
         </div>
       </div>

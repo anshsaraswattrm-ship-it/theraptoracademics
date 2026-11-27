@@ -14,6 +14,8 @@ import {
   FaPhoneVolume
 } from 'react-icons/fa';
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
 const inputBase =
   'peer w-full bg-white text-[#0f2547] placeholder-gray-400 text-sm font-semibold pl-12 pr-4 py-4 rounded-2xl border border-gray-200 shadow-sm outline-none transition-all duration-200 hover:border-gray-300 focus:border-red-500 focus:ring-4 focus:ring-red-500/10';
 
@@ -41,7 +43,7 @@ const ContactForm = () => {
     setStatus('Submitting...');
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/api/contact', {
+      const response = await fetch(`${API_BASE_URL}/api/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
@@ -65,10 +67,10 @@ const ContactForm = () => {
   const isPending = status === 'Submitting...';
 
   return (
-    <section className="relative py-24 px-4 md:px-12 bg-[#f8f9fc] overflow-hidden">
+    <section className="relative py-24 px-4 md:px-12 bg-[#f8f9fc] overflow-x-clip">
       {/* Soft background glows */}
-      <div className="absolute -top-24 -left-24 w-[420px] h-[420px] bg-red-100/60 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute -bottom-32 -right-24 w-[480px] h-[480px] bg-[#1b365d]/10 rounded-full blur-[130px] pointer-events-none" />
+      <div className="hidden lg:block absolute -top-24 -left-24 w-[420px] h-[420px] bg-red-100/60 rounded-full blur-[120px] pointer-events-none" />
+      <div className="hidden lg:block absolute -bottom-32 -right-24 w-[480px] h-[480px] bg-[#1b365d]/10 rounded-full blur-[130px] pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto bg-white rounded-[2rem] shadow-2xl shadow-[#1b365d]/10 border border-gray-100 overflow-hidden grid grid-cols-1 lg:grid-cols-12">
         {/* ============ LEFT: FORM ============ */}
@@ -79,13 +81,13 @@ const ContactForm = () => {
           </div>
 
           <h2 className="text-3xl md:text-4xl font-extrabold text-[#0f2547] leading-tight tracking-tight">
-          Book Your Free Study Abroad <br className="hidden sm:block" />
+            Book Your Free Study Abroad <br className="hidden sm:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-red-800">
-            Counselling Session.
+              Counselling Session.
             </span>
           </h2>
           <p className="text-gray-500 text-sm md:text-base mt-3 max-w-md leading-relaxed">
-          Take the first step towards your international education goals with personalised guidance from The Raptor Academics.
+            Take the first step towards your international education goals with personalised guidance from The Raptor Academics.
           </p>
 
           <form onSubmit={handleSubmit} className="mt-9 space-y-4">
@@ -217,37 +219,33 @@ const ContactForm = () => {
           </form>
         </div>
 
-        {/* ============ RIGHT: IMAGE PANEL ============ */}
-        <div className="hidden lg:block lg:col-span-5 relative min-h-[560px]">
+        {/* ============ RIGHT / BOTTOM: IMAGE PANEL ============ */}
+        <div className="block lg:col-span-5 relative min-h-[380px] sm:min-h-[440px] lg:min-h-[560px] transform-gpu">
           <img
             src="https://res.cloudinary.com/ppkvzeli/image/upload/v1794911042/contact.png"
             alt="Students"
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full object-cover object-center"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0b1b33]/90 via-[#0b1b33]/30 to-[#1b365d]/10" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0b1b33]/90 via-[#0b1b33]/30 to-[#1b365d]/10 pointer-events-none" />
 
-          <motion.div
-            animate={{ y: [0, -8, 0] }}
-            transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
-            className="absolute top-8 right-8 bg-white/95 backdrop-blur-md px-5 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3.5"
-          >
-            <div className="w-11 h-11 rounded-xl bg-red-50 text-red-600 flex items-center justify-center">
+          <div className="absolute top-6 right-6 md:top-8 md:right-8 bg-white/95 backdrop-blur-md px-5 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3.5">
+            <div className="w-11 h-11 rounded-xl bg-red-50 text-red-600 flex items-center justify-center shrink-0">
               <FaPhoneVolume size={18} />
             </div>
             <div>
               <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Call Back In</p>
               <p className="text-sm font-extrabold text-[#1b365d]">Under 24 Hours</p>
             </div>
-          </motion.div>
+          </div>
 
-          <div className="absolute bottom-8 left-8 right-8 text-white">
+          <div className="absolute bottom-7 left-6 right-6 md:bottom-8 md:left-8 md:right-8 text-white">
             <span className="bg-red-600 text-[10px] font-extrabold uppercase tracking-widest px-3 py-1 rounded-full">
               Malta • Schengen • EU
             </span>
-            <h3 className="text-2xl font-extrabold mt-3 leading-tight">
+            <h3 className="text-xl sm:text-2xl font-extrabold mt-3 leading-tight">
               Your European degree starts with one message.
             </h3>
-            <p className="text-sm text-gray-200 mt-2 leading-relaxed">
+            <p className="text-sm text-gray-200 mt-2 leading-relaxed max-w-xl">
               Without IELTS, pay tuition after visa, and a team that guides you till you land.
             </p>
           </div>

@@ -104,9 +104,9 @@ const StepsSection = () => {
                       : 'bg-[#f8fafc] text-[#0f2547] border-gray-200/90 shadow-sm lg:shadow-[0_-10px_25px_rgba(0,0,0,0.04)]'
                   }`}
                 >
-                  {/* Tablet Vertical (md to <lg): Side-by-side Text + Square Image */}
-                  <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center lg:block flex-1">
-                    <div className="md:col-span-7 flex flex-col h-full">
+                  {/* Tablet Vertical (md to <lg): Centered Side-by-side Text + Square Image */}
+                  <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-7 items-center lg:block flex-1">
+                    <div className="md:col-span-7 flex flex-col justify-center h-full text-left">
                       <div className="flex items-center gap-3.5 sm:gap-4">
                         <span
                           className={`w-11 h-11 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center text-base sm:text-lg font-extrabold shrink-0 transition-colors duration-300 ${
@@ -134,12 +134,12 @@ const StepsSection = () => {
                         {step.desc}
                       </p>
 
-                      {/* Mobile Only (< md): Full-aspect uncropped preview */}
-                      <div className="md:hidden mt-5 aspect-[4/3] rounded-2xl overflow-hidden border border-white/15">
+                      {/* Mobile Only (< md): Square uncropped centered preview */}
+                      <div className="md:hidden mt-5 w-full max-w-[340px] mx-auto aspect-square rounded-2xl overflow-hidden border border-white/15 bg-[#0f2547]">
                         <img
                           src={step.image}
                           alt={step.title}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-cover object-center"
                         />
                       </div>
 
@@ -158,16 +158,16 @@ const StepsSection = () => {
                       </div>
                     </div>
 
-                    {/* Tablet Vertical Only (md to <lg): Clean Square Card Preview */}
-                    <div className="hidden md:block lg:hidden md:col-span-5">
-                      <div className="relative aspect-square rounded-2xl overflow-hidden border-2 border-white/20 shadow-lg bg-[#0f2547]">
+                    {/* Tablet Vertical Only (md to <lg): Centered Square Card Preview */}
+                    <div className="hidden md:flex lg:hidden md:col-span-5 items-center justify-center">
+                      <div className="relative w-full max-w-[260px] mx-auto aspect-square rounded-2xl overflow-hidden border-2 border-white/20 shadow-lg bg-[#0f2547]">
                         <img
                           src={step.image}
                           alt={step.title}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-cover object-center"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-[#0f2547]/80 via-transparent to-transparent" />
-                        <span className="absolute bottom-3 left-3 right-3 bg-red-600 text-white text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-1 rounded-lg text-center">
+                        <span className="absolute bottom-3 left-3 right-3 bg-red-600 text-white text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-1.5 rounded-lg text-center">
                           {step.badge}
                         </span>
                       </div>
@@ -183,7 +183,7 @@ const StepsSection = () => {
             className="hidden lg:flex lg:col-span-6 justify-center items-center sticky"
             style={{ top: STEPS_BASE_TOP, height: `calc(100vh - ${STEPS_BASE_TOP + 24}px)` }}
           >
-            <div className="relative w-full max-w-xl">
+            <div className="relative w-full max-w-xl mx-auto">
               <div className="absolute -inset-6 bg-gradient-to-br from-red-100/60 via-transparent to-[#1b365d]/15 rounded-[2.5rem] blur-2xl pointer-events-none" />
               <AnimatePresence mode="wait">
                 <motion.div
@@ -197,7 +197,7 @@ const StepsSection = () => {
                   <img
                     src={stepsData[activeStep].image}
                     alt={stepsData[activeStep].title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover object-center"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0f2547]/90 via-[#0f2547]/20 to-transparent" />
                   <div className="absolute bottom-6 left-6 right-6 text-white">

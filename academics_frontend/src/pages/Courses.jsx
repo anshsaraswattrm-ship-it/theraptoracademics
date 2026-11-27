@@ -21,9 +21,6 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { institutionsData } from '../data/institutionsData';
 
-// ==========================================
-// INSTITUTION LOGOS / CAMPUS THUMBNAILS MAP
-// ==========================================
 const COLLEGE_IMAGES = {
   "La Vallette": "https://res.cloudinary.com/ppkvzeli/image/upload/v1795688615/La_valletta_campus_img.webp",
   "Avanza": "https://res.cloudinary.com/ppkvzeli/image/upload/v1795688613/Avanza_Campus_Img.webp",
@@ -94,7 +91,6 @@ const formatCourseTitle = (title = '', collegeName = '') => {
   return clean;
 };
 
-// STRICT COURSE-ONLY MQF LEVEL DETECTOR
 const detectMqfLevel = (course) => {
   const title = course?.title || '';
   const levelDetail = (course?.keyDetails || []).find((d) =>
@@ -121,81 +117,113 @@ const detectMqfLevel = (course) => {
   return 'Level 5';
 };
 
-// STRICT STREAM DETECTOR
-const detectStream = (course) => {
-  const text = `${course?.title || ''} ${course?.overview || ''}`.toLowerCase();
+const detectDomainCluster = (title = '') => {
+  const t = title.toLowerCase();
 
-  if (
-    /nursing|health|social care|public health|occupational health|medical|midwi/i.test(text) &&
-    !/wellness coaching|human resource|\bhrm\b/i.test(text)
-  ) {
-    return 'Nursing & Healthcare';
+  if (/nursing|early years|early childhood|health and social care|health, social care|public health|occupational health|neuroscience|care/i.test(t) && !/wellness coaching/i.test(t)) {
+    return 'nursing-health';
+  }
+  if (/logistics|supply chain/i.test(t)) {
+    return 'logistics-supply-chain';
+  }
+  if (/hospitality|tourism|hotel|resort|events management|sports management/i.test(t)) {
+    return 'hospitality-tourism';
+  }
+  if (/human resource|\bhrm\b|psycholog|wellness coaching/i.test(t)) {
+    return 'hr-psychology-coaching';
   }
   if (
-    /software|artificial intelligence|\bai\b|cloud|cyber|information technology|\bit\b|computer|digital marketing/i.test(text)
+    /information\s*technology|software\s*design|artificial\s*intelligence|cloud\s*computing|computer\s*science|cyber\s*security|digital\s*marketing|\bin\s+it\b/i.test(
+      t
+    )
+  ) {
+    return 'it-ai-digital';
+  }
+  if (/business|management|administration|accounting|finance|\bmba\b|\bdba\b|marketing|leadership/i.test(t)) {
+    return 'business-mgmt';
+  }
+  return 'general';
+};
+
+// STRICT TECH / IT / AI / CLOUD STREAM DETECTOR
+const detectStream = (course) => {
+  const title = (course?.title || '').toLowerCase();
+
+  if (
+    /information\s*technology|software\s*design|artificial\s*intelligence|cloud\s*computing|computer\s*science|cyber\s*security|digital\s*marketing|\bin\s+it\b/i.test(
+      title
+    )
   ) {
     return 'IT, AI & Cloud';
   }
-  if (/hospitality|tourism|hotel|resort|event|culinary/i.test(text)) {
+  if (
+    /nursing|early years|early childhood|health and social care|health, social care|public health|occupational health|neuroscience/i.test(
+      title
+    )
+  ) {
+    return 'Nursing & Healthcare';
+  }
+  if (/hospitality|tourism|hotel|resort|events management|sports management/i.test(title)) {
     return 'Hospitality & Tourism';
   }
-  if (/human resource|\bhrm\b|psycholog|wellness coaching|neuroscience/i.test(text)) {
+  if (/human resource|\bhrm\b|psycholog|wellness coaching/i.test(title)) {
     return 'HR, Psychology & Coaching';
   }
   return 'Business & MBA';
 };
 
-// NORMALIZE COURSE SUBJECT KEYWORDS FOR CROSS-UNIVERSITY MATCHING
-const extractCoreSubjectTokens = (title = '') => {
-  const stopWords = new Set([
-    'diploma', 'undergraduate', 'postgraduate', 'higher', 'extended', 'certificate',
-    'award', 'bachelor', 'masters', 'master', 'degree', 'honours', 'hons', 'arts',
-    'science', 'level', 'mqf', 'eqf', 'othm', 'qualifi', 'year', 'years', 'months',
-    'in', 'of', 'and', 'for', 'the', 'with', 'to', 'use', 'studies', 'study', 'skills',
-    'pathway', 'dual', 'complete', 'course', 'practice', 'management', 'administration'
-  ]);
-
-  const cleaned = title
-    .toLowerCase()
-    .replace(/\([^)]*\)/g, ' ')
-    .replace(/[^a-z0-9\s]/g, ' ');
-
-  const tokens = cleaned
-    .split(/\s+/)
-    .filter((w) => w.length > 1 && !stopWords.has(w) && !/^\d+$/.test(w));
-
-  // If title was generic like "Diploma in Business Management", keep "business"
-  if (tokens.length === 0 && /business|management|administration/i.test(title)) {
-    return ['business'];
-  }
-  return tokens;
-};
-
 const findSameCourseInOtherColleges = (currentItem, allCoursesList) => {
   if (!currentItem) return [];
 
-  const currentTokens = extractCoreSubjectTokens(currentItem.formattedTitle);
+  const currentTitle = currentItem.formattedTitle.toLowerCase();
+  const currentDomain = detectDomainCluster(currentItem.formattedTitle);
 
-  const matches = allCoursesList.filter((other) => {
+  const isBusinessOrMgmtCourse =
+    currentDomain === 'business-mgmt' ||
+    /business|management|administration|accounting|finance|leadership|mba|bba/i.test(currentTitle);
+
+  const isItOrTechCourse =
+    currentDomain === 'it-ai-digital' ||
+    /information\s*technology|software\s*design|artificial\s*intelligence|cloud\s*computing|computer\s*science|cyber\s*security|digital\s*marketing|\bin\s+it\b/i.test(
+      currentTitle
+    );
+
+  const candidates = allCoursesList.filter((other) => {
     if (other.collegeId === currentItem.collegeId) return false;
     if (other.level !== currentItem.level) return false;
-    if (other.stream !== currentItem.stream) return false;
 
-    const otherTokens = extractCoreSubjectTokens(other.formattedTitle);
+    const otherTitle = other.formattedTitle.toLowerCase();
+    const otherDomain = detectDomainCluster(other.formattedTitle);
 
-    // Check shared core subject tokens (e.g., nursing, business, hospitality, tourism, health, social, logistics, supply, chain, human, resources, psychology, accounting, finance, digital, marketing, software, computer, mba)
-    const overlap = currentTokens.filter((t) => otherTokens.includes(t));
-    return overlap.length >= 1;
+    if (isItOrTechCourse) {
+      return (
+        otherDomain === 'it-ai-digital' ||
+        /information\s*technology|software\s*design|artificial\s*intelligence|cloud\s*computing|computer\s*science|cyber\s*security|digital\s*marketing|\bin\s+it\b/i.test(
+          otherTitle
+        )
+      );
+    }
+
+    if (isBusinessOrMgmtCourse) {
+      return (
+        otherDomain === 'business-mgmt' ||
+        /business|management|administration|accounting|finance|leadership|mba|bba/i.test(otherTitle)
+      );
+    }
+
+    if (otherDomain === currentDomain && currentDomain !== 'general') {
+      return true;
+    }
+
+    return other.stream === currentItem.stream;
   });
 
-  // Deduplicate by collegeId (keep best title match per university)
   const byCollege = new Map();
-  matches.forEach((m) => {
-    const mTokens = extractCoreSubjectTokens(m.formattedTitle);
-    const score = currentTokens.filter((t) => mTokens.includes(t)).length;
-    const existing = byCollege.get(m.collegeId);
+  candidates.forEach((other) => {
+    const score = detectDomainCluster(other.formattedTitle) === currentDomain ? 2 : 1;
+    const existing = byCollege.get(other.collegeId);
     if (!existing || score > existing.score) {
-      byCollege.set(m.collegeId, { item: m, score });
+      byCollege.set(other.collegeId, { item: other, score });
     }
   });
 
@@ -252,9 +280,6 @@ const extractFeeInfo = (course, college) => {
   };
 };
 
-// ==========================================
-// QUICK COURSE DETAIL MODAL (WITH CROSS-UNIVERSITY SWITCHER)
-// ==========================================
 const CourseDetailModal = ({ item, allCoursesList, onSelectCourse, onClose }) => {
   const scrollContainerRef = useRef(null);
 
@@ -275,7 +300,7 @@ const CourseDetailModal = ({ item, allCoursesList, onSelectCourse, onClose }) =>
 
   if (!item) return null;
 
-  const { course, college, formattedTitle, level, duration, feeInfo, collegeSlug, collegeLogo } = item;
+  const { course, college, formattedTitle, level, duration, feeInfo, collegeSlug } = item;
 
   return (
     <div
@@ -289,40 +314,29 @@ const CourseDetailModal = ({ item, allCoursesList, onSelectCourse, onClose }) =>
         transition={{ duration: 0.22 }}
         className="bg-white w-full max-w-4xl rounded-[2rem] shadow-2xl border border-slate-200 overflow-hidden max-h-[90vh] flex flex-col my-auto"
       >
-        {/* Header with College Logo */}
         <div className="bg-gradient-to-r from-[#0b1930] to-[#0f2547] text-white px-6 py-5 md:px-8 flex items-start justify-between gap-4 shrink-0">
-          <div className="flex items-start gap-4">
-            <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-white p-1 shrink-0 overflow-hidden shadow-md hidden sm:flex items-center justify-center">
-              <img
-                src={collegeLogo}
-                alt={college.name}
-                className="w-full h-full object-cover rounded-xl"
-              />
-            </div>
-
-            <div className="space-y-1.5">
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="bg-red-600 text-white text-[10px] font-extrabold uppercase tracking-widest px-3 py-1 rounded-full">
-                  MQF/EQF {level}
+          <div className="space-y-1.5">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="bg-red-600 text-white text-[10px] font-extrabold uppercase tracking-widest px-3 py-1 rounded-full">
+                MQF/EQF {level}
+              </span>
+              <span className="bg-white/15 text-blue-100 text-[10px] font-bold px-3 py-1 rounded-full">
+                {duration}
+              </span>
+              {feeInfo.payAfterVisa && (
+                <span className="bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 text-[10px] font-extrabold px-3 py-1 rounded-full">
+                  ✓ Tuition After Visa Available
                 </span>
-                <span className="bg-white/15 text-blue-100 text-[10px] font-bold px-3 py-1 rounded-full">
-                  {duration}
-                </span>
-                {feeInfo.payAfterVisa && (
-                  <span className="bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 text-[10px] font-extrabold px-3 py-1 rounded-full">
-                    ✓ Tuition After Visa Available
-                  </span>
-                )}
-              </div>
-              <h3 className="text-xl md:text-2xl font-black leading-snug">
-                {formattedTitle}
-              </h3>
-              <p className="text-xs text-blue-200/85 font-semibold flex flex-wrap items-center gap-2">
-                <span>{college.name.split('–')[0].trim()}</span>
-                <span>•</span>
-                <span>📍 {to2027(college.location)}</span>
-              </p>
+              )}
             </div>
+            <h3 className="text-xl md:text-2xl font-black leading-snug">
+              {formattedTitle}
+            </h3>
+            <p className="text-xs text-blue-200/85 font-semibold flex flex-wrap items-center gap-2">
+              <span>{college.name.split('–')[0].trim()}</span>
+              <span>•</span>
+              <span>📍 {to2027(college.location)}</span>
+            </p>
           </div>
 
           <button
@@ -334,13 +348,11 @@ const CourseDetailModal = ({ item, allCoursesList, onSelectCourse, onClose }) =>
           </button>
         </div>
 
-        {/* Scrollable Body */}
         <div
           ref={scrollContainerRef}
           data-lenis-prevent="true"
           className="p-6 md:p-8 overflow-y-auto overscroll-contain space-y-6 bg-[#f8fafc]"
         >
-          {/* Fee & Intake Strip */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="bg-white p-4 rounded-2xl border border-slate-200">
               <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 block">
@@ -369,7 +381,6 @@ const CourseDetailModal = ({ item, allCoursesList, onSelectCourse, onClose }) =>
             </div>
           </div>
 
-          {/* Overview */}
           {course.overview && (
             <div className="bg-white p-5 rounded-2xl border border-slate-200">
               <h4 className="text-xs font-extrabold uppercase tracking-wider text-[#0f2547] mb-2 flex items-center gap-2">
@@ -379,7 +390,6 @@ const CourseDetailModal = ({ item, allCoursesList, onSelectCourse, onClose }) =>
             </div>
           )}
 
-          {/* Entry Requirements */}
           {course.entryRequirements && course.entryRequirements.length > 0 && (
             <div className="bg-white p-5 rounded-2xl border border-slate-200">
               <h4 className="text-xs font-extrabold uppercase tracking-wider text-[#0f2547] mb-3 flex items-center gap-2">
@@ -396,11 +406,10 @@ const CourseDetailModal = ({ item, allCoursesList, onSelectCourse, onClose }) =>
             </div>
           )}
 
-          {/* Modules */}
           {course.modules && course.modules.length > 0 && (
             <div className="bg-white p-5 rounded-2xl border border-slate-200">
               <h4 className="text-xs font-extrabold uppercase tracking-wider text-[#0f2547] mb-3">
-                Core Curriculum & Modules ({course.modules.length})
+                Core Curriculum &amp; Modules ({course.modules.length})
               </h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
                 {course.modules.map((mod, idx) => (
@@ -418,11 +427,10 @@ const CourseDetailModal = ({ item, allCoursesList, onSelectCourse, onClose }) =>
             </div>
           )}
 
-          {/* Careers */}
           {course.careers && course.careers.length > 0 && (
             <div className="bg-white p-5 rounded-2xl border border-slate-200">
               <h4 className="text-xs font-extrabold uppercase tracking-wider text-[#0f2547] mb-3 flex items-center gap-2">
-                <FaBriefcase className="text-red-600" /> Career Roles & Expected Schengen Salaries
+                <FaBriefcase className="text-red-600" /> Career Roles &amp; Expected Schengen Salaries
               </h4>
               <div className="overflow-x-auto rounded-xl border border-slate-200">
                 <table className="w-full text-xs text-left">
@@ -449,15 +457,14 @@ const CourseDetailModal = ({ item, allCoursesList, onSelectCourse, onClose }) =>
             </div>
           )}
 
-          {/* ALSO OFFERED AT THESE MALTA UNIVERSITIES / COLLEGES */}
           {similarInOtherColleges.length > 0 && (
             <div className="bg-gradient-to-br from-[#eff6ff] to-white p-5 md:p-6 rounded-2xl border-2 border-blue-200/80 space-y-3.5">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <h4 className="text-xs font-extrabold uppercase tracking-wider text-[#0f2547] flex items-center gap-2">
-                  <FaExchangeAlt className="text-red-600" /> Also Offered At These Malta Institutions ({similarInOtherColleges.length})
+                  <FaExchangeAlt className="text-red-600" /> Also Offered At These Malta Institutions ({level} • {similarInOtherColleges.length})
                 </h4>
                 <span className="text-[11px] font-bold text-blue-800 bg-white px-2.5 py-0.5 rounded-full border border-blue-200">
-                  Click any logo to switch & compare
+                  Same {level} • Click to switch
                 </span>
               </div>
 
@@ -467,31 +474,23 @@ const CourseDetailModal = ({ item, allCoursesList, onSelectCourse, onClose }) =>
                     key={alt.id}
                     type="button"
                     onClick={() => onSelectCourse(alt)}
-                    className="text-left bg-white hover:bg-[#0f2547] group/alt p-3.5 rounded-2xl border border-slate-200 hover:border-[#0f2547] shadow-2xs hover:shadow-md transition-all flex items-center gap-3 cursor-pointer"
+                    className="text-left bg-white hover:bg-[#0f2547] group/alt p-3.5 rounded-2xl border border-slate-200 hover:border-[#0f2547] shadow-2xs hover:shadow-md transition-all flex flex-col justify-between gap-1.5 cursor-pointer"
                   >
-                    <div className="w-12 h-12 rounded-xl bg-slate-100 border border-slate-200 overflow-hidden shrink-0">
-                      <img
-                        src={alt.collegeLogo}
-                        alt={alt.collegeShortName}
-                        className="w-full h-full object-cover group-hover/alt:scale-105 transition-transform"
-                      />
-                    </div>
-
-                    <div className="min-w-0 flex-1">
+                    <div>
                       <p className="text-xs font-extrabold text-[#0f2547] group-hover/alt:text-white truncate">
                         {alt.collegeShortName}
                       </p>
-                      <p className="text-[11px] font-semibold text-slate-500 group-hover/alt:text-blue-200 line-clamp-1 mt-0.5">
+                      <p className="text-[11px] font-semibold text-slate-500 group-hover/alt:text-blue-200 line-clamp-2 mt-0.5 leading-snug">
                         {alt.formattedTitle}
                       </p>
-                      <div className="flex items-center justify-between gap-1 mt-1">
-                        <span className="text-[11px] font-black text-red-600 group-hover/alt:text-amber-300">
-                          {alt.feeInfo.headline}
-                        </span>
-                        <span className="text-[10px] font-extrabold text-blue-700 group-hover/alt:text-white inline-flex items-center gap-1">
-                          Switch <FaArrowRight size={8} />
-                        </span>
-                      </div>
+                    </div>
+                    <div className="flex items-center justify-between gap-1 pt-1">
+                      <span className="text-[11px] font-black text-red-600 group-hover/alt:text-amber-300">
+                        {alt.feeInfo.headline}
+                      </span>
+                      <span className="text-[10px] font-extrabold text-blue-700 group-hover/alt:text-white inline-flex items-center gap-1">
+                        Switch <FaArrowRight size={8} />
+                      </span>
                     </div>
                   </button>
                 ))}
@@ -500,7 +499,6 @@ const CourseDetailModal = ({ item, allCoursesList, onSelectCourse, onClose }) =>
           )}
         </div>
 
-        {/* Footer Actions */}
         <div className="px-6 py-4 md:px-8 bg-white border-t border-slate-200 flex flex-wrap items-center justify-between gap-3 shrink-0">
           <Link
             to={`/institutions#${collegeSlug}`}
@@ -532,9 +530,6 @@ const CourseDetailModal = ({ item, allCoursesList, onSelectCourse, onClose }) =>
   );
 };
 
-// ==========================================
-// MAIN COURSES PAGE
-// ==========================================
 const Courses = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedStream, setSelectedStream] = useState('All Courses');
@@ -543,7 +538,6 @@ const Courses = () => {
   const [payAfterVisaOnly, setPayAfterVisaOnly] = useState(false);
   const [activeCourseModal, setActiveCourseModal] = useState(null);
 
-  // Flatten all courses across all colleges from institutionsData.js
   const allCoursesList = useMemo(() => {
     const list = [];
     institutionsData.forEach((college, colIdx) => {
@@ -614,7 +608,6 @@ const Courses = () => {
     <div className="min-h-screen bg-[#f8fafc] font-sans">
       <Navbar />
 
-      {/* HERO SECTION */}
       <section className="relative pt-36 pb-20 md:pt-44 md:pb-24 bg-[#0b1930] text-white overflow-hidden px-4 md:px-10">
         <div className="absolute -top-24 right-1/4 w-[480px] h-[480px] bg-red-600/20 rounded-full blur-[150px] pointer-events-none" />
 
@@ -628,7 +621,7 @@ const Courses = () => {
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.08] tracking-tight">
-              Find Your <span className="text-red-500">Malta Course</span> & Degree Pathway
+              Find Your <span className="text-red-500">Malta Course</span> &amp; Degree Pathway
             </h1>
 
             <p className="text-blue-100/85 text-base md:text-lg max-w-2xl leading-relaxed">
@@ -655,17 +648,15 @@ const Courses = () => {
                 </div>
               </div>
               <p className="text-xs text-emerald-300 font-bold flex items-center gap-2">
-                <FaCheckCircle /> 10th / 12th Pass & Gap Friendly • 2027 Intakes
+                <FaCheckCircle /> 10th / 12th Pass &amp; Gap Friendly • 2027 Intakes
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* FILTER & SEARCH BAR */}
       <section className="max-w-7xl mx-auto px-4 md:px-10 -mt-10 relative z-20">
         <div className="bg-white rounded-3xl p-5 md:p-7 shadow-xl border border-slate-200/90 space-y-5">
-          {/* Search + College Dropdown + Pay After Visa Toggle */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-3.5 items-center">
             <div className="md:col-span-6 relative">
               <FaSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={15} />
@@ -708,7 +699,6 @@ const Courses = () => {
             </div>
           </div>
 
-          {/* Stream Pills */}
           <div className="flex flex-wrap items-center gap-2 pt-1">
             <span className="text-[11px] font-extrabold uppercase tracking-wider text-slate-400 mr-1 flex items-center gap-1">
               <FaFilter size={10} /> Stream:
@@ -729,7 +719,6 @@ const Courses = () => {
             ))}
           </div>
 
-          {/* MQF Level Pills + Count */}
           <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-slate-100">
             <div className="flex flex-wrap items-center gap-2">
               <span className="text-[11px] font-extrabold uppercase tracking-wider text-slate-400 mr-1">
@@ -773,7 +762,6 @@ const Courses = () => {
         </div>
       </section>
 
-      {/* COURSES GRID */}
       <section className="max-w-7xl mx-auto px-4 md:px-10 py-14">
         {filteredCourses.length === 0 ? (
           <div className="bg-white rounded-3xl p-12 text-center border border-slate-200 space-y-4">
@@ -800,7 +788,6 @@ const Courses = () => {
                 className="bg-white rounded-3xl border border-slate-200/90 hover:border-[#0f2547]/40 p-6 shadow-xs hover:shadow-xl transition-all flex flex-col justify-between group"
               >
                 <div className="space-y-4">
-                  {/* Top Badges */}
                   <div className="flex flex-wrap items-center justify-between gap-2">
                     <span className="bg-blue-50 text-[#0f2547] border border-blue-200 text-[11px] font-extrabold px-3 py-1 rounded-full">
                       MQF/EQF {item.level}
@@ -810,12 +797,10 @@ const Courses = () => {
                     </span>
                   </div>
 
-                  {/* Course Title */}
                   <h3 className="text-lg font-extrabold text-[#0f2547] group-hover:text-red-600 transition-colors leading-snug">
                     {item.formattedTitle}
                   </h3>
 
-                  {/* College & Location */}
                   <div className="space-y-1.5 text-xs text-slate-600 font-semibold">
                     <p className="flex items-center gap-2 text-[#0f2547] font-bold">
                       <FaUniversity className="text-red-600 shrink-0" size={13} />
@@ -831,7 +816,6 @@ const Courses = () => {
                     </p>
                   </div>
 
-                  {/* Overview Snippet */}
                   {item.course.overview && (
                     <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed pt-1">
                       {to2027(item.course.overview)}
@@ -839,7 +823,6 @@ const Courses = () => {
                   )}
                 </div>
 
-                {/* Bottom Fee & Actions */}
                 <div className="pt-5 mt-5 border-t border-slate-100 space-y-3.5">
                   <div className="flex items-center justify-between gap-2">
                     <div>
@@ -864,7 +847,7 @@ const Courses = () => {
                       onClick={() => setActiveCourseModal(item)}
                       className="flex-1 bg-[#0f2547] hover:bg-red-600 text-white font-extrabold text-xs py-2.5 px-4 rounded-xl transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
                     >
-                      Syllabus & Details <FaArrowRight size={10} />
+                      Syllabus &amp; Details <FaArrowRight size={10} />
                     </button>
 
                     <Link
@@ -881,7 +864,6 @@ const Courses = () => {
         )}
       </section>
 
-      {/* BOTTOM CTA STRIP */}
       <section className="max-w-7xl mx-auto px-4 md:px-10 pb-20">
         <div className="bg-[#0f2547] text-white rounded-3xl p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
           <div className="space-y-1.5">
@@ -892,7 +874,7 @@ const Courses = () => {
               Talk To Our 2027 Malta Admissions Team in Jaipur
             </h2>
             <p className="text-sm text-blue-100/80">
-              Free profile evaluation for 10th/12th pass, graduates, nursing & hospitality candidates.
+              Free profile evaluation for 10th/12th pass, graduates, nursing &amp; hospitality candidates.
             </p>
           </div>
           <Link

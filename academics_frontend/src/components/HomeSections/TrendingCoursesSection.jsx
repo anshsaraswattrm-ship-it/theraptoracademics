@@ -1,7 +1,7 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { FaArrowRight, FaUniversity, FaClock, FaCheckCircle } from 'react-icons/fa';
+import { FaArrowRight, FaUniversity, FaClock, FaCheckCircle, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { RedUnderline } from './Shared';
 import { institutionsData } from '../../data/institutionsData';
 
@@ -116,6 +116,8 @@ const TRENDING_CONFIG = [
 
 const TrendingCoursesSection = () => {
   const [selectedCategory, setSelectedCategory] = useState("All Trending");
+  const [activeSlide, setActiveSlide] = useState(0);
+  const mobileSliderRef = useRef(null);
 
   // Dynamically hydrate every card directly from institutionsData.js
   const trendingCourses = useMemo(() => {
@@ -158,10 +160,39 @@ const TrendingCoursesSection = () => {
       ? trendingCourses
       : trendingCourses.filter((c) => c.category === selectedCategory);
 
+  useEffect(() => {
+    setActiveSlide(0);
+    if (mobileSliderRef.current) {
+      mobileSliderRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+    }
+  }, [selectedCategory]);
+
+  const scrollMobileToIndex = (index) => {
+    const container = mobileSliderRef.current;
+    if (!container) return;
+    const clamped = Math.max(0, Math.min(index, filteredCourses.length - 1));
+    const cardEl = container.children[clamped];
+    if (cardEl) {
+      container.scrollTo({
+        left: cardEl.offsetLeft - container.offsetLeft,
+        behavior: 'smooth'
+      });
+    }
+    setActiveSlide(clamped);
+  };
+
+  const handleMobileScroll = () => {
+    const container = mobileSliderRef.current;
+    if (!container || !container.children.length) return;
+    const firstCardWidth = container.children[0].offsetWidth + 16; // card width + gap-4
+    const currentIndex = Math.round(container.scrollLeft / firstCardWidth);
+    setActiveSlide(Math.max(0, Math.min(currentIndex, filteredCourses.length - 1)));
+  };
+
   return (
-    <section className="py-24 px-4 md:px-12 bg-[#f8f9fc] border-y border-gray-200/60">
+    <section className="py-16 md:py-24 px-4 md:px-12 bg-[#f8f9fc] border-y border-gray-200/60">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-10 space-y-3">
+        <div className="text-center mb-8 md:mb-10 space-y-3">
           <p className="text-red-600 font-extrabold uppercase tracking-[0.2em] text-xs">
             ★ 2027 INTAKES OPEN • PAY TUITION AFTER VISA ★
           </p>
@@ -174,13 +205,13 @@ const TrendingCoursesSection = () => {
         </div>
 
         {/* Category Filter Pills */}
-        <div className="flex flex-wrap justify-center gap-2.5 mb-12 bg-white p-2.5 rounded-3xl md:rounded-full max-w-5xl mx-auto shadow-sm border border-gray-200/80">
+        <div className="flex flex-wrap justify-center gap-2 md:gap-2.5 mb-8 md:mb-12 bg-white p-2.5 rounded-3xl md:rounded-full max-w-5xl mx-auto shadow-sm border border-gray-200/80">
           {courseCategories.map((cat) => (
             <button
               key={cat}
               type="button"
               onClick={() => setSelectedCategory(cat)}
-              className={`px-5 py-2.5 rounded-full text-xs md:text-sm font-bold transition-all cursor-pointer ${
+              className={`px-4 md:px-5 py-2 md:py-2.5 rounded-full text-xs md:text-sm font-bold transition-all cursor-pointer ${
                 selectedCategory === cat
                   ? 'bg-[#0f2547] text-white shadow-md'
                   : 'bg-gray-100 text-gray-700 hover:bg-red-50 hover:text-red-600'
@@ -191,8 +222,119 @@ const TrendingCoursesSection = () => {
           ))}
         </div>
 
-        {/* 3x3 Responsive Course Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* MOBILE ONLY (< md): TOUCH SWIPE + LEFT/RIGHT ARROW CAROUSEL */}
+        <div className="md:hidden">
+          <div className="flex items-center justify-between mb-3 px-1">
+            <span className="text-xs font-extrabold text-[#0f2547]">
+              Course {activeSlide + 1} of {filteredCourses.length}
+            </span>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => scrollMobileToIndex(activeSlide - 1)}
+                disabled={activeSlide === 0}
+                aria-label="Previous course"
+                className="w-9 h-9 rounded-full bg-white border border-gray-200 shadow-sm flex items-center justify-center text-[#0f2547] disabled:opacity-35 active:scale-95 transition"
+              >
+                <FaChevronLeft size={13} />
+              </button>
+              <button
+                type="button"
+                onClick={() => scrollMobileToIndex(activeSlide + 1)}
+                disabled={activeSlide >= filteredCourses.length - 1}
+                aria-label="Next course"
+                className="w-9 h-9 rounded-full bg-[#0f2547] text-white shadow-sm flex items-center justify-center disabled:opacity-35 active:scale-95 transition"
+              >
+                <FaChevronRight size={13} />
+              </button>
+            </div>
+          </div>
+
+          <div
+            ref={mobileSliderRef}
+            onScroll={handleMobileScroll}
+            className="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-3 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+          >
+            {filteredCourses.map((course, idx) => (
+              <div
+                key={`mobile-${course.title}-${idx}`}
+                className="w-[88%] shrink-0 snap-center bg-white rounded-3xl overflow-hidden border border-gray-200/90 shadow-sm flex flex-col"
+              >
+                <div className="h-48 overflow-hidden relative bg-slate-900">
+                  <img
+                    src={course.image}
+                    alt={course.title}
+                    className="w-full h-full object-cover object-top"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none" />
+
+                  <span className="absolute top-3 left-3 bg-white/95 backdrop-blur-xs text-[#0f2547] text-[10px] font-extrabold px-2.5 py-1 rounded-full shadow-xs">
+                    {course.category}
+                  </span>
+
+                  <span className="absolute bottom-3 left-3 inline-flex items-center gap-1 bg-emerald-600/95 text-white text-[10px] font-bold px-2.5 py-1 rounded-lg shadow">
+                    <FaCheckCircle size={9} /> {course.badge}
+                  </span>
+
+                  <span className="absolute bottom-3 right-3 bg-red-600 text-white text-xs font-extrabold px-2.5 py-1 rounded-lg shadow">
+                    {course.fee}
+                  </span>
+                </div>
+
+                <div className="p-5 flex flex-col flex-1 justify-between">
+                  <div>
+                    <div className="flex flex-wrap items-center gap-2 text-[11px] font-bold text-slate-500 mb-2">
+                      <span className="inline-flex items-center gap-1 text-[#0f2547] bg-blue-50 px-2.5 py-0.5 rounded-md border border-blue-100">
+                        <FaUniversity size={10} className="text-red-600" /> {course.collegeName}
+                      </span>
+                      <span className="inline-flex items-center gap-1">
+                        <FaClock size={10} className="text-slate-400" /> {course.duration}
+                      </span>
+                    </div>
+
+                    <h3 className="text-base font-extrabold text-gray-900 mb-3 line-clamp-2 leading-snug">
+                      {course.title}
+                    </h3>
+                  </div>
+
+                  <div className="pt-3.5 mt-1 border-t border-slate-100 flex items-center justify-between gap-2">
+                    <Link
+                      to={course.targetUrl}
+                      className="inline-flex items-center gap-1.5 text-xs font-extrabold text-red-600 hover:text-[#0f2547] transition-colors"
+                    >
+                      View College, Modules & Salaries <FaArrowRight size={10} />
+                    </Link>
+                    {course.modulesCount > 0 && (
+                      <span className="text-[11px] font-bold text-slate-400 shrink-0">
+                        {course.modulesCount} Units
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Pagination Dots */}
+          {filteredCourses.length > 1 && (
+            <div className="flex items-center justify-center gap-1.5 mt-3">
+              {filteredCourses.map((_, idx) => (
+                <button
+                  key={idx}
+                  type="button"
+                  onClick={() => scrollMobileToIndex(idx)}
+                  aria-label={`Go to course ${idx + 1}`}
+                  className={`h-2 rounded-full transition-all ${
+                    activeSlide === idx ? 'w-6 bg-red-600' : 'w-2 bg-gray-300'
+                  }`}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* TABLET & DESKTOP (md+): 3x3 Responsive Course Grid */}
+        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredCourses.map((course, idx) => (
             <motion.div
               key={`${course.title}-${idx}`}
@@ -258,7 +400,7 @@ const TrendingCoursesSection = () => {
         </div>
 
         {/* Bottom CTA to Full 12-College Directory */}
-        <div className="text-center mt-12">
+        <div className="text-center mt-10 md:mt-12">
           <Link
             to="/institutions"
             className="inline-flex items-center gap-2.5 bg-[#0f2547] hover:bg-red-600 text-white font-extrabold text-xs md:text-sm uppercase tracking-wider px-8 py-4 rounded-2xl shadow-lg transition-colors"

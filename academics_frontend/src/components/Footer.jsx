@@ -42,25 +42,31 @@ const Footer = () => {
     { name: 'Contact Us', path: '/contact-us' }
   ];
 
+  const servicesLinks = [
+    { name: 'Study Visa', path: '/contact-us' },
+    { name: 'Tourist Visa', path: '/contact-us' },
+    { name: 'Free Counselling', path: '/free-counselling' }
+  ];
+
   return (
     <footer className="w-full bg-[#f8fafc] text-[#334155] pt-20 pb-8 px-4 md:px-10 lg:px-20 border-t border-gray-200 font-sans">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-x-10 md:gap-y-12 lg:gap-16 mb-16 items-start">
 
         {/* 1. Brand Information */}
-        <div className="space-y-6 lg:pr-6 flex flex-col items-start md:items-center md:text-center lg:items-start lg:text-left">
-          <Link to="/" onClick={handleHomeOrLogoClick} className="inline-block mb-2 md:mx-auto lg:mx-0">
+        <div className="space-y-6 lg:pr-6 flex flex-col items-center text-center lg:items-start lg:text-left">
+          <Link to="/" onClick={handleHomeOrLogoClick} className="inline-block mb-2 mx-auto lg:mx-0">
             <img
               src={logo}
               alt="The Raptor Academics Logo"
               className="w-52 md:w-56 lg:w-64 object-contain mx-auto"
             />
           </Link>
-          <p className="text-sm leading-relaxed font-medium max-w-sm md:mx-auto lg:mx-0">
+          <p className="text-sm leading-relaxed font-medium max-w-sm mx-auto lg:mx-0">
             Expert guidance and trusted support for your study abroad journey. We turn your international education goals into reality with seamless visa and university assistance.
           </p>
 
           {/* Social Icons */}
-          <div className="flex gap-3 pt-2 justify-start md:justify-center lg:justify-start">
+          <div className="flex gap-3 pt-2 justify-center lg:justify-start">
             {[
               { icon: FaFacebookF, link: "https://www.facebook.com/raptoracademics" },
               { icon: FaInstagram, link: "https://www.instagram.com/theraptoracademics?utm_source=ig_web_button_share_sheet&xtok=ZDNlZDc0MzIxNw==" },
@@ -80,49 +86,48 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* 2. Quick Links */}
-        <div className="md:pl-4 lg:pl-0">
-          <h4 className="text-[#0f2547] font-extrabold text-lg mb-6 flex items-center gap-2.5">
-            <span className="w-2 h-2 bg-red-600 rounded-full"></span> Quick Links
-          </h4>
-          <ul className="space-y-3.5 text-sm font-semibold">
-            {quickLinks.map((link) => (
-              <li key={link.name}>
-                <Link
-                  to={link.path}
-                  onClick={link.onClick}
-                  className="group flex items-center gap-2.5 hover:text-red-600 transition-all duration-300"
-                >
-                  <FaChevronRight className="text-[10px] text-gray-400 group-hover:text-red-600 group-hover:translate-x-1 transition-all" />
-                  {link.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
+        {/* 2 & 3 on Mobile: Quick Links (Left) + Our Services (Right) | md+: Separate Columns */}
+        <div className="grid grid-cols-2 gap-6 md:contents">
+          {/* 2. Quick Links */}
+          <div className="md:pl-4 lg:pl-0">
+            <h4 className="text-[#0f2547] font-extrabold text-lg mb-6 flex items-center gap-2.5">
+              <span className="w-2 h-2 bg-red-600 rounded-full"></span> Quick Links
+            </h4>
+            <ul className="space-y-3.5 text-sm font-semibold">
+              {quickLinks.map((link) => (
+                <li key={link.name}>
+                  <Link
+                    to={link.path}
+                    onClick={link.onClick}
+                    className="group flex items-center gap-2.5 hover:text-red-600 transition-all duration-300"
+                  >
+                    <FaChevronRight className="text-[10px] text-gray-400 group-hover:text-red-600 group-hover:translate-x-1 transition-all shrink-0" />
+                    <span>{link.name}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-        {/* 3. Our Services */}
-        <div>
-          <h4 className="text-[#0f2547] font-extrabold text-lg mb-6 flex items-center gap-2.5">
-            <span className="w-2 h-2 bg-red-600 rounded-full"></span> Our Services
-          </h4>
-          <ul className="space-y-4 text-sm font-semibold">
-            {[
-              { name: 'Study Visa', path: '/contact-us' },
-              { name: 'Tourist Visa', path: '/contact-us' },
-              { name: 'Free Counselling', path: '/free-counselling' }
-            ].map((service) => (
-              <li key={service.name}>
-                <Link
-                  to={service.path}
-                  className="group flex items-center gap-2.5 hover:text-red-600 transition-all duration-300"
-                >
-                  <FaChevronRight className="text-[10px] text-gray-400 group-hover:text-red-600 group-hover:translate-x-1 transition-all" />
-                  {service.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
+          {/* 3. Our Services */}
+          <div>
+            <h4 className="text-[#0f2547] font-extrabold text-lg mb-6 flex items-center gap-2.5">
+              <span className="w-2 h-2 bg-red-600 rounded-full"></span> Our Services
+            </h4>
+            <ul className="space-y-4 text-sm font-semibold">
+              {servicesLinks.map((service) => (
+                <li key={service.name}>
+                  <Link
+                    to={service.path}
+                    className="group flex items-center gap-2.5 hover:text-red-600 transition-all duration-300"
+                  >
+                    <FaChevronRight className="text-[10px] text-gray-400 group-hover:text-red-600 group-hover:translate-x-1 transition-all shrink-0" />
+                    <span>{service.name}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
         {/* 4. Contact Us */}

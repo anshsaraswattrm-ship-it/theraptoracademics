@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaClock, FaCalendarAlt } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaPhoneAlt, FaClock, FaCalendarAlt } from 'react-icons/fa';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import ContactForm from '../components/ContactForm';
@@ -19,9 +19,9 @@ const ContactUs = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="space-y-10 flex flex-col md:items-center md:text-center lg:items-start lg:text-left"
+            className="space-y-10 flex flex-col items-center text-center lg:items-start lg:text-left"
           >
-            <div className="max-w-2xl md:mx-auto lg:mx-0">
+            <div className="max-w-2xl mx-auto lg:mx-0">
               <p className="text-red-600 font-bold uppercase tracking-widest text-sm mb-2 flex items-center justify-center lg:justify-start gap-2">
                 ★ QUICK CONTACT ★
               </p>
@@ -34,10 +34,10 @@ const ContactUs = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full max-w-2xl md:mx-auto lg:mx-0 text-left">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full max-w-2xl mx-auto lg:mx-0 text-center sm:text-left">
                {/* Location Card */}
-               <div className="flex gap-4 sm:col-span-2 bg-white/70 md:bg-transparent p-4 md:p-0 rounded-2xl border border-gray-200/70 md:border-none">
-                  <div className="bg-red-50 p-4 rounded-xl text-red-600 self-start shrink-0">
+               <div className="flex flex-col items-center sm:flex-row sm:items-start gap-4 sm:col-span-2 bg-white/70 md:bg-transparent p-4 md:p-0 rounded-2xl border border-gray-200/70 md:border-none">
+                  <div className="bg-red-50 p-4 rounded-xl text-red-600 shrink-0">
                     <FaMapMarkerAlt size={24} />
                   </div>
                   <div>
@@ -47,8 +47,8 @@ const ContactUs = () => {
                </div>
 
                {/* Phone & Email Card */}
-               <div className="flex gap-4 bg-white/70 md:bg-transparent p-4 md:p-0 rounded-2xl border border-gray-200/70 md:border-none">
-                  <div className="bg-red-50 p-4 rounded-xl text-red-600 self-start shrink-0">
+               <div className="flex flex-col items-center sm:flex-row sm:items-start gap-4 bg-white/70 md:bg-transparent p-4 md:p-0 rounded-2xl border border-gray-200/70 md:border-none">
+                  <div className="bg-red-50 p-4 rounded-xl text-red-600 shrink-0">
                     <FaPhoneAlt size={24} />
                   </div>
                   <div>
@@ -61,16 +61,16 @@ const ContactUs = () => {
                </div>
 
                {/* Opening Hours Card */}
-               <div className="flex gap-4 bg-white/70 md:bg-transparent p-4 md:p-0 rounded-2xl border border-gray-200/70 md:border-none">
-                  <div className="bg-red-50 p-4 rounded-xl text-red-600 self-start shrink-0">
+               <div className="flex flex-col items-center sm:flex-row sm:items-start gap-4 bg-white/70 md:bg-transparent p-4 md:p-0 rounded-2xl border border-gray-200/70 md:border-none">
+                  <div className="bg-red-50 p-4 rounded-xl text-red-600 shrink-0">
                     <FaClock size={24} />
                   </div>
                   <div>
                     <h4 className="text-xl font-bold text-gray-900 mb-2">Opening Hrs</h4>
-                    <p className="text-gray-900 font-semibold mb-1 flex items-center gap-2"><FaCalendarAlt className="text-red-600"/> Mon-Saturday:</p>
-                    <p className="text-gray-600 mb-3 pl-6">10.00 am to 06.00 pm</p>
-                    <p className="text-gray-900 font-semibold mb-1 flex items-center gap-2"><FaCalendarAlt className="text-gray-400"/> Sunday:</p>
-                    <p className="text-red-600 font-semibold pl-6">Close</p>
+                    <p className="text-gray-900 font-semibold mb-1 flex items-center justify-center sm:justify-start gap-2"><FaCalendarAlt className="text-red-600"/> Mon-Saturday:</p>
+                    <p className="text-gray-600 mb-3 sm:pl-6">10.00 am to 06.00 pm</p>
+                    <p className="text-gray-900 font-semibold mb-1 flex items-center justify-center sm:justify-start gap-2"><FaCalendarAlt className="text-gray-400"/> Sunday:</p>
+                    <p className="text-red-600 font-semibold sm:pl-6">Close</p>
                   </div>
                </div>
             </div>
@@ -81,7 +81,7 @@ const ContactUs = () => {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="w-full max-w-2xl md:mx-auto lg:max-w-none lg:mx-0 h-[440px] md:h-[480px] lg:h-[520px] rounded-2xl overflow-hidden shadow-2xl border-4 border-white"
+            className="w-full max-w-2xl mx-auto lg:max-w-none lg:mx-0 h-[440px] md:h-[480px] lg:h-[520px] rounded-2xl overflow-hidden shadow-2xl border-4 border-white"
           >
             <iframe 
               title="The Raptor Academics Jaipur Location"

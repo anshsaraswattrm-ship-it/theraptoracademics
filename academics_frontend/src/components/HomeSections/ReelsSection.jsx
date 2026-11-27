@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Play, Pause, Volume2, VolumeX, ArrowUpRight } from 'lucide-react';
-import { FaInstagram } from 'react-icons/fa';
+import { FaInstagram, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { RedUnderline } from './Shared';
 
 const reelsData = [
@@ -47,7 +47,7 @@ const reelsData = [
   }
 ];
 
-const ReelCard = ({ reel }) => {
+const ReelCard = ({ reel, isMobileSlide = false }) => {
   const videoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
@@ -84,9 +84,11 @@ const ReelCard = ({ reel }) => {
 
   return (
     <motion.div
-      whileHover={{ y: -8 }}
+      whileHover={isMobileSlide ? undefined : { y: -8 }}
       onClick={togglePlay}
-      className="relative w-full max-w-[300px] sm:max-w-none mx-auto aspect-[3/4] lg:aspect-[9/16] rounded-3xl overflow-hidden bg-[#151515] border border-gray-800 shadow-2xl group cursor-pointer select-none"
+      className={`relative w-full ${
+        isMobileSlide ? 'max-w-[290px]' : 'max-w-[300px] sm:max-w-none'
+      } mx-auto aspect-[3/4] lg:aspect-[9/16] rounded-3xl overflow-hidden bg-[#151515] border border-gray-800 shadow-2xl group cursor-pointer select-none`}
     >
       <video
         ref={videoRef}
@@ -104,6 +106,7 @@ const ReelCard = ({ reel }) => {
           {reel.category}
         </span>
         <button
+          type="button"
           onClick={toggleMute}
           className="w-9 h-9 rounded-full bg-black/60 backdrop-blur-md text-white flex items-center justify-center border border-white/15 hover:bg-red-600 transition-colors"
         >
@@ -131,11 +134,36 @@ const ReelCard = ({ reel }) => {
 };
 
 const ReelsSection = () => {
+  const [activeSlide, setActiveSlide] = useState(0);
+  const mobileSliderRef = useRef(null);
+
+  const scrollMobileToIndex = (index) => {
+    const container = mobileSliderRef.current;
+    if (!container) return;
+    const clamped = Math.max(0, Math.min(index, reelsData.length - 1));
+    const slideEl = container.children[clamped];
+    if (slideEl) {
+      container.scrollTo({
+        left: slideEl.offsetLeft - container.offsetLeft,
+        behavior: 'smooth'
+      });
+    }
+    setActiveSlide(clamped);
+  };
+
+  const handleMobileScroll = () => {
+    const container = mobileSliderRef.current;
+    if (!container || !container.children.length) return;
+    const slideWidth = container.children[0].offsetWidth + 16; // slide width + gap-4
+    const currentIndex = Math.round(container.scrollLeft / slideWidth);
+    setActiveSlide(Math.max(0, Math.min(currentIndex, reelsData.length - 1)));
+  };
+
   return (
-    <section className="py-20 lg:py-24 px-4 sm:px-6 md:px-10 lg:px-12 bg-[#080808] text-white relative overflow-hidden">
+    <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 md:px-10 lg:px-12 bg-[#080808] text-white relative overflow-hidden">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-72 bg-red-600/15 blur-[140px] pointer-events-none" />
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="flex flex-col items-center text-center lg:items-end lg:text-left lg:flex-row justify-between mb-12 lg:mb-14 gap-6">
+        <div className="flex flex-col items-center text-center lg:items-end lg:text-left lg:flex-row justify-between mb-10 sm:mb-12 lg:mb-14 gap-6">
           <div className="max-w-2xl">
             <p className="text-red-500 font-bold uppercase tracking-[0.2em] text-xs mb-3 flex items-center justify-center lg:justify-start gap-2">
               <span className="w-2 h-2 rounded-full bg-red-600 animate-ping" />
@@ -157,7 +185,67 @@ const ReelsSection = () => {
             <FaInstagram size={20} /> Follow On Instagram <ArrowUpRight size={18} />
           </a>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 justify-items-center">
+
+        {/* MOBILE ONLY (< sm): TOUCH SWIPE + LEFT/RIGHT ARROW CAROUSEL */}
+        <div className="sm:hidden">
+          <div className="flex items-center justify-between mb-3 px-1">
+            <span className="text-xs font-extrabold text-gray-300">
+              Reel {activeSlide + 1} of {reelsData.length}
+            </span>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => scrollMobileToIndex(activeSlide - 1)}
+                disabled={activeSlide === 0}
+                aria-label="Previous reel"
+                className="w-9 h-9 rounded-full bg-[#151515] border border-gray-700 flex items-center justify-center text-white disabled:opacity-35 active:scale-95 transition cursor-pointer"
+              >
+                <FaChevronLeft size={13} />
+              </button>
+              <button
+                type="button"
+                onClick={() => scrollMobileToIndex(activeSlide + 1)}
+                disabled={activeSlide >= reelsData.length - 1}
+                aria-label="Next reel"
+                className="w-9 h-9 rounded-full bg-red-600 text-white flex items-center justify-center disabled:opacity-35 active:scale-95 transition cursor-pointer"
+              >
+                <FaChevronRight size={13} />
+              </button>
+            </div>
+          </div>
+
+          <div
+            ref={mobileSliderRef}
+            onScroll={handleMobileScroll}
+            className="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-3 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+          >
+            {reelsData.map((reel) => (
+              <div
+                key={`mobile-reel-${reel.id}`}
+                className="w-[82%] shrink-0 snap-center flex justify-center"
+              >
+                <ReelCard reel={reel} isMobileSlide />
+              </div>
+            ))}
+          </div>
+
+          <div className="flex items-center justify-center gap-1.5 mt-3">
+            {reelsData.map((_, idx) => (
+              <button
+                key={idx}
+                type="button"
+                onClick={() => scrollMobileToIndex(idx)}
+                aria-label={`Go to reel ${idx + 1}`}
+                className={`h-2 rounded-full transition-all cursor-pointer ${
+                  activeSlide === idx ? 'w-6 bg-red-600' : 'w-2 bg-gray-700'
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* TABLET & DESKTOP (sm+): RESPONSIVE GRID */}
+        <div className="hidden sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 justify-items-center">
           {reelsData.map((reel) => (
             <ReelCard key={reel.id} reel={reel} />
           ))}

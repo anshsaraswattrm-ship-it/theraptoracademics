@@ -47,20 +47,20 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-x-10 md:gap-y-12 lg:gap-16 mb-16 items-start">
 
         {/* 1. Brand Information */}
-        <div className="space-y-6 lg:pr-6">
-          <Link to="/" onClick={handleHomeOrLogoClick} className="inline-block mb-2">
+        <div className="space-y-6 lg:pr-6 flex flex-col items-start md:items-center md:text-center lg:items-start lg:text-left">
+          <Link to="/" onClick={handleHomeOrLogoClick} className="inline-block mb-2 md:mx-auto lg:mx-0">
             <img
               src={logo}
               alt="The Raptor Academics Logo"
-              className="w-52 md:w-56 lg:w-64 object-contain"
+              className="w-52 md:w-56 lg:w-64 object-contain mx-auto"
             />
           </Link>
-          <p className="text-sm leading-relaxed font-medium max-w-sm">
+          <p className="text-sm leading-relaxed font-medium max-w-sm md:mx-auto lg:mx-0">
             Expert guidance and trusted support for your study abroad journey. We turn your international education goals into reality with seamless visa and university assistance.
           </p>
 
           {/* Social Icons */}
-          <div className="flex gap-3 pt-2">
+          <div className="flex gap-3 pt-2 justify-start md:justify-center lg:justify-start">
             {[
               { icon: FaFacebookF, link: "https://www.facebook.com/raptoracademics" },
               { icon: FaInstagram, link: "https://www.instagram.com/theraptoracademics?utm_source=ig_web_button_share_sheet&xtok=ZDNlZDc0MzIxNw==" },
